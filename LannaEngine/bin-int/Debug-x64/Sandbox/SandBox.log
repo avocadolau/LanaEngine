@@ -1,1 +1,2 @@
-﻿LINK : fatal error LNK1104: cannot open file 'D:\GitHub\LannaEngine\LannaEngine\bin\Debug-x64\LannaEngine\LannaEngine.lib'
+﻿  SandboxApp.cpp
+D:\GitHub\LannaEngine\LannaEngine\Source\Lanna\EntryPoint.h(10,2): error C2144: syntax error: 'auto' should be preceded by ';'
