@@ -1,2 +1,0 @@
-﻿SandboxApp.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __cdecl Lanna::Application::Run(void)" (__imp_?Run@Application@Lanna@@QEAAXXZ) referenced in function main
-C:\Users\lauraig\Documents\GitHub\LannaEngine\LannaEngine\bin\Debug-x64\Sandbox\Sandbox.exe : fatal error LNK1120: 1 unresolved externals
