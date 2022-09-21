@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "Lanna/Application.h"
 #include "Lanna/Core.h"
+#include "Lanna/Log.h"
 
 
 // ----- Entry Point ---------------

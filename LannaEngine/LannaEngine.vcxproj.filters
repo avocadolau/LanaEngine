@@ -13,8 +13,10 @@
     <ClInclude Include="Source\Lanna\Core.h" />
     <ClInclude Include="Source\Lanna.h" />
     <ClInclude Include="Source\Lanna\EntryPoint.h" />
+    <ClInclude Include="Source\Lanna\Log.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Lanna\Application.cpp" />
+    <ClCompile Include="Source\Lanna\Log.cpp" />
   </ItemGroup>
 </Project>
