@@ -1,14 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="src\Lanna.h" />
-    <ClInclude Include="src\Lanna\Application.h" />
-    <ClInclude Include="src\Lanna\Core.h" />
-    <ClInclude Include="src\Lanna\EntryPoint.h" />
-    <ClInclude Include="src\Lanna\Log.h" />
+    <Filter Include="Lanna">
+      <UniqueIdentifier>{AF59950D-1B6E-BDBE-E4EF-601E50C3B9EF}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Lanna\Application.cpp" />
-    <ClCompile Include="src\Lanna\Log.cpp" />
+    <ClInclude Include="src\Lanna.h" />
+    <ClInclude Include="src\Lanna\Application.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Core.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\EntryPoint.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Log.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Lanna\Application.cpp">
+      <Filter>Lanna</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Log.cpp">
+      <Filter>Lanna</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

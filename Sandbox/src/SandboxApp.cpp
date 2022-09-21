@@ -1,5 +1,4 @@
 #include <Lanna.h>
-#include <Lanna.h>
 
 class Sandbox : public Lanna::Application
 {
