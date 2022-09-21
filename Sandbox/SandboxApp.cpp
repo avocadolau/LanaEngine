@@ -11,6 +11,11 @@ public:
 	{
 
 	}
+
+	void Run()
+	{
+
+	}
 };
 
 Lanna::Application* Lanna::CreateApplication()

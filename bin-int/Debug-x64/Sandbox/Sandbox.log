@@ -1,9 +1,4 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets(2065,5): warning : The referenced project '..\LannaEngine\LannaEngine.vcxproj' does not exist.
-  SandboxApp.cpp
-D:\GitHub\LannaEngine\Lanna\Source\Lanna\Log.h(18,42): warning C4251: 'Lanna::Log::s_CoreLogger': class 'std::shared_ptr<spdlog::logger>' needs to have dll-interface to be used by clients of class 'Lanna::Log'
-D:\GitHub\LannaEngine\Lanna\vendor\spdlog\include\spdlog\details\registry.h(34): message : see declaration of 'std::shared_ptr<spdlog::logger>'
-D:\GitHub\LannaEngine\Lanna\Source\Lanna\Log.h(19,42): warning C4251: 'Lanna::Log::s_ClientLogger': class 'std::shared_ptr<spdlog::logger>' needs to have dll-interface to be used by clients of class 'Lanna::Log'
-D:\GitHub\LannaEngine\Lanna\vendor\spdlog\include\spdlog\details\registry.h(34): message : see declaration of 'std::shared_ptr<spdlog::logger>'
 SandboxApp.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl Lanna::Application::Application(void)" (__imp_??0Application@Lanna@@QEAA@XZ) referenced in function "public: __cdecl Sandbox::Sandbox(void)" (??0Sandbox@@QEAA@XZ)
 SandboxApp.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __cdecl Lanna::Application::~Application(void)" (__imp_??1Application@Lanna@@UEAA@XZ) referenced in function "public: virtual __cdecl Sandbox::~Sandbox(void)" (??1Sandbox@@UEAA@XZ)
 SandboxApp.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __cdecl Lanna::Application::Run(void)" (__imp_?Run@Application@Lanna@@QEAAXXZ) referenced in function main
