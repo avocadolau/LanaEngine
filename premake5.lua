@@ -28,13 +28,14 @@ project "Lanna"
 
     includedirs
     {
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{prj.name}/src/Lanna"
     }
 
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
-        systemversion "10.0.19041.0"
+        systemversion "latest"
 
         defines
         {
@@ -89,7 +90,7 @@ project "Sandbox"
     filter "system:windows"
         cppdialect "C++17"
         staticruntime "On"
-        systemversion "10.0.19041.0"
+        systemversion "latest"
 
         defines
         {

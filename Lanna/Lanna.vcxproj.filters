@@ -4,6 +4,9 @@
     <Filter Include="Lanna">
       <UniqueIdentifier>{AF59950D-1B6E-BDBE-E4EF-601E50C3B9EF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\Events">
+      <UniqueIdentifier>{B36A6D83-9FCD-FC27-4853-35DE3495C8AA}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Lanna.h" />
@@ -15,6 +18,18 @@
     </ClInclude>
     <ClInclude Include="src\Lanna\EntryPoint.h">
       <Filter>Lanna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Events\ApplicationEvent.h">
+      <Filter>Lanna\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Events\Event.h">
+      <Filter>Lanna\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Events\KeyEvent.h">
+      <Filter>Lanna\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Events\MouseEvent.h">
+      <Filter>Lanna\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Log.h">
       <Filter>Lanna</Filter>
