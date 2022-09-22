@@ -8,7 +8,8 @@ workspace "Lanna"
         "Dist"
     }
 
-outputdir= "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
 
 project "Lanna"
     location "Lanna"
@@ -27,7 +28,7 @@ project "Lanna"
 
     includedirs
     {
-        "Lanna/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include"
     }
 
     filter "system:windows"
@@ -43,8 +44,8 @@ project "Lanna"
 
         postbuildcommands
         {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" ..outputdir .. "/Sandbox")
-        }
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+	    }
 
     filter "configurations:Debug"
         defines "LN_DEBUG"
@@ -100,10 +101,9 @@ project "Sandbox"
         symbols "On"
 
     filter "configurations:Release"
-    filter "configurations:Release"
         defines "LN_RELEASE"
         optimize "On"
 
-    filter "configurations:Debug"
+    filter "configurations:Dist"
         defines "LN_DIST"
         optimize "On"
