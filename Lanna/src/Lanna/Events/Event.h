@@ -1,5 +1,6 @@
 #pragma once
 
+#include "lnpch.h"
 #include "Core.h"
 
 namespace Lanna {
