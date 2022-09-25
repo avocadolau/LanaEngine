@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Lanna {
 
 	class LANNA_API MouseMovedEvent : public Event

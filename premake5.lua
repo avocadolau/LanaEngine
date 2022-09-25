@@ -19,6 +19,9 @@ project "Lanna"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "lnpch.h"
+	pchsource "Lanna/src/lnpch.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",
