@@ -7,6 +7,12 @@
     <Filter Include="Lanna\Events">
       <UniqueIdentifier>{B36A6D83-9FCD-FC27-4853-35DE3495C8AA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\Platform">
+      <UniqueIdentifier>{4a4bfafa-fee5-4c0d-97d8-16b9970dc2d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lanna\Platform\Windows">
+      <UniqueIdentifier>{de3b19ad-a8f9-4f65-820f-2e027039e5bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Lanna.h" />
@@ -35,6 +41,9 @@
       <Filter>Lanna</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Lanna\Platform\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -44,5 +53,11 @@
       <Filter>Lanna</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="src\Lanna\Window.h">
+      <Filter>Lanna</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Lanna\Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -10,6 +10,10 @@ workspace "Lanna"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "Lanna/vendor/GLFW/include"
+
+include "Lanna/vendor/GLFW"
 
 project "Lanna"
     location "Lanna"
@@ -23,16 +27,22 @@ project "Lanna"
 	pchsource "Lanna/src/lnpch.cpp"
 
     files
-    {
-        "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
 
-    }
+	includedirs
+	{
+        "%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}"
+	}
 
-    includedirs
-    {
-        "%{prj.name}/vendor/spdlog/include",
-        "%{prj.name}/src/Lanna"
+	links 
+	{ 
+		"GLFW",
+		"opengl32.lib"
     }
 
     filter "system:windows"
@@ -47,9 +57,9 @@ project "Lanna"
         }
 
         postbuildcommands
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-	    }
+		{
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+		}
 
     filter "configurations:Debug"
         defines "LN_DEBUG"
