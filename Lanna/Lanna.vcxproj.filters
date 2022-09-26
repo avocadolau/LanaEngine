@@ -7,11 +7,11 @@
     <Filter Include="Lanna\Events">
       <UniqueIdentifier>{B36A6D83-9FCD-FC27-4853-35DE3495C8AA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lanna\Platform">
-      <UniqueIdentifier>{4a4bfafa-fee5-4c0d-97d8-16b9970dc2d4}</UniqueIdentifier>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lanna\Platform\Windows">
-      <UniqueIdentifier>{de3b19ad-a8f9-4f65-820f-2e027039e5bc}</UniqueIdentifier>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,27 +37,39 @@
     <ClInclude Include="src\Lanna\Events\MouseEvent.h">
       <Filter>Lanna\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Layer.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\LayerStack.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Log.h">
       <Filter>Lanna</Filter>
     </ClInclude>
-    <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
-      <Filter>Lanna\Platform\Windows</Filter>
+    <ClInclude Include="src\Lanna\Window.h">
+      <Filter>Lanna</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lnpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lanna\Layer.cpp">
+      <Filter>Lanna</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\LayerStack.cpp">
+      <Filter>Lanna</Filter>
+    </ClCompile>
     <ClCompile Include="src\Lanna\Log.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
-    <ClCompile Include="src\lnpch.cpp" />
-    <ClCompile Include="src\Lanna\Window.h">
-      <Filter>Lanna</Filter>
-    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Lanna\Platform\Windows</Filter>
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="src\lnpch.cpp" />
   </ItemGroup>
 </Project>
