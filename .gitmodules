@@ -4,3 +4,6 @@
 [submodule "Lanna/vendor/GLFW"]
 	path = Lanna/vendor/GLFW
 	url = https://github.com/TheCherno/GLFW
+[submodule "Lanna/vendor/imgui"]
+	path = Lanna/vendor/imgui
+	url = https://github.com/TheCherno/imgui
