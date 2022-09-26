@@ -10,12 +10,16 @@
 	#error Lanna only supports Windows!
 #endif
 
+#ifdef LN_DEBUG
+	#define LN_ENABLE_ASSERTS
+#endif
+
 #ifdef LN_ENABLE_ASSERTS
-#define LN_ASSERT(x, ...) { if(!(x)) { LN_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-#define LN_CORE_ASSERT(x, ...) { if(!(x)) { LN_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define LN_ASSERT(x, ...) { if(!(x)) { LN_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define LN_CORE_ASSERT(x, ...) { if(!(x)) { LN_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
-#define LN_ASSERT(x, ...)
-#define LN_CORE_ASSERT(x, ...)
+	#define LN_ASSERT(x, ...)
+	#define LN_CORE_ASSERT(x, ...)
 #endif
 
 
