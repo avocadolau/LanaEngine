@@ -1,7 +1,7 @@
 #pragma once
 
 #include "lnpch.h"
-#include "Core.h"
+#include "Lanna/Core.h"
 
 namespace Lanna {
 
@@ -10,7 +10,7 @@ namespace Lanna {
 		None =0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
