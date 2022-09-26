@@ -46,6 +46,9 @@
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h">
       <Filter>Lanna\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Input.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Layer.h">
       <Filter>Lanna</Filter>
     </ClInclude>
@@ -65,6 +68,9 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -89,5 +95,8 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
