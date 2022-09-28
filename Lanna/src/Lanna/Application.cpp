@@ -6,6 +6,9 @@
 #include <glad/glad.h>
 
 #include "Input.h"
+#include "imgui.h"
+
+#include <shellapi.h>
 
 namespace Lanna {
 
@@ -69,7 +72,13 @@ namespace Lanna {
 			//LN_CORE_TRACE("{0}, {1}", x, y);
 
 			m_Window->OnUpdate();
+			
 		}
+	}
+
+	void Application::OpenUrl(const char* url)
+	{
+		ShellExecuteA(0, "open", url, NULL, NULL, SW_SHOWNORMAL);
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e)

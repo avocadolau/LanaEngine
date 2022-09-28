@@ -26,6 +26,8 @@ namespace Lanna {
 		inline Window& GetWindow() { return *m_Window; }
 
 		inline static Application& Get() { return *s_Instance; }
+
+		void OpenUrl(const char* url);
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 

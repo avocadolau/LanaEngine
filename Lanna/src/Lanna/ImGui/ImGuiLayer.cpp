@@ -74,8 +74,10 @@ namespace Lanna {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
 
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		UpdateMainMenu();
+
+		/*static bool show = true;
+		ImGui::ShowDemoWindow(&show);*/
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -167,4 +169,43 @@ namespace Lanna {
 		return false;
 	}
 
+	void ImGuiLayer::UpdateMainMenu()
+	{
+		ImGui::BeginMainMenuBar();
+		if (ImGui::BeginMenu("Configuration"))
+		{
+			confMenu = !confMenu;
+
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Help"))
+		{
+			if (ImGui::MenuItem("Demo"))
+				Lanna::Application::Get().OpenUrl("https://google.com/");
+
+			if (ImGui::MenuItem("Documentation"))
+				Lanna::Application::Get().OpenUrl("https://google.com/");
+
+			if (ImGui::MenuItem("Download latest"))
+				Lanna::Application::Get().OpenUrl("https://google.com/");
+
+			if (ImGui::MenuItem("Report a bug"))
+				Lanna::Application::Get().OpenUrl("https://google.com/");
+
+			if (ImGui::MenuItem("About"))
+				Lanna::Application::Get().OpenUrl("https://google.com/");
+
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+
+		if (confMenu==true)
+		{
+			ImGui::Begin("Configuration uwu");
+			ImGui::Text("uwu engine, i mean Lanna Engine uwu");
+			ImGui::End();
+		}
+
+	}
 }
+

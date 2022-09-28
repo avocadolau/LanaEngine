@@ -46,7 +46,13 @@
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h">
       <Filter>Lanna\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\ImGui\Panel.h">
+      <Filter>Lanna\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Input.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\KeyCodes.h">
       <Filter>Lanna</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Layer.h">
@@ -56,6 +62,9 @@
       <Filter>Lanna</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Log.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\MouseButtonCodes.h">
       <Filter>Lanna</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Window.h">
@@ -71,18 +80,16 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Lanna\KeyCodes.h">
-      <Filter>Lanna</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\MouseButtonCodes.h">
-      <Filter>Lanna</Filter>
-    </ClInclude>
+    <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp">
+      <Filter>Lanna\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\ImGui\Panel.cpp">
       <Filter>Lanna\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Layer.cpp">
