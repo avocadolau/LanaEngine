@@ -171,6 +171,38 @@ namespace Lanna {
 
 	void ImGuiLayer::UpdateMainMenu()
 	{
+		MainMenuBar();
+
+
+
+		// CONFIGURATION -------------------------------------------------
+		ImGui::Begin("Configuration uwu");
+		ImGui::Text("uwu engine, i mean Lanna Engine uwu");
+
+
+
+		/*char title[25];
+		if (ImGui::CollapsingHeader("Info"))
+		{
+			sprintf_s(title, 25, "Framerate %.1f", m_FPSLog[m_FPSLog.size() - 1]);
+			ImGui::PlotHistogram("##framerate", &m_FPSLog[0], m_FPSLog.size(), 0, title, 0.0f, 100.0f, ImVec2(150, 50));
+			sprintf_s(title, 25, "Frametime %.1f", m_MSLog[m_MSLog.size() - 1]);
+			ImGui::PlotHistogram("##frametime", &m_MSLog[0], m_MSLog.size(), 0, title, 0.0f, 100.0f, ImVec2(150, 50));
+			sprintf_s(title, 25, "Mem used %.1f", m_MemLog[m_MemLog.size() - 1]);
+			ImGui::PlotHistogram("##memory", &m_MemLog[0], m_MSLog.size(), 0, title, 0.0f, 100.0f, ImVec2(150, 50));
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		}*/
+
+
+
+
+		ImGui::End();
+		// CONFIGURATION -------------------------------------------------
+
+	}
+
+	void ImGuiLayer::MainMenuBar()
+	{
 		ImGui::BeginMainMenuBar();
 		if (ImGui::BeginMenu("Configuration"))
 		{
@@ -198,14 +230,6 @@ namespace Lanna {
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
-
-		if (confMenu==true)
-		{
-			ImGui::Begin("Configuration uwu");
-			ImGui::Text("uwu engine, i mean Lanna Engine uwu");
-			ImGui::End();
-		}
-
 	}
 }
 
