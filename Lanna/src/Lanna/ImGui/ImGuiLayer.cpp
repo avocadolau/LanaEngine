@@ -6,6 +6,10 @@
 
 #include "Lanna/Application.h"
 
+// PANELS
+#include "Lanna/ImGui/Panel.h"
+#include "Lanna/ImGui/Panels/ConfigurationPanel.h"
+
 // TEMPORARY
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -15,6 +19,11 @@ namespace Lanna {
 	ImGuiLayer::ImGuiLayer()
 		: Layer("ImGuiLayer")
 	{
+
+		// create pannels
+
+
+
 	}
 
 	ImGuiLayer::~ImGuiLayer()
@@ -206,7 +215,7 @@ namespace Lanna {
 		ImGui::BeginMainMenuBar();
 		if (ImGui::BeginMenu("Configuration"))
 		{
-			confMenu = !confMenu;
+			configurationPanel = !configurationPanel;
 
 			ImGui::EndMenu();
 		}

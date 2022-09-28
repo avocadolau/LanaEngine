@@ -5,6 +5,10 @@
 #include "Lanna/Events/ApplicationEvent.h"
 #include "Lanna/Events/KeyEvent.h"
 #include "Lanna/Events/MouseEvent.h"
+#include "Lanna/ImGui/Panel.h"
+
+#include "Lanna/ImGui/Panel.h"
+#include <vector>
 
 namespace Lanna {
 
@@ -33,9 +37,9 @@ namespace Lanna {
 	private:
 		float m_Time = 0.0f;
 
-		bool confMenu = false;
+		bool configurationPanel = false;
 
-
+		std::vector<Panel> panels;
 	};
 
 }

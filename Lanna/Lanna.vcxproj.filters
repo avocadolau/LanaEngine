@@ -10,6 +10,9 @@
     <Filter Include="Lanna\ImGui">
       <UniqueIdentifier>{19168C3A-85CB-0430-0EC0-FE067A74FB33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\ImGui\Panels">
+      <UniqueIdentifier>{4B506C03-3734-2D59-A094-27AC8C9717DB}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
@@ -46,8 +49,8 @@
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h">
       <Filter>Lanna\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lanna\ImGui\Panel.h">
-      <Filter>Lanna\ImGui</Filter>
+    <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Input.h">
       <Filter>Lanna</Filter>
@@ -80,16 +83,15 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panel.h">
+      <Filter>Lanna\ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp">
-      <Filter>Lanna\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\ImGui\Panel.cpp">
       <Filter>Lanna\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Layer.cpp">
@@ -111,5 +113,8 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panel.cpp">
+      <Filter>Lanna\ImGui</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
