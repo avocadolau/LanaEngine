@@ -29,6 +29,7 @@ namespace Lanna {
 		bool OnWindowResizeEvent(WindowResizeEvent& e);
 		
 		void UpdateMainMenu();
+		void MainMenuBar();
 	private:
 		float m_Time = 0.0f;
 
