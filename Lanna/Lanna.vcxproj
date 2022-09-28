@@ -159,9 +159,11 @@
     <ClInclude Include="src\Lanna\Events\MouseEvent.h" />
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Lanna\Input.h" />
+    <ClInclude Include="src\Lanna\KeyCodes.h" />
     <ClInclude Include="src\Lanna\Layer.h" />
     <ClInclude Include="src\Lanna\LayerStack.h" />
     <ClInclude Include="src\Lanna\Log.h" />
+    <ClInclude Include="src\Lanna\MouseButtonCodes.h" />
     <ClInclude Include="src\Lanna\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />

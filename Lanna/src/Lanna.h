@@ -6,6 +6,10 @@
 #include "Lanna/Layer.h"
 #include "Lanna/Log.h"
 
+#include "Lanna/Input.h"
+#include "Lanna/KeyCodes.h"
+#include "Lanna/MouseButtonCodes.h"
+
 #include "Lanna/ImGui/ImGuiLayer.h"
 
 // ---Entry Point---------------------

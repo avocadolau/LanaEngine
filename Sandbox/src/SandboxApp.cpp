@@ -10,12 +10,19 @@ public:
 
 	void OnUpdate() override
 	{
-		LN_INFO("ExampleLayer::Update");
+		if (Lanna::Input::IsKeyPressed(LN_KEY_TAB))
+			LN_TRACE("Tab key is pressed (poll)!");
 	}
 
 	void OnEvent(Lanna::Event& event) override
 	{
-		LN_TRACE("{0}", event);
+		if (event.GetEventType() == Lanna::EventType::KeyPressed)
+		{
+			Lanna::KeyPressedEvent& e = (Lanna::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == LN_KEY_TAB)
+				LN_TRACE("Tab key is pressed (event)!");
+			LN_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 
