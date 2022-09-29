@@ -7,7 +7,10 @@
 #include "Lanna/Application.h"
 
 // PANELS
-#include "Lanna/ImGui/Panel.h"
+#include <vector>
+
+#include "Lanna/ImGui/Panels/Panel.h"
+#include "Lanna/ImGui/Panels/AboutPanel.h"
 #include "Lanna/ImGui/Panels/ConfigurationPanel.h"
 
 // TEMPORARY
@@ -62,12 +65,22 @@ namespace Lanna {
 		io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
 		io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
 
+		m_configuration = new ConfigurationPanel();
+		m_about = new AboutPanel();
+
+
+		m_panels.push_back(m_configuration);
+		m_panels.push_back(m_about);
+
+
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
 	void ImGuiLayer::OnDetach()
 	{
 
+		delete m_about;
+		m_panels.clear();
 	}
 
 	void ImGuiLayer::OnUpdate()
@@ -83,14 +96,19 @@ namespace Lanna {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
 
-		UpdateMainMenu();
-
+		MainMenuBar();
+		for (auto p : m_panels)
+		{
+			if (p->active)
+				p->Draw();
+		}
 		/*static bool show = true;
 		ImGui::ShowDemoWindow(&show);*/
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
+
 
 	void ImGuiLayer::OnEvent(Event& event)
 	{
@@ -178,45 +196,16 @@ namespace Lanna {
 		return false;
 	}
 
-	void ImGuiLayer::UpdateMainMenu()
-	{
-		MainMenuBar();
-
-
-
-		// CONFIGURATION -------------------------------------------------
-		ImGui::Begin("Configuration uwu");
-		ImGui::Text("uwu engine, i mean Lanna Engine uwu");
-
-
-
-		/*char title[25];
-		if (ImGui::CollapsingHeader("Info"))
-		{
-			sprintf_s(title, 25, "Framerate %.1f", m_FPSLog[m_FPSLog.size() - 1]);
-			ImGui::PlotHistogram("##framerate", &m_FPSLog[0], m_FPSLog.size(), 0, title, 0.0f, 100.0f, ImVec2(150, 50));
-			sprintf_s(title, 25, "Frametime %.1f", m_MSLog[m_MSLog.size() - 1]);
-			ImGui::PlotHistogram("##frametime", &m_MSLog[0], m_MSLog.size(), 0, title, 0.0f, 100.0f, ImVec2(150, 50));
-			sprintf_s(title, 25, "Mem used %.1f", m_MemLog[m_MemLog.size() - 1]);
-			ImGui::PlotHistogram("##memory", &m_MemLog[0], m_MSLog.size(), 0, title, 0.0f, 100.0f, ImVec2(150, 50));
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		}*/
-
-
-
-
-		ImGui::End();
-		// CONFIGURATION -------------------------------------------------
-
-	}
-
 	void ImGuiLayer::MainMenuBar()
 	{
 		ImGui::BeginMainMenuBar();
-		if (ImGui::BeginMenu("Configuration"))
+		if (ImGui::BeginMenu("View"))
 		{
-			configurationPanel = !configurationPanel;
-
+			for (auto p : m_panels)
+			{
+				if (ImGui::MenuItem(p->GetName(), "", p->active))
+					p->SwitchActive();
+			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help"))

@@ -49,7 +49,10 @@
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h">
       <Filter>Lanna\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h">
+    <ClInclude Include="src\Lanna\ImGui\Panels\AboutPanel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Input.h">
@@ -83,8 +86,8 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Lanna\ImGui\Panel.h">
-      <Filter>Lanna\ImGui</Filter>
+    <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +96,12 @@
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp">
       <Filter>Lanna\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\ImGui\Panels\AboutPanel.cpp">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\ImGui\Panels\Panel.cpp">
+      <Filter>Lanna\ImGui\Panels</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Layer.cpp">
       <Filter>Lanna</Filter>
@@ -113,8 +122,8 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
-    <ClCompile Include="src\Lanna\ImGui\Panel.cpp">
-      <Filter>Lanna\ImGui</Filter>
+    <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp">
+      <Filter>Lanna\ImGui\Panels</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

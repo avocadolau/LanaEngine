@@ -5,9 +5,9 @@
 #include "Lanna/Events/ApplicationEvent.h"
 #include "Lanna/Events/KeyEvent.h"
 #include "Lanna/Events/MouseEvent.h"
-#include "Lanna/ImGui/Panel.h"
 
-#include "Lanna/ImGui/Panel.h"
+#include "Lanna/ImGui/Panels/Panel.h"
+
 #include <vector>
 
 namespace Lanna {
@@ -18,10 +18,10 @@ namespace Lanna {
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		void OnAttach();
-		void OnDetach();
-		void OnUpdate();
-		void OnEvent(Event& event);
+		void OnAttach() override;
+		void OnDetach() override;
+		void OnUpdate() override;
+		void OnEvent(Event& event) override;
 	private:
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
 		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
@@ -32,14 +32,14 @@ namespace Lanna {
 		bool OnKeyTypedEvent(KeyTypedEvent& e);
 		bool OnWindowResizeEvent(WindowResizeEvent& e);
 		
-		void UpdateMainMenu();
 		void MainMenuBar();
 	private:
 		float m_Time = 0.0f;
 
-		bool configurationPanel = false;
+		Panel* m_about = nullptr;
+		Panel* m_configuration = nullptr;
 
-		std::vector<Panel> panels;
+		std::vector<Panel*> m_panels;
 	};
 
 }

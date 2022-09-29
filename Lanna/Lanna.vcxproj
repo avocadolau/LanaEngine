@@ -158,8 +158,9 @@
     <ClInclude Include="src\Lanna\Events\KeyEvent.h" />
     <ClInclude Include="src\Lanna\Events\MouseEvent.h" />
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\Lanna\ImGui\Panel.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panels\AboutPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h" />
     <ClInclude Include="src\Lanna\Input.h" />
     <ClInclude Include="src\Lanna\KeyCodes.h" />
     <ClInclude Include="src\Lanna\Layer.h" />
@@ -175,7 +176,9 @@
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp" />
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\Lanna\ImGui\Panel.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\AboutPanel.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\Panel.cpp" />
     <ClCompile Include="src\Lanna\Layer.cpp" />
     <ClCompile Include="src\Lanna\LayerStack.cpp" />
     <ClCompile Include="src\Lanna\Log.cpp" />

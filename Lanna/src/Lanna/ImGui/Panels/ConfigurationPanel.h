@@ -1,19 +1,24 @@
-#include "Lanna/ImGui/Panel.h"
-#include "imgui.h"
+#pragma once
 
-namespace Lanna
+#include "Panel.h"
+#include "Lanna/Application.h"
+
+#include <list>
+
+#define MAX 64
+
+class ConfigurationPanel :
+    public Panel
 {
-	class Configuration : public Panel
-	{
-	public:
-		void Draw() override
-		{
-			if (active)
-			{
-				ImGui::Begin("Configuration");
-				ImGui::Text("Pitos");
-				ImGui::End();
-			}
-		}
-	};
-}
+public:
+	ConfigurationPanel();
+	~ConfigurationPanel();
+
+	void Draw() override;
+
+private:
+	std::vector<float> fpsLog;
+	std::vector<float> msLog;
+
+};
+
