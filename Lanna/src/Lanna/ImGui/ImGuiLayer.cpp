@@ -12,6 +12,7 @@
 #include "Lanna/ImGui/Panels/Panel.h"
 #include "Lanna/ImGui/Panels/AboutPanel.h"
 #include "Lanna/ImGui/Panels/ConfigurationPanel.h"
+#include "Lanna/ImGui/Panels/HardwarePanel.h"
 
 // TEMPORARY
 #include <GLFW/glfw3.h>
@@ -67,10 +68,11 @@ namespace Lanna {
 
 		m_configuration = new ConfigurationPanel();
 		m_about = new AboutPanel();
-
+		m_hardware = new HardwarePanel();
 
 		m_panels.push_back(m_configuration);
 		m_panels.push_back(m_about);
+		m_panels.push_back(m_hardware);
 
 
 		ImGui_ImplOpenGL3_Init("#version 410");

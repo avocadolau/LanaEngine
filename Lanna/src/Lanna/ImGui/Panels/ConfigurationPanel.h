@@ -7,8 +7,7 @@
 
 #define MAX 64
 
-class ConfigurationPanel :
-    public Panel
+class ConfigurationPanel : public Panel
 {
 public:
 	ConfigurationPanel();
@@ -19,6 +18,10 @@ public:
 private:
 	std::vector<float> fpsLog;
 	std::vector<float> msLog;
+
+	bool fullscreen = false;
+	bool resizable = false;
+	bool vsync = false;
 
 };
 

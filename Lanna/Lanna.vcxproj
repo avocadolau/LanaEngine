@@ -160,6 +160,7 @@
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\AboutPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panels\HardwarePanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h" />
     <ClInclude Include="src\Lanna\Input.h" />
     <ClInclude Include="src\Lanna\KeyCodes.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\AboutPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\HardwarePanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\Panel.cpp" />
     <ClCompile Include="src\Lanna\Layer.cpp" />
     <ClCompile Include="src\Lanna\LayerStack.cpp" />

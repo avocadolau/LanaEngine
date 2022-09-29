@@ -38,6 +38,7 @@ namespace Lanna {
 
 		Panel* m_about = nullptr;
 		Panel* m_configuration = nullptr;
+		Panel* m_hardware = nullptr;
 
 		std::vector<Panel*> m_panels;
 	};

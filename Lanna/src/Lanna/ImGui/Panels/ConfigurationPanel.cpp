@@ -26,18 +26,30 @@ void ConfigurationPanel::Draw()
 	if (fpsLog.size() > MAX)
 		fpsLog.erase(fpsLog.begin());
 
-	bool testBool = true;
-
 	ImGui::Begin("Configuration", &active);
 
-	if (ImGui::CollapsingHeader("Options"))
+	if (ImGui::CollapsingHeader("Window"))
 	{
-		ImGui::Checkbox("vsync", &testBool);
+		int val = 1;
+		ImGui::SliderInt("Brightness", &val, 0, 100, "%i");
+		ImGui::SliderInt("Width", &val, 0, 100, "%i");
+		ImGui::SliderInt("Height", &val, 0, 100, "%i");
+
+		if (ImGui::Checkbox("Fullscreen", &fullscreen))
+		{
+
+		}
+		ImGui::SameLine();
+		if (ImGui::Checkbox("Resizable", &resizable))
+		{
+
+		}
 	}
 
-	
-	if (ImGui::CollapsingHeader("Info"))
+	if (ImGui::CollapsingHeader("Render"))
 	{
+		ImGui::Checkbox("vsync", &vsync);
+
 		if (ImGui::BeginTable("Frame info", 2))
 		{
 			char title[25];
@@ -51,6 +63,15 @@ void ConfigurationPanel::Draw()
 
 			ImGui::EndTable();
 		}
+	}
+
+	
+	if (ImGui::CollapsingHeader("Sound"))
+	{
+		int val = 1;
+		int min = 0;
+		int max = 100;
+		ImGui::SliderInt("volume", &val, min, max, "%i");
 	}
 
 	ImGui::End();
