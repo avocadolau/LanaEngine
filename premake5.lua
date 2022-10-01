@@ -16,6 +16,7 @@ IncludeDir["GLFW"] = "Lanna/vendor/GLFW/include"
 IncludeDir["Glad"] = "Lanna/vendor/Glad/include"
 IncludeDir["ImGui"] = "Lanna/vendor/imgui"
 IncludeDir["Glew"] = "Lanna/vendor/Glew/include/GL"
+IncludeDir["JSON"] = "Lanna/vendor/rapidjson"
 
 include "Lanna/vendor/GLFW"
 include "Lanna/vendor/Glad"
@@ -44,7 +45,7 @@ project "Lanna"
 	{
         "%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-        "%{prj.name}/vendor/rapidjson/include",
+        "%{prj.name}/vendor/rapidjson",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
@@ -111,7 +112,7 @@ project "Sandbox"
     includedirs
     {
         "Lanna/vendor/spdlog/include",
-        "Lanna/vendor/rapidjson/include",
+        "Lanna/vendor/rapidjson",
         "Lanna/src"
     }
 
