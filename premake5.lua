@@ -18,6 +18,7 @@ IncludeDir["ImGui"] = "Lanna/vendor/imgui"
 IncludeDir["Glew"] = "Lanna/vendor/Glew/include/GL"
 IncludeDir["JSON"] = "Lanna/vendor/rapidjson"
 IncludeDir["MathGeoLib"] = "Lanna/vendor/MathGeoLib"
+IncludeDir["PCG"] = "Lanna/vendor/PCG/include"
 
 include "Lanna/vendor/GLFW"
 include "Lanna/vendor/Glad"
@@ -52,6 +53,7 @@ project "Lanna"
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.MathGeoLib}",
         "%{IncludeDir.Glew}",
+        "%{IncludeDir.PCG}"
 	}
 
 	links 

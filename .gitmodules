@@ -16,3 +16,9 @@
 [submodule "Lanna/vendor/MathGeoLib"]
 	path = Lanna/vendor/MathGeoLib
 	url = https://github.com/juj/MathGeoLib
+[submodule "Lanna/Lanna/vendor/PCG"]
+	path = Lanna/Lanna/vendor/PCG
+	url = https://github.com/imneme/pcg-cpp
+[submodule "Lanna/vendor/PCG"]
+	path = Lanna/vendor/PCG
+	url = https://github.com/imneme/pcg-cpp
