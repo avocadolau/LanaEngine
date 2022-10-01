@@ -13,3 +13,6 @@
 [submodule "Lanna/vendor/Gle"]
 	path = Lanna/vendor/Gle
 	url = https://github.com/nigels-com/glew.git
+[submodule "Lanna/vendor/MathGeoLib"]
+	path = Lanna/vendor/MathGeoLib
+	url = https://github.com/juj/MathGeoLib
