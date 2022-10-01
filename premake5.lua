@@ -42,9 +42,10 @@ project "Lanna"
 	{
         "%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
+        "%{prj.name}/vendor/rapidjson/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
-        "%{IncludeDir.ImGui}"
+        "%{IncludeDir.ImGui}",
 	}
 
 	links 
@@ -106,6 +107,7 @@ project "Sandbox"
     includedirs
     {
         "Lanna/vendor/spdlog/include",
+        "Lanna/vendor/rapidjson/include",
         "Lanna/src"
     }
 

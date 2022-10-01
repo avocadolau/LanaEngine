@@ -7,3 +7,6 @@
 [submodule "Lanna/vendor/imgui"]
 	path = Lanna/vendor/imgui
 	url = https://github.com/TheCherno/imgui
+[submodule "Lanna/vendor/RapidJson"]
+	path = Lanna/vendor/RapidJson
+	url = https://github.com/Tencent/rapidjson/
