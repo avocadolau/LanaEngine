@@ -10,3 +10,6 @@
 [submodule "Lanna/vendor/RapidJson"]
 	path = Lanna/vendor/RapidJson
 	url = https://github.com/Tencent/rapidjson/
+[submodule "Lanna/vendor/Gle"]
+	path = Lanna/vendor/Gle
+	url = https://github.com/nigels-com/glew.git

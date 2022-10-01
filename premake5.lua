@@ -15,6 +15,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Lanna/vendor/GLFW/include"
 IncludeDir["Glad"] = "Lanna/vendor/Glad/include"
 IncludeDir["ImGui"] = "Lanna/vendor/imgui"
+IncludeDir["Glew"] = "Lanna/vendor/Glew/include/GL"
 
 include "Lanna/vendor/GLFW"
 include "Lanna/vendor/Glad"
@@ -46,6 +47,7 @@ project "Lanna"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
+        "%{IncludeDir.Glew}"
 	}
 
 	links 
@@ -53,7 +55,8 @@ project "Lanna"
 		"GLFW",
         "Glad",
         "ImGui",
-		"opengl32.lib"
+		"opengl32.lib",
+        "Lanna/vendor/Glew/lib/glew32.lib"
     }
 
     filter "system:windows"
