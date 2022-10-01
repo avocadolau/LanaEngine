@@ -1,7 +1,6 @@
 #include "lnpch.h"
 #include "ImGuiLayer.h"
 
-#include "imgui.h"
 #include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
 
 #include "Lanna/Application.h"
@@ -13,6 +12,7 @@
 #include "Lanna/ImGui/Panels/AboutPanel.h"
 #include "Lanna/ImGui/Panels/ConfigurationPanel.h"
 #include "Lanna/ImGui/Panels/HardwarePanel.h"
+#include "Lanna/ImGui/Panels/ScenePanel.h"
 
 // TEMPORARY
 #include <GLFW/glfw3.h>
@@ -20,13 +20,8 @@
 
 namespace Lanna {
 
-	ImGuiLayer::ImGuiLayer()
-		: Layer("ImGuiLayer")
+	ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
 	{
-
-		// create pannels
-
-
 
 	}
 
@@ -66,13 +61,17 @@ namespace Lanna {
 		io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
 		io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
 
+
+		// panels --------------------------------
 		m_configuration = new ConfigurationPanel();
 		m_about = new AboutPanel();
 		m_hardware = new HardwarePanel();
+		m_scene = new ScenePanel();
 
 		m_panels.push_back(m_configuration);
 		m_panels.push_back(m_about);
 		m_panels.push_back(m_hardware);
+		m_panels.push_back(m_scene);
 
 
 		ImGui_ImplOpenGL3_Init("#version 410");
@@ -98,6 +97,16 @@ namespace Lanna {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
 
+		m_Log.AddLog(ImGuiLog::LogLevel::TRACE, "uwu");
+		m_Log.AddLog(ImGuiLog::LogLevel::INFO, "uwu");
+		m_Log.AddLog(ImGuiLog::LogLevel::WARN, "uwu");
+		m_Log.AddLog(ImGuiLog::LogLevel::ERR, "uwu");
+		m_Log.AddLog(ImGuiLog::LogLevel::FATAL, "uwu");
+
+		m_Log.Draw("Console intense UWU");
+
+
+		// panels ------------------------
 		MainMenuBar();
 		for (auto p : m_panels)
 		{

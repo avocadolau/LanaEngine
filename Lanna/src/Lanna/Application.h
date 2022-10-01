@@ -7,8 +7,21 @@
 #include "Lanna/Events/Event.h"
 #include "Lanna/Events/ApplicationEvent.h"
 
-
 namespace Lanna {
+
+	struct SysInfo
+	{
+		char glfwVer[32];
+		uint32_t cache;
+		uint32_t numCores;
+		float ram;
+		const unsigned char* gpu;
+		const unsigned char* gpuBrand;
+		float gpuVRAM;
+		float gpuVRAMUsage;
+		float gpuVRAMAV;
+		float gpuVRAMReserve;
+	};
 
 	class LANNA_API Application
 	{
@@ -17,15 +30,17 @@ namespace Lanna {
 		virtual ~Application();
 
 		void Run();
-
 		void OnEvent(Event& e);
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
-		inline Window& GetWindow() { return *m_Window; }
+		void SetHwInfo();
 
+		inline Window& GetWindow() { return *m_Window; }
 		inline static Application& Get() { return *s_Instance; }
+
+		inline SysInfo& GetSystemInfo() { return m_SysInfo; }
 
 		void OpenUrl(const char* url);
 	private:
@@ -33,6 +48,7 @@ namespace Lanna {
 
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
+		SysInfo m_SysInfo;
 		LayerStack m_LayerStack;
 	private:
 		static Application* s_Instance;

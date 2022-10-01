@@ -69,10 +69,9 @@ void ConfigurationPanel::Draw()
 		}
 	}
 
-	if (ImGui::CollapsingHeader("Render"))
+	if (ImGui::CollapsingHeader("Information"))
 	{
 		
-
 		if (ImGui::BeginTable("Frame info", 2))
 		{
 			ImGui::TableNextColumn();
@@ -87,6 +86,40 @@ void ConfigurationPanel::Draw()
 		}
 	}
 
+	if (ImGui::CollapsingHeader("Hardware"))
+	{
+		info = Lanna::Application::Get().GetSystemInfo();
+
+		ImGui::Text("GLFW version:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", info.glfwVer);
+		ImGui::Separator();
+		ImGui::Text("CPUs:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%i", info.numCores);
+		ImGui::Text("System RAM:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%0.1fMb", info.ram);
+		ImGui::Separator();
+		ImGui::Text("GPU:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", info.gpu);
+		ImGui::Text("Brand:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", info.gpuBrand);
+		ImGui::Text("Total VRAM:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%0.1fMb", info.gpuVRAM);
+		ImGui::Text("VRAM Usage:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), " %0.1fMb", info.gpuVRAMUsage);
+		ImGui::Text("VRAM Available:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%0.1fMb", info.gpuVRAMAV);
+		ImGui::Text("VRAM Reserved:");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%0.1fMb", info.gpuVRAMReserve);
+	}
 	
 	if (ImGui::CollapsingHeader("Sound"))
 	{

@@ -23,5 +23,6 @@ private:
 	bool resizable = false;
 	bool vsync = false;
 
+	Lanna::SysInfo info;
 };
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Lanna/ImGui/ImGuiLog.h"
 #include "Lanna/Layer.h"
 
 #include "Lanna/Events/ApplicationEvent.h"
@@ -22,6 +23,15 @@ namespace Lanna {
 		void OnDetach() override;
 		void OnUpdate() override;
 		void OnEvent(Event& event) override;
+
+		inline void LogTrace(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::TRACE, log); }
+		inline void LogInfo(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::INFO, log); }
+		inline void LogWarn(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::WARN, log); }
+		inline void LogError(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::ERR, log); }
+		inline void LogCritical(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::FATAL, log); }
+
+		inline ImGuiLog& GetLog() { return m_Log; }
+
 	private:
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
 		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
@@ -34,11 +44,13 @@ namespace Lanna {
 		
 		void MainMenuBar();
 	private:
+		ImGuiLog m_Log;
 		float m_Time = 0.0f;
 
 		Panel* m_about = nullptr;
 		Panel* m_configuration = nullptr;
 		Panel* m_hardware = nullptr;
+		Panel* m_scene = nullptr;
 
 		std::vector<Panel*> m_panels;
 	};
