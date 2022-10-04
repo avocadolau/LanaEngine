@@ -6,6 +6,7 @@
 
 ScenePanel::ScenePanel(): Panel("Scene")
 {
+	active = true;
 	m_Shadings.push_back(new ShadingView("Default", true));
 	m_Shadings.push_back(new ShadingView("Wireframe", true));
 	m_Shadings.push_back(new ShadingView("Stil WIP T_T", true));
@@ -46,6 +47,7 @@ void ScenePanel::Draw()
 	glVertex3f(0.f, 10.f, 0.f);
 	glEnd();
 	glLineWidth(1.0f);
+
 
 	ImGui::End();
 

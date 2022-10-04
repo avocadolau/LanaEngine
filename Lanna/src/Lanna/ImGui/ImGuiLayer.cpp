@@ -1,9 +1,14 @@
 #include "lnpch.h"
 #include "ImGuiLayer.h"
 
-#include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
+//#include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
+#include "imgui.h"
+#include "Platform/OpenGL/imgui_impl_opengl3.h"
+#include "Platform/OpenGL/imgui_impl_glfw.h"
 
 #include "Lanna/Application.h"
+
+#define IMGUI_IMP_API
 
 // PANELS
 #include <vector>
@@ -16,7 +21,7 @@
 
 // TEMPORARY
 #include <GLFW/glfw3.h>
-#include <glad/glad.h>
+#include <glew.h>
 
 namespace Lanna {
 
@@ -32,14 +37,21 @@ namespace Lanna {
 	void ImGuiLayer::OnAttach()
 	{
 		ImGui::CreateContext();
-		ImGui::StyleColorsDark();
+		IMGUI_CHECKVERSION();
 		//Set some flags
 		ImGuiIO& io = ImGui::GetIO();
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+
+		ImGui::StyleColorsDark();
+
+
 		// TEMPORARY: should use Lanna key codes
-		io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
+		/*io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
 		io.KeyMap[ImGuiKey_LeftArrow] = GLFW_KEY_LEFT;
 		io.KeyMap[ImGuiKey_RightArrow] = GLFW_KEY_RIGHT;
 		io.KeyMap[ImGuiKey_UpArrow] = GLFW_KEY_UP;
@@ -59,7 +71,7 @@ namespace Lanna {
 		io.KeyMap[ImGuiKey_V] = GLFW_KEY_V;
 		io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
 		io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
-		io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
+		io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;*/
 
 
 		// panels --------------------------------
@@ -73,38 +85,25 @@ namespace Lanna {
 		m_panels.push_back(m_hardware);
 		m_panels.push_back(m_scene);
 
-
+		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
 	void ImGuiLayer::OnDetach()
 	{
-
 		delete m_about;
 		m_panels.clear();
+
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+		ImGui::DestroyContext();
 	}
 
 	void ImGuiLayer::OnUpdate()
 	{
-		ImGuiIO& io = ImGui::GetIO();
-		Application& app = Application::Get(); //Give us our APP
-		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight()); //Shows Im gui our display is
 
-		float time = (float)glfwGetTime();
-		io.DeltaTime = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f); //To keep track of time
-		m_Time = time;
-
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui::NewFrame();
-
-		m_Log.AddLog(ImGuiLog::LogLevel::TRACE, "uwu");
-		m_Log.AddLog(ImGuiLog::LogLevel::INFO, "uwu");
-		m_Log.AddLog(ImGuiLog::LogLevel::WARN, "uwu");
-		m_Log.AddLog(ImGuiLog::LogLevel::ERR, "uwu");
-		m_Log.AddLog(ImGuiLog::LogLevel::FATAL, "uwu");
-
-		m_Log.Draw("Console intense UWU");
-
+		
 
 		// panels ------------------------
 		MainMenuBar();
@@ -113,25 +112,42 @@ namespace Lanna {
 			if (p->active)
 				p->Draw();
 		}
+		if (logActive)
+			m_Log.Draw("Console", &logActive);
+
 		/*static bool show = true;
 		ImGui::ShowDemoWindow(&show);*/
-
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
 
-
-	void ImGuiLayer::OnEvent(Event& event)
+	void ImGuiLayer::Begin()
 	{
-		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<MouseButtonPressedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
-		dispatcher.Dispatch<MouseButtonReleasedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));
-		dispatcher.Dispatch<MouseMovedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseMovedEvent));
-		dispatcher.Dispatch<MouseScrolledEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
-		dispatcher.Dispatch<KeyPressedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnKeyPressedEvent));
-		dispatcher.Dispatch<KeyTypedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnKeyTypedEvent));
-		dispatcher.Dispatch<KeyReleasedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
-		dispatcher.Dispatch<WindowResizeEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnWindowResizeEvent));
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+	}
+
+	void ImGuiLayer::End()
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		Application& app = Application::Get();  //Give us our APP
+		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight()); //Shows Im gui our display is
+
+		// RENDER
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* backup_current_context = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			glfwMakeContextCurrent(backup_current_context);
+		}
+	}
+
+	void ImGuiLayer::OnImGuiRender()
+	{
+		
 	}
 
 	bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)
@@ -167,36 +183,6 @@ namespace Lanna {
 		return false;
 	}
 
-	bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.KeysDown[e.GetKeyCode()] = true;
-
-		io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
-		io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
-		io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
-		io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
-		return false;
-	}
-
-	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.KeysDown[e.GetKeyCode()] = false;
-
-		return false;
-	}
-
-	bool ImGuiLayer::OnKeyTypedEvent(KeyTypedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		int keycode = e.GetKeyCode();
-		if (keycode > 0 && keycode < 0x10000)
-			io.AddInputCharacter((unsigned short)keycode);
-
-		return false;
-	}
-
 	bool ImGuiLayer::OnWindowResizeEvent(WindowResizeEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
@@ -217,6 +203,7 @@ namespace Lanna {
 				if (ImGui::MenuItem(p->GetName(), "", p->active))
 					p->SwitchActive();
 			}
+			ImGui::MenuItem("Console", "", &logActive);
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help"))

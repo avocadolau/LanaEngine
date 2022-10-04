@@ -14,6 +14,7 @@ namespace Lanna {
 		virtual void OnAttach() {} //When a layer is pushed on a layer stack and part of app, we attach it
 		virtual void OnDetach() {} //We can detatch/remove it
 		virtual void OnUpdate() {} //Gets called by app when layer is updated , every frame
+		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {} //Whenever an event gets sent to layer, we recieve it here (all virtual so we can override)
 
 		inline const std::string& GetName() const { return m_DebugName; }

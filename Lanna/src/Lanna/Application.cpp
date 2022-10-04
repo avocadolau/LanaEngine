@@ -31,6 +31,9 @@ namespace Lanna {
 
 		SetHwInfo();
 
+		m_Layer = new ImGuiLayer();
+		PushOverlay(m_Layer);
+
 		unsigned int id;
 		glGenVertexArrays(1, &id);
 	}
@@ -110,8 +113,14 @@ namespace Lanna {
 			glEnable(GL_TEXTURE_2D);*/
 
 
+			
+
+			m_Layer->Begin();
+
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			m_Layer->End();
 
 			//auto [x, y] = Input::GetMousePosition();
 			//LN_CORE_TRACE("{0}, {1}", x, y);

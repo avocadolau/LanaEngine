@@ -5,7 +5,6 @@ namespace Lanna {
 	//Layers belong to layer stack, layerstack is owned by the application
 	LayerStack::LayerStack()
 	{
-		m_LayerInsert = m_Layers.begin();
 	}
 	//Ass long as the layer is given to layerstack, it will be deallocated when application shuts down
 	LayerStack::~LayerStack()
@@ -16,7 +15,8 @@ namespace Lanna {
 	//Layers get pushed to the 1st half of the list 
 	void LayerStack::PushLayer(Layer* layer)
 	{
-		m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer); //layerstack recieves the layer and pushes it into the right place
+		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer); //layerstack recieves the layer and pushes it into the right place
+		m_LayerInsertIndex++;
 	}
 	//Overlayers get pushed to the 2nd half of the list, bc we want to render them last
 	void LayerStack::PushOverlay(Layer* overlay)
@@ -30,7 +30,7 @@ namespace Lanna {
 		if (it != m_Layers.end())
 		{
 			m_Layers.erase(it); //Layer isnt deleted, just removed from the actual vector
-			m_LayerInsert--;
+			m_LayerInsertIndex--;
 		}
 	}
 

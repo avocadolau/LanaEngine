@@ -4,6 +4,7 @@
 
 #include "Window.h"
 #include "Lanna/LayerStack.h"
+#include "Lanna/ImGui/ImGuiLayer.h"
 #include "Lanna/Events/Event.h"
 #include "Lanna/Events/ApplicationEvent.h"
 
@@ -50,6 +51,7 @@ namespace Lanna {
 		bool m_Running = true;
 		SysInfo m_SysInfo;
 		LayerStack m_LayerStack;
+		ImGuiLayer* m_Layer;
 	private:
 		static Application* s_Instance;
 	};

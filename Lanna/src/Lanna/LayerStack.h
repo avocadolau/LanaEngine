@@ -22,7 +22,7 @@ namespace Lanna {
 		std::vector<Layer*>::iterator end() { return m_Layers.end(); }
 	private:
 		std::vector<Layer*> m_Layers; //Using a vector bc every frame this will be ittirated over, we will also need a reverse itterator
-		std::vector<Layer*>::iterator m_LayerInsert;//Stores raw`pointers
+		unsigned int m_LayerInsertIndex = 0;
 	};
 
 }

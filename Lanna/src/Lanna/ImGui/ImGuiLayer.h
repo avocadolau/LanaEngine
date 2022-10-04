@@ -22,7 +22,11 @@ namespace Lanna {
 		void OnAttach() override;
 		void OnDetach() override;
 		void OnUpdate() override;
-		void OnEvent(Event& event) override;
+
+		void Begin();
+		void End();
+
+		void OnImGuiRender() override;
 
 		inline void LogTrace(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::TRACE, log); }
 		inline void LogInfo(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::INFO, log); }
@@ -37,14 +41,13 @@ namespace Lanna {
 		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
 		bool OnMouseMovedEvent(MouseMovedEvent& e);
 		bool OnMouseScrolledEvent(MouseScrolledEvent& e);
-		bool OnKeyPressedEvent(KeyPressedEvent& e);
-		bool OnKeyReleasedEvent(KeyReleasedEvent& e);
-		bool OnKeyTypedEvent(KeyTypedEvent& e);
 		bool OnWindowResizeEvent(WindowResizeEvent& e);
-		
+
 		void MainMenuBar();
 	private:
 		ImGuiLog m_Log;
+		bool logActive;
+
 		float m_Time = 0.0f;
 
 		Panel* m_about = nullptr;
