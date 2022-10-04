@@ -1,5 +1,6 @@
 #include "lnpch.h"
 #include "ScenePanel.h"
+#include <gl/GL.h>
 
 #include <imgui.h>
 
@@ -38,6 +39,13 @@ void ScenePanel::Draw()
 
 
 	// draw geometry
+	glBegin(GL_LINES);
+
+	glLineWidth(2.0f);
+	glVertex3f(0.f, 0.f, 0.f);
+	glVertex3f(0.f, 10.f, 0.f);
+	glEnd();
+	glLineWidth(1.0f);
 
 	ImGui::End();
 
