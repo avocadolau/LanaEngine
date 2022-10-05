@@ -10,10 +10,7 @@ namespace Lanna {
 		virtual bool IsKeyPressedImpl(int keycode) override;
 		virtual bool IsMouseButtonPressedImpl(int button) override;
 		virtual std::pair<float, float> GetMousePositionImpl() override;
-#ifdef CAMERA
 		virtual glm::vec2 GetMousePositionVec2Impl() override;
-
-#endif // CAMERA
 
 		virtual float GetMouseXImpl() override;
 		virtual float GetMouseYImpl() override;

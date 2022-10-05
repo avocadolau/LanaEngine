@@ -82,6 +82,7 @@ namespace Lanna {
 
 	void Application::Close()
 	{
+		m_Running = false;
 	}
 
 
@@ -102,6 +103,7 @@ namespace Lanna {
 	{
 		while (m_Running)
 		{
+
 			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 			glClearDepth(1.0f);
 

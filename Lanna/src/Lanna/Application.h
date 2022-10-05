@@ -37,10 +37,10 @@ namespace Lanna {
 		void PushOverlay(Layer* layer);
 
 		void SetHwInfo();
+		void Close();
 
 		inline Window& GetWindow() { return *m_Window; }
 		inline static Application& Get() { return *s_Instance; }
-
 		inline SysInfo& GetSystemInfo() { return m_SysInfo; }
 
 		void OpenUrl(const char* url);

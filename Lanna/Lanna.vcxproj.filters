@@ -22,6 +22,9 @@
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\Renderer">
+      <UniqueIdentifier>{66aa1336-6fbe-4b66-b271-6ccaad5917a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Lanna.h" />
@@ -107,6 +110,9 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="src\Lanna\Renderer\Camera.h">
+      <Filter>Lanna\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -155,5 +161,8 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="src\Lanna\Renderer\Camera.cpp">
+      <Filter>Lanna\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,8 +1,6 @@
 #include <lnpch.h>
 #include "Camera.h"
 
-#ifdef CAMERA
-
 #include <gtc/matrix_transform.hpp>
 #include <gtc/quaternion.hpp>
 #include <gtx/quaternion.hpp>
@@ -10,6 +8,7 @@
 #include "Input.h"
 
 #include "KeyCodes.h"
+#include "Camera.h"
 
 using namespace Lanna;
 
@@ -140,4 +139,3 @@ void Camera::RecalculateRayDirections()
 	}
 }
 
-#endif
