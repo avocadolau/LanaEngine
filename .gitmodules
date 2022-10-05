@@ -22,3 +22,6 @@
 [submodule "Lanna/vendor/PCG"]
 	path = Lanna/vendor/PCG
 	url = https://github.com/imneme/pcg-cpp
+[submodule "Lanna/vendor/assimp"]
+	path = Lanna/vendor/assimp
+	url = https://github.com/assimp/assimp
