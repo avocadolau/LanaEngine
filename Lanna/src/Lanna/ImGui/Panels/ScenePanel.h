@@ -25,6 +25,10 @@ public:
 	void DrawElements();
 private:
 	std::vector<ShadingView*> m_Shadings;
+#ifdef CAMERA
 	const Camera* m_Camera;
+
+#endif // CAMERA
+
 };
 

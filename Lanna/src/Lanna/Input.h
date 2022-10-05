@@ -1,7 +1,11 @@
 #pragma once
 
 #include "Core.h"
+
+
+#ifdef CAMERA
 #include "../glm/glm/glm.hpp"
+#endif // CAMERA
 
 namespace Lanna {
 
@@ -11,7 +15,10 @@ namespace Lanna {
 		inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
 		inline static bool IsMouseButtonPressed(int button) { return s_Instance->IsMouseButtonPressedImpl(button); }
 		inline static std::pair<float, float> GetMousePosition() { return s_Instance->GetMousePositionImpl(); }
+#ifdef CAMERA
 		inline static glm::vec2 GetMousePositionVec2() { return s_Instance->GetMousePositionVec2Impl(); }
+
+#endif // CAMERA
 		inline static float GetMouseX() { return s_Instance->GetMouseXImpl(); }
 		inline static float GetMouseY() { return s_Instance->GetMouseYImpl(); }
 
@@ -19,7 +26,9 @@ namespace Lanna {
 		virtual bool IsKeyPressedImpl(int keycode) = 0;
 		virtual bool IsMouseButtonPressedImpl(int button) = 0;
 		virtual std::pair<float, float> GetMousePositionImpl() = 0;
+#ifdef CAMERA
 		virtual glm::vec2 GetMousePositionVec2Impl() = 0;
+#endif // CAMERA
 		virtual float GetMouseXImpl() = 0;
 		virtual float GetMouseYImpl() = 0;
 	private:

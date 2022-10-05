@@ -1,6 +1,7 @@
 #include <lnpch.h>
 #include "Camera.h"
 
+#ifdef CAMERA
 
 #include <gtc/matrix_transform.hpp>
 #include <gtc/quaternion.hpp>
@@ -138,3 +139,5 @@ void Camera::RecalculateRayDirections()
 		}
 	}
 }
+
+#endif

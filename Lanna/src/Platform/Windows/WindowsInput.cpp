@@ -31,6 +31,7 @@ namespace Lanna {
 		return { (float)xpos, (float)ypos };
 	}
 
+#ifdef CAMERA
 	glm::vec2 WindowsInput::GetMousePositionVec2Impl()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
@@ -39,6 +40,9 @@ namespace Lanna {
 
 		return { (float)xpos, (float)ypos };
 	}
+#endif // CAMERA
+
+	
 
 
 	float WindowsInput::GetMouseXImpl()

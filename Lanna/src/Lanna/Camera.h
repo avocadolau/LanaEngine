@@ -1,5 +1,10 @@
 #pragma once
 
+//#define CAMERA
+
+
+#ifdef CAMERA
+
 #include "lnpch.h"
 #include <glm.hpp>
 #include <vector>
@@ -47,3 +52,6 @@ private:
 
 	uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
 };
+
+
+#endif // CAMERA
