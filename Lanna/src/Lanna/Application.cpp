@@ -80,6 +80,10 @@ namespace Lanna {
 		m_SysInfo.gpuVRAMReserve = cur_reserv_mem_kb >> 10;
 	}
 
+	void Application::Close()
+	{
+	}
+
 
 	void Application::OnEvent(Event& e)
 	{

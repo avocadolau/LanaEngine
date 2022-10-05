@@ -44,6 +44,7 @@ namespace Lanna {
 		bool OnWindowResizeEvent(WindowResizeEvent& e);
 
 		void MainMenuBar();
+		void DockSpace();
 	private:
 		ImGuiLog m_Log;
 		bool logActive;
