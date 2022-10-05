@@ -82,6 +82,7 @@ namespace Lanna {
 
 	void Application::Close()
 	{
+		m_Running = false;
 	}
 
 
