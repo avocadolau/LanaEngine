@@ -2,6 +2,8 @@
 #include "Panel.h"
 #include "lnpch.h"
 
+#include "Lanna/Camera.h"
+
 struct ShadingView
 {
 	const char* name;
@@ -20,7 +22,9 @@ public:
 	~ScenePanel();
 
 	void Draw() override;
+	void DrawElements();
 private:
 	std::vector<ShadingView*> m_Shadings;
+	const Camera* m_Camera;
 };
 

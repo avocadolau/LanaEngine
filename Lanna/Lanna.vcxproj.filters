@@ -28,6 +28,9 @@
     <ClInclude Include="src\Lanna\Application.h">
       <Filter>Lanna</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Camera.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Core.h">
       <Filter>Lanna</Filter>
     </ClInclude>
@@ -107,6 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
+      <Filter>Lanna</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Camera.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp">

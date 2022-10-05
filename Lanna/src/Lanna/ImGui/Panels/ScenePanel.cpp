@@ -10,6 +10,8 @@ ScenePanel::ScenePanel(): Panel("Scene")
 	m_Shadings.push_back(new ShadingView("Default", true));
 	m_Shadings.push_back(new ShadingView("Wireframe", true));
 	m_Shadings.push_back(new ShadingView("Stil WIP T_T", true));
+	m_Camera = new Camera(45.0f, 0.1f, 100.0f);
+
 }
 
 ScenePanel::~ScenePanel()
@@ -40,14 +42,19 @@ void ScenePanel::Draw()
 
 
 	// draw geometry
+	
+	DrawElements();
+
+	ImGui::End();
+
+}
+
+void ScenePanel::DrawElements()
+{
 	glBegin(GL_TRIANGLES);
 
 	glVertex3f(0.5f, 0.f, 0.f);
 	glVertex3f(0.f, 0.5f, 0.f);
 	glVertex3f(0.5f, 0.5f, 0.f);
 	glEnd();
-
-
-	ImGui::End();
-
 }
