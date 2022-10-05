@@ -24,7 +24,8 @@ void AboutPanel::Draw()
 	ImGui::Text("By Laura Isidro & Anna Metrevelli");
 	ImGui::Text("\n3rd Party Libraries used:");
 
-	
+	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0, 0.0, 0.0, 0.0));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.0, 0.0, 0.0, 0.0));
 	if (ImGui::Button("> OpenGL v3.2.1       "))
 		Lanna::Application::Get().OpenUrl("https://github.com/glfw/glfw");
 	if (ImGui::Button("> Glad                "))
@@ -37,6 +38,16 @@ void AboutPanel::Draw()
 		Lanna::Application::Get().OpenUrl("https://github.com/gabime/spdlog");
 	if (ImGui::Button("> premake v5.0.0-beta2"))
 		Lanna::Application::Get().OpenUrl("https://github.com/premake/premake-core");
+	if (ImGui::Button("> MathGeoLib v1.5     "))
+		Lanna::Application::Get().OpenUrl("https://github.com/juj/MathGeoLib");
+	if (ImGui::Button("> Glew v2.1.0         "))
+		Lanna::Application::Get().OpenUrl("https://glew.sourceforge.net/index.html");
+	if (ImGui::Button("> PCG v0.98.1         "))
+		Lanna::Application::Get().OpenUrl("https://github.com/imneme/pcg-cpp");
+	if (ImGui::Button("> assimp v5.2.5       "))
+		Lanna::Application::Get().OpenUrl("https://github.com/assimp/assimp");
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
 
 	ImGui::Text("\nLicence:  MIT License");
 
