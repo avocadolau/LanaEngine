@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGui", "Lanna\vendor\imgui
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lanna", "Lanna\Lanna.vcxproj", "{AF59950D-1B6E-BDBE-E4EF-601E50C3B9EF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Optick", "Lanna\vendor\Optick\Optick.vcxproj", "{AFAE52C8-9B50-7D9E-840B-91F2704C04EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -56,6 +58,12 @@ Global
 		{AF59950D-1B6E-BDBE-E4EF-601E50C3B9EF}.Dist|x64.Build.0 = Dist|x64
 		{AF59950D-1B6E-BDBE-E4EF-601E50C3B9EF}.Release|x64.ActiveCfg = Release|x64
 		{AF59950D-1B6E-BDBE-E4EF-601E50C3B9EF}.Release|x64.Build.0 = Release|x64
+		{AFAE52C8-9B50-7D9E-840B-91F2704C04EF}.Debug|x64.ActiveCfg = Debug|x64
+		{AFAE52C8-9B50-7D9E-840B-91F2704C04EF}.Debug|x64.Build.0 = Debug|x64
+		{AFAE52C8-9B50-7D9E-840B-91F2704C04EF}.Dist|x64.ActiveCfg = Dist|x64
+		{AFAE52C8-9B50-7D9E-840B-91F2704C04EF}.Dist|x64.Build.0 = Dist|x64
+		{AFAE52C8-9B50-7D9E-840B-91F2704C04EF}.Release|x64.ActiveCfg = Release|x64
+		{AFAE52C8-9B50-7D9E-840B-91F2704C04EF}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
