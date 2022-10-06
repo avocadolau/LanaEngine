@@ -21,13 +21,11 @@ IncludeDir["MathGeoLib"] = "Lanna/vendor/MathGeoLib"
 IncludeDir["PCG"] = "Lanna/vendor/PCG/include"
 IncludeDir["assimp"] = "Lanna/vendor/assimp/include"
 IncludeDir["glm"] = "Lanna/vendor/glm/glm"
-IncludeDir["Optick"] = "Lanna/vendor/Optick/include"
 
 include "Lanna/vendor/GLFW"
 include "Lanna/vendor/Glad"
 include "Lanna/vendor/imgui"
 include "Lanna/vendor/Glew"
-include "Lanna/vendor/Optick"
 
 project "Lanna"
     location "Lanna"
@@ -59,8 +57,7 @@ project "Lanna"
         "%{IncludeDir.Glew}",
         "%{IncludeDir.PCG}",
         "%{IncludeDir.assimp}",
-        "%{IncludeDir.glm}",
-        "%{IncludeDir.Optick}"
+        "%{IncludeDir.glm}"
 	}
 
 	links 
@@ -70,7 +67,6 @@ project "Lanna"
         "ImGui",
         "Glew",
 		"opengl32.lib",
-        "Optick"
     }
 
     filter "system:windows"
@@ -126,8 +122,7 @@ project "Sandbox"
         "Lanna/vendor/spdlog/include",
         "Lanna/vendor/rapidjson",
         "Lanna/vendor/imgui",
-        "Lanna/src",
-        "Lanna/vendor/Optik/include"
+        "Lanna/src"
     }
 
     links
