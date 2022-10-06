@@ -127,7 +127,7 @@ project "Sandbox"
         "Lanna/vendor/rapidjson",
         "Lanna/vendor/imgui",
         "Lanna/src",
-        "Lanna/vendor/glm/glm"
+        "Lanna/vendor/glm/glm",
         "Lanna/vendor/Optik/include"
     }
 
