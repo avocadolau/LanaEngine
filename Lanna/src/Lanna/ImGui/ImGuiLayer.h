@@ -8,6 +8,7 @@
 #include "Lanna/Events/MouseEvent.h"
 
 #include "Lanna/ImGui/Panels/Panel.h"
+#include "Lanna/Renderer/Camera.h"
 
 #include <vector>
 
@@ -56,7 +57,9 @@ namespace Lanna {
 		Panel* m_hardware = nullptr;
 		Panel* m_scene = nullptr;
 
+		Camera* m_Camera = nullptr;
 		std::vector<Panel*> m_panels;
+
 	};
 
 }

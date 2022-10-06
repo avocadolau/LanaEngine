@@ -11,11 +11,6 @@ ScenePanel::ScenePanel(): Panel("Scene")
 	m_Shadings.push_back(new ShadingView("Wireframe", true));
 	m_Shadings.push_back(new ShadingView("Stil WIP T_T", true));
 
-#ifdef CAMERA
-	m_Camera = new Camera(45.0f, 0.1f, 100.0f);
-
-#endif // CAMERA
-
 
 }
 
@@ -56,10 +51,10 @@ void ScenePanel::Draw()
 
 void ScenePanel::DrawElements()
 {
-	glBegin(GL_TRIANGLES);
+	/*glBegin(GL_TRIANGLES);
 
 	glVertex3f(0.5f, 0.f, 0.f);
 	glVertex3f(0.f, 0.5f, 0.f);
 	glVertex3f(0.5f, 0.5f, 0.f);
-	glEnd();
+	glEnd();*/
 }

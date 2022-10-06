@@ -13,6 +13,9 @@
     <Filter Include="Lanna\ImGui\Panels">
       <UniqueIdentifier>{4B506C03-3734-2D59-A094-27AC8C9717DB}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\Renderer">
+      <UniqueIdentifier>{35F26D0B-21C0-6111-0A54-D237F6C03D76}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
@@ -22,16 +25,10 @@
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lanna\Renderer">
-      <UniqueIdentifier>{66aa1336-6fbe-4b66-b271-6ccaad5917a5}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Lanna.h" />
     <ClInclude Include="src\Lanna\Application.h">
-      <Filter>Lanna</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\Camera.h">
       <Filter>Lanna</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Core.h">
@@ -91,6 +88,9 @@
     <ClInclude Include="src\Lanna\MouseButtonCodes.h">
       <Filter>Lanna</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Renderer\Camera.h">
+      <Filter>Lanna\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Window.h">
       <Filter>Lanna</Filter>
     </ClInclude>
@@ -110,15 +110,9 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Lanna\Renderer\Camera.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
-      <Filter>Lanna</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Camera.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp">
@@ -148,6 +142,9 @@
     <ClCompile Include="src\Lanna\Log.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lanna\Renderer\Camera.cpp">
+      <Filter>Lanna\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp">
       <Filter>Platform\OpenGL</Filter>
     </ClCompile>
@@ -161,8 +158,5 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Camera.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

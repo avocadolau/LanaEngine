@@ -2,8 +2,6 @@
 #include "Panel.h"
 #include "lnpch.h"
 
-#include "Lanna/Camera.h"
-
 struct ShadingView
 {
 	const char* name;

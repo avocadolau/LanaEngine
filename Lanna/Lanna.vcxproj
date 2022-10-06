@@ -154,7 +154,6 @@
   <ItemGroup>
     <ClInclude Include="src\Lanna.h" />
     <ClInclude Include="src\Lanna\Application.h" />
-    <ClInclude Include="src\Lanna\Camera.h" />
     <ClInclude Include="src\Lanna\Core.h" />
     <ClInclude Include="src\Lanna\EntryPoint.h" />
     <ClInclude Include="src\Lanna\Events\ApplicationEvent.h" />
@@ -185,7 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp" />
-    <ClCompile Include="src\Lanna\Camera.cpp" />
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\AboutPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp" />

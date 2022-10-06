@@ -122,7 +122,9 @@ project "Sandbox"
         "Lanna/vendor/spdlog/include",
         "Lanna/vendor/rapidjson",
         "Lanna/vendor/imgui",
-        "Lanna/src"
+        "Lanna/src",
+        "Lanna/vendor/glm/glm"
+
     }
 
     links

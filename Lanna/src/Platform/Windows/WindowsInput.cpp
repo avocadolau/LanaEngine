@@ -41,9 +41,6 @@ namespace Lanna {
 	}
 
 
-	
-
-
 	float WindowsInput::GetMouseXImpl()
 	{
 		auto [x, y] = GetMousePositionImpl();
