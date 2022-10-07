@@ -51,10 +51,5 @@ void ScenePanel::Draw()
 
 void ScenePanel::DrawElements()
 {
-	/*glBegin(GL_TRIANGLES);
 
-	glVertex3f(0.5f, 0.f, 0.f);
-	glVertex3f(0.f, 0.5f, 0.f);
-	glVertex3f(0.5f, 0.5f, 0.f);
-	glEnd();*/
 }
