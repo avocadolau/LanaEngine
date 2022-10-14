@@ -86,8 +86,11 @@ project "Lanna"
 
         postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\""),
+            ("{COPY} %{cfg.buildtarget.relpath} ../Editor")
 		}
+
+    debugdir "$(SolutionDir)/Editor"
 
     filter "configurations:Debug"
         defines "LN_DEBUG"
@@ -128,6 +131,7 @@ project "Sandbox"
         "Lanna/vendor/imgui",
         "Lanna/src",
         "Lanna/vendor/glm/glm",
+        "Lanna/vendor/Glad/include",
         "Lanna/vendor/Optik/include"
     }
 
@@ -135,6 +139,8 @@ project "Sandbox"
     {
         "Lanna"
     }
+
+    debugdir "$(SolutionDir)/Editor"
 
     filter "system:windows"
         cppdialect "C++17"
@@ -144,6 +150,10 @@ project "Sandbox"
         {
             "LN_PLATFORM_WINDOWS"
         }
+        postbuildcommands
+		{
+			("{COPY} %{cfg.buildtarget.relpath} ../Editor")
+		}
 
     filter "configurations:Debug"
         defines "LN_DEBUG"

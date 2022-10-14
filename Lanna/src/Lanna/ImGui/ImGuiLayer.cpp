@@ -28,7 +28,7 @@
 
 // TEMPORARY
 #include <GLFW/glfw3.h>
-#include <glew.h>
+#include <Glad/glad.h>
 
 namespace Lanna {
 
@@ -82,8 +82,6 @@ namespace Lanna {
 		io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
 		io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
 		io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;*/
-
-		m_Camera = new Camera();
 		
 		// panels --------------------------------
 		m_configuration = new ConfigurationPanel();
@@ -118,47 +116,7 @@ namespace Lanna {
 
 		ImGuiIO& io = ImGui::GetIO();
 		
-		if (Lanna::Input::IsKeyPressed(LN_KEY_A))
-		{
-			m_Camera->ProcessKeyboard(Lanna::Camera_Movement::LEFT, ImGui::GetIO().Framerate);
-			m_Log.AddLog(ImGuiLog::INFO, "A");
-		}
-		if (Lanna::Input::IsKeyPressed(LN_KEY_S))
-		{
-			m_Camera->ProcessKeyboard(Lanna::Camera_Movement::BACKWARD, ImGui::GetIO().Framerate);
-			m_Log.AddLog(ImGuiLog::INFO, "S");
-		}
-		if (Lanna::Input::IsKeyPressed(LN_KEY_D))
-		{
-			m_Camera->ProcessKeyboard(Lanna::Camera_Movement::FORWARD, ImGui::GetIO().Framerate);
-			m_Log.AddLog(ImGuiLog::INFO, "D");
-		}
-		if (Lanna::Input::IsKeyPressed(LN_KEY_W))
-		{
-			m_Camera->ProcessKeyboard(Lanna::Camera_Movement::RIGHT, ImGui::GetIO().Framerate);
-			m_Log.AddLog(ImGuiLog::INFO, "W");
-		}
-		if (Lanna::Input::IsKeyPressed(LN_KEY_UP))
-		{
-			m_Camera->ProcessMouseMovement(0,ImGui::GetIO().Framerate, false);
-			m_Log.AddLog(ImGuiLog::INFO, "UP");
-		}
-		if (Lanna::Input::IsKeyPressed(LN_KEY_DOWN))
-		{
-			m_Camera->ProcessMouseMovement(0, -ImGui::GetIO().Framerate, false);
-			m_Log.AddLog(ImGuiLog::INFO, "DOWN");
-		}
-
-		if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT))
-		{
-			m_Camera->ProcessMouseMovement(-ImGui::GetIO().Framerate, 0, false);
-			m_Log.AddLog(ImGuiLog::INFO, "LEFT");
-		}
-		if (Lanna::Input::IsKeyPressed(LN_KEY_RIGHT))
-		{
-			m_Camera->ProcessMouseMovement(ImGui::GetIO().Framerate, 0, false);
-			m_Log.AddLog(ImGuiLog::INFO, "RIGHT");
-		}
+		
 
 		// panels ------------------------
 		//MainMenuBar();
@@ -169,9 +127,6 @@ namespace Lanna {
 		}
 		if (logActive)
 			m_Log.Draw("Console", &logActive);
-
-		
-		m_Camera->PrintTiangle(glm::vec3(0.5f, 0.f, 0.f), glm::vec3(0.f, 0.5f, 0.f), glm::vec3(0.5f, 0.5f, 0.f));
 
 		// trying camera
 		
@@ -232,8 +187,6 @@ namespace Lanna {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MousePos = ImVec2(e.GetX(), e.GetY());
-		m_Log.AddLog(ImGuiLog::INFO, "Mouse move");
-		m_Camera->ProcessMouseMovement(io.MousePos.x - e.GetX(), io.MousePos.y - e.GetY(),false);
 		return false;
 	}
 
@@ -243,8 +196,7 @@ namespace Lanna {
 		io.MouseWheelH += e.GetXOffset();
 		io.MouseWheel += e.GetYOffset();
 
-		m_Camera->ProcessMouseScroll(e.GetYOffset());
-		m_Log.AddLog(ImGuiLog::INFO, "Mouse scroll");
+
 
 		return false;
 	}

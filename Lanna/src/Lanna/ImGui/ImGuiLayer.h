@@ -57,7 +57,6 @@ namespace Lanna {
 		Panel* m_hardware = nullptr;
 		Panel* m_scene = nullptr;
 
-		Camera* m_Camera = nullptr;
 		std::vector<Panel*> m_panels;
 
 	};

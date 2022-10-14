@@ -24,46 +24,16 @@ namespace Lanna
     class Camera
     {
     public:
-        
         Camera();
-        Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch);
         ~Camera();
 
-        glm::mat4 GetViewMatrix();
-        void ProcessKeyboard(Camera_Movement direction, float deltaTime);
-        void ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch);
-        void ProcessMouseScroll(float yoffset);
 
-        void PrintTiangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3);
+        glm::mat4 getView() { return m_View; }
+        glm::mat4 getProjection() { return m_Projection; }
 
     private:
-        void updateCameraVectors();
-
-        void GenerateMats();
-        glm::vec3 WorldToCam(glm::vec3 vec);
-        glm::vec3 CamToWorld(glm::vec3 vec);
-        
-    public:
-        // camera Attributes
-        glm::vec3 Position;
-        glm::vec3 Front;
-        glm::vec3 Up;
-        glm::vec3 Right;
-        glm::vec3 WorldUp;
-        // euler Angles
-        float yaw;
-        float pitch;
-        float roll;
-        // camera options
-        float MovementSpeed;
-        float MouseSensitivity;
-        float Zoom;
-
-
-        // own camera
-        float* matWorldToCam;
-        float* matCamToWorld;
-
+        glm::mat4 m_View;
+        glm::mat4 m_Projection;
 
 
     };

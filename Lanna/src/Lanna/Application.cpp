@@ -7,6 +7,7 @@
 
 #include "Input.h"
 #include "imgui.h"
+#include "Render3D.h"
 
 #include <Windows.h>
 #include <shellapi.h>
@@ -31,8 +32,11 @@ namespace Lanna {
 
 		SetHwInfo();
 
-		m_Layer = new ImGuiLayer();
-		PushOverlay(m_Layer);
+		m_Render3D = new Render3D();
+		m_Render3D->Init();
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 
 		unsigned int id;
 		glGenVertexArrays(1, &id);
@@ -120,14 +124,13 @@ namespace Lanna {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 
-			
-
-			m_Layer->Begin();
+			m_Render3D->Draw();
+			m_ImGuiLayer->Begin();
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 
-			m_Layer->End();
+			m_ImGuiLayer->End();
 
 			//auto [x, y] = Input::GetMousePosition();
 			//LN_CORE_TRACE("{0}, {1}", x, y);

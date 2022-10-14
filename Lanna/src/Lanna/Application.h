@@ -7,6 +7,7 @@
 #include "Lanna/ImGui/ImGuiLayer.h"
 #include "Lanna/Events/Event.h"
 #include "Lanna/Events/ApplicationEvent.h"
+#include "Render3D.h"
 
 namespace Lanna {
 
@@ -51,7 +52,8 @@ namespace Lanna {
 		bool m_Running = true;
 		SysInfo m_SysInfo;
 		LayerStack m_LayerStack;
-		ImGuiLayer* m_Layer;
+		ImGuiLayer* m_ImGuiLayer;
+		Render3D* m_Render3D;
 	private:
 		static Application* s_Instance;
 	};
