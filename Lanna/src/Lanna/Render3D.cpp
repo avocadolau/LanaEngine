@@ -23,7 +23,7 @@ namespace Lanna {
 		glm::vec2  resolution = { window.GetHeight(), window.GetHeight() };
 
 
-		m_ColorShader = new Shader("$(SolutionDir)/Editor/resources/shaders/model_color");
+		m_ColorShader = new Shader("resources/shaders/model_color");
 
 
 		// esto va a la mesh
@@ -47,6 +47,7 @@ namespace Lanna {
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT,GL_FALSE, sizeof(float) * 3, (const void*)0);		// 0, num vertex,	espacio entre vertices, offset start
 
+		
 
 	}
 
