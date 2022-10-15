@@ -132,7 +132,8 @@ project "Sandbox"
         "Lanna/src",
         "Lanna/vendor/glm/glm",
         "Lanna/vendor/Glad/include",
-        "Lanna/vendor/Optik/include"
+        "Lanna/vendor/Optik/include",
+        "Lanna/vendor/assimp/include"
     }
 
     links

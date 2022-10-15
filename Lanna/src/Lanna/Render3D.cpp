@@ -3,6 +3,7 @@
 
 #include <Lanna/Application.h>
 #include <Lanna/Window.h>
+#include <Lanna/Renderer/Mesh.h>
 
 #include <glm.hpp>
 
@@ -20,50 +21,52 @@ namespace Lanna {
 	void Render3D::Init()
 	{
 		Lanna::Window& window = Lanna::Application::Get().GetWindow();
-		glm::vec2  resolution = { window.GetHeight(), window.GetHeight() };
+		resolution = { window.GetHeight(), window.GetHeight() };
 
 
 		m_ColorShader = new Shader("resources/shaders/model_color");
+		m_ActiveCamera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f),-90,0);
+		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
 
-
-		// esto va a la mesh
+		m_exampleMesh = new Mesh();
 		
-
-		
-		unsigned int buffer;
-
-		glGenBuffers(1, &buffer);
-		glBindBuffer(GL_ARRAY_BUFFER, buffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);   // 9* sizeof(float)
-
-		unsigned int ibo;	// index buffer data
-
-		glGenBuffers(1, &ibo);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);   // 9* sizeof(float)
-
-
-
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT,GL_FALSE, sizeof(float) * 3, (const void*)0);		// 0, num vertex,	espacio entre vertices, offset start
-
-		
-
 	}
 
 
 	void Render3D::Draw()
 	{
 		
-		glClear(GL_COLOR_BUFFER_BIT);		// limpia la pantalla
-		//glDrawArrays(GL_TRIANGLES, 0, 3);	// first intex, num of vertex
-
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);			// 6 the number of indices 
-		
 	}
 
 	void Render3D::Close()
 	{
+
+	}
+	void Render3D::RenderMesh(Mesh& mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color)
+	{
+		glViewport(0, 0, resolution.x, resolution.y);
+
+
+		// bind buffer
+		glBindFramebuffer(GL_FRAMEBUFFER, mesh.GetBuffer());
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(position.x, position.y, position.z));
+		model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
+
+		m_ColorShader->Use();
+		m_ColorShader->setMat4("u_Model", model);
+		m_ColorShader->setMat4("u_View", m_ActiveCamera->getView());
+		m_ColorShader->setMat4("u_Proj", m_ActiveCamera->getProjection());
+		m_ColorShader->setVec4("u_Color", glm::vec4(color.r, color.g, color.b, color.a));
+		
+		mesh.Render();
+
+
+		// unbind buffer
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 
 	}
 }

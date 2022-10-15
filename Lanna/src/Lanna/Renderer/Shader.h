@@ -45,6 +45,8 @@ namespace Lanna {
         void setMat3(const std::string& name, const glm::mat3& mat) const;
         void setMat4(const std::string& name, const glm::mat4& mat) const;
 
+        unsigned int getUniformLocation(const char* uniform_name);
+
     private:
         void checkCompileErrors(unsigned int shader, std::string type);
         std::string* Shader::getFileData(const char* file);

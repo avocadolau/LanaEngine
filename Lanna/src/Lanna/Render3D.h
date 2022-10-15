@@ -1,8 +1,11 @@
 #pragma once
+#include <lnpch.h>
 
 #include <Lanna/Core.h>
 #include <Lanna/Renderer/Shader.h>
 #include <Lanna/Renderer/Camera.h>
+#include <Lanna/Renderer/Mesh.h>
+
 
 #include <glm.hpp>
 
@@ -16,25 +19,17 @@ namespace Lanna
 		unsigned int fragmentShader;
 		unsigned int vertexShader;
 
-		//----------------
-
-
-		unsigned int VAO;
-		float vertex[9] = { 0.3f, 0.21f, 0.f,
-							0.34f, 0.215f, 0.f,
-							0.32f,0.25f, 0.f };
-
-		int indices[3] = { 0,1,2 };
-
-		// ----------------------------------
-
+		Camera* m_ActiveCamera;
 		glm::mat4 m_PersProj;
 		glm::mat4 m_View;
+		glm::vec2  resolution;
 
 		int m_ColorShaderId;
+
 		Shader* m_ColorShader;
 
-		Camera* m_ActiveCamera;
+		Mesh* m_exampleMesh;
+
 	public:
 		Render3D();
 		~Render3D();
@@ -47,6 +42,6 @@ namespace Lanna
 		glm::mat4 GetPersProjection() { return m_ActiveCamera->getProjection(); }
 		glm::mat4 GetView() { return m_ActiveCamera->getView(); }
 
-	
+		void RenderMesh(Mesh& mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color);
 	};
 }

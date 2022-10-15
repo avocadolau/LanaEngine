@@ -151,6 +151,11 @@ namespace Lanna {
         glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
 
+    unsigned int Shader::getUniformLocation(const char* uniform_name)
+    {
+        return glGetUniformLocation(ID, uniform_name);
+    }
+
 
     void Shader::checkCompileErrors(unsigned int shader, std::string type)
     {
