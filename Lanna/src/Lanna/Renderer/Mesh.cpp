@@ -22,7 +22,7 @@ namespace Lanna {
 
 	void Mesh::LoadFromFile(const char* file)
 	{
-		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
+		/*const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
 		if (scene != nullptr && scene->HasMeshes())
 		{
 			
@@ -32,7 +32,7 @@ namespace Lanna {
 		}
 		else {
 			LN_CORE_ERROR("Error loading mesh {0}", file);
-		}
+		}*/
 	}
 
 	void Mesh::Render()
@@ -44,9 +44,8 @@ namespace Lanna {
 	void Mesh::GenerateBuffers()
 	{
 		glGenBuffers(1, &buffer);		// buffer
-		glGenBuffers(1, &ibo);			// index buffer object
-		glGenVertexArrays(1, &vao);		// vertex array buffer
 
+		glGenVertexArrays(1, &vao);		// vertex array buffer
 		glBindVertexArray(vao);
 
 		// bind vertex
@@ -54,6 +53,7 @@ namespace Lanna {
 		glBufferData(GL_ARRAY_BUFFER, vao_data.size() * sizeof(float), vao_data.data(), GL_STATIC_DRAW);
 
 		// bind indices
+		glGenBuffers(1, &ibo);			// index buffer object
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, ibo_data.size() * sizeof(int), ibo_data.data(), GL_STATIC_DRAW);
 

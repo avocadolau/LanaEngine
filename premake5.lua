@@ -71,6 +71,7 @@ project "Lanna"
         "Glew",
 		"opengl32.lib",
         "Optick"
+
     }
 
     filter "system:windows"
@@ -133,7 +134,8 @@ project "Sandbox"
         "Lanna/vendor/glm/glm",
         "Lanna/vendor/Glad/include",
         "Lanna/vendor/Optik/include",
-        "Lanna/vendor/assimp/include"
+        "Lanna/vendor/assimp/include",
+        "Lanna/vendor/PCG/include"
     }
 
     links
