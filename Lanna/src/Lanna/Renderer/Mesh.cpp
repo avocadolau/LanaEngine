@@ -6,9 +6,9 @@
 #include <glm.hpp>
 #include "glad/glad.h"
 
-//#include <assimp/cimport.h>
-//#include <assimp/scene.h>
-//#include <assimp/postprocess.h>
+#include <cimport.h>
+#include <scene.h>
+#include <postprocess.h>
 
 namespace Lanna {
 
