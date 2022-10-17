@@ -19,7 +19,7 @@ IncludeDir["Glew"] = "Lanna/vendor/Glew/include/GL"
 IncludeDir["JSON"] = "Lanna/vendor/rapidjson"
 IncludeDir["MathGeoLib"] = "Lanna/vendor/MathGeoLib"
 IncludeDir["PCG"] = "Lanna/vendor/PCG/include"
-IncludeDir["assimp"] = "Lanna/vendor/assimp"
+IncludeDir["assimp"] = "Lanna/vendor/assimp/include"
 IncludeDir["glm"] = "Lanna/vendor/glm/glm"
 IncludeDir["Optick"] = "Lanna/vendor/Optick/include"
 
@@ -98,16 +98,28 @@ project "Lanna"
         defines "LN_DEBUG"
         runtime "Debug"
         symbols "On"
+        links
+		{
+			"Lanna/vendor/assimp/lib/x64/debug/assimp-vc143-mtd.lib"
+		}
 
     filter "configurations:Release"
         defines "LN_RELEASE"
         runtime "Release"
         optimize "On"
+        links
+		{
+			"Lanna/vendor/assimp/lib/x64/release/assimp-vc143-mt.lib"
+		}
 
     filter "configurations:Dist"
         defines "LN_DIST"
         runtime "Release"
         optimize "On"
+        links
+		{
+			"Lanna/vendor/assimp/lib/x64/release/assimp-vc143-mt.lib"
+		}
 
 
 project "Sandbox"
