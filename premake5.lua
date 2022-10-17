@@ -71,6 +71,7 @@ project "Lanna"
         "ImGui",
         "Glew",
 		"opengl32.lib",
+        "Lanna/vendor/assimp/bin/Debug-windows-x86_64/assimp/assimp-vc142-mtd.lib",
         "Optick"
 
     }
@@ -100,26 +101,20 @@ project "Lanna"
         symbols "On"
         links
 		{
-			"Lanna/vendor/assimp/lib/x64/debug/assimp-vc143-mtd.lib"
+			"Lanna/vendor/assimp/bin/Debug-windows-x86_64/assimp/assimp-vc142-mtd.lib"
 		}
 
     filter "configurations:Release"
         defines "LN_RELEASE"
         runtime "Release"
         optimize "On"
-        links
-		{
-			"Lanna/vendor/assimp/lib/x64/release/assimp-vc143-mt.lib"
-		}
+       
 
     filter "configurations:Dist"
         defines "LN_DIST"
         runtime "Release"
         optimize "On"
-        links
-		{
-			"Lanna/vendor/assimp/lib/x64/release/assimp-vc143-mt.lib"
-		}
+        
 
 
 project "Sandbox"
