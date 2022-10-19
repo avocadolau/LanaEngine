@@ -22,7 +22,7 @@ namespace Lanna {
 
 	void Mesh::LoadFromFile(const char* file)
 	{
-		/*const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
+		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
 		if (scene != nullptr && scene->HasMeshes())
 		{
 			
@@ -32,7 +32,7 @@ namespace Lanna {
 		}
 		else {
 			LN_CORE_ERROR("Error loading mesh {0}", file);
-		}*/
+		}
 	}
 
 	void Mesh::Render()
