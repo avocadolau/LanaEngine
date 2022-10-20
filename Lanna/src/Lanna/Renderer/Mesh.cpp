@@ -6,9 +6,9 @@
 #include <glm.hpp>
 #include "glad/glad.h"
 
-#include <assimp/cimport.h>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
+//#include <cimport.h>
+//#include <scene.h>
+//#include <postprocess.h>
 
 namespace Lanna {
 
@@ -22,7 +22,28 @@ namespace Lanna {
 
 	void Mesh::LoadFromFile(const char* file)
 	{
-		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
+		vao_data.push_back(0.3f);
+		vao_data.push_back(0.21f);
+		vao_data.push_back(0.0f);
+		vao_data.push_back(0.34f);
+		vao_data.push_back(0.21f);
+		vao_data.push_back(0.0f);
+		vao_data.push_back(0.32f);
+		vao_data.push_back(0.25f);
+		vao_data.push_back(0.0f);
+
+		ibo_data.push_back(0);
+		ibo_data.push_back(1);
+		ibo_data.push_back(2);
+
+		//float vao_data[9] = { 0.3f, 0.21f, 0.f,
+		//						0.34f, 0.215f, 0.f,
+		//						0.32f,0.25f, 0.f };
+		//int ibo_data[3] = { 0,1,2 };
+
+
+
+		/*const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
 		if (scene != nullptr && scene->HasMeshes())
 		{
 			
@@ -32,7 +53,9 @@ namespace Lanna {
 		}
 		else {
 			LN_CORE_ERROR("Error loading mesh {0}", file);
-		}
+		}*/
+
+		GenerateBuffers();
 	}
 
 	void Mesh::Render()

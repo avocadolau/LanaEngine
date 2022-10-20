@@ -7,6 +7,12 @@
     <Filter Include="Lanna\Events">
       <UniqueIdentifier>{B36A6D83-9FCD-FC27-4853-35DE3495C8AA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\GameObject">
+      <UniqueIdentifier>{CF4895CC-BB41-B41E-E473-99A3D0CB932A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lanna\GameObject\Components">
+      <UniqueIdentifier>{84AEAD09-F0BB-DBEF-79A2-D7DAE5AEA7A6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Lanna\ImGui">
       <UniqueIdentifier>{19168C3A-85CB-0430-0EC0-FE067A74FB33}</UniqueIdentifier>
     </Filter>
@@ -34,6 +40,9 @@
     <ClInclude Include="src\Lanna\Core.h">
       <Filter>Lanna</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\EntityManager.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\EntryPoint.h">
       <Filter>Lanna</Filter>
     </ClInclude>
@@ -49,6 +58,21 @@
     <ClInclude Include="src\Lanna\Events\MouseEvent.h">
       <Filter>Lanna\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\GameObject\Component.h">
+      <Filter>Lanna\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\GameObject\Components\MaterialComponent.h">
+      <Filter>Lanna\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\GameObject\Components\MeshComponent.h">
+      <Filter>Lanna\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\GameObject\Components\TransformComponent.h">
+      <Filter>Lanna\GameObject\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\GameObject\GameObject.h">
+      <Filter>Lanna\GameObject</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h">
       <Filter>Lanna\ImGui</Filter>
     </ClInclude>
@@ -62,6 +86,12 @@
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\ImGui\Panels\HardwarePanel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\ImGui\Panels\HierarchyPanel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\ImGui\Panels\InspectorPanel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h">
@@ -124,6 +154,21 @@
     <ClCompile Include="src\Lanna\Application.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lanna\EntityManager.cpp">
+      <Filter>Lanna</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\GameObject\Components\MaterialComponent.cpp">
+      <Filter>Lanna\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\GameObject\Components\MeshComponent.cpp">
+      <Filter>Lanna\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\GameObject\Components\TransformComponent.cpp">
+      <Filter>Lanna\GameObject\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\GameObject\GameObject.cpp">
+      <Filter>Lanna\GameObject</Filter>
+    </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp">
       <Filter>Lanna\ImGui</Filter>
     </ClCompile>
@@ -134,6 +179,12 @@
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\Panels\HardwarePanel.cpp">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\ImGui\Panels\HierarchyPanel.cpp">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\ImGui\Panels\InspectorPanel.cpp">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\Panels\Panel.cpp">

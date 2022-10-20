@@ -9,6 +9,10 @@
 
 #include "glad/glad.h"
 
+#include <imgui.h>
+#include "Lanna/Input.h"
+#include "Lanna/KeyCodes.h"
+
 namespace Lanna {
 
 	Render3D::Render3D()
@@ -29,13 +33,31 @@ namespace Lanna {
 		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
 
 		m_exampleMesh = new Mesh();
+		m_exampleMesh->LoadFromFile("");
 		
 	}
 
 
 	void Render3D::Draw()
 	{
-		
+		if (m_ActiveCamera)
+		{
+			ImGuiIO& io = ImGui::GetIO();
+
+			if (Lanna::Input::IsKeyPressed(LN_KEY_A))
+				m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_LEFT, io.DeltaTime);
+			if (Lanna::Input::IsKeyPressed(LN_KEY_D))
+				m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_RIGHT, io.DeltaTime);
+			if (Lanna::Input::IsKeyPressed(LN_KEY_W))
+				m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_UP, io.DeltaTime);
+			if (Lanna::Input::IsKeyPressed(LN_KEY_S))
+				m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_DOWN, io.DeltaTime);
+
+				
+		}
+
+
+		m_exampleMesh->Render();
 	}
 
 	void Render3D::Close()
@@ -56,11 +78,12 @@ namespace Lanna {
 		model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
 
 		m_ColorShader->Use();
+
 		m_ColorShader->setMat4("u_Model", model);
 		m_ColorShader->setMat4("u_View", m_ActiveCamera->getView());
 		m_ColorShader->setMat4("u_Proj", m_ActiveCamera->getProjection());
 		m_ColorShader->setVec4("u_Color", glm::vec4(color.r, color.g, color.b, color.a));
-		
+
 		mesh.Render();
 
 
@@ -69,6 +92,7 @@ namespace Lanna {
 
 
 	}
+
 }
 
 

@@ -41,7 +41,10 @@ namespace Lanna
 
 		glm::mat4 GetPersProjection() { return m_ActiveCamera->getProjection(); }
 		glm::mat4 GetView() { return m_ActiveCamera->getView(); }
+		Camera& GetActiveCamera() { return *m_ActiveCamera; }
 
 		void RenderMesh(Mesh& mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color);
 	};
+
+
 }

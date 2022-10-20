@@ -9,7 +9,6 @@
 #include <gtc/matrix_transform.hpp>
 #include <vector>
 
-
 namespace Lanna
 {
     enum class CameraType {
@@ -18,10 +17,14 @@ namespace Lanna
         PERSPECTIVE
     };
     enum Camera_Movement {
-        FORWARD,
-        BACKWARD,
-        LEFT,
-        RIGHT
+        ZOOM_IN,
+        ZOOM_OUT,
+        ORBIT,
+        FOCUS,
+        FREE_LOOK_UP,
+        FREE_LOOK_DOWN,
+        FREE_LOOK_RIGHT,
+        FREE_LOOK_LEFT
     };
     // An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
     class Camera

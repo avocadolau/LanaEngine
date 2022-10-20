@@ -18,8 +18,9 @@
 #include "Lanna/ImGui/Panels/ConfigurationPanel.h"
 #include "Lanna/ImGui/Panels/HardwarePanel.h"
 #include "Lanna/ImGui/Panels/ScenePanel.h"
+#include "Lanna/ImGui/Panels/InspectorPanel.h"
 
-
+#include "Lanna/Render3D.h"
 #include "Lanna/Renderer/Camera.h"
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
@@ -88,11 +89,13 @@ namespace Lanna {
 		m_about = new AboutPanel();
 		m_hardware = new HardwarePanel();
 		m_scene = new ScenePanel();
+		m_Inspector = new InspectorPanel();
 
 		m_panels.push_back(m_configuration);
 		m_panels.push_back(m_about);
 		m_panels.push_back(m_hardware);
 		m_panels.push_back(m_scene);
+		m_panels.push_back(m_Inspector);
 
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -160,6 +163,16 @@ namespace Lanna {
 		}
 	}
 
+	void ImGuiLayer::OnEvent(Event& event)
+	{
+		EventDispatcher dispatcher(event);
+		dispatcher.Dispatch<MouseButtonPressedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
+		dispatcher.Dispatch<MouseButtonReleasedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));
+		dispatcher.Dispatch<MouseMovedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseMovedEvent));
+		dispatcher.Dispatch<MouseScrolledEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
+		dispatcher.Dispatch<WindowResizeEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnWindowResizeEvent));
+	}
+
 	void ImGuiLayer::OnImGuiRender()
 	{
 		
@@ -170,7 +183,6 @@ namespace Lanna {
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseDown[e.GetMouseButton()] = true;
 
-		m_Log.AddLog(ImGuiLog::INFO, "Mouse button Pressed");
 		return false;
 	}
 
@@ -178,7 +190,6 @@ namespace Lanna {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseDown[e.GetMouseButton()] = false;
-		m_Log.AddLog(ImGuiLog::INFO, "Mouse button released");
 
 		return false;
 	}
@@ -187,6 +198,11 @@ namespace Lanna {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MousePos = ImVec2(e.GetX(), e.GetY());
+
+		if(Lanna::Input::IsKeyPressed(341))
+			Lanna::Application::Get().GetRenderer().GetActiveCamera().ProcessMouseMovement(e.GetX(), e.GetY(), true);
+
+
 		return false;
 	}
 
@@ -196,7 +212,7 @@ namespace Lanna {
 		io.MouseWheelH += e.GetXOffset();
 		io.MouseWheel += e.GetYOffset();
 
-
+		Lanna::Application::Get().GetRenderer().GetActiveCamera().ProcessMouseScroll(e.GetYOffset());
 
 		return false;
 	}

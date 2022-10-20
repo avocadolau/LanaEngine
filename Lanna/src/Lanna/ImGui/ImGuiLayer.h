@@ -27,6 +27,7 @@ namespace Lanna {
 		void Begin();
 		void End();
 
+		void OnEvent(Event& event) override;
 		void OnImGuiRender() override;
 
 		inline void LogTrace(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::TRACE, log); }
@@ -56,6 +57,7 @@ namespace Lanna {
 		Panel* m_configuration = nullptr;
 		Panel* m_hardware = nullptr;
 		Panel* m_scene = nullptr;
+		Panel* m_Inspector = nullptr;
 
 		std::vector<Panel*> m_panels;
 

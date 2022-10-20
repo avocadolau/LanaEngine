@@ -155,16 +155,24 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna.h" />
     <ClInclude Include="src\Lanna\Application.h" />
     <ClInclude Include="src\Lanna\Core.h" />
+    <ClInclude Include="src\Lanna\EntityManager.h" />
     <ClInclude Include="src\Lanna\EntryPoint.h" />
     <ClInclude Include="src\Lanna\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Lanna\Events\Event.h" />
     <ClInclude Include="src\Lanna\Events\KeyEvent.h" />
     <ClInclude Include="src\Lanna\Events\MouseEvent.h" />
+    <ClInclude Include="src\Lanna\GameObject\Component.h" />
+    <ClInclude Include="src\Lanna\GameObject\Components\MaterialComponent.h" />
+    <ClInclude Include="src\Lanna\GameObject\Components\MeshComponent.h" />
+    <ClInclude Include="src\Lanna\GameObject\Components\TransformComponent.h" />
+    <ClInclude Include="src\Lanna\GameObject\GameObject.h" />
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Lanna\ImGui\ImGuiLog.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\AboutPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\HardwarePanel.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panels\HierarchyPanel.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panels\InspectorPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\ScenePanel.h" />
     <ClInclude Include="src\Lanna\Input.h" />
@@ -187,10 +195,17 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp" />
+    <ClCompile Include="src\Lanna\EntityManager.cpp" />
+    <ClCompile Include="src\Lanna\GameObject\Components\MaterialComponent.cpp" />
+    <ClCompile Include="src\Lanna\GameObject\Components\MeshComponent.cpp" />
+    <ClCompile Include="src\Lanna\GameObject\Components\TransformComponent.cpp" />
+    <ClCompile Include="src\Lanna\GameObject\GameObject.cpp" />
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\AboutPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\HardwarePanel.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\HierarchyPanel.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\InspectorPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\Panel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\ScenePanel.cpp" />
     <ClCompile Include="src\Lanna\Layer.cpp" />

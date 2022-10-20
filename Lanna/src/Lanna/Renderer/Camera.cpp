@@ -136,13 +136,13 @@ namespace Lanna {
     void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
     {
         float velocity = m_MovementSpeed * deltaTime;
-        if (direction == FORWARD)
+        if (direction == FREE_LOOK_UP)
             Position += Front * velocity;
-        if (direction == BACKWARD)
+        if (direction == FREE_LOOK_DOWN)
             Position -= Front * velocity;
-        if (direction == LEFT)
+        if (direction == FREE_LOOK_LEFT)
             Position -= Right * velocity;
-        if (direction == RIGHT)
+        if (direction == FREE_LOOK_RIGHT)
             Position += Right * velocity;
 
         UpdateCameraVectors();

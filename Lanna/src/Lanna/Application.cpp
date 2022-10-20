@@ -32,6 +32,8 @@ namespace Lanna {
 
 		SetHwInfo();
 
+		m_EntityManager = new EntityManager();
+
 		m_Render3D = new Render3D();
 		m_Render3D->Init();
 
@@ -125,6 +127,8 @@ namespace Lanna {
 
 
 			m_Render3D->Draw();
+			m_EntityManager->Update();
+			m_EntityManager->Render();
 			m_ImGuiLayer->Begin();
 
 			for (Layer* layer : m_LayerStack)
