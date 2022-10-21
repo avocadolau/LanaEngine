@@ -33,6 +33,7 @@ namespace Lanna {
 		SetHwInfo();
 
 		m_EntityManager = new EntityManager();
+		m_EntityManager->Init();
 
 		m_Render3D = new Render3D();
 		m_Render3D->Init();

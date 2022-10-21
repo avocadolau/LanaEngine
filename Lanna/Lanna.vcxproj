@@ -162,6 +162,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\Events\KeyEvent.h" />
     <ClInclude Include="src\Lanna\Events\MouseEvent.h" />
     <ClInclude Include="src\Lanna\GameObject\Component.h" />
+    <ClInclude Include="src\Lanna\GameObject\Components\CameraComponent.h" />
     <ClInclude Include="src\Lanna\GameObject\Components\MaterialComponent.h" />
     <ClInclude Include="src\Lanna\GameObject\Components\MeshComponent.h" />
     <ClInclude Include="src\Lanna\GameObject\Components\TransformComponent.h" />
@@ -196,6 +197,8 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp" />
     <ClCompile Include="src\Lanna\EntityManager.cpp" />
+    <ClCompile Include="src\Lanna\GameObject\Component.cpp" />
+    <ClCompile Include="src\Lanna\GameObject\Components\CameraComponent.cpp" />
     <ClCompile Include="src\Lanna\GameObject\Components\MaterialComponent.cpp" />
     <ClCompile Include="src\Lanna\GameObject\Components\MeshComponent.cpp" />
     <ClCompile Include="src\Lanna\GameObject\Components\TransformComponent.cpp" />

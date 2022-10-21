@@ -1,13 +1,15 @@
 #pragma once
-
 #include "Lanna/GameObject/Component.h"
 
-
-class MaterialComponent : public Component
+class CameraComponent : public Component
 {
+
 public:
-	MaterialComponent();
-	~MaterialComponent();
+
+	
+public:
+	CameraComponent();
+	~CameraComponent();
 
 	void Use() override;
 	void ImGuiDraw() override;

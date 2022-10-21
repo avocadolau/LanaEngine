@@ -13,6 +13,14 @@ EntityManager::~EntityManager()
 	m_Entities.clear();
 }
 
+void EntityManager::Init()
+{
+	GameObject* go = AddEmptyGameObject("empty");
+	go->AddComponent(Component::Type::TRANSFORM);
+	m_Entities.push_back(go);
+	activeEntitiy = go;
+}
+
 void EntityManager::Update()
 {
 	for (GameObject* object : m_Entities)
@@ -30,9 +38,9 @@ void EntityManager::AddGameObject(GameObject* gameObject)
 	m_Entities.push_back(gameObject);
 }
 
-GameObject* EntityManager::AddEmptyGameObject()
+GameObject* EntityManager::AddEmptyGameObject(const char* name)
 {
-	GameObject* object = new GameObject();
+	GameObject* object = new GameObject(name);
 	m_Entities.push_back(object);
 	return object;
 }

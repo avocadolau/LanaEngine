@@ -9,6 +9,7 @@ public:
 	MeshComponent();
 	~MeshComponent();
 
+	void Use() override;
 	void ImGuiDraw() override;
 
 };

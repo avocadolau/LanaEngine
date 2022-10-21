@@ -5,20 +5,22 @@ class Component
 {
 public:
 	enum Type {
-		NONE,
-		TRANSFORM,
-		MESH,
-		MATERIAL
-		
+		TRANSFORM = 0,
+		MESH=1,
+		MATERIAL=2,
+		CAMERA=3,
+
+
+		TOTAL
 	};
 
 
 	Type m_Type;
 
 public:
-	Component(Type type) : m_Type(type) {}
+	Component(Type type);
 
-	~Component() {}
+	~Component();
 
 	virtual void Use() = 0;
 	virtual void ImGuiDraw() = 0;

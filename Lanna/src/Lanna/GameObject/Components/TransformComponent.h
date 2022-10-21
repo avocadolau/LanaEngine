@@ -26,6 +26,7 @@ public:
 	void SetRotation(glm::vec3 rotation);
 	void SetScale(glm::vec3 scale);
 
+	void Use() override;
 	void ImGuiDraw() override;
 
 	~TransformComponent();

@@ -12,9 +12,7 @@ class GameObject
 {
 public:
 
-
-
-	GameObject();
+	GameObject(const char* name);
 	~GameObject();
 
 
@@ -30,6 +28,6 @@ public:
 	std::list<Component*> m_Components;
 	std::list<GameObject*> m_Children;
 	GameObject* m_Parent = nullptr;
-	
+	const char* m_Name;
 };
 
