@@ -21,5 +21,5 @@ public:
 	~Component() {}
 
 	virtual void Use() = 0;
-
+	virtual void ImGuiDraw() = 0;
 };

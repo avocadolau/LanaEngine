@@ -11,3 +11,10 @@ MaterialComponent::~MaterialComponent()
 {
 
 }
+
+void MaterialComponent::ImGuiDraw()
+{
+
+
+
+}

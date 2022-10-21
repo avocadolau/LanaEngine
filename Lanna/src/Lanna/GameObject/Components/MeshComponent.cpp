@@ -8,4 +8,12 @@ MeshComponent::MeshComponent() : Component(Component::MESH)
 }
 MeshComponent::~MeshComponent()
 {
+
+}
+
+void MeshComponent::ImGuiDraw()
+{
+
+
+
 }

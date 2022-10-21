@@ -6,9 +6,9 @@
 #include <glm.hpp>
 #include "glad/glad.h"
 
-//#include <cimport.h>
-//#include <scene.h>
-//#include <postprocess.h>
+#include <assimp/cimport.h>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 namespace Lanna {
 
@@ -43,7 +43,7 @@ namespace Lanna {
 
 
 
-		/*const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
+		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
 		if (scene != nullptr && scene->HasMeshes())
 		{
 			
@@ -53,7 +53,7 @@ namespace Lanna {
 		}
 		else {
 			LN_CORE_ERROR("Error loading mesh {0}", file);
-		}*/
+		}
 
 		GenerateBuffers();
 	}

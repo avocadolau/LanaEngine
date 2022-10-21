@@ -8,4 +8,7 @@ class MeshComponent: public Component
 public:
 	MeshComponent();
 	~MeshComponent();
+
+	void ImGuiDraw() override;
+
 };

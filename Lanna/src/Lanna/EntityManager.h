@@ -22,7 +22,7 @@ public:
 
 private:
 	std::vector<GameObject*> m_Entities;
-	GameObject* activeEntitiy;
+	GameObject* activeEntitiy=nullptr;
 
 };
 

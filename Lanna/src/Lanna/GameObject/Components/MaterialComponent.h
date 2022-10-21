@@ -8,4 +8,7 @@ class MaterialComponent : public Component
 public:
 	MaterialComponent();
 	~MaterialComponent();
+
+	void ImGuiDraw() override;
+
 };

@@ -7,5 +7,8 @@ public:
 	~InspectorPanel();
 
 	void Draw() override;
+
+private:
+	bool addComp = false;
 };
 
