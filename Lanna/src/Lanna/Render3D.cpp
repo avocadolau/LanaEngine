@@ -5,9 +5,9 @@
 #include <Lanna/Window.h>
 #include <Lanna/Renderer/Mesh.h>
 
+#include <glew.h>
 #include <glm.hpp>
 
-#include "glad/glad.h"
 
 #include <imgui.h>
 #include "Lanna/Input.h"

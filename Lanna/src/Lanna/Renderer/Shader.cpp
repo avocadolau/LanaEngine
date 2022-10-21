@@ -1,7 +1,7 @@
 #include "lnpch.h"
 #include "Shader.h"
 
-#include <glad/glad.h>
+#include <glew.h>
 #include <glm.hpp>
 
 #include <string>

@@ -2,6 +2,7 @@
 
 #include "Core.h"
 
+#include "glew.h"
 #include "../glm/glm/glm.hpp"
 
 namespace Lanna {

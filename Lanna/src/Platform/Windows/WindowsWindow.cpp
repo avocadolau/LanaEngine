@@ -5,7 +5,8 @@
 #include "Lanna/Events/MouseEvent.h"
 #include "Lanna/Events/KeyEvent.h"
 
-#include <glad/glad.h>
+#include <glew.h>
+#include <gl/gl.h>
 
 namespace Lanna {
 
@@ -56,8 +57,14 @@ namespace Lanna {
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		LN_CORE_ASSERT(status, "Failed to initialize Glad!");
+		GLenum status = glewInit();
+
+		LN_CORE_INFO("Using Glew {0}", glewGetString(GLEW_VERSION));
+		LN_CORE_INFO("Vendor: {0}", glGetString(GL_VENDOR));
+		LN_CORE_INFO("Renderer: {0}", glGetString(GL_RENDERER));
+		LN_CORE_INFO("OpenGL version supported {0}", glGetString(GL_VERSION));
+		LN_CORE_INFO("GLSL: {0}\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+		//LN_CORE_ASSERT(status, "Failed to initialize Glad!");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

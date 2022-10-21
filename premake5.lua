@@ -11,23 +11,20 @@ workspace "Lanna"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-IncludeDir = {}
-IncludeDir["GLFW"] = "Lanna/vendor/GLFW/include"
-IncludeDir["Glad"] = "Lanna/vendor/Glad/include"
-IncludeDir["ImGui"] = "Lanna/vendor/imgui"
-IncludeDir["Glew"] = "Lanna/vendor/Glew/include/GL"
-IncludeDir["JSON"] = "Lanna/vendor/rapidjson"
-IncludeDir["MathGeoLib"] = "Lanna/vendor/MathGeoLib"
-IncludeDir["PCG"] = "Lanna/vendor/PCG/include"
-IncludeDir["assimp"] = "Lanna/vendor/assimp/include"
-IncludeDir["glm"] = "Lanna/vendor/glm/glm"
-IncludeDir["Optick"] = "Lanna/vendor/Optick/include"
+IncludeDirs = {}
+IncludeDirs["GLFW"] = "Lanna/vendor/GLFW/include"
+IncludeDirs["ImGui"] = "Lanna/vendor/imgui"
+IncludeDirs["Glew"] = "Lanna/vendor/Glew/include/GL"
+IncludeDirs["JSON"] = "Lanna/vendor/rapidjson"
+IncludeDirs["MathGeoLib"] = "Lanna/vendor/MathGeoLib"
+IncludeDirs["PCG"] = "Lanna/vendor/PCG/include"
+IncludeDirs["assimp"] = "Lanna/vendor/assimp/include"
+IncludeDirs["glm"] = "Lanna/vendor/glm/glm"
+IncludeDirs["Optick"] = "Lanna/vendor/Optick/include"
 
 
 include "Lanna/vendor/GLFW"
-include "Lanna/vendor/Glad"
 include "Lanna/vendor/imgui"
-include "Lanna/vendor/Glew"
 include "Lanna/vendor/Optick"
 
 project "Lanna"
@@ -53,23 +50,21 @@ project "Lanna"
         "%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
         "%{prj.name}/vendor/rapidjson",
-        "%{IncludeDir.GLFW}",
-        "%{IncludeDir.Glad}",
-        "%{IncludeDir.ImGui}",
-        "%{IncludeDir.MathGeoLib}",
-        "%{IncludeDir.Glew}",
-        "%{IncludeDir.PCG}",
-        "%{IncludeDir.assimp}",
-        "%{IncludeDir.glm}",
-        "%{IncludeDir.Optick}"
+        "%{IncludeDirs.GLFW}",
+        "%{IncludeDirs.ImGui}",
+        "%{IncludeDirs.MathGeoLib}",
+        "%{IncludeDirs.Glew}",
+        "%{IncludeDirs.PCG}",
+        "%{IncludeDirs.assimp}",
+        "%{IncludeDirs.glm}",
+        "%{IncludeDirs.Optick}"
 	}
 
 	links 
 	{ 
 		"GLFW",
-        "Glad",
         "ImGui",
-        "Glew",
+        "Lanna/vendor/Glew/lib/glew32.lib",
 		"opengl32.lib",
         "Optick"
 
@@ -145,8 +140,8 @@ project "Sandbox"
         "Lanna/vendor/rapidjson",
         "Lanna/vendor/imgui",
         "Lanna/src",
+        "Lanna/vendor/Glew/include/GL",
         "Lanna/vendor/glm/glm",
-        "Lanna/vendor/Glad/include",
         "Lanna/vendor/Optik/include",
         "Lanna/vendor/assimp/include",
         "Lanna/vendor/PCG/include"
@@ -154,7 +149,8 @@ project "Sandbox"
 
     links
     {
-        "Lanna"
+        "Lanna",
+        "ImGui"
     }
 
     debugdir "$(SolutionDir)/Editor"

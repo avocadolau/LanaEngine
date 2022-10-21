@@ -22,14 +22,14 @@
 
 #include "Lanna/Render3D.h"
 #include "Lanna/Renderer/Camera.h"
-#include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include "Lanna/Input.h"
 #include "Lanna/KeyCodes.h"
 
 // TEMPORARY
 #include <GLFW/glfw3.h>
-#include <Glad/glad.h>
+#include <glew.h>
+#include <glm.hpp>
 
 namespace Lanna {
 

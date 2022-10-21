@@ -3,6 +3,7 @@
 
 #include "vec3.hpp"
 
+#include <glew.h>
 #include <gl/GL.h>
 
 class TransformComponent : public Component

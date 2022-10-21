@@ -3,7 +3,7 @@
 
 #include "Log.h"
 
-#include <glad/glad.h>
+#include <glew.h>
 
 #include "Input.h"
 #include "imgui.h"

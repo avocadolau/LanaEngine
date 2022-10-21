@@ -9,7 +9,6 @@
 
 #include <glm.hpp>
 
-#include "glad/glad.h"
 namespace Lanna
 {
 	class LANNA_API Render3D

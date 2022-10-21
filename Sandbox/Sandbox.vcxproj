@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LN_PLATFORM_WINDOWS;LN_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Lanna\vendor\spdlog\include;..\Lanna\vendor\rapidjson;..\Lanna\vendor\imgui;..\Lanna\src;..\Lanna\vendor\glm\glm;..\Lanna\vendor\Glad\include;..\Lanna\vendor\Optik\include;..\Lanna\vendor\assimp\include;..\Lanna\vendor\PCG\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Lanna\vendor\spdlog\include;..\Lanna\vendor\rapidjson;..\Lanna\vendor\imgui;..\Lanna\src;..\Lanna\vendor\Glew\include\GL;..\Lanna\vendor\glm\glm;..\Lanna\vendor\Optik\include;..\Lanna\vendor\assimp\include;..\Lanna\vendor\PCG\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -98,7 +98,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LN_PLATFORM_WINDOWS;LN_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Lanna\vendor\spdlog\include;..\Lanna\vendor\rapidjson;..\Lanna\vendor\imgui;..\Lanna\src;..\Lanna\vendor\glm\glm;..\Lanna\vendor\Glad\include;..\Lanna\vendor\Optik\include;..\Lanna\vendor\assimp\include;..\Lanna\vendor\PCG\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Lanna\vendor\spdlog\include;..\Lanna\vendor\rapidjson;..\Lanna\vendor\imgui;..\Lanna\src;..\Lanna\vendor\Glew\include\GL;..\Lanna\vendor\glm\glm;..\Lanna\vendor\Optik\include;..\Lanna\vendor\assimp\include;..\Lanna\vendor\PCG\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -121,7 +121,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LN_PLATFORM_WINDOWS;LN_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Lanna\vendor\spdlog\include;..\Lanna\vendor\rapidjson;..\Lanna\vendor\imgui;..\Lanna\src;..\Lanna\vendor\glm\glm;..\Lanna\vendor\Glad\include;..\Lanna\vendor\Optik\include;..\Lanna\vendor\assimp\include;..\Lanna\vendor\PCG\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Lanna\vendor\spdlog\include;..\Lanna\vendor\rapidjson;..\Lanna\vendor\imgui;..\Lanna\src;..\Lanna\vendor\Glew\include\GL;..\Lanna\vendor\glm\glm;..\Lanna\vendor\Optik\include;..\Lanna\vendor\assimp\include;..\Lanna\vendor\PCG\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -145,6 +145,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Lanna\Lanna.vcxproj">
       <Project>{AF59950D-1B6E-BDBE-E4EF-601E50C3B9EF}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Lanna\vendor\imgui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

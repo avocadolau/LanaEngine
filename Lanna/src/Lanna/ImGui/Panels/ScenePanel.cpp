@@ -1,5 +1,6 @@
 #include "lnpch.h"
 #include "ScenePanel.h"
+#include <glew.h>
 #include <gl/GL.h>
 
 #include <imgui.h>

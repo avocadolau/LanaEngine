@@ -28,8 +28,6 @@ void AboutPanel::Draw()
 	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.0, 0.0, 0.0, 0.0));
 	if (ImGui::Button("> OpenGL v3.2.1       "))
 		Lanna::Application::Get().OpenUrl("https://github.com/glfw/glfw");
-	if (ImGui::Button("> Glad                "))
-		Lanna::Application::Get().OpenUrl("https://google.com/");
 	if (ImGui::Button("> GLFW v3.3.8         "))
 		Lanna::Application::Get().OpenUrl("https://glfw.org/");
 	if (ImGui::Button("> ImGui v1.66b        "))
@@ -40,8 +38,8 @@ void AboutPanel::Draw()
 		Lanna::Application::Get().OpenUrl("https://github.com/premake/premake-core");
 	if (ImGui::Button("> MathGeoLib v1.5     "))
 		Lanna::Application::Get().OpenUrl("https://github.com/juj/MathGeoLib");
-	if (ImGui::Button("> Glew v2.1.0         "))
-		Lanna::Application::Get().OpenUrl("https://glew.sourceforge.net/index.html");
+	if (ImGui::Button("> Glew v2.2.0         "))
+		Lanna::Application::Get().OpenUrl("https://glew.sourceforge.net");
 	if (ImGui::Button("> PCG v0.98.1         "))
 		Lanna::Application::Get().OpenUrl("https://github.com/imneme/pcg-cpp");
 	if (ImGui::Button("> assimp v5.2.5       "))
