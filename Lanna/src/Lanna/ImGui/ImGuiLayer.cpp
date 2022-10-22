@@ -114,6 +114,8 @@ namespace Lanna {
 
 	void ImGuiLayer::OnUpdate()
 	{
+		OPTICK_FRAME("OnUpdate");
+		OPTICK_EVENT();
 
 		DockSpace();
 
@@ -165,6 +167,8 @@ namespace Lanna {
 
 	void ImGuiLayer::OnEvent(Event& event)
 	{
+		OPTICK_EVENT();
+
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<MouseButtonPressedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
 		dispatcher.Dispatch<MouseButtonReleasedEvent>(LN_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));
@@ -175,7 +179,8 @@ namespace Lanna {
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		
+		OPTICK_FRAME("OnImguiRender");
+		OPTICK_EVENT();
 	}
 
 	bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)

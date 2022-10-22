@@ -10,6 +10,8 @@
 #include "Render3D.h"
 #include "EntityManager.h"
 
+#include <Lanna/utilities/maths/Vector4f.h>
+
 namespace Lanna {
 
 	struct SysInfo
