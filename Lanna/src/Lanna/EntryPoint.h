@@ -1,5 +1,7 @@
 #pragma once
 
+#include <optick.h>
+
 #ifdef LN_PLATFORM_WINDOWS
 
 extern Lanna::Application* Lanna::CreateApplication();

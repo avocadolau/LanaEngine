@@ -142,7 +142,7 @@ project "Sandbox"
         "Lanna/src",
         "Lanna/vendor/Glew/include/GL",
         "Lanna/vendor/glm/glm",
-        "Lanna/vendor/Optik/include",
+        "%{IncludeDirs.Optick}",
         "Lanna/vendor/assimp/include",
         "Lanna/vendor/PCG/include"
     }
@@ -150,7 +150,8 @@ project "Sandbox"
     links
     {
         "Lanna",
-        "ImGui"
+        "ImGui",
+        "Optick"
     }
 
     debugdir "$(SolutionDir)/Editor"

@@ -111,6 +111,9 @@ namespace Lanna {
 		while (m_Running)
 		{
 
+			OPTICK_FRAME("Application Loop");
+			OPTICK_EVENT();
+
 			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 			glClearDepth(1.0f);
 
