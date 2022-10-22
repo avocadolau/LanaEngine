@@ -22,6 +22,24 @@ InspectorPanel::~InspectorPanel()
 
 }
 
+
+void InspectorPanel::ShowObjectHierarchy(GameObject* obj)
+{
+	bool node_open = ImGui::TreeNode(obj->m_Name);
+	ImGui::SameLine();
+	if (ImGui::SmallButton("Del"))
+		obj->DelParent();
+
+	if (node_open)
+	{
+		for (GameObject* o : obj->m_Children)
+		{
+			ShowObjectHierarchy(o);
+		}
+		ImGui::TreePop();
+	}
+}
+
 void InspectorPanel::Draw()
 {
 	GameObject* activeObject = Lanna::Application::Get().GetEntityManager()->GetActiveEntitiy();
@@ -30,32 +48,53 @@ void InspectorPanel::Draw()
 	if (activeObject!=nullptr)
 	{
 		ImGui::Text(activeObject->m_Name);
+
+		ImGui::Text("Parent: ");
+		ImGui::SameLine();
+		if (activeObject->m_Parent == nullptr) ImGui::Text("None");
+		else ImGui::Text(activeObject->m_Parent->m_Name);
+		ImGui::SameLine();
+		if (ImGui::SmallButton("Del")) {}
+		if (ImGui::SmallButton("Add")){}
+
+		/*ImGui::Text("Children");
+		if(activeObject->m_Children.size()>0)
+			ShowObjectHierarchy(activeObject);*/
+
+
+		/*bool node_open = ImGui::TreeNode("Children");
+		if (node_open)
+		{
+			for (GameObject* o : activeObject->m_Children)
+			{
+				ShowObjectHierarchy(o);
+			}
+			ImGui::TreePop();
+		}
+		if (ImGui::SmallButton("Add")) {}*/
+
+
+		// components
+		ImGui::Separator();
 		for (Component* comps : activeObject->m_Components)
 			comps->ImGuiDraw();
 		
-
 		ImGui::Separator();
-
 		if (ImGui::Button("Add Component"))
-		{
 			addComp = !addComp;
-		}
 
 		if (addComp)
 		{
-
 			if (ImGui::Button("Transform"))
 			{
 				activeObject->AddComponent(Component::Type::TRANSFORM);
 				addComp = false;
 			}
-
 			if (ImGui::Button("Mesh"))
 			{
 				activeObject->AddComponent(Component::Type::MESH);
 				addComp = false;
 			}
-
 			if (ImGui::Button("Material"))
 			{
 				activeObject->AddComponent(Component::Type::MATERIAL);

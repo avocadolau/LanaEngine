@@ -21,6 +21,10 @@ public:
 
 	void AddComponent(Component::Type type);
 
+	void SetParent(GameObject* parent);
+	void SetChild(GameObject* child);
+	void DelChild(GameObject*child);
+	void DelParent();
 
 public:
 	bool active = true;
@@ -29,5 +33,6 @@ public:
 	std::list<GameObject*> m_Children;
 	GameObject* m_Parent = nullptr;
 	const char* m_Name;
+	int m_Hierarchy;
 };
 

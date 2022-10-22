@@ -18,16 +18,29 @@ HierarchyPanel::~HierarchyPanel()
 
 void HierarchyPanel::Draw()
 {
-	std::vector<GameObject*>* entities = Lanna::Application::Get().GetEntityManager()->GetEntityList();
+	std::vector<GameObject*> entities = *Lanna::Application::Get().GetEntityManager()->GetEntityList();
 
-	ImGui::Begin("Game Object Hierarchy", &active);
+	ImGui::Begin("Scene Game Objects", &active);
 
-	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0, 0.0, 0.0, 0.0));
-	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.0, 0.0, 0.0, 0.0));
+    static int selected = 0;
+    {
 
+        /*for (GameObject* comps : entities)
+        {
+            if (ImGui::Selectable(comps->m_Name, selected == i))
+                selected = i;
+            i++;
+        }*/
 
-	ImGui::PopStyleColor();
-	ImGui::PopStyleColor();
+        for (int i = 0; i < entities.size(); i++)
+        {
+            if (ImGui::Selectable(entities.at(i)->m_Name, selected == i))
+                selected = i;
+        }
+
+        Lanna::Application::Get().GetEntityManager()->SetActiveEntity(selected);
+    }
+
 
 	ImGui::End();	
 }

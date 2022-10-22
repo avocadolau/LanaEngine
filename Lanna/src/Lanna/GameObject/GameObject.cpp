@@ -9,6 +9,9 @@
 #include "Components/MaterialComponent.h"
 #include "Components/CameraComponent.h"
 
+#include "Lanna/Application.h"
+#include "Lanna/EntityManager.h"
+
 GameObject::GameObject(const char* name) :m_Name(name)
 {
 
@@ -51,5 +54,29 @@ void GameObject::AddComponent(Component::Type type)
 
 	if (comp!=nullptr)
 		m_Components.push_back(comp);
+}
+
+void GameObject::SetParent(GameObject* parent)
+{
+	if (parent != nullptr)
+	{
+		m_Parent = parent;
+
+	}
+}
+
+void GameObject::SetChild(GameObject* child)
+{
+	m_Children.push_back(child);
+}
+
+void GameObject::DelChild(GameObject*child)
+{
+	
+}
+
+void GameObject::DelParent()
+{
+
 }
 

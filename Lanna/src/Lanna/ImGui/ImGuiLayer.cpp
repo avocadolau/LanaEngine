@@ -19,6 +19,7 @@
 #include "Lanna/ImGui/Panels/HardwarePanel.h"
 #include "Lanna/ImGui/Panels/ScenePanel.h"
 #include "Lanna/ImGui/Panels/InspectorPanel.h"
+#include "Lanna/ImGui/Panels/HierarchyPanel.h"
 
 #include "Lanna/Render3D.h"
 #include "Lanna/Renderer/Camera.h"
@@ -90,12 +91,14 @@ namespace Lanna {
 		m_hardware = new HardwarePanel();
 		m_scene = new ScenePanel();
 		m_Inspector = new InspectorPanel();
+		m_Hierarchy = new HierarchyPanel();
 
 		m_panels.push_back(m_configuration);
 		m_panels.push_back(m_about);
 		m_panels.push_back(m_hardware);
 		m_panels.push_back(m_scene);
 		m_panels.push_back(m_Inspector);
+		m_panels.push_back(m_Hierarchy);
 
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		ImGui_ImplGlfw_InitForOpenGL(window, true);

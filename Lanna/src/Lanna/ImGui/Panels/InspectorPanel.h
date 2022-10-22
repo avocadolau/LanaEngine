@@ -1,5 +1,6 @@
 #pragma once
 #include "Panel.h"
+#include "Lanna/GameObject/GameObject.h"
 class InspectorPanel : public Panel
 {
 public:
@@ -9,6 +10,7 @@ public:
 	void Draw() override;
 
 private:
+	void ShowObjectHierarchy(GameObject* obj);
 	bool addComp = false;
 };
 
