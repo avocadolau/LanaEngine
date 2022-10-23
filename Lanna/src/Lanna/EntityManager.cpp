@@ -16,7 +16,6 @@ EntityManager::~EntityManager()
 void EntityManager::Init()
 {
 	GameObject* go = AddEmptyGameObject("empty");
-	go->AddComponent(Component::Type::TRANSFORM);
 	activeEntitiy = go;
 	go->SetChild(new GameObject("uwwwwuu"));
 

@@ -18,6 +18,7 @@ public:
 	TransformComponent();
 	TransformComponent(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
+
 	glm::vec3 GetPosition() { return m_Position; }
 	glm::vec3 GetRotation() { return m_Rotation; }
 	glm::vec3 GetScale() { return m_Scale; }

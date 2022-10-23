@@ -31,6 +31,7 @@ public:
 
 	std::list<Component*> m_Components;
 	std::list<GameObject*> m_Children;
+	TransformComponent* m_Transform = nullptr;
 	GameObject* m_Parent = nullptr;
 	const char* m_Name;
 	int m_Hierarchy;

@@ -33,45 +33,55 @@ void TransformComponent::Use()
 
 void TransformComponent::ImGuiDraw()
 {
-	if (ImGui::CollapsingHeader("Transform"))
+	if (ImGui::TreeNode("Transform"))
 	{
 
 		ImGui::Text("Position");
 		ImGui::Text("x");
 		ImGui::SameLine();
-		ImGui::InputFloat("##value", &m_Position.x, 0.1f);
+		ImGui::SetNextItemWidth(-FLT_MIN);
+		ImGui::InputFloat("pos  x", &m_Position.x, 0.1f);
 		ImGui::Text("y");
 		ImGui::SameLine();
-		ImGui::InputFloat("##value", &m_Position.y, 0.1f);
+		ImGui::SetNextItemWidth(-FLT_MIN);
+		ImGui::InputFloat("posy y", &m_Position.y, 0.1f);
 		ImGui::Text("z");
 		ImGui::SameLine();
-		ImGui::InputFloat("##value", &m_Position.z, 0.1f);
+		ImGui::SetNextItemWidth(-FLT_MIN);
+		ImGui::InputFloat("pos z", &m_Position.z, 0.1f);
 
 		//ImGui::DragFloat("##value", &m_Position.x, 1.0f);
 
 		ImGui::Text("Rotation");
 		ImGui::Text("x");
 		ImGui::SameLine();
-		ImGui::InputFloat("##value", &m_Rotation.x, 0.1f);
+		ImGui::SetNextItemWidth(-FLT_MIN);
+		ImGui::InputFloat("rot x", &m_Rotation.x, 0.1f);
 		ImGui::Text("y");
 		ImGui::SameLine();
-		ImGui::InputFloat("##value", &m_Rotation.y, 0.1f);
+		ImGui::SetNextItemWidth(-FLT_MIN);
+		ImGui::InputFloat("rot y", &m_Rotation.y, 0.1f);
 		ImGui::Text("z");
 		ImGui::SameLine();
-		ImGui::InputFloat("##value", &m_Rotation.z, 0.1f);
+		ImGui::SetNextItemWidth(-FLT_MIN);
+		ImGui::InputFloat("rot z", &m_Rotation.z, 0.1f);
 
 
 		ImGui::Text("Scale");
 		ImGui::Text("x");
 		ImGui::SameLine();
-		ImGui::InputFloat("##value", &m_Scale.x, 0.1f);
+		ImGui::SetNextItemWidth(-FLT_MIN);
+		ImGui::InputFloat("scale x", &m_Scale.x, 0.1f);
 		ImGui::Text("y");
 		ImGui::SameLine();
-		ImGui::InputFloat("##value", &m_Scale.y, 0.1f);
+		ImGui::SetNextItemWidth(-FLT_MIN);
+		ImGui::InputFloat("scale y", &m_Scale.y, 0.1f);
 		ImGui::Text("z");
 		ImGui::SameLine();
-		ImGui::InputFloat("##value", &m_Scale.z, 0.1f);
+		ImGui::SetNextItemWidth(-FLT_MIN);
+		ImGui::InputFloat("scale z", &m_Scale.z, 0.1f);
 		
+		ImGui::TreePop();
 	}
 
 

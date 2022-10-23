@@ -14,10 +14,11 @@
 
 GameObject::GameObject(const char* name) :m_Name(name)
 {
-
+	m_Transform = new TransformComponent();
 }
 GameObject::~GameObject()
 {
+	delete m_Transform;
 	m_Components.clear();
 	m_Children.clear();
 }
@@ -25,35 +26,46 @@ GameObject::~GameObject()
 
 void GameObject::Update() {
 
+	
+	for (Component* c : m_Components)
+	{
+		if (c->m_Type == Component::Type::CAMERA)
+		{
+			for (Component* t : m_Components)
+			{
+				if (t->m_Type == Component::Type::TRANSFORM)
+				{
+					
+				}
+			}
+		}
+	}
 
 }
 void GameObject::Render() {}
 
 void GameObject::AddComponent(Component::Type type)
 {
-	Component* comp = nullptr;
 	switch (type)
 	{
 	case Component::Type::TOTAL:
 		break;
-	case Component::Type::TRANSFORM:
-		comp = new TransformComponent();
-		break;
+	/*case Component::Type::TRANSFORM:
+		m_Transform = new TransformComponent();
+		m_Components.push_back(m_Transform);
+		break;*/
 	case Component::Type::MESH:
-		comp = new MeshComponent();
+		m_Components.push_back(new MeshComponent());
 		break;
 	case Component::Type::MATERIAL:
-		comp = new MaterialComponent();
+		m_Components.push_back(new MaterialComponent());
 		break;
 	case Component::Type::CAMERA:
-		comp = new CameraComponent();
-		break;
-	default:
+		CameraComponent*c = new CameraComponent();
+		c->AddTransformComponent(m_Transform);
+		m_Components.push_back(c);
 		break;
 	}
-
-	if (comp!=nullptr)
-		m_Components.push_back(comp);
 }
 
 void GameObject::SetParent(GameObject* parent)

@@ -49,22 +49,10 @@ void AboutPanel::Draw()
 
 	ImGui::Text("\nLicence:  MIT License");
 
-	ImGui::Text("\nCopyright(c) 2022 Laura Isidro & Anna Metrevelli");
-	ImGui::Text("\nPermission is hereby granted, free of charge, to any person obtaining a copy");
-	ImGui::Text("of this softwareand associated documentation files(the 'Software'), to deal");
-	ImGui::Text("in the Software without restriction, including without limitation the rights");
-	ImGui::Text("to use, copy, modify, merge, publish, distribute, sublicense, and /or sell");
-	ImGui::Text("copies of the Software, and to permit persons to whom the Software is");
-	ImGui::Text("furnished to do so, subject to the following conditions :");
-	ImGui::Text("\nThe above copyright noticeand this permission notice shall be included in all");
-	ImGui::Text("copies or substantial portions of the Software.");
-	ImGui::Text("\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR");
-	ImGui::Text("IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,");
-	ImGui::Text("FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE");
-	ImGui::Text("AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER");
-	ImGui::Text("LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,");
-	ImGui::Text("OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE");
-	ImGui::Text("SOFTWARE.");
+	ImGui::TextWrapped("\nCopyright(c) 2022 Laura Isidro & Anna Metrevelli");
+	ImGui::TextWrapped("\nPermission is hereby granted, free of charge, to any person obtaining a copy of this softwareand associated documentation files(the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and /or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions :");
+	ImGui::TextWrapped("\nThe above copyright noticeand this permission notice shall be included in all copies or substantial portions of the Software.");
+	ImGui::TextWrapped("\nTHE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.");
 
 	ImGui::End();
 }

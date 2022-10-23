@@ -76,6 +76,7 @@ void InspectorPanel::Draw()
 
 		// components
 		ImGui::Separator();
+		activeObject->m_Transform->ImGuiDraw();
 		for (Component* comps : activeObject->m_Components)
 			comps->ImGuiDraw();
 		
@@ -85,11 +86,11 @@ void InspectorPanel::Draw()
 
 		if (addComp)
 		{
-			if (ImGui::Button("Transform"))
+			/*if (ImGui::Button("Transform"))
 			{
 				activeObject->AddComponent(Component::Type::TRANSFORM);
 				addComp = false;
-			}
+			}*/
 			if (ImGui::Button("Mesh"))
 			{
 				activeObject->AddComponent(Component::Type::MESH);

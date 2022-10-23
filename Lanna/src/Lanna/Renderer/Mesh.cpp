@@ -60,8 +60,7 @@ namespace Lanna {
 
 	void Mesh::Render()
 	{
-		glBindVertexArray(vao);
-		glDrawElements(GL_TRIANGLES, ibo_data.size(), GL_UNSIGNED_INT, 0);
+		
 	}
 
 	void Mesh::GenerateBuffers()
