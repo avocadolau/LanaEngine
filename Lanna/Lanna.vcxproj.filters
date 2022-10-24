@@ -158,6 +158,7 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="src\Utilities\MemoryAllocation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">

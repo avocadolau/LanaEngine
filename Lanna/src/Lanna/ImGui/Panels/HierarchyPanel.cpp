@@ -75,8 +75,8 @@ void HierarchyPanel::Draw()
                 {
                     //std::iter_swap(entities.at(i), entities.at(n_next));
                     //std::swap(entities.at(i), entities.at(n_next));
-                    entities.
-                    ImGui::ResetMouseDragDelta();
+                    /*entities.
+                    ImGui::ResetMouseDragDelta();*/
                 }
             }
 
