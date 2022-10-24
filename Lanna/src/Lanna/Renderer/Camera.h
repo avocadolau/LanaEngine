@@ -53,6 +53,8 @@ namespace Lanna
         void ProcessMouseScroll(float yOffset);
         void ProcessKeyboard(Camera_Movement direction, float deltaTime);
 
+        void SetPosition(glm::vec3 pos) { Position = pos; }
+        void LookAt(const glm::vec3 pos);
     private:
         void UpdateCameraVectors();
     

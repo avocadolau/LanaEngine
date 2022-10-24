@@ -1,6 +1,7 @@
 #include "lnpch.h"
 #include "MeshComponent.h"
 #include "Lanna/GameObject/Component.h"
+#include "Lanna/Utils/Primitives.h"
 
 #include "Lanna/Log.h"
 
@@ -96,6 +97,10 @@ void MeshComponent::LoadFromFile(const char* file)
 	}*/
 
 	GenerateBuffers();
+}
+
+void MeshComponent::LoadPrimitive(Primitives type)
+{
 }
 
 void MeshComponent::GenerateBuffers()

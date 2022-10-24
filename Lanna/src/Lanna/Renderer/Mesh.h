@@ -18,7 +18,7 @@ namespace Lanna {
 	private:
 		void GenerateBuffers();
 
-	private:
+	public:
 		unsigned int vao, ibo, buffer;				// vertex array object, intex buffer data, vertex buffer data
 
 		std::vector<float> vao_data;

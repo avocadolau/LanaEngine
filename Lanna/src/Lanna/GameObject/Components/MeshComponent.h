@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Lanna/GameObject/Component.h"
+#include "Lanna/Utils/Primitives.h"
 #include <vector>
 
 class MeshComponent: public Component
@@ -14,11 +15,12 @@ public:
 	void Render();
 
 	void LoadFromFile(const char* file);
+	void LoadPrimitive(Primitives type);
 	unsigned int GetBuffer() { return buffer; }
 
 private:
 	void GenerateBuffers();
-private:
+public:
 	unsigned int vao, ibo, buffer;				// vertex array object, intex buffer data, vertex buffer data
 
 	std::vector<float> vao_data;

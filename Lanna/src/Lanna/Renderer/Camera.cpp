@@ -148,6 +148,12 @@ namespace Lanna {
         UpdateCameraVectors();
     }
 
+    void Camera::LookAt(const glm::vec3 pos)
+    {
+        m_View = glm::lookAt(Position, pos, Up);
+        Front = pos - Position;
+    }
+
     void Camera::UpdateCameraVectors()
     {
 

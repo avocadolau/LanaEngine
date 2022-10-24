@@ -28,6 +28,8 @@ public:
 
 public:
 	bool active = true;
+	int mainOrder = -1;
+	int secOrder = -1;
 
 	std::list<Component*> m_Components;
 	std::list<GameObject*> m_Children;
