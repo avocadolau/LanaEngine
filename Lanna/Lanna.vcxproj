@@ -167,7 +167,6 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\GameObject\Components\MeshComponent.h" />
     <ClInclude Include="src\Lanna\GameObject\Components\TransformComponent.h" />
     <ClInclude Include="src\Lanna\GameObject\GameObject.h" />
-    <ClInclude Include="src\Lanna\ImGui\EditorLayer.h" />
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Lanna\ImGui\ImGuiLog.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\AboutPanel.h" />
@@ -188,7 +187,6 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\Renderer\Camera.h" />
     <ClInclude Include="src\Lanna\Renderer\Mesh.h" />
     <ClInclude Include="src\Lanna\Renderer\Shader.h" />
-    <ClInclude Include="src\Lanna\System\FileSystem.h" />
     <ClInclude Include="src\Lanna\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
