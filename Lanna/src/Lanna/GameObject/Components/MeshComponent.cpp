@@ -31,24 +31,36 @@ void MeshComponent::ImGuiDraw()
 	if (ImGui::TreeNode("Mesh"))
 	{
 		static int selectedMesh = -1;
-		const char* names[] = { "mesh 1", "mesh 2", "mesh 3", "mesh 4", "mesh 5" };
+		const char* names[] = { "cube", "pyramid", "plane"};
 
-		if (ImGui::Button("Select.."))
+		if (ImGui::Button("Primitives"))
 			ImGui::OpenPopup("my_select_popup");
 		ImGui::SameLine();
-		ImGui::TextUnformatted(selectedMesh == -1 ? "<None>" : names[selectedMesh]);
+		//ImGui::TextUnformatted(selectedMesh == -1 ? "<None>" : names[selectedMesh]);
 		if (ImGui::BeginPopup("my_select_popup"))
 		{
-			ImGui::Text("Assets");
+			ImGui::Text("Primitives");
 			ImGui::Separator();
 			for (int i = 0; i < IM_ARRAYSIZE(names); i++)
 				if (ImGui::Selectable(names[i]))
+				{
 					selectedMesh = i;
+					LoadPrimitive((Primitives)i);
+				} 
 			if (ImGui::Selectable("<None>"))
 				selectedMesh = -1;
 			ImGui::EndPopup();
 		}
-
+		ImGui::Text("");
+		static char buf[100] = "";
+		ImGui::Text("Mesh Path");
+		ImGui::SetNextItemWidth(-FLT_MIN-50);
+		ImGui::InputText("", buf, IM_ARRAYSIZE(buf));
+		ImGui::SameLine();
+		if (ImGui::SmallButton("load"))
+		{
+			LoadFromFile(buf);
+		}
 		ImGui::TreePop();
 	}
 
@@ -62,6 +74,10 @@ void MeshComponent::Render()
 
 void MeshComponent::LoadFromFile(const char* file)
 {
+	vao_data.clear();
+	ibo_data.clear();
+
+
 	vao_data.push_back(0.3f);
 	vao_data.push_back(0.21f);
 	vao_data.push_back(0.0f);

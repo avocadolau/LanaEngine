@@ -25,7 +25,7 @@ InspectorPanel::~InspectorPanel()
 
 void InspectorPanel::ShowObjectHierarchy(GameObject* obj)
 {
-	bool node_open = ImGui::TreeNode(obj->m_Name);
+	bool node_open = ImGui::TreeNode(obj->m_Name.c_str());
 	ImGui::SameLine();
 	if (ImGui::SmallButton("Del"))
 		obj->DelParent();
@@ -47,12 +47,12 @@ void InspectorPanel::Draw()
 	ImGui::Begin("Inspector", &active);
 	if (activeObject!=nullptr)
 	{
-		ImGui::Text(activeObject->m_Name);
+		ImGui::Text(activeObject->m_Name.c_str());
 
 		ImGui::Text("Parent: ");
 		ImGui::SameLine();
 		if (activeObject->m_Parent == nullptr) ImGui::Text("None");
-		else ImGui::Text(activeObject->m_Parent->m_Name);
+		else ImGui::Text(activeObject->m_Parent->m_Name.c_str());
 		ImGui::SameLine();
 		if (ImGui::SmallButton("Del")) {}
 		if (ImGui::SmallButton("Add")){}
@@ -76,7 +76,7 @@ void InspectorPanel::Draw()
 
 		// components
 		ImGui::Separator();
-		activeObject->m_Transform->ImGuiDraw();
+		/*activeObject->m_Transform->ImGuiDraw();*/
 		for (Component* comps : activeObject->m_Components)
 			comps->ImGuiDraw();
 		
@@ -86,11 +86,11 @@ void InspectorPanel::Draw()
 
 		if (addComp)
 		{
-			/*if (ImGui::Button("Transform"))
+			if (ImGui::Button("Transform"))
 			{
 				activeObject->AddComponent(Component::Type::TRANSFORM);
 				addComp = false;
-			}*/
+			}
 			if (ImGui::Button("Mesh"))
 			{
 				activeObject->AddComponent(Component::Type::MESH);

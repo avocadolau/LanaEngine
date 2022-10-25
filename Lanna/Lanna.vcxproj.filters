@@ -22,9 +22,6 @@
     <Filter Include="Lanna\Renderer">
       <UniqueIdentifier>{35F26D0B-21C0-6111-0A54-D237F6C03D76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lanna\Utils">
-      <UniqueIdentifier>{4FA2693B-BB57-E230-444C-DC07B000D934}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
@@ -133,12 +130,6 @@
     <ClInclude Include="src\Lanna\Render3D.h">
       <Filter>Lanna</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Camera.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Mesh.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\Lanna\Renderer\Shader.h">
       <Filter>Lanna\Renderer</Filter>
     </ClInclude>
@@ -225,12 +216,6 @@
     </ClCompile>
     <ClCompile Include="src\Lanna\Render3D.cpp">
       <Filter>Lanna</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Camera.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Mesh.cpp">
-      <Filter>Lanna\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Renderer\Shader.cpp">
       <Filter>Lanna\Renderer</Filter>

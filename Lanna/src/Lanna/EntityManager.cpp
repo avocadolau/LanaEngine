@@ -36,12 +36,31 @@ void EntityManager::Render()
 
 void EntityManager::AddGameObject(GameObject* gameObject)
 {
-	m_Entities.push_back(gameObject);
+	if (gameObject)
+		m_Entities.push_back(gameObject);
 }
 
 GameObject* EntityManager::AddEmptyGameObject(const char* name)
 {
-	GameObject* object = new GameObject(name);
+	std::string nName = name;
+	int count = 0;
+	for (GameObject* object : m_Entities)
+	{
+		std::string nObj = object->m_Name;
+		if (nObj.find(name) != -1)
+			count++;
+	}
+	GameObject* object;
+	if (count > 0)
+	{
+		nName.append(" ");
+		nName.append(std::to_string(count+1).c_str());
+		object = new GameObject(nName.c_str());
+
+	}
+	else
+		object = new GameObject(name);
+
 	m_Entities.push_back(object);
 	return object;
 }

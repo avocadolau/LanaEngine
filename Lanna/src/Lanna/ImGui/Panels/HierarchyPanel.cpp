@@ -29,7 +29,7 @@ void HierarchyPanel::Draw()
 
         for (int i = 0; i < entities.size(); i++)
         {
-            if (ImGui::Selectable(entities.at(i)->m_Name, selected == i))
+            if (ImGui::Selectable(entities.at(i)->m_Name.c_str(), selected == i))
                 selected = i;
         }
 

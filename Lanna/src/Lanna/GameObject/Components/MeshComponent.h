@@ -11,6 +11,7 @@ enum Primitives{
 	TOTAL
 };
 
+
 class MeshComponent: public Component
 {
 public:

@@ -7,6 +7,7 @@
 #include "Platform/OpenGL/imgui_impl_glfw.h"
 
 #include "Lanna/Application.h"
+#include "Lanna/EntityManager.h"
 
 #define IMGUI_IMP_API
 
@@ -23,7 +24,6 @@
 #include "Lanna/GameObject/Components/MeshComponent.h"
 
 #include "Lanna/Render3D.h"
-#include "Lanna/Renderer/Camera.h"
 #include <gtc/matrix_transform.hpp>
 #include "Lanna/Input.h"
 #include "Lanna/KeyCodes.h"
@@ -250,10 +250,18 @@ namespace Lanna {
 		}
 		if (ImGui::BeginMenu("Primitives"))
 		{
-			if (ImGui::MenuItem("Cube"))
-			{
-			}
+			const char* names[] = { "Cube", "Pyramid","Plane" };
 
+			for (int i = 0; i < (int)Primitives::TOTAL; i++)
+			{
+				if (ImGui::MenuItem(names[i]))
+				{
+					GameObject* obj = Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject(names[i]);
+					MeshComponent* mesh= (MeshComponent*)obj->AddComponent(Component::Type::MESH);
+					mesh->LoadPrimitive((Primitives)i);
+				}
+			}
+			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help"))
 		{
