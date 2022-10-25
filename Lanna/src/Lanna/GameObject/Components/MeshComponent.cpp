@@ -1,7 +1,6 @@
 #include "lnpch.h"
 #include "MeshComponent.h"
 #include "Lanna/GameObject/Component.h"
-#include "Lanna/Utils/Primitives.h"
 
 #include "Lanna/Log.h"
 
@@ -101,6 +100,76 @@ void MeshComponent::LoadFromFile(const char* file)
 
 void MeshComponent::LoadPrimitive(Primitives type)
 {
+
+	vao_data.clear();
+	ibo_data.clear();
+
+	switch (type)
+	{
+	case CUBE:
+		vao_data=
+		{
+			-0.5f,-0.5f,0.5f,
+			0.5f,-0.5f,0.5f,
+			0.5f,0.5f,0.5f,
+			-0.5f,0.5f,0.5f,
+
+			-0.5f,-0.5f,-0.5f,
+			0.5f,-0.5f,-0.5f,
+			0.5f,0.5f,-0.5f,
+			-0.5f,0.5f,-0.5f
+
+		};
+
+		ibo_data=
+		{
+			0,1,2,		2,3,0,
+			5,4,6,		6,4,7,
+			4,5,1,		1,0,4,
+			5,6,2,		2,1,5,
+			6,7,3,		3,2,6,
+			7,4,0,		0,3,7
+		};
+
+		break;
+	case PYRAMID:
+		vao_data =
+		{
+			-0.5f,-0.5f,0.0f,
+			0.5f,-0.5f,0.0f,
+			0.5f,0.5f,0.0f,
+			-0.5f,0.5f,0.0f,
+			0.0f,0.0f,1.0f
+		};
+
+		ibo_data =
+		{
+			0,3,2,		2,1,0,
+			0,1,4,
+			1,2,4,
+			2,3,4,
+			3,0,4
+		};
+
+		break;
+	case PLANE:
+
+		vao_data =
+		{
+			-10.0f,-10.0f,0.0f,
+			10.0f,-10.0f,0.0f,
+			10.0f,10.0f,0.0f,
+			-10.0f,10.0f,0.0f,
+		};
+
+		ibo_data =
+		{
+			0,1,2,		2,3,0
+		};
+
+
+		break;
+	}
 }
 
 void MeshComponent::GenerateBuffers()

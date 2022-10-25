@@ -1,8 +1,15 @@
 #pragma once
 
 #include "Lanna/GameObject/Component.h"
-#include "Lanna/Utils/Primitives.h"
 #include <vector>
+
+enum Primitives{
+	CUBE,
+	PYRAMID,
+	PLANE,
+
+	TOTAL
+};
 
 class MeshComponent: public Component
 {

@@ -142,9 +142,6 @@
     <ClInclude Include="src\Lanna\Renderer\Shader.h">
       <Filter>Lanna\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lanna\Utils\Primitives.h">
-      <Filter>Lanna\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="src\Lanna\Window.h">
       <Filter>Lanna</Filter>
     </ClInclude>

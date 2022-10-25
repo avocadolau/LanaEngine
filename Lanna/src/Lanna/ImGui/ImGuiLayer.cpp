@@ -20,6 +20,7 @@
 #include "Lanna/ImGui/Panels/ScenePanel.h"
 #include "Lanna/ImGui/Panels/InspectorPanel.h"
 #include "Lanna/ImGui/Panels/HierarchyPanel.h"
+#include "Lanna/GameObject/Components/MeshComponent.h"
 
 #include "Lanna/Render3D.h"
 #include "Lanna/Renderer/Camera.h"
@@ -246,6 +247,13 @@ namespace Lanna {
 			}
 			ImGui::MenuItem("Console", "", &logActive);
 			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Primitives"))
+		{
+			if (ImGui::MenuItem("Cube"))
+			{
+			}
+
 		}
 		if (ImGui::BeginMenu("Help"))
 		{
