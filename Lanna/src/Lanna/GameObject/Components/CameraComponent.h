@@ -47,6 +47,8 @@ public:
     float getAspectRatio() { return m_AspectRatio; }
     void setResolution(int width, int height);
 
+    void setPosition(glm::vec3 pos);
+
     void setFOV(float fov);
     float getFOV() { return m_Fov; }
 
@@ -56,6 +58,8 @@ public:
     void ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch);
     void ProcessMouseScroll(float yOffset);
     void ProcessKeyboard(Camera_Movement direction, float deltaTime);
+
+    void LookAt(glm::vec3 spot);
 
 private:
     void UpdateCameraVectors();

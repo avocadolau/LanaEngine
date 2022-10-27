@@ -36,8 +36,9 @@ namespace Lanna {
 		GameObject* camera=Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject("camera");
 		
 		m_ActiveCamera = (CameraComponent*)camera->AddComponent(Component::Type::CAMERA);
+		m_ActiveCamera->setPosition({ 0.0f,4.0f,0.0f });
 		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
-		
+		m_ActiveCamera->LookAt({ 0.0f, 0.0f, 0.0f });
 	}
 
 
@@ -71,7 +72,7 @@ namespace Lanna {
 
 
 		// bind buffer
-		glBindFramebuffer(GL_FRAMEBUFFER, mesh.GetBuffer());
+		glBindFramebuffer(GL_FRAMEBUFFER, mesh.buffer);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glm::mat4 model = glm::mat4(1.0f);

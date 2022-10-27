@@ -152,7 +152,9 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="Buffer.h" />
+    <ClInclude Include="src\Lanna\Renderer\Framebuffer.h">
+      <Filter>Lanna\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -234,6 +236,8 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
-    <ClCompile Include="Buffer.cpp" />
+    <ClCompile Include="src\Lanna\Renderer\Framebuffer.cpp">
+      <Filter>Lanna\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

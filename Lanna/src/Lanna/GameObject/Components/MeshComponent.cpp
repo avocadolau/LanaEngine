@@ -14,7 +14,7 @@
 #include <imgui.h>
 MeshComponent::MeshComponent() : Component(Component::Type::MESH)
 {
-
+	LoadPrimitive(Primitives::CUBE);
 }
 MeshComponent::~MeshComponent()
 {
@@ -78,7 +78,7 @@ void MeshComponent::LoadFromFile(const char* file)
 	ibo_data.clear();
 
 
-	vao_data.push_back(0.3f);
+	/*vao_data.push_back(0.3f);
 	vao_data.push_back(0.21f);
 	vao_data.push_back(0.0f);
 	vao_data.push_back(0.34f);
@@ -90,16 +90,16 @@ void MeshComponent::LoadFromFile(const char* file)
 
 	ibo_data.push_back(0);
 	ibo_data.push_back(1);
-	ibo_data.push_back(2);
+	ibo_data.push_back(2);*/
 
-	//float vao_data[9] = { 0.3f, 0.21f, 0.f,
-	//						0.34f, 0.215f, 0.f,
-	//						0.32f,0.25f, 0.f };
-	//int ibo_data[3] = { 0,1,2 };
+	/*float vao_data[9] = { 0.3f, 0.21f, 0.f,
+							0.34f, 0.215f, 0.f,
+							0.32f,0.25f, 0.f };
+	int ibo_data[3] = { 0,1,2 };*/
 
 
 
-	/*const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
+	const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
 
@@ -109,7 +109,7 @@ void MeshComponent::LoadFromFile(const char* file)
 	}
 	else {
 		LN_CORE_ERROR("Error loading mesh {0}", file);
-	}*/
+	}
 
 	GenerateBuffers();
 }
@@ -186,6 +186,8 @@ void MeshComponent::LoadPrimitive(Primitives type)
 
 		break;
 	}
+	GenerateBuffers();
+
 }
 
 void MeshComponent::GenerateBuffers()

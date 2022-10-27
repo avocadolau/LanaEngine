@@ -139,6 +139,11 @@ void CameraComponent::setResolution(int width, int height)
         m_Projection = glm::ortho(0.0f, (float)width, (float)height, 0.0f);
 }
 
+void CameraComponent::setPosition(glm::vec3 pos)
+{
+    Position = pos;
+}
+
 void CameraComponent::setFOV(float fov)
 {
     m_Fov = fov;
@@ -212,6 +217,12 @@ void CameraComponent::ProcessKeyboard(Camera_Movement direction, float deltaTime
     if (direction == FREE_LOOK_RIGHT)
         Position += Right * velocity;
 
+    UpdateCameraVectors();
+}
+
+void CameraComponent::LookAt(glm::vec3 spot)
+{
+    Front = spot;
     UpdateCameraVectors();
 }
 

@@ -33,20 +33,15 @@ void GameObject::Update() {
 	
 	for (Component* c : m_Components)
 	{
-		if (c->m_Type == Component::Type::CAMERA)
-		{
-			for (Component* t : m_Components)
-			{
-				if (t->m_Type == Component::Type::TRANSFORM)
-				{
-					
-				}
-			}
-		}
+		c->Use();
 	}
 
 }
-void GameObject::Render() {}
+void GameObject::Render() {
+	
+	if (m_Mesh)
+		Lanna::Application::Get().GetRenderer().RenderMesh(*m_Mesh, m_Transform->m_Position, m_Transform->m_Rotation, m_Transform->m_Scale, glm::vec4(1.0f, 1.0f, 1.0f,1.0f));
+}
 
 Component* GameObject::AddComponent(Component::Type type)
 {
