@@ -116,30 +116,33 @@ namespace Lanna {
 			OPTICK_FRAME("Application Loop");
 			OPTICK_EVENT();
 
-			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-			glClearDepth(1.0f);
+			/*glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+			glClearDepth(1.0f);*/
 
-
-			glClearColor(0.f, 0.f, 0.f, 1.f);
+			//m_Render3D->Clear();
+			glClearColor(0.1f, 0.1f, 0.1f, 1.f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			/*glEnable(GL_DEPTH_TEST);*/
-			/*glEnable(GL_CULL_FACE);*/
-			/*glEnable(GL_LIGHTING);*/
-			glEnable(GL_COLOR_MATERIAL);
-			glEnable(GL_TEXTURE_2D);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-
 			m_Render3D->Draw();
+			//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			///*glEnable(GL_DEPTH_TEST);*/
+			///*glEnable(GL_CULL_FACE);*/
+			///*glEnable(GL_LIGHTING);*/
+			//glEnable(GL_COLOR_MATERIAL);
+			//glEnable(GL_TEXTURE_2D);
+			//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+
+			
+			
 			m_EntityManager->Update();
 			m_EntityManager->Render();
+
 			m_ImGuiLayer->Begin();
-
-			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate();
-
+			{
+				for (Layer* layer : m_LayerStack)
+					layer->OnUpdate();
+			}
 			m_ImGuiLayer->End();
 
 			//auto [x, y] = Input::GetMousePosition();

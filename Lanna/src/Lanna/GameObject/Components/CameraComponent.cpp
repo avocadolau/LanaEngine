@@ -80,23 +80,6 @@ void CameraComponent::ImGuiDraw()
         ImGui::SameLine();
         ImGui::Text(std::to_string(val).c_str());
 
-       
-        glm::vec3 look;
-        look= UnitaryVector(Front) * m_Zoom+(*Position);
-        ImGui::Text("Look at");
-        val = look.x;
-        ImGui::Text("x ");
-        ImGui::SameLine();
-        ImGui::Text(std::to_string(val).c_str());
-        val = look.y;
-        ImGui::Text("y ");
-        ImGui::SameLine();
-        ImGui::Text(std::to_string(val).c_str());
-        val = look.z;
-        ImGui::Text("z ");
-        ImGui::SameLine();
-        ImGui::Text(std::to_string(val).c_str());
-
 
         ImGui::BeginTable("uwu", 2, !ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable|!ImGuiTableFlags_Borders|ImGuiTableFlags_NoBordersInBodyUntilResize);
         ImGui::TableNextRow();
@@ -182,6 +165,8 @@ void CameraComponent::setPosition(glm::vec3 pos)
 {
     
     *Position = pos;
+
+    updateView();
 }
 
 void CameraComponent::setFOV(float fov)
@@ -195,6 +180,8 @@ void CameraComponent::setFOV(float fov)
 void CameraComponent::SetPerspective(float fov, float aspectRatio, float nearDistance, float farDistance)
 {
     m_type = CameraType::PERSPECTIVE;
+
+    m_Fov = fov;
 
     m_Projection = glm::perspective(glm::radians(m_Fov), aspectRatio, nearDistance, farDistance);
 
@@ -254,11 +241,15 @@ void CameraComponent::ProcessMouseScroll(float yOffset)
 
 void CameraComponent::LookAt(glm::vec3 spot)
 {
-    glm::vec3 newSpot = spot + (*Position);
-    Front = glm::normalize(newSpot);
-    Front=UnitaryVector(Front);
-    *Position = newSpot-(Front * m_Zoom);
+
+    m_View = glm::lookAt(*Position + spot, *Position, Up);
+    Front = spot - *Position;
     UpdateCameraVectorsFromCameraDirection();
+}
+
+void CameraComponent::updateView()
+{
+    m_View = glm::lookAt(*Position, *Position + Front, Up);
 }
 
 void CameraComponent::UpdateCameraVectorsFromEulerAngles()

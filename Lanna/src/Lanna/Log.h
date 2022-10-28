@@ -25,11 +25,11 @@ namespace Lanna {
 #define LN_CORE_INFO(...)     ::Lanna::Log::GetCoreLogger()->info(__VA_ARGS__)
 #define LN_CORE_WARN(...)     ::Lanna::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define LN_CORE_ERROR(...)    ::Lanna::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define LN_CORE_FATAL(...)    ::Lanna::Log::GetCoreLogger()->fatal(__VA_ARGS__)
+#define LN_CORE_FATAL(...)    ::Lanna::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client log macros
 #define LN_TRACE(...)	      ::Lanna::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define LN_INFO(...)	      ::Lanna::Log::GetClientLogger()->info(__VA_ARGS__)
 #define LN_WARN(...)	      ::Lanna::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define LN_ERROR(...)	      ::Lanna::Log::GetClientLogger()->error(__VA_ARGS__)
-#define LN_FATAL(...)	      ::Lanna::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define LN_FATAL(...)	      ::Lanna::Log::GetClientLogger()->critical(__VA_ARGS__)

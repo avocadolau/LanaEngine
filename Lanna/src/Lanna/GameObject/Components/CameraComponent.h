@@ -51,6 +51,8 @@ public:
 
     void LookAt(glm::vec3 spot);
 
+    void updateView();
+
 private:
     void UpdateCameraVectorsFromEulerAngles();
     void UpdateCameraVectorsFromCameraDirection();

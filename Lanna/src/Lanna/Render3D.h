@@ -14,9 +14,6 @@ namespace Lanna
 	class LANNA_API Render3D
 	{
 	private:
-		int m_ShaderProgram;
-		unsigned int fragmentShader;
-		unsigned int vertexShader;
 
 		CameraComponent* m_ActiveCamera;
 		glm::mat4 m_PersProj;
@@ -29,7 +26,7 @@ namespace Lanna
 
 	public:
 
-		Framebuffer* m_Fbo;
+		Framebuffer* m_Framebuffer;
 
 	public:
 		Render3D();
@@ -37,13 +34,14 @@ namespace Lanna
 
 
 		void Init();
+		void Clear();
 		void Draw();
 		void Close();
 
 		glm::mat4 GetPersProjection() { return m_ActiveCamera->getProjection(); }
 		glm::mat4 GetView() { return m_ActiveCamera->getView(); }
 		CameraComponent& GetActiveCamera() { return *m_ActiveCamera; }
-
+		uint32_t getColorBufferTexture() { return m_Framebuffer->getColorBufferTexture(); }
 		void RenderMesh(MeshComponent& mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color);
 	private:
 	};

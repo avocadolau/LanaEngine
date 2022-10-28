@@ -101,11 +101,6 @@ void MeshComponent::LoadFromFile(const char* file)
 	ibo_data.push_back(0);
 	ibo_data.push_back(1);
 	ibo_data.push_back(2);*/
-
-	float vao_data[9] = { 0.3f, 0.21f, 0.f,
-							0.34f, 0.215f, 0.f,
-							0.32f,0.25f, 0.f };
-	int ibo_data[3] = { 0,1,2 };
 #else
 
 	const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
@@ -202,23 +197,26 @@ void MeshComponent::LoadPrimitive(Primitives type)
 
 void MeshComponent::GenerateBuffers()
 {
-	glGenBuffers(1, &Lanna::Application::Get().GetRenderer().m_Fbo->fbo);		// buffer
-	//glGenBuffers(1, &buffer);		// buffer
+	glGenBuffers(1, &vao);
+	glGenBuffers(1, &ibo);
+	glGenVertexArrays(1, &vao);
 
-	glGenVertexArrays(1, &vao);		// vertex array buffer
 	glBindVertexArray(vao);
 
-	// bind vertex
-	glBindBuffer(GL_ARRAY_BUFFER, Lanna::Application::Get().GetRenderer().m_Fbo->fbo);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vao);
 	glBufferData(GL_ARRAY_BUFFER, vao_data.size() * sizeof(float), vao_data.data(), GL_STATIC_DRAW);
 
-	// bind indices
-	glGenBuffers(1, &ibo);			// index buffer object
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, ibo_data.size() * sizeof(int), ibo_data.data(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	//glEnableVertexAttribArray(1);
+	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	//glEnableVertexAttribArray(2);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);

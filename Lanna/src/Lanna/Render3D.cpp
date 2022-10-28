@@ -38,10 +38,16 @@ namespace Lanna {
 		
 		m_ActiveCamera = (CameraComponent*)camera->AddComponent(Component::Type::CAMERA);
 		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
-		m_ActiveCamera->LookAt(glm::vec3 (0.0f, 0.0f, -1.0f ));
+		m_ActiveCamera->setPosition({ 0.0f,1.0f,5.0f });
+		m_ActiveCamera->LookAt({ 0.0f, 0.0f, 0.0f });
 
-		m_Fbo = new Framebuffer();
-		m_Fbo->Init(800, 600);
+		m_Framebuffer = new Framebuffer();
+		m_Framebuffer->Init(1920, 1080);
+	}
+
+	void Render3D::Clear()
+	{
+		m_Framebuffer->Clear();
 	}
 
 
@@ -65,8 +71,8 @@ namespace Lanna {
 			
 
 				
-		}*/
-
+		}
+		*/
 	}
 
 	void Render3D::Close()
@@ -79,9 +85,8 @@ namespace Lanna {
 
 
 		// bind buffer
-		m_Fbo->Bind();
-		/*glBindFramebuffer(GL_FRAMEBUFFER, m_Fbo->fbo);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);*/
+		m_Framebuffer->Bind(false);
+	
 
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(position.x, position.y, position.z));
@@ -99,10 +104,8 @@ namespace Lanna {
 
 		mesh.Render();
 
-
 		// unbind buffer
-		/*glBindFramebuffer(GL_FRAMEBUFFER, 0);*/
-		m_Fbo->Unbind();
+		m_Framebuffer->Unbind();
 
 	}
 
