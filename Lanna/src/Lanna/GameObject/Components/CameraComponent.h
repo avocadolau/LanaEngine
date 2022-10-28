@@ -11,18 +11,13 @@
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
 const float SPEED = 0.01f;
-const float SENSITIVITY = 0.0001f;
+const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
 
 enum class CameraType {
     NONE,
     ORTHOGRAPHIC,
     PERSPECTIVE
-};
-enum Camera_Movement {
-    MOVE,
-    ORBIT,
-    NONE
 };
 
 class CameraComponent : public Component
@@ -63,7 +58,7 @@ private:
     void Move(float xoffset, float yoffset);
     void Orbit(float xoffset, float yoffset);
 
-    void UnitaryVector(glm::vec3 &vec);
+    glm::vec3 UnitaryVector(glm::vec3 vec);
 private:
     CameraType m_type;
 
@@ -92,9 +87,5 @@ private:
     // matrices
     glm::mat4 m_View;
     glm::mat4 m_Projection;
-
-    // movement
-public:
-    Camera_Movement movement;
 
 };

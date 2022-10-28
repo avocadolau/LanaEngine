@@ -37,9 +37,8 @@ namespace Lanna {
 		GameObject* camera=Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject("camera");
 		
 		m_ActiveCamera = (CameraComponent*)camera->AddComponent(Component::Type::CAMERA);
-		m_ActiveCamera->setPosition({ 0.0f,4.0f,0.0f });
 		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
-		m_ActiveCamera->LookAt({ 0.0f, 0.0f, 0.0f });
+		m_ActiveCamera->LookAt({ 0.0f, 0.0f, -1.0f });
 
 		m_Fbo = new Framebuffer();
 		m_Fbo->Init(800, 600);
@@ -48,7 +47,7 @@ namespace Lanna {
 
 	void Render3D::Draw()
 	{
-		if (m_ActiveCamera)
+		/*if (m_ActiveCamera)
 		{
 			ImGuiIO& io = ImGui::GetIO();
 
@@ -66,7 +65,7 @@ namespace Lanna {
 			
 
 				
-		}
+		}*/
 
 	}
 

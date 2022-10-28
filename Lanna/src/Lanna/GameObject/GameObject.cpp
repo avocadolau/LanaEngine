@@ -35,10 +35,6 @@ void GameObject::Update() {
 	{
 		c->Use();
 	}
-	if (m_Camera && m_Transform)
-	{
-		m_Camera->setPosition(m_Transform->m_Position);
-	}
 
 }
 void GameObject::Render() {

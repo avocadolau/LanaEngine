@@ -163,6 +163,7 @@ void CameraComponent::setResolution(int width, int height)
 
 void CameraComponent::setPosition(glm::vec3 pos)
 {
+    
     *Position = pos;
 }
 
@@ -198,17 +199,16 @@ void CameraComponent::SetOrthographic(int width, int height, float nearDistance,
 
 void CameraComponent::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch = true)
 {
-    
-    if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
-        speedMul = 2.0f;
-    else speedMul = 1.0f;
-
     if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_ALT))
     {
-        if (movement == MOVE)
-            Move(xoffset,yoffset);
-        if (movement == ORBIT)
-            Orbit(xoffset, yoffset);
+        if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
+            speedMul = 2.0f;
+        else speedMul = 1.0f;
+
+        ImGuiIO& io = ImGui::GetIO();
+
+        if (io.MouseDown[0]) Orbit(xoffset, yoffset);
+        if (io.MouseDown[2]) Move(xoffset, yoffset);
     }
 
     // update Front, Right and Up Vectors using the updated Euler angles
@@ -217,18 +217,19 @@ void CameraComponent::ProcessMouseMovement(float xoffset, float yoffset, bool co
 
 void CameraComponent::ProcessMouseScroll(float yOffset)
 {
-    if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
-        speedMul = 2.0f;
-    else speedMul = 1.0f;
-
+    
     if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_ALT))
     {
+        if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
+            speedMul = 2.0f;
+        else speedMul = 1.0f;
+        float lastZoom = m_Zoom;
         m_Zoom -= yOffset * m_MouseWheelSensitivity * speedMul;
+        if (m_Zoom < 0.5f)m_Zoom = 0.5f;
+        Front=UnitaryVector(Front);
         
-        UnitaryVector(Front);
-        
-        *Position == Front - (Front * m_Zoom);
-        UpdateCameraVectorsFromEulerAngles;
+        *Position -= Front * (lastZoom-m_Zoom);
+        UpdateCameraVectorsFromEulerAngles();
     }
     
 
@@ -236,10 +237,10 @@ void CameraComponent::ProcessMouseScroll(float yOffset)
 
 void CameraComponent::LookAt(glm::vec3 spot)
 {
-
-    Front = glm::normalize( spot + *Position);
-    UnitaryVector(Front);
-    *Position = Front-(Front * m_Zoom);
+    glm::vec3 newSpot = spot + *Position;
+    Front = glm::normalize(newSpot);
+    Front=UnitaryVector(Front);
+    *Position = newSpot-(Front * m_Zoom);
     UpdateCameraVectorsFromEulerAngles();
 }
 
@@ -288,10 +289,11 @@ void CameraComponent::Orbit(float xoffset, float yoffset)
     UpdateCameraVectorsFromCameraDirection();
 }
 
-void CameraComponent::UnitaryVector(glm::vec3 &vec)
+glm::vec3 CameraComponent::UnitaryVector(glm::vec3 vec)
 {
+    glm::vec3 unitary = vec;
     float multiplier = 1/glm::distance(vec, glm::vec3(0.0f, 0.0f, 0.0f));
-
-    vec *= multiplier;
+    unitary *= multiplier;
+    return unitary;
 }
 
