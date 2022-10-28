@@ -80,6 +80,23 @@ void CameraComponent::ImGuiDraw()
         ImGui::SameLine();
         ImGui::Text(std::to_string(val).c_str());
 
+       
+        glm::vec3 look;
+        look= UnitaryVector(Front) * m_Zoom+(*Position);
+        ImGui::Text("Look at");
+        val = look.x;
+        ImGui::Text("x ");
+        ImGui::SameLine();
+        ImGui::Text(std::to_string(val).c_str());
+        val = look.y;
+        ImGui::Text("y ");
+        ImGui::SameLine();
+        ImGui::Text(std::to_string(val).c_str());
+        val = look.z;
+        ImGui::Text("z ");
+        ImGui::SameLine();
+        ImGui::Text(std::to_string(val).c_str());
+
 
         ImGui::BeginTable("uwu", 2, !ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable|!ImGuiTableFlags_Borders|ImGuiTableFlags_NoBordersInBodyUntilResize);
         ImGui::TableNextRow();
@@ -237,11 +254,11 @@ void CameraComponent::ProcessMouseScroll(float yOffset)
 
 void CameraComponent::LookAt(glm::vec3 spot)
 {
-    glm::vec3 newSpot = spot + *Position;
+    glm::vec3 newSpot = spot + (*Position);
     Front = glm::normalize(newSpot);
     Front=UnitaryVector(Front);
     *Position = newSpot-(Front * m_Zoom);
-    UpdateCameraVectorsFromEulerAngles();
+    UpdateCameraVectorsFromCameraDirection();
 }
 
 void CameraComponent::UpdateCameraVectorsFromEulerAngles()

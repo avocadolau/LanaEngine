@@ -38,7 +38,7 @@ namespace Lanna {
 		
 		m_ActiveCamera = (CameraComponent*)camera->AddComponent(Component::Type::CAMERA);
 		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
-		m_ActiveCamera->LookAt({ 0.0f, 0.0f, -1.0f });
+		m_ActiveCamera->LookAt(glm::vec3 (0.0f, 0.0f, -1.0f ));
 
 		m_Fbo = new Framebuffer();
 		m_Fbo->Init(800, 600);
