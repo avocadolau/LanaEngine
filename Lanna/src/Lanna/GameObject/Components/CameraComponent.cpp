@@ -15,30 +15,20 @@
 #include <gl/GL.h>
 
 
-// Default camera values
-const float YAW = -90.0f;
-const float PITCH = 0.0f;
-const float SPEED = 0.0001f;
-const float SENSITIVITY = 0.0001f;
-const float ZOOM = 45.0f;
-
-CameraComponent::CameraComponent() :Component(Component::Type::CAMERA)
+CameraComponent::CameraComponent()
+    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_Zoom(ZOOM), Component(Component::Type::CAMERA)
 {
-    Front = glm::vec3(0.0f, 0.0f, -1.0f);
-    m_MovementSpeed = SPEED;
-    m_MouseSensitivity = SENSITIVITY;
-    m_Zoom = ZOOM;
     Position = glm::vec3(0.0f, 0.0f, 0.0f);
     WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
     m_Yaw = YAW;
-    m_Pitch = PITCH;
+    m_Pitch = PITCH;  
     UpdateCameraVectors();
 }
 
 CameraComponent::CameraComponent(glm::vec3 _position, glm::vec3 _up = glm::vec3(0.0f, 1.0f, 0.0f), float _yaw = YAW, float _pitch = PITCH)
 	: Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_Zoom(ZOOM), Component(Component::Type::CAMERA)
 {
-	Position =glm::vec3(_position);
+	Position =_position;
 	WorldUp = _up;
 	m_Yaw = _yaw;
 	m_Pitch = _pitch;
@@ -62,12 +52,7 @@ CameraComponent::~CameraComponent()
 
 void CameraComponent::Use()
 {
-    if (m_Transform != nullptr)
-    {
-        Position = m_Transform->GetPosition();
-        m_Yaw = m_Transform->GetRotation().x;
-        m_Pitch = m_Transform->GetRotation().y;
-    }
+    
 }
 
 void CameraComponent::ImGuiDraw()
@@ -154,6 +139,11 @@ void CameraComponent::setResolution(int width, int height)
         m_Projection = glm::ortho(0.0f, (float)width, (float)height, 0.0f);
 }
 
+void CameraComponent::setPosition(glm::vec3 pos)
+{
+    Position = pos;
+}
+
 void CameraComponent::setFOV(float fov)
 {
     m_Fov = fov;
@@ -230,9 +220,10 @@ void CameraComponent::ProcessKeyboard(Camera_Movement direction, float deltaTime
     UpdateCameraVectors();
 }
 
-void CameraComponent::AddTransformComponent(TransformComponent* t)
+void CameraComponent::LookAt(glm::vec3 spot)
 {
-    m_Transform = t;
+    Front = spot;
+    UpdateCameraVectors();
 }
 
 void CameraComponent::UpdateCameraVectors()

@@ -1,12 +1,17 @@
 #pragma once
 #include "Lanna/GameObject/Component.h"
-#include "Lanna/GameObject/GameObject.h"
-#include "TransformComponent.h"
 
 #include <glew.h>
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <vector>
+
+// Default camera values
+const float YAW = -90.0f;
+const float PITCH = 0.0f;
+const float SPEED = 0.0001f;
+const float SENSITIVITY = 0.0001f;
+const float ZOOM = 45.0f;
 
 enum class CameraType {
     NONE,
@@ -26,8 +31,6 @@ enum Camera_Movement {
 
 class CameraComponent : public Component
 {
-
-	
 public:
     CameraComponent();
     CameraComponent(glm::vec3 _position, glm::vec3 _up, float _yaw, float _pitch);
@@ -44,6 +47,8 @@ public:
     float getAspectRatio() { return m_AspectRatio; }
     void setResolution(int width, int height);
 
+    void setPosition(glm::vec3 pos);
+
     void setFOV(float fov);
     float getFOV() { return m_Fov; }
 
@@ -54,13 +59,12 @@ public:
     void ProcessMouseScroll(float yOffset);
     void ProcessKeyboard(Camera_Movement direction, float deltaTime);
 
-    void AddTransformComponent(TransformComponent* t);
+    void LookAt(glm::vec3 spot);
+
 private:
     void UpdateCameraVectors();
-    TransformComponent* m_Transform = nullptr;
 private:
     CameraType m_type;
-    GameObject* m_Obj = nullptr;
 
     // camera Attributes
     glm::vec3 Position;
