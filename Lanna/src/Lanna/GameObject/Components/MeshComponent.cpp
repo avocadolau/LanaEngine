@@ -3,6 +3,8 @@
 #include "Lanna/GameObject/Component.h"
 
 #include "Lanna/Log.h"
+#include "Lanna/Application.h"
+#include "Lanna/Render3D.h"
 
 #include <glew.h>
 #include <glm.hpp>
@@ -192,7 +194,11 @@ void MeshComponent::LoadPrimitive(Primitives type)
 
 void MeshComponent::GenerateBuffers()
 {
-	glGenBuffers(1, &buffer);		// buffer
+	
+
+
+	glGenBuffers(1, &Lanna::Application::Get().GetRenderer().m_Fbo->fbo);		// buffer
+	//glGenBuffers(1, &buffer);		// buffer
 
 	glGenVertexArrays(1, &vao);		// vertex array buffer
 	glBindVertexArray(vao);

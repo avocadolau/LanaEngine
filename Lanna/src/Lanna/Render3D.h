@@ -5,6 +5,7 @@
 #include <Lanna/Renderer/Shader.h>
 #include "GameObject/Components/MeshComponent.h"
 #include "GameObject/Components/CameraComponent.h"
+#include "Lanna/Renderer/Framebuffer.h"
 
 #include <glm.hpp>
 
@@ -26,6 +27,9 @@ namespace Lanna
 
 		Shader* m_ColorShader;
 
+	public:
+
+		Framebuffer* m_Fbo;
 
 	public:
 		Render3D();

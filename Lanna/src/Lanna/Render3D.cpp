@@ -10,6 +10,7 @@
 #include <imgui.h>
 #include "Lanna/Input.h"
 #include "Lanna/KeyCodes.h"
+#include "Renderer/Framebuffer.h"
 
 #include "Lanna/EntityManager.h"
 #include "GameObject/GameObject.h"
@@ -39,6 +40,9 @@ namespace Lanna {
 		m_ActiveCamera->setPosition({ 0.0f,4.0f,0.0f });
 		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
 		m_ActiveCamera->LookAt({ 0.0f, 0.0f, 0.0f });
+
+		m_Fbo = new Framebuffer();
+		m_Fbo->Init(800, 600);
 	}
 
 
@@ -72,8 +76,9 @@ namespace Lanna {
 
 
 		// bind buffer
-		glBindFramebuffer(GL_FRAMEBUFFER, mesh.buffer);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		m_Fbo->Bind();
+		/*glBindFramebuffer(GL_FRAMEBUFFER, m_Fbo->fbo);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);*/
 
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(position.x, position.y, position.z));
@@ -90,8 +95,8 @@ namespace Lanna {
 
 
 		// unbind buffer
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
+		/*glBindFramebuffer(GL_FRAMEBUFFER, 0);*/
+		m_Fbo->Unbind();
 
 	}
 
