@@ -121,12 +121,6 @@ void MeshComponent::LoadFromFile(const char* file)
 	}
 #endif // ASSIMP_NOT_WORKING
 
-	
-
-
-
-	
-
 	GenerateBuffers();
 }
 
@@ -208,9 +202,6 @@ void MeshComponent::LoadPrimitive(Primitives type)
 
 void MeshComponent::GenerateBuffers()
 {
-	
-
-
 	glGenBuffers(1, &Lanna::Application::Get().GetRenderer().m_Fbo->fbo);		// buffer
 	//glGenBuffers(1, &buffer);		// buffer
 
@@ -218,7 +209,7 @@ void MeshComponent::GenerateBuffers()
 	glBindVertexArray(vao);
 
 	// bind vertex
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, Lanna::Application::Get().GetRenderer().m_Fbo->fbo);
 	glBufferData(GL_ARRAY_BUFFER, vao_data.size() * sizeof(float), vao_data.data(), GL_STATIC_DRAW);
 
 	// bind indices

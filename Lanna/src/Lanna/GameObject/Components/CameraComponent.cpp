@@ -246,6 +246,9 @@ void CameraComponent::ProcessKeyboard(Camera_Movement direction, float deltaTime
 
 void CameraComponent::LookAt(glm::vec3 spot)
 {
+    glm::vec3 vecToSpot = spot - *Position;
+
+
     Front = spot;
     UpdateCameraVectors();
 }
