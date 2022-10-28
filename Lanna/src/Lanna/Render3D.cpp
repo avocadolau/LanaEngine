@@ -52,14 +52,18 @@ namespace Lanna {
 		{
 			ImGuiIO& io = ImGui::GetIO();
 
-			if (Lanna::Input::IsKeyPressed(LN_KEY_A))
-				m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_LEFT, io.DeltaTime);
-			if (Lanna::Input::IsKeyPressed(LN_KEY_D))
-				m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_RIGHT, io.DeltaTime);
-			if (Lanna::Input::IsKeyPressed(LN_KEY_W))
-				m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_UP, io.DeltaTime);
-			if (Lanna::Input::IsKeyPressed(LN_KEY_S))
-				m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_DOWN, io.DeltaTime);
+			if (Lanna::Input::IsKeyPressed(LN_KEY_RIGHT_ALT))
+			{
+				if (Lanna::Input::IsKeyPressed(LN_KEY_A))
+					m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_LEFT, io.DeltaTime);
+				if (Lanna::Input::IsKeyPressed(LN_KEY_D))
+					m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_RIGHT, io.DeltaTime);
+				if (Lanna::Input::IsKeyPressed(LN_KEY_W))
+					m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_UP, io.DeltaTime);
+				if (Lanna::Input::IsKeyPressed(LN_KEY_S))
+					m_ActiveCamera->ProcessKeyboard(Camera_Movement::FREE_LOOK_DOWN, io.DeltaTime);
+			}
+			
 
 				
 		}

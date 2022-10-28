@@ -16,16 +16,16 @@
 
 #include "TransformComponent.h"
 
+#include "Lanna/Input.h"
+#include "Lanna/KeyCodes.h"
 
 CameraComponent::CameraComponent(TransformComponent* t)
-    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseSensitivity(SENSITIVITY), m_Zoom(ZOOM), Component(Component::Type::CAMERA)
+    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseWheelSensitivity(SENSITIVITY), m_Zoom(ZOOM), Component(Component::Type::CAMERA)
 {
     Position = &t->m_Position;
     WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
     Rotation = &t->m_Rotation;
-    m_Yaw = YAW;
-    m_Pitch = PITCH;  
-    UpdateCameraVectors();
+    UpdateCameraVectorsFromEulerAngles();
 }
 
 //CameraComponent::CameraComponent(glm::vec3 _position, glm::vec3 _up = glm::vec3(0.0f, 1.0f, 0.0f), float _yaw = YAW, float _pitch = PITCH)
@@ -124,7 +124,7 @@ void CameraComponent::ImGuiDraw()
         ImGui::Text("MouseSensitivity");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::InputFloat("mouse sens", &m_MouseSensitivity, SENSITIVITY, 0.0f, "%.5f");
+        ImGui::InputFloat("mouse sens", &m_MouseWheelSensitivity, SENSITIVITY, 0.0f, "%.5f");
 
 
         ImGui::EndTable();
@@ -198,62 +198,52 @@ void CameraComponent::SetOrthographic(int width, int height, float nearDistance,
 
 void CameraComponent::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch = true)
 {
-    float x, y;
-    x = xoffset * m_MouseSensitivity;
-    y = yoffset * m_MouseSensitivity;
+    
+    if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
+        speedMul = 2.0f;
+    else speedMul = 1.0f;
 
-    Rotation->x += x;
-    Rotation->y += y;
-    /*m_Yaw += x;
-    m_Pitch += y;*/
-
-    // make sure that when pitch is out of bounds, screen doesn't get flipped
-    if (constrainPitch)
+    if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_ALT))
     {
-        if (Rotation->x > 89.0f)
-            Rotation->x = 89.0f;
-        if (Rotation->y < -89.0f)
-            Rotation->y = -89.0f;
+        if (movement == MOVE)
+            Move(xoffset,yoffset);
+        if (movement == ORBIT)
+            Orbit(xoffset, yoffset);
     }
 
     // update Front, Right and Up Vectors using the updated Euler angles
-    UpdateCameraVectors();
+    UpdateCameraVectorsFromEulerAngles();
 }
 
 void CameraComponent::ProcessMouseScroll(float yOffset)
 {
-    m_Zoom -= (float)yOffset;
-    if (m_Zoom < 1.0f)
-        m_Zoom = 1.0f;
-    if (m_Zoom > 45.0f)
-        m_Zoom = 45.0f;
-}
+    if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
+        speedMul = 2.0f;
+    else speedMul = 1.0f;
 
-void CameraComponent::ProcessKeyboard(Camera_Movement direction, float deltaTime)
-{
-    float velocity = m_MovementSpeed * deltaTime;
-    if (direction == FREE_LOOK_UP)
-        *Position += Front * velocity;
-    if (direction == FREE_LOOK_DOWN)
-        *Position -= Front * velocity;
-    if (direction == FREE_LOOK_LEFT)
-        *Position -= Right * velocity;
-    if (direction == FREE_LOOK_RIGHT)
-        *Position += Right * velocity;
+    if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_ALT))
+    {
+        m_Zoom -= yOffset * m_MouseWheelSensitivity * speedMul;
+        
+        UnitaryVector(Front);
+        
+        *Position == Front - (Front * m_Zoom);
+        UpdateCameraVectorsFromEulerAngles;
+    }
+    
 
-    UpdateCameraVectors();
 }
 
 void CameraComponent::LookAt(glm::vec3 spot)
 {
-    glm::vec3 vecToSpot = spot - *Position;
 
-
-    Front = spot;
-    UpdateCameraVectors();
+    Front = glm::normalize( spot + *Position);
+    UnitaryVector(Front);
+    *Position = Front-(Front * m_Zoom);
+    UpdateCameraVectorsFromEulerAngles();
 }
 
-void CameraComponent::UpdateCameraVectors()
+void CameraComponent::UpdateCameraVectorsFromEulerAngles()
 {
 
     // calculate the new Front vector
@@ -269,3 +259,39 @@ void CameraComponent::UpdateCameraVectors()
     m_View = glm::lookAt(*Position, *Position + Front, Up);
 
 }
+
+void CameraComponent::UpdateCameraVectorsFromCameraDirection()
+{
+    Right = glm::normalize(glm::cross(Front, WorldUp));
+    Up= glm::normalize(glm::cross(Right, Front));
+
+    Rotation->x = glm::degrees(atan(Up.z / Up.y));
+    Rotation->y = glm::degrees(atan(Front.z / Front.x));
+    Rotation->z = 0;
+}
+
+void CameraComponent::Move(float xoffset, float yoffset)
+{
+    *Position += Right * xoffset * m_MovementSpeed * speedMul;
+    *Position += Up * yoffset * m_MovementSpeed * speedMul;
+    UpdateCameraVectorsFromEulerAngles();
+}
+
+void CameraComponent::Orbit(float xoffset, float yoffset)
+{
+
+    *Position += Right * xoffset * m_MovementSpeed * speedMul;
+    *Position += Up * yoffset * m_MovementSpeed * speedMul;
+    
+    Front -= Right * xoffset * m_MovementSpeed * speedMul;
+    Front -= Up * yoffset * m_MovementSpeed * speedMul;
+    UpdateCameraVectorsFromCameraDirection();
+}
+
+void CameraComponent::UnitaryVector(glm::vec3 &vec)
+{
+    float multiplier = 1/glm::distance(vec, glm::vec3(0.0f, 0.0f, 0.0f));
+
+    vec *= multiplier;
+}
+

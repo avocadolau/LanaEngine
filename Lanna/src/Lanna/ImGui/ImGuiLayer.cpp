@@ -191,6 +191,8 @@ namespace Lanna {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseDown[e.GetMouseButton()] = true;
+		if (e.GetMouseButton() == 2) Lanna::Application::Get().GetRenderer().GetActiveCamera().movement = MOVE;
+		if (e.GetMouseButton() == 0) Lanna::Application::Get().GetRenderer().GetActiveCamera().movement = ORBIT;
 
 		return false;
 	}
@@ -208,9 +210,8 @@ namespace Lanna {
 		ImGuiIO& io = ImGui::GetIO();
 		io.MousePos = ImVec2(e.GetX(), e.GetY());
 
-		if(Lanna::Input::IsKeyPressed(341))
+		if(Lanna::Input::IsKeyPressed(341))//left alt
 			Lanna::Application::Get().GetRenderer().GetActiveCamera().ProcessMouseMovement(e.GetX(), e.GetY(), true);
-
 
 		return false;
 	}

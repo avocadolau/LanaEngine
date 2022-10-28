@@ -20,14 +20,9 @@ enum class CameraType {
     PERSPECTIVE
 };
 enum Camera_Movement {
-    ZOOM_IN,
-    ZOOM_OUT,
+    MOVE,
     ORBIT,
-    FOCUS,
-    FREE_LOOK_UP,
-    FREE_LOOK_DOWN,
-    FREE_LOOK_RIGHT,
-    FREE_LOOK_LEFT
+    NONE
 };
 
 class CameraComponent : public Component
@@ -58,12 +53,17 @@ public:
 
     void ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch);
     void ProcessMouseScroll(float yOffset);
-    void ProcessKeyboard(Camera_Movement direction, float deltaTime);
 
     void LookAt(glm::vec3 spot);
 
 private:
-    void UpdateCameraVectors();
+    void UpdateCameraVectorsFromEulerAngles();
+    void UpdateCameraVectorsFromCameraDirection();
+
+    void Move(float xoffset, float yoffset);
+    void Orbit(float xoffset, float yoffset);
+
+    void UnitaryVector(glm::vec3 &vec);
 private:
     CameraType m_type;
 
@@ -80,16 +80,21 @@ private:
     float m_Pitch;
     // camera options
     float m_MovementSpeed;
-    float m_MouseSensitivity;
-    float m_Zoom;
+    float m_MouseWheelSensitivity;
+    float m_Zoom; //distance from objective
     float m_Fov = 45.0f;
     float m_zNear = 0.1f;
     float m_zFar = 100.0f;
     float m_AspectRatio;
 
+    float speedMul = 1.0f;
 
     // matrices
     glm::mat4 m_View;
     glm::mat4 m_Projection;
+
+    // movement
+public:
+    Camera_Movement movement;
 
 };
