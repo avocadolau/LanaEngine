@@ -5,10 +5,10 @@ class Component
 {
 public:
 	enum Type {
-		TRANSFORM = 0,
-		MESH=1,
-		MATERIAL=2,
-		CAMERA=3,
+		TRANSFORM,
+		MESH,
+		MATERIAL,
+		CAMERA,
 
 
 		TOTAL
@@ -24,4 +24,5 @@ public:
 
 	virtual void Use() = 0;
 	virtual void ImGuiDraw() = 0;
+	virtual void Render() {};
 };

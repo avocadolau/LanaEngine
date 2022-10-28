@@ -21,7 +21,6 @@ public:
 	void SetActiveEntity(unsigned int index);
 	GameObject* GetActiveEntitiy() { return activeEntitiy; }
 	std::vector<GameObject*>* GetEntityList() { return &m_Entities; }
-
 private:
 	std::vector<GameObject*> m_Entities;
 	GameObject* activeEntitiy=nullptr;

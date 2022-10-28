@@ -3,9 +3,9 @@
 
 #include <Lanna/Core.h>
 #include <Lanna/Renderer/Shader.h>
-#include <Lanna/Renderer/Camera.h>
-#include <Lanna/Renderer/Mesh.h>
-
+#include "GameObject/Components/MeshComponent.h"
+#include "GameObject/Components/CameraComponent.h"
+#include "Lanna/Renderer/Framebuffer.h"
 
 #include <glm.hpp>
 
@@ -18,7 +18,7 @@ namespace Lanna
 		unsigned int fragmentShader;
 		unsigned int vertexShader;
 
-		Camera* m_ActiveCamera;
+		CameraComponent* m_ActiveCamera;
 		glm::mat4 m_PersProj;
 		glm::mat4 m_View;
 		glm::vec2  resolution;
@@ -27,7 +27,9 @@ namespace Lanna
 
 		Shader* m_ColorShader;
 
-		Mesh* m_exampleMesh;
+	public:
+
+		Framebuffer* m_Fbo;
 
 	public:
 		Render3D();
@@ -40,9 +42,11 @@ namespace Lanna
 
 		glm::mat4 GetPersProjection() { return m_ActiveCamera->getProjection(); }
 		glm::mat4 GetView() { return m_ActiveCamera->getView(); }
-		Camera& GetActiveCamera() { return *m_ActiveCamera; }
+		CameraComponent& GetActiveCamera() { return *m_ActiveCamera; }
 
-		void RenderMesh(Mesh& mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color);
+		void RenderMesh(MeshComponent& mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color);
+	private:
+
 	};
 
 

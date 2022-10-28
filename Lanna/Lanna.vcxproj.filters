@@ -76,6 +76,9 @@
     <ClInclude Include="src\Lanna\GameObject\GameObject.h">
       <Filter>Lanna\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\ImGui\EditorLayer.h">
+      <Filter>Lanna\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h">
       <Filter>Lanna\ImGui</Filter>
     </ClInclude>
@@ -155,6 +158,7 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="src\Utilities\MemoryAllocation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">

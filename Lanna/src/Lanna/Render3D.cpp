@@ -3,15 +3,19 @@
 
 #include <Lanna/Application.h>
 #include <Lanna/Window.h>
-#include <Lanna/Renderer/Mesh.h>
 
 #include <glew.h>
 #include <glm.hpp>
 
-
 #include <imgui.h>
 #include "Lanna/Input.h"
 #include "Lanna/KeyCodes.h"
+#include "Renderer/Framebuffer.h"
+
+#include "Lanna/EntityManager.h"
+#include "GameObject/GameObject.h"
+#include "GameObject/Components/MeshComponent.h"
+#include "GameObject/Components/CameraComponent.h"
 
 namespace Lanna {
 
@@ -29,12 +33,16 @@ namespace Lanna {
 
 
 		m_ColorShader = new Shader("resources/shaders/model_color");
-		m_ActiveCamera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f),-90,0);
-		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
 
-		m_exampleMesh = new Mesh();
-		m_exampleMesh->LoadFromFile("");
+		GameObject* camera=Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject("camera");
 		
+		m_ActiveCamera = (CameraComponent*)camera->AddComponent(Component::Type::CAMERA);
+		m_ActiveCamera->setPosition({ 0.0f,4.0f,0.0f });
+		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
+		m_ActiveCamera->LookAt({ 0.0f, 0.0f, 0.0f });
+
+		m_Fbo = new Framebuffer();
+		m_Fbo->Init(800, 600);
 	}
 
 
@@ -56,22 +64,21 @@ namespace Lanna {
 				
 		}
 
-
-		m_exampleMesh->Render();
 	}
 
 	void Render3D::Close()
 	{
 
 	}
-	void Render3D::RenderMesh(Mesh& mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color)
+	void Render3D::RenderMesh(MeshComponent& mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color)
 	{
 		glViewport(0, 0, resolution.x, resolution.y);
 
 
 		// bind buffer
-		glBindFramebuffer(GL_FRAMEBUFFER, mesh.GetBuffer());
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		m_Fbo->Bind();
+		/*glBindFramebuffer(GL_FRAMEBUFFER, m_Fbo->fbo);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);*/
 
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(position.x, position.y, position.z));
@@ -88,8 +95,8 @@ namespace Lanna {
 
 
 		// unbind buffer
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
+		/*glBindFramebuffer(GL_FRAMEBUFFER, 0);*/
+		m_Fbo->Unbind();
 
 	}
 

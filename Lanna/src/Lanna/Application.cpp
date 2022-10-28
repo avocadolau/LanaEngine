@@ -12,6 +12,8 @@
 #include <Windows.h>
 #include <shellapi.h>
 
+#include "Utilities/MemoryAllocation.h"
+
 #define GL_GPU_MEM_INFO_TOTAL_AVAILABLE_MEM_NVX 0x9048
 #define GL_GPU_MEM_INFO_CURRENT_AVAILABLE_MEM_NVX 0x9049
 #define GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX 0x904B

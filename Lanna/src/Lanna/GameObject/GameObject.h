@@ -7,6 +7,7 @@
 #include "Components/TransformComponent.h"
 #include "Components/MeshComponent.h"
 #include "Components/MaterialComponent.h"
+#include "Components/CameraComponent.h"
 
 class GameObject
 {
@@ -19,7 +20,7 @@ public:
 	void Update();
 	void Render();
 
-	void AddComponent(Component::Type type);
+	Component* AddComponent(Component::Type type);
 
 	void SetParent(GameObject* parent);
 	void SetChild(GameObject* child);
@@ -28,11 +29,17 @@ public:
 
 public:
 	bool active = true;
+	int mainOrder = -1;
+	int secOrder = -1;
 
 	std::list<Component*> m_Components;
 	std::list<GameObject*> m_Children;
+	TransformComponent* m_Transform = nullptr;
+	MaterialComponent* m_Material = nullptr;
+	MeshComponent* m_Mesh = nullptr;
+	CameraComponent* m_Camera = nullptr;
 	GameObject* m_Parent = nullptr;
-	const char* m_Name;
+	std::string m_Name;
 	int m_Hierarchy;
 };
 

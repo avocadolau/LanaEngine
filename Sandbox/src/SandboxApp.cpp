@@ -10,8 +10,15 @@ public:
 
 	void OnUpdate() override
 	{
-		if (Lanna::Input::IsKeyPressed(LN_KEY_TAB))
-			LN_TRACE("Tab key is pressed (poll)!");
+		/*if (Lanna::Input::IsKeyPressed(LN_KEY_TAB))
+			LN_TRACE("Tab key is pressed (poll)!");*/
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Settings");
+		//ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		ImGui::End();
 	}
 
 	void OnEvent(Lanna::Event& event) override
