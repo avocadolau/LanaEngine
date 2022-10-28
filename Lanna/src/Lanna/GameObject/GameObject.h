@@ -41,5 +41,6 @@ public:
 	GameObject* m_Parent = nullptr;
 	std::string m_Name;
 	int m_Hierarchy;
+	bool loockComonents = false;
 };
 

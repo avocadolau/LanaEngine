@@ -35,6 +35,10 @@ void GameObject::Update() {
 	{
 		c->Use();
 	}
+	if (m_Camera && m_Transform)
+	{
+		m_Camera->setPosition(m_Transform->m_Position);
+	}
 
 }
 void GameObject::Render() {
@@ -89,8 +93,10 @@ Component* GameObject::AddComponent(Component::Type type)
 		if (m_Camera == nullptr)
 		{
 			if (m_Transform == nullptr) AddComponent(Component::Type::TRANSFORM);
-			m_Camera = new CameraComponent(glm::vec3(0.0f,0.0f,0.0f), glm::vec3(0.0f, 1.0f, 0.0f), YAW, PITCH);
+			//m_Camera = new CameraComponent(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), YAW, PITCH);
+			m_Camera = new CameraComponent(m_Transform);
 			m_Components.push_back(m_Camera);
+			loockComonents = true;
 			return m_Camera;
 		}
 		else

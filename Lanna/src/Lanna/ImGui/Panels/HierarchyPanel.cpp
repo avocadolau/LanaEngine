@@ -9,7 +9,7 @@
 
 HierarchyPanel::HierarchyPanel(): Panel("SceneObjects")
 {
-
+    active = true;
 }
 
 HierarchyPanel::~HierarchyPanel()

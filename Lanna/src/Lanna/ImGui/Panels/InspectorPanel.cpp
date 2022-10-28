@@ -14,7 +14,7 @@
 
 InspectorPanel::InspectorPanel(): Panel("Inspector")
 {
-
+	active = true;
 }
 
 InspectorPanel::~InspectorPanel()
@@ -80,33 +80,38 @@ void InspectorPanel::Draw()
 		for (Component* comps : activeObject->m_Components)
 			comps->ImGuiDraw();
 		
-		ImGui::Separator();
-		if (ImGui::Button("Add Component"))
-			addComp = !addComp;
 
-		if (addComp)
+		if (activeObject->loockComonents == false)
 		{
-			if (ImGui::Button("Transform"))
+			ImGui::Separator();
+			if (ImGui::Button("Add Component"))
+				addComp = !addComp;
+
+			if (addComp)
 			{
-				activeObject->AddComponent(Component::Type::TRANSFORM);
-				addComp = false;
-			}
-			if (ImGui::Button("Mesh"))
-			{
-				activeObject->AddComponent(Component::Type::MESH);
-				addComp = false;
-			}
-			if (ImGui::Button("Material"))
-			{
-				activeObject->AddComponent(Component::Type::MATERIAL);
-				addComp = false;
-			}
-			if (ImGui::Button("Camera"))
-			{
-				activeObject->AddComponent(Component::Type::CAMERA);
-				addComp = false;
+				if (ImGui::Button("Transform"))
+				{
+					activeObject->AddComponent(Component::Type::TRANSFORM);
+					addComp = false;
+				}
+				if (ImGui::Button("Mesh"))
+				{
+					activeObject->AddComponent(Component::Type::MESH);
+					addComp = false;
+				}
+				if (ImGui::Button("Material"))
+				{
+					activeObject->AddComponent(Component::Type::MATERIAL);
+					addComp = false;
+				}
+				/*if (ImGui::Button("Camera"))
+				{
+					activeObject->AddComponent(Component::Type::CAMERA);
+					addComp = false;
+				}*/
 			}
 		}
+		
 	}
 
 	ImGui::End();

@@ -1,8 +1,6 @@
 #pragma once
 
 #include <list>
-
-
 #include "GameObject/GameObject.h"
 class EntityManager
 {
@@ -24,6 +22,4 @@ public:
 private:
 	std::vector<GameObject*> m_Entities;
 	GameObject* activeEntitiy=nullptr;
-
 };
-

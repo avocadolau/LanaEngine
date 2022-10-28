@@ -7,7 +7,7 @@
 
 ScenePanel::ScenePanel(): Panel("Scene")
 {
-	active = true;
+	active = false;
 	m_Shadings.push_back(new ShadingView("Default", true));
 	m_Shadings.push_back(new ShadingView("Wireframe", true));
 	m_Shadings.push_back(new ShadingView("Stil WIP T_T", true));

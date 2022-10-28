@@ -31,6 +31,9 @@
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{010A8043-6D74-34BA-B6B2-E55F225C120F}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Lanna.h" />
@@ -130,10 +133,7 @@
     <ClInclude Include="src\Lanna\Render3D.h">
       <Filter>Lanna</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Camera.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Mesh.h">
+    <ClInclude Include="src\Lanna\Renderer\Framebuffer.h">
       <Filter>Lanna\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Renderer\Shader.h">
@@ -157,8 +157,10 @@
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="src\Utilities\MemoryAllocation.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Utilities\MemoryAllocation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -224,10 +226,7 @@
     <ClCompile Include="src\Lanna\Render3D.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Camera.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Mesh.cpp">
+    <ClCompile Include="src\Lanna\Renderer\Framebuffer.cpp">
       <Filter>Lanna\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Renderer\Shader.cpp">
