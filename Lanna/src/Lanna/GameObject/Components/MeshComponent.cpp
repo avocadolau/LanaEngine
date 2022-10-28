@@ -1,4 +1,6 @@
 #include "lnpch.h"
+#define ASSIMP_NOT_WORKING
+
 #include "MeshComponent.h"
 #include "Lanna/GameObject/Component.h"
 
@@ -9,11 +11,17 @@
 #include <glew.h>
 #include <glm.hpp>
 
+#ifndef ASSIMP_NOT_WORKING
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#endif // !ASSIMP_NOT_WORKING
+
+
 
 #include <imgui.h>
+
+
 MeshComponent::MeshComponent() : Component(Component::Type::MESH)
 {
 	LoadPrimitive(Primitives::CUBE);
@@ -79,7 +87,7 @@ void MeshComponent::LoadFromFile(const char* file)
 	vao_data.clear();
 	ibo_data.clear();
 
-
+#ifdef ASSIMP_NOT_WORKING
 	/*vao_data.push_back(0.3f);
 	vao_data.push_back(0.21f);
 	vao_data.push_back(0.0f);
@@ -94,12 +102,11 @@ void MeshComponent::LoadFromFile(const char* file)
 	ibo_data.push_back(1);
 	ibo_data.push_back(2);*/
 
-	/*float vao_data[9] = { 0.3f, 0.21f, 0.f,
+	float vao_data[9] = { 0.3f, 0.21f, 0.f,
 							0.34f, 0.215f, 0.f,
 							0.32f,0.25f, 0.f };
-	int ibo_data[3] = { 0,1,2 };*/
-
-
+	int ibo_data[3] = { 0,1,2 };
+#else
 
 	const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
@@ -112,6 +119,13 @@ void MeshComponent::LoadFromFile(const char* file)
 	else {
 		LN_CORE_ERROR("Error loading mesh {0}", file);
 	}
+#endif // ASSIMP_NOT_WORKING
+
+	
+
+
+
+	
 
 	GenerateBuffers();
 }
