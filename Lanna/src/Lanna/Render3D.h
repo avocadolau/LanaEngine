@@ -6,6 +6,8 @@
 #include "GameObject/Components/MeshComponent.h"
 #include "GameObject/Components/CameraComponent.h"
 #include "Lanna/Renderer/Framebuffer.h"
+#include "Lanna/Renderer/Texture.h"
+#include "Lanna/Renderer/Shader.h"
 
 #include <glm.hpp>
 
