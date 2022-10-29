@@ -9,6 +9,8 @@
 #include "Lanna/Application.h"
 #include <GLFW/glfw3.h>
 
+#include "Utilities/MemoryAllocation.h"
+
 ConfigurationPanel::ConfigurationPanel():Panel("Configuration")
 {
 }
@@ -22,6 +24,8 @@ void ConfigurationPanel::Draw()
 	char title[25];
 	msLog.push_back(1000.0f / ImGui::GetIO().Framerate);
 	fpsLog.push_back(ImGui::GetIO().Framerate);
+	allocLog.push_back(Lanna::MemoryAllocation::allocation_count);
+	byteLog.push_back(Lanna::MemoryAllocation::bytes_allocated);
 	
 	if (msLog.size() > MAX)
 		msLog.erase(msLog.begin());
@@ -81,6 +85,12 @@ void ConfigurationPanel::Draw()
 			ImGui::TableNextColumn();
 			sprintf_s(title, 25, "Frametime %.1f", msLog[msLog.size() - 1]);
 			ImGui::PlotHistogram("##frametime", &msLog[0], msLog.size(), 0, title, 0.0f, 100.0f, ImVec2(200, 100));
+
+			sprintf_s(title, 25, "Current Allocations %.0f", allocLog[allocLog.size() - 1]);
+			ImGui::PlotHistogram("##memory", &allocLog[0], (int)allocLog.size(), 0, title, 0.0f, 100.0f, ImVec2(200, 100));
+
+			sprintf_s(title, 25, "Bytes allocated %.0f", byteLog[byteLog.size() - 1]);
+			ImGui::PlotHistogram("##memory", &byteLog[0], (int)byteLog.size(), 0, title, 0.0f, 100.0f, ImVec2(200, 100));
 
 			ImGui::EndTable();
 		}

@@ -18,6 +18,8 @@ public:
 private:
 	std::vector<float> fpsLog;
 	std::vector<float> msLog;
+	std::vector<float> allocLog;
+	std::vector<float> byteLog;
 
 	bool fullscreen = false;
 	bool resizable = false;
