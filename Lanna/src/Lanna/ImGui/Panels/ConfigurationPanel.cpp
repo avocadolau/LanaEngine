@@ -9,7 +9,7 @@
 #include "Lanna/Application.h"
 #include <GLFW/glfw3.h>
 
-#include "Utilities/MemoryAllocation.h"
+#include "Lanna/Utilities/MemoryAllocation.h"
 
 ConfigurationPanel::ConfigurationPanel():Panel("Configuration")
 {
@@ -76,7 +76,7 @@ void ConfigurationPanel::Draw()
 	if (ImGui::CollapsingHeader("Information"))
 	{
 		
-		if (ImGui::BeginTable("Frame info", 2))
+		if (ImGui::BeginTable("Frame info", 1))
 		{
 			ImGui::TableNextColumn();
 			sprintf_s(title, 25, "Framerate %.1f", fpsLog[fpsLog.size() - 1]);

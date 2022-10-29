@@ -161,6 +161,8 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
+    <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -245,5 +247,10 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="src\Lanna\Renderer\Texture.cpp">
+      <Filter>Lanna\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />
+    <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp" />
   </ItemGroup>
 </Project>

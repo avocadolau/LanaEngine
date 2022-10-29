@@ -187,6 +187,8 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\Render3D.h" />
     <ClInclude Include="src\Lanna\Renderer\Framebuffer.h" />
     <ClInclude Include="src\Lanna\Renderer\Shader.h" />
+    <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
+    <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
     <ClInclude Include="src\Lanna\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
@@ -220,6 +222,9 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\Render3D.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Lanna\Renderer\Texture.cpp" />
+    <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />
+    <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp" />
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
