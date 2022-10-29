@@ -34,7 +34,6 @@ MeshComponent::~MeshComponent()
 MeshComponent::MeshComponent(const char* file) : Component(Component::Type::MESH)
 {
 	LoadFromFile(file);
-	GenerateBuffers();
 }
 
 void MeshComponent::Use()
@@ -121,6 +120,7 @@ void MeshComponent::LoadFromFile(const char* file)
 		LN_CORE_INFO("Error loading mesh {0} with error {1}", file, aiGetErrorString());
 	}
 	m_ModelPath = file;
+	GenerateBuffers();
 }
 
 void MeshComponent::LoadPrimitive(Primitives type)

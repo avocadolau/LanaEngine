@@ -1,6 +1,9 @@
 #include "lnpch.h"
 #include "EntityManager.h"
 
+#include "GameObject/GameObject.h"
+#include "GameObject/Components/TransformComponent.h"
+#include "GameObject/Components/MeshComponent.h"
 #include <vector>
 
 EntityManager::EntityManager()
@@ -21,13 +24,12 @@ void EntityManager::Init()
 
 	AddEmptyGameObject("uwu");
 	GameObject* house = AddEmptyGameObject("House");
+	house->AddComponent(Component::Type::MESH);
 	MeshComponent* houseMesh = new MeshComponent("resources/models/BakerHouse.fbx");
-	TransformComponent* houseTransform = new TransformComponent(glm::vec3{ 0.0, 0.0, -10.0f }, glm::vec3{ 0.0f }, glm::vec3{ 1.0f });
+	house->m_Transform->m_Position = glm::vec3( 0.0,0.0,1.0f );
 	house->m_Mesh = houseMesh;
 
-	house->m_Transform = houseTransform;
 	house->m_Components.push_back(houseMesh);
-	house->m_Components.push_back(houseTransform);
 
 }
 
