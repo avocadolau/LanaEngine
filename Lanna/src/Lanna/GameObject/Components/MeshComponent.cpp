@@ -1,5 +1,5 @@
 #include "lnpch.h"
-#define ASSIMP_NOT_WORKING
+
 
 #include "MeshComponent.h"
 #include "Lanna/GameObject/Component.h"
@@ -29,6 +29,12 @@ MeshComponent::MeshComponent() : Component(Component::Type::MESH)
 MeshComponent::~MeshComponent()
 {
 
+}
+
+MeshComponent::MeshComponent(const char* file) : Component(Component::Type::MESH)
+{
+	LoadFromFile(file);
+	GenerateBuffers();
 }
 
 void MeshComponent::Use()
@@ -78,45 +84,43 @@ void MeshComponent::ImGuiDraw()
 
 void MeshComponent::Render()
 {
-	glBindVertexArray(vao);
-	glDrawElements(GL_TRIANGLES, ibo_data.size(), GL_UNSIGNED_INT, 0);
+	if (is_root) {
+		size_t meshCount = models.size();
+
+		for (size_t i = 0; i < meshCount; i++) {
+			models[i]->Render();
+		}
+	}
+	else {
+		glBindVertexArray(vao);
+		glDrawElements(GL_TRIANGLES, (GLsizei)ibo_data.size(), GL_UNSIGNED_INT, 0);
+	}
 }
 
 void MeshComponent::LoadFromFile(const char* file)
 {
-	vao_data.clear();
-	ibo_data.clear();
+	const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_FlipUVs);
 
-#ifdef ASSIMP_NOT_WORKING
-	/*vao_data.push_back(0.3f);
-	vao_data.push_back(0.21f);
-	vao_data.push_back(0.0f);
-	vao_data.push_back(0.34f);
-	vao_data.push_back(0.21f);
-	vao_data.push_back(0.0f);
-	vao_data.push_back(0.32f);
-	vao_data.push_back(0.25f);
-	vao_data.push_back(0.0f);
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
+		LN_ERROR("Couldn't load mesh file: {0}", file);
+	}
+	LN_CORE_INFO("Loading mesh file at: {0} ...", file);
+	is_root = true;
 
-	ibo_data.push_back(0);
-	ibo_data.push_back(1);
-	ibo_data.push_back(2);*/
-#else
-
-	const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
+		for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
+			MeshComponent* model = loadmesh(scene->mMeshes[i]);
+
+			models.push_back(model);
+		}
 
 		aiReleaseImport(scene);
-
-		GenerateBuffers();
 	}
 	else {
-		LN_CORE_ERROR("Error loading mesh {0}", file);
+		LN_CORE_INFO("Error loading mesh {0} with error {1}", file, aiGetErrorString());
 	}
-#endif // ASSIMP_NOT_WORKING
-
-	GenerateBuffers();
+	m_ModelPath = file;
 }
 
 void MeshComponent::LoadPrimitive(Primitives type)
@@ -193,6 +197,58 @@ void MeshComponent::LoadPrimitive(Primitives type)
 	}
 	GenerateBuffers();
 
+}
+
+MeshComponent* MeshComponent::loadmesh(const aiMesh* mesh)
+{
+	MeshComponent* model = new MeshComponent();
+
+	for (unsigned int j = 0; j < mesh->mNumVertices; j++) {
+		// Vertices
+		model->vao_data.push_back(mesh->mVertices[j].x);
+		model->vao_data.push_back(mesh->mVertices[j].y);
+		model->vao_data.push_back(mesh->mVertices[j].z);
+		// Normals
+		model->vao_data.push_back(mesh->mNormals[j].x);
+		model->vao_data.push_back(mesh->mNormals[j].y);
+		model->vao_data.push_back(mesh->mNormals[j].z);
+		// Texture coordinates
+		if (mesh->mTextureCoords[0])
+		{
+			model->vao_data.push_back(mesh->mTextureCoords[0][j].x);
+			model->vao_data.push_back(mesh->mTextureCoords[0][j].y);
+		}
+		else {
+			model->vao_data.push_back(0.0f);
+			model->vao_data.push_back(0.0f);
+		}
+	}
+	if (model->vao_data.empty())
+	{
+		LN_CORE_INFO("Error while loading mesh vertex buffer");
+	}
+	else
+	{
+		LN_CORE_INFO("Vertex buffer generated correctly");
+	}
+	// Indices
+	for (unsigned int j = 0; j < mesh->mNumFaces; j++) {
+		aiFace& face = mesh->mFaces[j];
+		for (unsigned int k = 0; k < face.mNumIndices; k++) {
+			model->ibo_data.push_back(face.mIndices[k]);
+		}
+	}
+	if (model->ibo_data.empty())
+	{
+		LN_CORE_INFO("Error while loading mesh index buffer");
+	}
+	else
+	{
+		LN_CORE_INFO("Index buffer generated correctly");
+	}
+	model->GenerateBuffers();
+
+	return model;
 }
 
 void MeshComponent::GenerateBuffers()

@@ -125,7 +125,7 @@ struct ScopeData
 
 	void ResetHeader();
 	void Send();
-	void Clear();
+	void Update();
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #if defined(OPTICK_MSVC)
@@ -243,7 +243,7 @@ struct EventStorage
 		array<array<EventBuffer, GPU_QUEUE_COUNT>, MAX_GPU_NODES> gpuBuffer;
 		GPUContext context;
 
-		void Clear(bool preserveMemory);
+		void Update(bool preserveMemory);
 		
 		EventData* Start(const EventDescription& desc);
 		void Stop(EventData& data);
@@ -263,12 +263,12 @@ struct EventStorage
 	}
 
 	// Free all temporary memory
-	void Clear(bool preserveContent)
+	void Update(bool preserveContent)
 	{
 		currentMode = Mode::OFF;
-		eventBuffer.Clear(preserveContent);
-		fiberSyncBuffer.Clear(preserveContent);
-		gpuStorage.Clear(preserveContent);
+		eventBuffer.Update(preserveContent);
+		fiberSyncBuffer.Update(preserveContent);
+		gpuStorage.Update(preserveContent);
 		ClearTags(preserveContent);
 
 		while (pushPopEventStackIndex)
@@ -280,17 +280,17 @@ struct EventStorage
 
 	void ClearTags(bool preserveContent)
 	{
-		tagFloatBuffer.Clear(preserveContent);
-		tagS32Buffer.Clear(preserveContent);
-		tagU32Buffer.Clear(preserveContent);
-		tagU64Buffer.Clear(preserveContent);
-		tagPointBuffer.Clear(preserveContent);
-		tagStringBuffer.Clear(preserveContent);
+		tagFloatBuffer.Update(preserveContent);
+		tagS32Buffer.Update(preserveContent);
+		tagU32Buffer.Update(preserveContent);
+		tagU64Buffer.Update(preserveContent);
+		tagPointBuffer.Update(preserveContent);
+		tagStringBuffer.Update(preserveContent);
 	}
 
 	void Reset()
 	{
-		Clear(true);
+		Update(true);
 	}
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -367,7 +367,7 @@ public:
 	SysCallPool syscallPool;
 
 	SysCallData& Add();
-	void Clear();
+	void Update();
 
 	bool Serialize(OutputDataStream& stream);
 };
@@ -389,7 +389,7 @@ class CallstackCollector
 	CallstacksPool callstacksPool;
 public:
 	void Add(const CallstackDesc& desc);
-	void Clear();
+	void Update();
 
 	bool SerializeModules(OutputDataStream& stream);
 	bool SerializeSymbols(OutputDataStream& stream);
@@ -417,7 +417,7 @@ class SwitchContextCollector
 	SwitchContextPool switchContextPool;
 public:
 	void Add(const SwitchContextDesc& desc);
-	void Clear();
+	void Update();
 	bool Serialize(OutputDataStream& stream);
 };
 //////////////////////////////////////////////////////////////////////////
@@ -451,9 +451,9 @@ struct FrameStorage
 	FrameBuffer m_Frames;
 	std::atomic<uint32_t> m_FrameNumber;
 
-	void Clear(bool preserveMemory = true)
+	void Update(bool preserveMemory = true)
 	{
-		m_Frames.Clear(preserveMemory);
+		m_Frames.Update(preserveMemory);
 	}
 
 	FrameStorage() : m_Description(nullptr) {}

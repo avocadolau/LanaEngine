@@ -20,6 +20,15 @@ void EntityManager::Init()
 	go->SetChild(new GameObject("uwwwwuu"));
 
 	AddEmptyGameObject("uwu");
+	GameObject* house = AddEmptyGameObject("House");
+	MeshComponent* houseMesh = new MeshComponent("resources/models/BakerHouse.fbx");
+	TransformComponent* houseTransform = new TransformComponent(glm::vec3{ 0.0, 0.0, -10.0f }, glm::vec3{ 0.0f }, glm::vec3{ 1.0f });
+	house->m_Mesh = houseMesh;
+
+	house->m_Transform = houseTransform;
+	house->m_Components.push_back(houseMesh);
+	house->m_Components.push_back(houseTransform);
+
 }
 
 void EntityManager::Update()

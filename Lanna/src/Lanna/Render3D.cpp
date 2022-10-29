@@ -32,6 +32,8 @@ namespace Lanna {
 		resolution = { window.GetHeight(), window.GetHeight() };
 
 
+		m_Framebuffer.Init(resolution.x, resolution.y);
+
 		m_ColorShader = new Shader("resources/shaders/model_color");
 
 		GameObject* camera=Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject("camera");
@@ -41,13 +43,11 @@ namespace Lanna {
 		m_ActiveCamera->setPosition({ 0.0f,1.0f,5.0f });
 		m_ActiveCamera->LookAt({ 0.0f, 0.0f, 0.0f });
 
-		m_Framebuffer = new Framebuffer();
-		m_Framebuffer->Init(1920, 1080);
 	}
 
-	void Render3D::Clear()
+	void Render3D::Update()
 	{
-		m_Framebuffer->Clear();
+		m_Framebuffer.Clear();
 	}
 
 
@@ -85,7 +85,7 @@ namespace Lanna {
 
 
 		// bind buffer
-		m_Framebuffer->Bind(false);
+		m_Framebuffer.Bind(true);
 	
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -105,7 +105,7 @@ namespace Lanna {
 		mesh.Render();
 
 		// unbind buffer
-		m_Framebuffer->Unbind();
+		m_Framebuffer.Unbind();
 
 	}
 

@@ -322,7 +322,7 @@ namespace Optick
 			return (chunk == nullptr) || (chunk == root && index == 0);
 		}
 
-		OPTICK_INLINE void Clear(bool preserveMemory = true)
+		OPTICK_INLINE void Update(bool preserveMemory = true)
 		{
 			if (!preserveMemory)
 			{
@@ -459,9 +459,9 @@ namespace Optick
 			return static_cast<T*>(Add(&val, sizeof(T), allowOverlap));
 		}
 
-		void Clear(bool preserveMemory)
+		void Update(bool preserveMemory)
 		{
-			MemoryPool<uint8, CHUNK_SIZE>::Clear(preserveMemory);
+			MemoryPool<uint8, CHUNK_SIZE>::Update(preserveMemory);
 		}
 	};
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

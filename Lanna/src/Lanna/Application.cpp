@@ -42,9 +42,6 @@ namespace Lanna {
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
-
-		unsigned int id;
-		glGenVertexArrays(1, &id);
 	}
 
 	Application::~Application()
@@ -113,27 +110,13 @@ namespace Lanna {
 		while (m_Running)
 		{
 
-			OPTICK_FRAME("Application Loop");
-			OPTICK_EVENT();
-
-			/*glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-			glClearDepth(1.0f);*/
-
-			//m_Render3D->Clear();
-			glClearColor(0.1f, 0.1f, 0.1f, 1.f);
+			OPTICK_FRAME("Application Loop")
+			OPTICK_EVENT()
+			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
-
-			m_Render3D->Draw();
-			//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			///*glEnable(GL_DEPTH_TEST);*/
-			///*glEnable(GL_CULL_FACE);*/
-			///*glEnable(GL_LIGHTING);*/
-			//glEnable(GL_COLOR_MATERIAL);
-			//glEnable(GL_TEXTURE_2D);
-			//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			//m_Render3D->Update();
 
 
-			
 			
 			m_EntityManager->Update();
 			m_EntityManager->Render();
@@ -145,11 +128,7 @@ namespace Lanna {
 			}
 			m_ImGuiLayer->End();
 
-			//auto [x, y] = Input::GetMousePosition();
-			//LN_CORE_TRACE("{0}, {1}", x, y);
-
 			m_Window->OnUpdate();
-			
 		}
 	}
 

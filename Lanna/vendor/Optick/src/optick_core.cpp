@@ -217,7 +217,7 @@ void SortMemoryPool(MemoryPool<T, SIZE>& memoryPool)
 
 	std::sort(memoryArray.begin(), memoryArray.end());
 
-	memoryPool.Clear(true);
+	memoryPool.Update(true);
 
 	for (const T& item : memoryArray)
 		memoryPool.Add(item);
@@ -463,8 +463,8 @@ const EventDescriptionList& EventDescriptionBoard::GetEvents() const
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void EventDescriptionBoard::Shutdown()
 {
-	boardDescriptions.Clear(false);
-	sharedNames.Clear(false);
+	boardDescriptions.Update(false);
+	sharedNames.Update(false);
 	sharedDescriptions.clear();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -548,9 +548,9 @@ SysCallData& SysCallCollector::Add()
 	return syscallPool.Add();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void SysCallCollector::Clear()
+void SysCallCollector::Update()
 {
-	syscallPool.Clear(false);
+	syscallPool.Update(false);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool SysCallCollector::Serialize(OutputDataStream& stream)
@@ -559,7 +559,7 @@ bool SysCallCollector::Serialize(OutputDataStream& stream)
 
 	if (!syscallPool.IsEmpty())
 	{
-		syscallPool.Clear(false);
+		syscallPool.Update(false);
 		return true;
 	}
 
@@ -598,9 +598,9 @@ void CallstackCollector::Add(const CallstackDesc& desc)
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CallstackCollector::Clear()
+void CallstackCollector::Update()
 {
-	callstacksPool.Clear(false);
+	callstacksPool.Update(false);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool CallstackCollector::SerializeModules(OutputDataStream& stream)
@@ -695,7 +695,7 @@ bool CallstackCollector::SerializeCallstacks(OutputDataStream& stream)
 
 	if (!callstacksPool.IsEmpty())
 	{
-		callstacksPool.Clear(false);
+		callstacksPool.Update(false);
 		return true;
 	}
 
@@ -719,9 +719,9 @@ void SwitchContextCollector::Add(const SwitchContextDesc& desc)
 	switchContextPool.Add() = desc;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void SwitchContextCollector::Clear()
+void SwitchContextCollector::Update()
 {
-	switchContextPool.Clear(false);
+	switchContextPool.Update(false);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool SwitchContextCollector::Serialize(OutputDataStream& stream)
@@ -730,7 +730,7 @@ bool SwitchContextCollector::Serialize(OutputDataStream& stream)
 
 	if (!switchContextPool.IsEmpty())
 	{
-		switchContextPool.Clear(false);
+		switchContextPool.Update(false);
 		return true;
 	}
 
@@ -920,7 +920,7 @@ void Core::DumpEvents(EventStorage& entry, const EventTime& timeSlice, ScopeData
 
 		scope.Send();
 
-		entry.eventBuffer.Clear(false);
+		entry.eventBuffer.Update(false);
 	}
 }
 
@@ -1073,7 +1073,7 @@ void Core::DumpFrames(uint32 mode)
 	}
 
 	for (int i = 0; i < FrameType::COUNT; ++i)
-		frames[i].Clear(false);
+		frames[i].Update(false);
 
 	CleanupThreadsAndFibers();
 
@@ -1960,7 +1960,7 @@ void ThreadEntry::Activate(Mode::Type mode)
 		return;
 
 	if (mode != Mode::OFF)
-		storage.Clear(true);
+		storage.Update(true);
 
 	if (threadTLS != nullptr)
 	{
@@ -1986,7 +1986,7 @@ void ScopeData::Send()
 		}
 	}
 
-	Clear();
+	Update();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void ScopeData::ResetHeader()
@@ -1995,18 +1995,18 @@ void ScopeData::ResetHeader()
 	header.event.finish = INT64_MIN;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void ScopeData::Clear()
+void ScopeData::Update()
 {
 	ResetHeader();
 	events.clear();
 	categories.clear();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void EventStorage::GPUStorage::Clear(bool preserveMemory)
+void EventStorage::GPUStorage::Update(bool preserveMemory)
 {
 	for (size_t i = 0; i < gpuBuffer.size(); ++i)
 		for (int j = 0; j < GPU_QUEUE_COUNT; ++j)
-			gpuBuffer[i][j].Clear(preserveMemory);
+			gpuBuffer[i][j].Update(preserveMemory);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 EventData* EventStorage::GPUStorage::Start(const EventDescription &desc)

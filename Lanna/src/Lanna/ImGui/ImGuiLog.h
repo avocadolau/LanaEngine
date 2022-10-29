@@ -37,7 +37,7 @@ struct ImGuiLog
     ImGuiLog()
     {
         autoScroll = true;
-        Clear();
+        Update();
 
         LevelColors[LogLevel::TRACE] = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
         LevelColors[LogLevel::INFO] = ImVec4(0.0f, 1.0f, 0.0f, 1.0f);
@@ -46,7 +46,7 @@ struct ImGuiLog
         LevelColors[LogLevel::FATAL] = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
     }
 
-    void Clear()
+    void Update()
     {
         //Buf.clear();
         offset = 0;
@@ -88,7 +88,7 @@ struct ImGuiLog
         ImGui::Separator();
         ImGui::BeginChild("scrolling", ImVec2(0, 0), false, ImGuiWindowFlags_HorizontalScrollbar);
         if (clear)
-            Clear();
+            Update();
 
         for (auto l : logs)
         {

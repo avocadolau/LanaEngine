@@ -66,56 +66,54 @@ project "Lanna"
         "ImGui",
         "Lanna/vendor/Glew/lib/glew32.lib",
 		"opengl32.lib",
-        "Optick"
+        "Optick",
+        "Lanna/vendor/assimp/lib/x64/release/assimp-vc143-mt.lib"
 
     }
 
     filter "system:windows"
         cppdialect "C++17"
+        staticruntime "Off"
         systemversion "latest"
 
         defines
         {
             "LN_PLATFORM_WINDOWS",
             "LN_BUILD_DLL",
-            "GLFW_INCLUDE_NONE"
+            "GLFW_INCLUDE_NONE",
+            "_CRT_SECURE_NO_WARNINGS"
         }
 
         postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\""),
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox"),
             ("{COPY} %{cfg.buildtarget.relpath} ../Editor")
 		}
 
     debugdir "$(SolutionDir)/Editor"
 
     filter "configurations:Debug"
-        defines "LN_DEBUG"
+        defines
+		{ 
+			"LN_DEBUG",
+			"LN_ENABLE_ASSERTS"
+		}
         runtime "Debug"
         symbols "On"
-        links
-		{
-			"Lanna/vendor/assimp/lib/x64/debug/assimp-vc142-mtd.lib"
-		}
+
 
     filter "configurations:Release"
         defines "LN_RELEASE"
         runtime "Release"
         optimize "On"
-        links
-		{
-			"Lanna/vendor/assimp/lib/x64/release/assimp-vc142-mtd.lib"
-		}
+
        
 
     filter "configurations:Dist"
         defines "LN_DIST"
         runtime "Release"
         optimize "On"
-        links
-		{
-			"Lanna/vendor/assimp/lib/x64/release/assimp-vc142-mtd.lib"
-		}
+
 
 
 project "Sandbox"
