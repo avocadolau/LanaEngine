@@ -186,7 +186,10 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\MouseButtonCodes.h" />
     <ClInclude Include="src\Lanna\Render3D.h" />
     <ClInclude Include="src\Lanna\Renderer\Framebuffer.h" />
+    <ClInclude Include="src\Lanna\Renderer\Image.h" />
     <ClInclude Include="src\Lanna\Renderer\Shader.h" />
+    <ClInclude Include="src\Lanna\Renderer\Texture.h" />
+    <ClInclude Include="src\Lanna\Resources.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
     <ClInclude Include="src\Lanna\Window.h" />
@@ -221,6 +224,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\Log.cpp" />
     <ClCompile Include="src\Lanna\Render3D.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\Lanna\Renderer\Image.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Shader.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Texture.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />

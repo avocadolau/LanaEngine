@@ -163,6 +163,11 @@
     <ClInclude Include="src\lnpch.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
+    <ClInclude Include="src\Lanna\Renderer\Texture.h">
+      <Filter>Lanna\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources.h" />
+    <ClInclude Include="src\Lanna\Renderer\Image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -252,5 +257,6 @@
     </ClCompile>
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp" />
+    <ClCompile Include="src\Lanna\Renderer\Image.cpp" />
   </ItemGroup>
 </Project>
