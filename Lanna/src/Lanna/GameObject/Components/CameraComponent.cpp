@@ -10,6 +10,7 @@
 
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
+#include <gtx/rotate_vector.hpp>
 #include <vector>
 
 #include <gl/GL.h>
@@ -18,14 +19,22 @@
 
 #include "Lanna/Input.h"
 #include "Lanna/KeyCodes.h"
+#include "Lanna/EntityManager.h"
+#include "Lanna/Application.h"
 
 CameraComponent::CameraComponent(TransformComponent* t)
-    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), m_MovementSpeed(SPEED), m_MouseWheelSensitivity(SENSITIVITY), m_Zoom(ZOOM), Component(Component::Type::CAMERA)
+    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), Component(Component::Type::CAMERA)
 {
     Position = &t->m_Position;
     WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
     Rotation = &t->m_Rotation;
-    UpdateCameraVectorsFromEulerAngles();
+    lastPitch = Rotation->x;
+    lastYaw = Rotation->y;
+    m_WorldSpot = (glm::vec3(0.0f, 0.0f, -10.0f)-*Position);
+    m_MovementSpeed = 0.003f;
+    m_OrbitSpeed = 0.001f;
+    m_ZoomSpeed = 0.00001f;
+    UpdateCameraVectorsFromCameraSpot();
 }
 
 //CameraComponent::CameraComponent(glm::vec3 _position, glm::vec3 _up = glm::vec3(0.0f, 1.0f, 0.0f), float _yaw = YAW, float _pitch = PITCH)
@@ -55,11 +64,51 @@ CameraComponent::~CameraComponent()
 
 void CameraComponent::Use()
 {
-    
+    UpdateRotation();
+    if (Lanna::Input::IsKeyPressed(LN_KEY_F))
+    {
+        GameObject* active = Lanna::Application::Get().GetEntityManager()->GetActiveEntitiy();
+        LookAt(active->m_Transform->m_Position);
+    }
+
+    ImGuiIO& io = ImGui::GetIO();
+    if (io.MouseDown[1])
+    {
+        if (Lanna::Input::IsKeyPressed(LN_KEY_W))
+        {
+            glm::vec3 _up = UnitaryVector(Up);
+            *Position += _up * m_MovementSpeed * speedMul * io.Framerate;
+            m_WorldSpot += _up * m_MovementSpeed * speedMul*io.Framerate;
+            UpdateCameraVectorsFromCameraSpot();
+        }
+        if (Lanna::Input::IsKeyPressed(LN_KEY_S))
+        {
+            glm::vec3 _up = UnitaryVector(Up);
+            *Position -= _up * m_MovementSpeed * speedMul * io.Framerate;
+            m_WorldSpot -= _up * m_MovementSpeed * speedMul * io.Framerate;
+            UpdateCameraVectorsFromCameraSpot();
+        }
+        if (Lanna::Input::IsKeyPressed(LN_KEY_A))
+        {
+            glm::vec3 _right = UnitaryVector(Right);
+            *Position -= _right * m_MovementSpeed * speedMul * io.Framerate;
+            m_WorldSpot -= _right * m_MovementSpeed * speedMul * io.Framerate;
+            UpdateCameraVectorsFromCameraSpot();
+        }
+        if (Lanna::Input::IsKeyPressed(LN_KEY_D))
+        {
+            glm::vec3 _right = UnitaryVector(Right);
+            *Position += _right * m_MovementSpeed * speedMul * io.Framerate;
+            m_WorldSpot += _right * m_MovementSpeed * speedMul * io.Framerate;
+            UpdateCameraVectorsFromCameraSpot();
+        }
+    }
 }
 
 void CameraComponent::ImGuiDraw()
 {
+    UpdateRotation();
+    UpdateCameraVectorsFromCameraSpot();
 	if (ImGui::TreeNode("Camera"))
 	{
         
@@ -81,15 +130,48 @@ void CameraComponent::ImGuiDraw()
         ImGui::Text(std::to_string(val).c_str());
 
 
+        ImGui::Text("Spot");
+        val = m_WorldSpot.x;
+        ImGui::Text("x ");
+        ImGui::SameLine();
+        ImGui::Text(std::to_string(val).c_str());
+        val = m_WorldSpot.y;
+        ImGui::Text("y ");
+        ImGui::SameLine();
+        ImGui::Text(std::to_string(val).c_str());
+        val = m_WorldSpot.z;
+        ImGui::Text("z ");
+        ImGui::SameLine();
+        ImGui::Text(std::to_string(val).c_str());
+
+
+        ImGui::Text("Spot");
+        ImGui::Text("x");
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(-FLT_MIN);
+        ImGui::DragFloat("pos  x", &m_WorldSpot.x, 0.01f);
+        ImGui::Text("y");
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(-FLT_MIN);
+        ImGui::DragFloat("posy y", &m_WorldSpot.y, 0.01f);
+        ImGui::Text("z");
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(-FLT_MIN);
+        ImGui::DragFloat("pos z", &m_WorldSpot.z, 0.01f);
+
+        ImGui::Checkbox("free look", &freelookaround);
+
+
         ImGui::BeginTable("uwu", 2, !ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable|!ImGuiTableFlags_Borders|ImGuiTableFlags_NoBordersInBodyUntilResize);
         ImGui::TableNextRow();
 
-        ImGui::TableNextRow();
+
+        /*ImGui::TableNextRow();
         ImGui::TableSetColumnIndex(0);
         ImGui::Text("Zoom");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::DragFloat("zoom", &m_Zoom, 0.01f, 0, 1000000, "%.1f");
+        ImGui::DragFloat("zoom", &m_Zoom, 0.01f, 0, 1000000, "%.1f");*/
       
         ImGui::TableNextRow();
         ImGui::TableSetColumnIndex(0);
@@ -117,18 +199,24 @@ void CameraComponent::ImGuiDraw()
         ImGui::Text("Movement Speed");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::DragFloat("mov speed", &m_MovementSpeed, SPEED, 0.0f);
+        ImGui::DragFloat("mov speed", &m_MovementSpeed, m_MovementSpeed, 0.0f);
 
         ImGui::TableNextRow();
         ImGui::TableSetColumnIndex(0);
-        ImGui::Text("MouseSensitivity");
+        ImGui::Text("Orbit Speed");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::DragFloat("mouse sens", &m_MouseWheelSensitivity, SENSITIVITY, 0.0f);
+        ImGui::DragFloat("Orbit speed", &m_OrbitSpeed, m_OrbitSpeed, 0.0f);
+
+        ImGui::TableNextRow();
+        ImGui::TableSetColumnIndex(0);
+        ImGui::Text("Zoom Speed");
+        ImGui::TableSetColumnIndex(1);
+        ImGui::SetNextItemWidth(-FLT_MIN);
+        ImGui::DragFloat("Zoom speed", &m_ZoomSpeed, m_ZoomSpeed, 0.0f);
 
 
         ImGui::EndTable();
-
 
         ImGui::TreePop();
 	}
@@ -163,10 +251,30 @@ void CameraComponent::setResolution(int width, int height)
 
 void CameraComponent::setPosition(glm::vec3 pos)
 {
-    
     *Position = pos;
+    Front = m_WorldSpot - *Position;
 
-    updateView();
+    UpdateCameraVectorsFromCameraSpot();
+}
+
+void CameraComponent::UpdateRotation()
+{
+    if (lastPitch != Rotation->x)
+    {
+        glm::vec3 nSpot = m_WorldSpot + *Position;
+        nSpot = glm::rotate(nSpot, Rotation->x - lastPitch, Right);
+        nSpot = UnitaryVector(nSpot) * distance;
+        m_WorldSpot = nSpot - *Position;
+        UpdateCameraVectorsFromCameraSpot();
+    }
+    if (lastYaw != Rotation->y)
+    {
+        glm::vec3 nSpot = m_WorldSpot + *Position;
+        nSpot = glm::rotate(nSpot, Rotation->y - lastYaw, Up);
+        nSpot = UnitaryVector(nSpot) * distance;
+        m_WorldSpot = nSpot - *Position;
+        UpdateCameraVectorsFromCameraSpot();
+    }
 }
 
 void CameraComponent::setFOV(float fov)
@@ -201,7 +309,7 @@ void CameraComponent::SetOrthographic(int width, int height, float nearDistance,
     m_zFar = farDistance;
 }
 
-void CameraComponent::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch = true)
+void CameraComponent::ProcessMouseMovement(float x, float y, bool constrainPitch = true)
 {
     if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_ALT))
     {
@@ -211,12 +319,11 @@ void CameraComponent::ProcessMouseMovement(float xoffset, float yoffset, bool co
 
         ImGuiIO& io = ImGui::GetIO();
 
-        if (io.MouseDown[0]) Orbit(xoffset, yoffset);
-        if (io.MouseDown[2]) Move(xoffset, yoffset);
+        if (io.MouseDown[0]) Orbit(x-lastpos.x, y-lastpos.y);
+        if (io.MouseDown[2]) Move(x-lastpos.x, y-lastpos.y);
+        lastpos.x = x;
+        lastpos.y = y;
     }
-
-    // update Front, Right and Up Vectors using the updated Euler angles
-    UpdateCameraVectorsFromEulerAngles();
 }
 
 void CameraComponent::ProcessMouseScroll(float yOffset)
@@ -227,13 +334,12 @@ void CameraComponent::ProcessMouseScroll(float yOffset)
         if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
             speedMul = 2.0f;
         else speedMul = 1.0f;
-        float lastZoom = m_Zoom;
-        m_Zoom -= yOffset * m_MouseWheelSensitivity * speedMul;
-        if (m_Zoom < 0.5f)m_Zoom = 0.5f;
-        Front=UnitaryVector(Front);
         
-        *Position -= Front * (lastZoom-m_Zoom);
-        UpdateCameraVectorsFromEulerAngles();
+        float mul = 10000.0f;
+        glm::vec3 front = UnitaryVector(Front);
+        *Position += front * yOffset * m_ZoomSpeed * speedMul*mul;
+        m_WorldSpot -= front * yOffset * m_ZoomSpeed * speedMul*mul;
+        UpdateCameraVectorsFromCameraSpot();
     }
     
 
@@ -241,67 +347,91 @@ void CameraComponent::ProcessMouseScroll(float yOffset)
 
 void CameraComponent::LookAt(glm::vec3 spot)
 {
-
-    m_View = glm::lookAt(*Position + spot, *Position, Up);
-    Front = spot - *Position;
-    UpdateCameraVectorsFromCameraDirection();
+    m_WorldSpot = spot;
+    m_View = glm::lookAt(*Position + m_WorldSpot, *Position, Up);
+    UpdateCameraVectorsFromCameraSpot();
 }
 
 void CameraComponent::updateView()
 {
-    m_View = glm::lookAt(*Position, *Position + Front, Up);
+    m_View = glm::lookAt(*Position, *Position + m_WorldSpot, Up);
 }
 
-void CameraComponent::UpdateCameraVectorsFromEulerAngles()
+//void CameraComponent::UpdateCameraVectorsFromEulerAngles()
+//{
+//    // calculate the new Front vector
+//    glm::vec3 front;
+//    front.x = cos(glm::radians(Rotation->y)) * cos(glm::radians(Rotation->x));
+//    front.y = sin(glm::radians(Rotation->x));
+//    front.z = sin(glm::radians(Rotation->y)) * cos(glm::radians(Rotation->x));
+//    Front = glm::normalize(front);
+//    // also re-calculate the Right and Up vector
+//    Right = glm::normalize(glm::cross(Front, WorldUp));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+//    Up = glm::normalize(glm::cross(Right, Front));
+//
+//
+//    float distance = glm::distance(m_WorldSpot, *Position);
+//    front = UnitaryVector(Front);
+//    m_WorldSpot = front * distance - *Position;
+//
+//    m_View = glm::lookAt(*Position, *Position + Front, Up);
+//
+//}
+
+void CameraComponent::UpdateCameraVectorsFromCameraSpot()
 {
-
-    // calculate the new Front vector
-    glm::vec3 front;
-    front.x = cos(glm::radians(Rotation->y)) * cos(glm::radians(Rotation->x));
-    front.y = sin(glm::radians(Rotation->x));
-    front.z = sin(glm::radians(Rotation->y)) * cos(glm::radians(Rotation->x));
-    Front = glm::normalize(front);
-    // also re-calculate the Right and Up vector
-    Right = glm::normalize(glm::cross(Front, WorldUp));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
-    Up = glm::normalize(glm::cross(Right, Front));
-
-    m_View = glm::lookAt(*Position, *Position + Front, Up);
-
-}
-
-void CameraComponent::UpdateCameraVectorsFromCameraDirection()
-{
+    /*Front = glm::normalize(m_WorldSpot - *Position);
     Right = glm::normalize(glm::cross(Front, WorldUp));
-    Up= glm::normalize(glm::cross(Right, Front));
+    Up= glm::normalize(glm::cross(Right, Front));*/
+    Front = m_WorldSpot - *Position;
+    Right = glm::cross(Front, WorldUp);
+    Up = glm::cross(Right, Front);
 
     Rotation->x = glm::degrees(atan(Up.z / Up.y));
     Rotation->y = glm::degrees(atan(Front.z / Front.x));
     Rotation->z = 0;
+
+    lastPitch = Rotation->x;
+    lastYaw = Rotation->y;
+    distance = glm::distance(*Position, m_WorldSpot);
+    m_View = glm::lookAt(*Position, *Position + Front, Up);
 }
 
 void CameraComponent::Move(float xoffset, float yoffset)
 {
-    *Position += Right * xoffset * m_MovementSpeed * speedMul;
-    *Position += Up * yoffset * m_MovementSpeed * speedMul;
-    UpdateCameraVectorsFromEulerAngles();
+    glm::vec3 _right = UnitaryVector(Right);
+    glm::vec3 _up = UnitaryVector(Up);
+    *Position += _right * -xoffset * m_MovementSpeed * speedMul;
+    *Position += _up * yoffset * m_MovementSpeed * speedMul;
+    m_WorldSpot += _right * -xoffset * m_MovementSpeed * speedMul;
+    m_WorldSpot += _up * yoffset * m_MovementSpeed * speedMul;
+    UpdateCameraVectorsFromCameraSpot();
 }
 
 void CameraComponent::Orbit(float xoffset, float yoffset)
 {
+    //m_WorldSpot
 
-    *Position += Right * xoffset * m_MovementSpeed * speedMul;
-    *Position += Up * yoffset * m_MovementSpeed * speedMul;
+    glm::vec3 nPosCam = *Position+ m_WorldSpot;
+    nPosCam = glm::rotateY(nPosCam, -xoffset * m_OrbitSpeed * speedMul);
+    nPosCam = glm::rotateX(nPosCam, -yoffset * m_OrbitSpeed * speedMul);
+    //nPosCam = UnitaryVector(nPosCam) * distance;
+    *Position = nPosCam - m_WorldSpot;
     
-    Front -= Right * xoffset * m_MovementSpeed * speedMul;
-    Front -= Up * yoffset * m_MovementSpeed * speedMul;
-    UpdateCameraVectorsFromCameraDirection();
+    Front = *Position + m_WorldSpot + *Position;
+    UpdateCameraVectorsFromCameraSpot();
+
 }
 
 glm::vec3 CameraComponent::UnitaryVector(glm::vec3 vec)
 {
     glm::vec3 unitary = vec;
-    float multiplier = 1/glm::distance(vec, glm::vec3(0.0f, 0.0f, 0.0f));
+    float distance = glm::distance(vec, glm::vec3(0.0f, 0.0f, 0.0f));
+    float multiplier = 1/distance;
     unitary *= multiplier;
+    if (unitary.x<0.00000001f && unitary.x > -0.00000001f)unitary.x = 0;
+    if (unitary.y<0.00000001f && unitary.y > -0.00000001f)unitary.y = 0;
+    if (unitary.z<0.00000001f && unitary.z > -0.00000001f)unitary.z = 0;
     return unitary;
 }
 

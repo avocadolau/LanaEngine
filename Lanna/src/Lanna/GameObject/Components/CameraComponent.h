@@ -10,8 +10,6 @@
 // Default camera values
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
-const float SPEED = 0.01f;
-const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
 
 enum class CameraType {
@@ -39,6 +37,7 @@ public:
     void setResolution(int width, int height);
 
     void setPosition(glm::vec3 pos);
+    void UpdateRotation();
 
     void setFOV(float fov);
     float getFOV() { return m_Fov; }
@@ -54,8 +53,8 @@ public:
     void updateView();
 
 private:
-    void UpdateCameraVectorsFromEulerAngles();
-    void UpdateCameraVectorsFromCameraDirection();
+    /*void UpdateCameraVectorsFromEulerAngles();*/
+    void UpdateCameraVectorsFromCameraSpot();
 
     void Move(float xoffset, float yoffset);
     void Orbit(float xoffset, float yoffset);
@@ -77,8 +76,8 @@ private:
     float m_Pitch;
     // camera options
     float m_MovementSpeed;
-    float m_MouseWheelSensitivity;
-    float m_Zoom; //distance from objective
+    float m_ZoomSpeed;
+    float m_OrbitSpeed;
     float m_Fov = 45.0f;
     float m_zNear = 0.1f;
     float m_zFar = 100.0f;
@@ -90,4 +89,11 @@ private:
     glm::mat4 m_View;
     glm::mat4 m_Projection;
 
+private:
+    glm::vec3 m_WorldSpot;
+    float lastPitch;    //x
+    float lastYaw;      //y
+    float distance = 10.0f;
+    glm::vec2 lastpos;
+    bool freelookaround = false;
 };

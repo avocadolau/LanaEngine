@@ -47,6 +47,8 @@ namespace Lanna {
 
 	void Render3D::Update()
 	{
+		ImGuiIO& io = ImGui::GetIO();
+
 		m_Framebuffer.Clear();
 	}
 

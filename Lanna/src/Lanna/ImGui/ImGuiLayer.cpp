@@ -206,8 +206,9 @@ namespace Lanna {
 	bool ImGuiLayer::OnMouseMovedEvent(MouseMovedEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
+		io.MousePosPrev = io.MousePos;
 		io.MousePos = ImVec2(e.GetX(), e.GetY());
-		
+		//Lanna::Application::Get().GetRenderer().GetActiveCamera().ProcessMouseMovement(e.GetX(), e.GetY(), true);
 		Lanna::Application::Get().GetRenderer().GetActiveCamera().ProcessMouseMovement(e.GetX(), e.GetY(), true);
 
 		return false;

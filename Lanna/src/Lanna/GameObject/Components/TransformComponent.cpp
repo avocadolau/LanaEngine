@@ -54,15 +54,15 @@ void TransformComponent::ImGuiDraw()
 		ImGui::Text("x");
 		ImGui::SameLine();
 		ImGui::SetNextItemWidth(-FLT_MIN);
-		ImGui::DragFloat("rot x", &m_Rotation.x, 0.01f);
+		ImGui::DragFloat("rot x", &m_Rotation.x, 0.001f);
 		ImGui::Text("y");
 		ImGui::SameLine();
 		ImGui::SetNextItemWidth(-FLT_MIN);
-		ImGui::DragFloat("rot y", &m_Rotation.y, 0.01f);
+		ImGui::DragFloat("rot y", &m_Rotation.y, 0.001f);
 		ImGui::Text("z");
 		ImGui::SameLine();
 		ImGui::SetNextItemWidth(-FLT_MIN);
-		ImGui::DragFloat("rot z", &m_Rotation.z, 0.01f);
+		ImGui::DragFloat("rot z", &m_Rotation.z, 0.001f);
 
 
 		ImGui::Text("Scale");
