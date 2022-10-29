@@ -17,8 +17,8 @@ class MeshComponent: public Component
 {
 public:
 	MeshComponent();
-	~MeshComponent();
 	MeshComponent(const char* file);
+	~MeshComponent();
 
 	void Use() override;
 	void ImGuiDraw() override;
@@ -30,12 +30,15 @@ public:
 private:
 	void GenerateBuffers();
 public:
-	unsigned int vao, ibo, buffer;				// vertex array object, intex buffer data, vertex buffer data
+	unsigned int vao = -1;				// vertex array object
+	unsigned int ebo = -1;				// element buffer object
+	unsigned int vbo = -1;				// vertex buffer object
 
-	std::vector<float> vao_data;
-	std::vector<int> ibo_data;
+	std::vector<float> vbo_data;
+	std::vector<int> ebo_data;
 	std::vector<MeshComponent*> models;
 	Lanna::Framebuffer* buff;
 	bool is_root = false;
 	std::string m_ModelPath;
+	const char* source;
 };

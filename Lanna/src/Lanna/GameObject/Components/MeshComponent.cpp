@@ -24,7 +24,7 @@
 
 MeshComponent::MeshComponent() : Component(Component::Type::MESH)
 {
-	LoadPrimitive(Primitives::CUBE);
+	source = "no mesh";
 }
 MeshComponent::~MeshComponent()
 {
@@ -45,28 +45,40 @@ void MeshComponent::ImGuiDraw()
 {
 	if (ImGui::TreeNode("Mesh"))
 	{
-		static int selectedMesh = -1;
-		const char* names[] = { "cube", "pyramid", "plane"};
+		
 
-		if (ImGui::Button("Primitives"))
-			ImGui::OpenPopup("my_select_popup");
-		ImGui::SameLine();
-		//ImGui::TextUnformatted(selectedMesh == -1 ? "<None>" : names[selectedMesh]);
-		if (ImGui::BeginPopup("my_select_popup"))
+		if (source != "no mesh")
 		{
-			ImGui::Text("Primitives");
-			ImGui::Separator();
-			for (int i = 0; i < IM_ARRAYSIZE(names); i++)
-				if (ImGui::Selectable(names[i]))
-				{
-					selectedMesh = i;
-					LoadPrimitive((Primitives)i);
-				} 
-			if (ImGui::Selectable("<None>"))
-				selectedMesh = -1;
-			ImGui::EndPopup();
+			ImGui::Text("Source mesh");
+			ImGui::TextWrapped(source);
 		}
-		ImGui::Text("");
+		else
+		{
+			static int selectedMesh = -1;
+			const char* names[] = { "cube", "pyramid", "plane" };
+
+			if (ImGui::Button("Primitives"))
+				ImGui::OpenPopup("my_select_popup");
+			ImGui::SameLine();
+
+			if (ImGui::BeginPopup("my_select_popup"))
+			{
+				ImGui::Text("Primitives");
+				ImGui::Separator();
+				for (int i = 0; i < IM_ARRAYSIZE(names); i++)
+					if (ImGui::Selectable(names[i]))
+					{
+						selectedMesh = i;
+						LoadPrimitive((Primitives)i);
+					}
+				if (ImGui::Selectable("<None>"))
+					selectedMesh = -1;
+				ImGui::EndPopup();
+			}
+		}
+		//ImGui::TextUnformatted(selectedMesh == -1 ? "<None>" : names[selectedMesh]);
+		
+		/*ImGui::Text("");
 		static char buf[100] = "";
 		ImGui::Text("Mesh Path");
 		ImGui::SetNextItemWidth(-FLT_MIN-50);
@@ -75,7 +87,7 @@ void MeshComponent::ImGuiDraw()
 		if (ImGui::SmallButton("load"))
 		{
 			LoadFromFile(buf);
-		}
+		}*/
 		ImGui::TreePop();
 	}
 
@@ -92,12 +104,14 @@ void MeshComponent::Render()
 	}
 	else {
 		glBindVertexArray(vao);
-		glDrawElements(GL_TRIANGLES, (GLsizei)ibo_data.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, (GLsizei)ebo_data.size(), GL_UNSIGNED_INT, 0);
 	}
 }
 
 void MeshComponent::LoadFromFile(const char* file)
 {
+	vbo_data.clear();
+	ebo_data.clear();
 	const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_FlipUVs);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
@@ -115,6 +129,7 @@ void MeshComponent::LoadFromFile(const char* file)
 		}
 
 		aiReleaseImport(scene);
+		source = file;
 	}
 	else {
 		LN_CORE_INFO("Error loading mesh {0} with error {1}", file, aiGetErrorString());
@@ -125,78 +140,23 @@ void MeshComponent::LoadFromFile(const char* file)
 
 void MeshComponent::LoadPrimitive(Primitives type)
 {
-
-	vao_data.clear();
-	ibo_data.clear();
-
+	vbo_data.clear();
+	ebo_data.clear();
 	switch (type)
 	{
 	case CUBE:
-		vao_data=
-		{
-			-0.5f,-0.5f,0.5f,
-			0.5f,-0.5f,0.5f,
-			0.5f,0.5f,0.5f,
-			-0.5f,0.5f,0.5f,
-
-			-0.5f,-0.5f,-0.5f,
-			0.5f,-0.5f,-0.5f,
-			0.5f,0.5f,-0.5f,
-			-0.5f,0.5f,-0.5f
-
-		};
-
-		ibo_data=
-		{
-			0,1,2,		2,3,0,
-			5,4,6,		6,4,7,
-			4,5,1,		1,0,4,
-			5,6,2,		2,1,5,
-			6,7,3,		3,2,6,
-			7,4,0,		0,3,7
-		};
-
+		LoadFromFile("resources/models/Primitives/cube.fbx");
+		source = "Cube primitive";
 		break;
 	case PYRAMID:
-		vao_data =
-		{
-			-0.5f,-0.5f,0.0f,
-			0.5f,-0.5f,0.0f,
-			0.5f,0.5f,0.0f,
-			-0.5f,0.5f,0.0f,
-			0.0f,0.0f,1.0f
-		};
-
-		ibo_data =
-		{
-			0,3,2,		2,1,0,
-			0,1,4,
-			1,2,4,
-			2,3,4,
-			3,0,4
-		};
-
+		LoadFromFile("resources/models/Primitives/pyramid.fbx");
+		source = "Pyramid primitive";
 		break;
 	case PLANE:
-
-		vao_data =
-		{
-			-10.0f,-10.0f,0.0f,
-			10.0f,-10.0f,0.0f,
-			10.0f,10.0f,0.0f,
-			-10.0f,10.0f,0.0f,
-		};
-
-		ibo_data =
-		{
-			0,1,2,		2,3,0
-		};
-
-
+		LoadFromFile("resources/models/Primitives/plane.fbx");
+		source = "Plane primitive";
 		break;
 	}
-	GenerateBuffers();
-
 }
 
 MeshComponent* MeshComponent::loadmesh(const aiMesh* mesh)
@@ -205,25 +165,25 @@ MeshComponent* MeshComponent::loadmesh(const aiMesh* mesh)
 
 	for (unsigned int j = 0; j < mesh->mNumVertices; j++) {
 		// Vertices
-		model->vao_data.push_back(mesh->mVertices[j].x);
-		model->vao_data.push_back(mesh->mVertices[j].y);
-		model->vao_data.push_back(mesh->mVertices[j].z);
+		model->vbo_data.push_back(mesh->mVertices[j].x);
+		model->vbo_data.push_back(mesh->mVertices[j].y);
+		model->vbo_data.push_back(mesh->mVertices[j].z);
 		// Normals
-		model->vao_data.push_back(mesh->mNormals[j].x);
-		model->vao_data.push_back(mesh->mNormals[j].y);
-		model->vao_data.push_back(mesh->mNormals[j].z);
+		model->vbo_data.push_back(mesh->mNormals[j].x);
+		model->vbo_data.push_back(mesh->mNormals[j].y);
+		model->vbo_data.push_back(mesh->mNormals[j].z);
 		// Texture coordinates
 		if (mesh->mTextureCoords[0])
 		{
-			model->vao_data.push_back(mesh->mTextureCoords[0][j].x);
-			model->vao_data.push_back(mesh->mTextureCoords[0][j].y);
+			model->vbo_data.push_back(mesh->mTextureCoords[0][j].x);
+			model->vbo_data.push_back(mesh->mTextureCoords[0][j].y);
 		}
 		else {
-			model->vao_data.push_back(0.0f);
-			model->vao_data.push_back(0.0f);
+			model->vbo_data.push_back(0.0f);
+			model->vbo_data.push_back(0.0f);
 		}
 	}
-	if (model->vao_data.empty())
+	if (model->vbo_data.empty())
 	{
 		LN_CORE_INFO("Error while loading mesh vertex buffer");
 	}
@@ -235,10 +195,10 @@ MeshComponent* MeshComponent::loadmesh(const aiMesh* mesh)
 	for (unsigned int j = 0; j < mesh->mNumFaces; j++) {
 		aiFace& face = mesh->mFaces[j];
 		for (unsigned int k = 0; k < face.mNumIndices; k++) {
-			model->ibo_data.push_back(face.mIndices[k]);
+			model->ebo_data.push_back(face.mIndices[k]);
 		}
 	}
-	if (model->ibo_data.empty())
+	if (model->ebo_data.empty())
 	{
 		LN_CORE_INFO("Error while loading mesh index buffer");
 	}
@@ -253,21 +213,21 @@ MeshComponent* MeshComponent::loadmesh(const aiMesh* mesh)
 
 void MeshComponent::GenerateBuffers()
 {
-	glGenBuffers(1, &vao);
-	glGenBuffers(1, &ibo);
+	glGenBuffers(1, &vbo);
+	glGenBuffers(1, &ebo);
 	glGenVertexArrays(1, &vao);
 
 	glBindVertexArray(vao);
 
 
-	glBindBuffer(GL_ARRAY_BUFFER, vao);
-	glBufferData(GL_ARRAY_BUFFER, vao_data.size() * sizeof(float), vao_data.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, vbo_data.size() * sizeof(float), vbo_data.data(), GL_STATIC_DRAW);
 
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, ibo_data.size() * sizeof(int), ibo_data.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, ebo_data.size() * sizeof(int), ebo_data.data(), GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	//glEnableVertexAttribArray(1);
