@@ -89,42 +89,42 @@ void CameraComponent::ImGuiDraw()
         ImGui::Text("Zoom");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::InputFloat("zoom", &m_Zoom, 1.0f, 0.0f, "%.1f");
+        ImGui::DragFloat("zoom", &m_Zoom, 0.01f, 0, 1000000, "%.1f");
       
         ImGui::TableNextRow();
         ImGui::TableSetColumnIndex(0);
         ImGui::Text("Fov");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::InputFloat("fov", &m_Fov, 1.0f, 0.0f, "%.1f");
+        ImGui::DragFloat("fov", &m_Fov, 1.0f);
 
         ImGui::TableNextRow();
         ImGui::TableSetColumnIndex(0);
         ImGui::Text("Near");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::InputFloat("near", &m_zNear, 0.1f, 0.0f, "%.1f");
+        ImGui::DragFloat("near", &m_zNear, 0.1f, 0.0f);
 
         ImGui::TableNextRow();
         ImGui::TableSetColumnIndex(0);
         ImGui::Text("Far");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::InputFloat("far", &m_zFar, 1.0f, 0.0f, "%.1f");
+        ImGui::DragFloat("far", &m_zFar, 1.0f, 0.0f);
 
         ImGui::TableNextRow();
         ImGui::TableSetColumnIndex(0);
         ImGui::Text("Movement Speed");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::InputFloat("mov speed", &m_MovementSpeed, SPEED, 0.0f, "%.5f");
+        ImGui::DragFloat("mov speed", &m_MovementSpeed, SPEED, 0.0f);
 
         ImGui::TableNextRow();
         ImGui::TableSetColumnIndex(0);
         ImGui::Text("MouseSensitivity");
         ImGui::TableSetColumnIndex(1);
         ImGui::SetNextItemWidth(-FLT_MIN);
-        ImGui::InputFloat("mouse sens", &m_MouseWheelSensitivity, SENSITIVITY, 0.0f, "%.5f");
+        ImGui::DragFloat("mouse sens", &m_MouseWheelSensitivity, SENSITIVITY, 0.0f);
 
 
         ImGui::EndTable();

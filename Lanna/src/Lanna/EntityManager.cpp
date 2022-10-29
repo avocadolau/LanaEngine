@@ -24,7 +24,6 @@ void EntityManager::Init()
 
 	AddEmptyGameObject("uwu");
 	GameObject* house = AddEmptyGameObject("House");
-	house->AddComponent(Component::Type::MESH);
 	MeshComponent* houseMesh = new MeshComponent("resources/models/BakerHouse.fbx");
 	house->m_Transform->m_Position = glm::vec3( 0.0,0.0,1.0f );
 	house->m_Mesh = houseMesh;
