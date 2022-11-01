@@ -37,6 +37,7 @@ namespace Lanna {
 
 		m_ColorShader = new Shader("resources/shaders/model_color");
 		m_TexShader = new Shader("resources/shaders/model_texture");
+		m_GridShader = new Shader("resourses/shaders/grid");
 
 		GameObject* camera=Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject("camera");
 		
@@ -159,6 +160,32 @@ namespace Lanna {
 		// unbind buffer
 		m_Framebuffer.Unbind();
 
+	}
+
+	void Render3D::RenderGrid(Framebuffer* target, bool clear)
+	{
+		if (!target) target = &m_Framebuffer;
+		glViewport(0, 0, target->width, target->height);
+
+		target->Bind(clear);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glLineWidth(1.0f);
+
+		glBegin(GL_LINES);
+
+		float d = 200.0f;
+
+		for (float i = -d; i <= d; i += 1.0f)
+		{
+			glVertex3f(i, 0.0f, -d);
+			glVertex3f(i, 0.0f, d);
+			glVertex3f(-d, 0.0f, i);
+			glVertex3f(d, 0.0f, i);
+		}
+
+		glEnd();
+
+		target->Unbind();
 	}
 
 }

@@ -14,8 +14,6 @@ namespace Lanna {
 		m_Shadings.push_back(new ShadingView("Default", true));
 		m_Shadings.push_back(new ShadingView("Wireframe", true));
 		m_Shadings.push_back(new ShadingView("Stil WIP T_T", true));
-
-
 	}
 
 	ScenePanel::~ScenePanel()
@@ -70,6 +68,9 @@ namespace Lanna {
 		ImVec2 scales = { viewportPanelSize.x / (float)resolution.x, viewportPanelSize.y / (float)resolution.y };
 
 		float scale = scales.x < scales.y ? scales.x : scales.y;
+
+		static bool grid = true;
+		Lanna::Application::Get().GetRenderer().RenderGrid();
 
 		ImVec2 isize = { resolution.x * scale, resolution.y * scale };
 		ImTextureID tex = (ImTextureID)(intptr_t)Lanna::Application::Get().GetRenderer().getColorBufferTexture();
