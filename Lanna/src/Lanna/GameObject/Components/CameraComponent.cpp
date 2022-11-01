@@ -36,6 +36,7 @@ namespace Lanna
         m_MovementSpeed = 0.003f;
         m_OrbitSpeed = 0.001f;
         m_ZoomSpeed = 0.00001f;
+        m_FreeLookSpeed = 0.001f;
         UpdateCameraVectorsFromCameraSpot();
     }
 
@@ -76,32 +77,36 @@ namespace Lanna
         ImGuiIO& io = ImGui::GetIO();
         if (io.MouseDown[1])
         {
+            float speedVel = speedMul;
+            if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
+                speedVel = 2.0f;
+
             if (Lanna::Input::IsKeyPressed(LN_KEY_W))
             {
-                glm::vec3 _up = UnitaryVector(Up);
-                *Position += _up * m_MovementSpeed * speedMul * io.Framerate;
-                m_WorldSpot += _up * m_MovementSpeed * speedMul * io.Framerate;
+                glm::vec3 _front = UnitaryVector(Front);
+                *Position += _front * m_MovementSpeed * speedVel * io.Framerate;
+                m_WorldSpot += _front * m_MovementSpeed * speedVel * io.Framerate;
                 UpdateCameraVectorsFromCameraSpot();
             }
             if (Lanna::Input::IsKeyPressed(LN_KEY_S))
             {
-                glm::vec3 _up = UnitaryVector(Up);
-                *Position -= _up * m_MovementSpeed * speedMul * io.Framerate;
-                m_WorldSpot -= _up * m_MovementSpeed * speedMul * io.Framerate;
+                glm::vec3 _front = UnitaryVector(Front);
+                *Position -= _front * m_MovementSpeed * speedVel * io.Framerate;
+                m_WorldSpot -= _front * m_MovementSpeed * speedVel * io.Framerate;
                 UpdateCameraVectorsFromCameraSpot();
             }
             if (Lanna::Input::IsKeyPressed(LN_KEY_A))
             {
                 glm::vec3 _right = UnitaryVector(Right);
-                *Position -= _right * m_MovementSpeed * speedMul * io.Framerate;
-                m_WorldSpot -= _right * m_MovementSpeed * speedMul * io.Framerate;
+                *Position -= _right * m_MovementSpeed * speedVel * io.Framerate;
+                m_WorldSpot -= _right * m_MovementSpeed * speedVel * io.Framerate;
                 UpdateCameraVectorsFromCameraSpot();
             }
             if (Lanna::Input::IsKeyPressed(LN_KEY_D))
             {
                 glm::vec3 _right = UnitaryVector(Right);
-                *Position += _right * m_MovementSpeed * speedMul * io.Framerate;
-                m_WorldSpot += _right * m_MovementSpeed * speedMul * io.Framerate;
+                *Position += _right * m_MovementSpeed * speedVel * io.Framerate;
+                m_WorldSpot += _right * m_MovementSpeed * speedVel * io.Framerate;
                 UpdateCameraVectorsFromCameraSpot();
             }
         }
@@ -160,8 +165,6 @@ namespace Lanna
             ImGui::SameLine();
             ImGui::SetNextItemWidth(-FLT_MIN);
             ImGui::DragFloat("pos z", &m_WorldSpot.z, 0.01f);
-
-            ImGui::Checkbox("free look", &freelookaround);
 
 
             ImGui::BeginTable("uwu", 2, !ImGuiTableFlags_BordersOuter | ImGuiTableFlags_Resizable | !ImGuiTableFlags_Borders | ImGuiTableFlags_NoBordersInBodyUntilResize);
@@ -313,6 +316,10 @@ namespace Lanna
 
     void CameraComponent::ProcessMouseMovement(float x, float y, bool constrainPitch = true)
     {
+        if (Lanna::Input::IsMouseButtonPressed(1))
+            FreeLookAround(x - lastpos.x, y - lastpos.y);
+
+
         if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_ALT))
         {
             if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
@@ -320,17 +327,18 @@ namespace Lanna
             else speedMul = 1.0f;
 
             ImGuiIO& io = ImGui::GetIO();
-
-            if (io.MouseDown[0]) Orbit(x - lastpos.x, y - lastpos.y);
-            if (io.MouseDown[2]) Move(x - lastpos.x, y - lastpos.y);
-            lastpos.x = x;
-            lastpos.y = y;
+            
+            if (Lanna::Input::IsMouseButtonPressed(0)) Orbit(x - lastpos.x, y - lastpos.y);
+            if (Lanna::Input::IsMouseButtonPressed(2)) Move(x - lastpos.x, y - lastpos.y);
+            
         }
+        lastpos.x = x;
+        lastpos.y = y;
     }
 
     void CameraComponent::ProcessMouseScroll(float yOffset)
     {
-
+        
         if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_ALT))
         {
             if (Lanna::Input::IsKeyPressed(LN_KEY_LEFT_SHIFT))
@@ -357,6 +365,12 @@ namespace Lanna
     void CameraComponent::updateView()
     {
         m_View = glm::lookAt(*Position, *Position + m_WorldSpot, Up);
+    }
+
+    void CameraComponent::setFront(const glm::vec3 front)
+    {
+        Front = front;
+        updateView();
     }
 
     //void CameraComponent::UpdateCameraVectorsFromEulerAngles()
@@ -423,6 +437,13 @@ namespace Lanna
         Front = *Position + m_WorldSpot + *Position;
         UpdateCameraVectorsFromCameraSpot();
 
+    }
+
+    void CameraComponent::FreeLookAround(float xoffset, float yoffset)
+    {
+        Rotation->x += yoffset * m_FreeLookSpeed * speedMul;
+        Rotation->y += xoffset * m_FreeLookSpeed * speedMul;
+        UpdateRotation();
     }
 
     glm::vec3 CameraComponent::UnitaryVector(glm::vec3 vec)

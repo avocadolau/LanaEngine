@@ -30,7 +30,7 @@ namespace Lanna
 
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			LN_CORE_FATAL("Framebuffer not compleated");
+			LN_CORE_CRITICAL("Framebuffer not compleated");
 		}
 		else
 			LN_CORE_INFO("Framebuffer completed");

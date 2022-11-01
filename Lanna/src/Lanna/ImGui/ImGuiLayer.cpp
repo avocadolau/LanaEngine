@@ -239,6 +239,16 @@ namespace Lanna {
 
 	void ImGuiLayer::MainMenuBar()
 	{
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("Quit"))
+			{
+				Lanna::Application::Get().Close();
+			}
+
+			ImGui::EndMenu();
+		}
+
 		if (ImGui::BeginMenu("View"))
 		{
 			for (auto p : m_panels)

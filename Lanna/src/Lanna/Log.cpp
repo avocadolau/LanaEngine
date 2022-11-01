@@ -18,4 +18,9 @@ namespace Lanna {
 		s_ClientLogger->set_level(spdlog::level::trace);
 	}
 
+	const char* Log::GetCoreLastLog()
+	{
+		return nullptr;
+	}
+
 }

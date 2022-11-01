@@ -45,6 +45,9 @@ namespace Lanna {
 		m_ActiveCamera->setPosition({ 0.0f,1.0f,5.0f });
 		m_ActiveCamera->LookAt({ 0.0f, 0.0f, 0.0f });
 
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+
 	}
 
 	void Render3D::Update()

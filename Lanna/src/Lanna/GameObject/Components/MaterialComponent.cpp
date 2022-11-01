@@ -18,7 +18,7 @@ namespace Lanna
 	{
 
 	}
-	MaterialComponent::MaterialComponent(const char* file) : Component(Component::Type::MATERIAL)
+	MaterialComponent::MaterialComponent(const char* file) : Component(Component::Type::MATERIAL), m_Type(TEXTURE)
 	{
 		m_TexPath = file;
 		if (!m_TexPath.empty())
@@ -37,6 +37,7 @@ namespace Lanna
 
 	void MaterialComponent::setTexture(const char* file)
 	{
+		m_Type = TEXTURE;
 		m_TexPath = file;
 		/*if (m_texture!=nullptr)
 			delete m_texture;*/
@@ -75,6 +76,7 @@ namespace Lanna
 			{
 				ImGui::Text("Texture path:");
 				ImGui::Text(m_TexPath.c_str());
+				ImGui::Image((ImTextureID)(intptr_t)m_texture->GetTextureId(), { 64, 64 });
 			}
 			else
 			{
