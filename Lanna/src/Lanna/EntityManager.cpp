@@ -20,10 +20,6 @@ namespace Lanna {
 
 	void EntityManager::Init()
 	{
-		GameObject* go = AddEmptyGameObject("empty");
-		activeEntitiy = go;
-		go->SetChild(new GameObject("uwwwwuu"));
-
 		AddEmptyGameObject("uwu");
 		GameObject* house = AddEmptyGameObject("House");
 		MeshComponent* houseMesh = new MeshComponent("resources/models/BakerHouse.fbx");

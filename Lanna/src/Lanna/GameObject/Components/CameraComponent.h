@@ -53,13 +53,15 @@ namespace Lanna
         void LookAt(glm::vec3 spot);
 
         void updateView();
-
+         
+        void setFront(const glm::vec3 front);
     private:
         /*void UpdateCameraVectorsFromEulerAngles();*/
         void UpdateCameraVectorsFromCameraSpot();
 
         void Move(float xoffset, float yoffset);
         void Orbit(float xoffset, float yoffset);
+        void FreeLookAround(float xoffset, float yoffset);
 
         glm::vec3 UnitaryVector(glm::vec3 vec);
     private:
@@ -74,10 +76,11 @@ namespace Lanna
 
         // euler Angles
         glm::vec3* Rotation;
-        float m_Yaw;
-        float m_Pitch;
+        float m_Yaw = 0.0f;
+        float m_Pitch = 0.0f;
         // camera options
         float m_MovementSpeed;
+        float m_FreeLookSpeed;
         float m_ZoomSpeed;
         float m_OrbitSpeed;
         float m_Fov = 45.0f;

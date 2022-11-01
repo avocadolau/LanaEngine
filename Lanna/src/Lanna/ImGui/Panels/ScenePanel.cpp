@@ -81,9 +81,8 @@ namespace Lanna {
 		ImGui::Image(tex, isize, ImVec2(0, 1), ImVec2(1, 0));
 	}
 	void ScenePanel::ImportFBX(const std::filesystem::path& path)
-	{
-	
-		GameObject* newFBX = Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject(path.string().c_str());
+	{	
+		GameObject* newFBX = Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject(path.filename().string().c_str());
 		newFBX->AddComponent(Component::Type::MESH);
 		newFBX->m_Mesh->LoadFromFile(path.string().c_str());
 	}

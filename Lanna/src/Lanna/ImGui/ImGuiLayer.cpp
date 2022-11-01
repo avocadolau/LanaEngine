@@ -239,6 +239,16 @@ namespace Lanna {
 
 	void ImGuiLayer::MainMenuBar()
 	{
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("Quit"))
+			{
+				Lanna::Application::Get().Close();
+			}
+
+			ImGui::EndMenu();
+		}
+
 		if (ImGui::BeginMenu("View"))
 		{
 			for (auto p : m_panels)
@@ -266,20 +276,17 @@ namespace Lanna {
 		}
 		if (ImGui::BeginMenu("Help"))
 		{
-			if (ImGui::MenuItem("Demo"))
-				Lanna::Application::Get().OpenUrl("https://google.com/");
 
 			if (ImGui::MenuItem("Documentation"))
-				Lanna::Application::Get().OpenUrl("https://google.com/");
+				Lanna::Application::Get().OpenUrl("https://github.com/avocadolau/LannaEngine/Wiki");
 
 			if (ImGui::MenuItem("Download latest"))
-				Lanna::Application::Get().OpenUrl("https://google.com/");
+				Lanna::Application::Get().OpenUrl("https://github.com/avocadolau/LannaEngine/releases");
 
 			if (ImGui::MenuItem("Report a bug"))
-				Lanna::Application::Get().OpenUrl("https://google.com/");
+				Lanna::Application::Get().OpenUrl("https://github.com/avocadolau/LannaEngine/issues");
 
-			if (ImGui::MenuItem("About"))
-				Lanna::Application::Get().OpenUrl("https://google.com/");
+			
 
 			ImGui::EndMenu();
 		}
