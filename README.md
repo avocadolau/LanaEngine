@@ -25,6 +25,9 @@ Lanna engine is a 3D Game Engine developed during the Game Engines classes. We a
 - Information output of memory consumption, hardware detection and software
 versions.
 
+# Link to GitHub repository:
+https://github.com/avocadolau/LannaEngine
+
 # Authors:
 - [Laura Isidro](https://github.com/avocadolau)
 
@@ -42,7 +45,6 @@ Visual Studio 2019 or more
 Open the Scripts folder and then select your Visual Studio version at GenerateProjectsX.bat Create a Assets folder at the Editor folder
 
 - Note: the project only supports Windows
-- You will need the premake.exe in the 
 
 MIT License
 Copyright (c) 2022 avocadolau & aNnA2606
