@@ -16,6 +16,8 @@ Lanna engine is a 3D Game Engine developed during the Game Engines classes. We a
 - Drag&drop of FBX files.
 - Drag&drop of DDS/PNG files.
 - Each GameObject has 3 display components: Transform, Mesh and Texture.
+- There is a cofnfiguration panel to see the engine's configuration.
+
 
 # Editor Windows:
 - Console: the window LOG the process from ASSIMP and the external libraries initialization process.
@@ -39,6 +41,11 @@ https://github.com/avocadolau/LannaEngine
 - ALT + Left click to orbit the object.
 - “F” to focus the camera around the geometry.
 - Hold SHIFT to duplicate movement speed.
+
+# How to use:
+- To create Entities you can use the primitive's menu or do it from the asset panel with drag and drop on scene panel.
+- You can only add one component of each type in the inspector.
+- In the material component you can add textures from the asset panel.
 
 # Dependencies:
 Visual Studio 2019 or more
