@@ -62,7 +62,7 @@ namespace Lanna {
 		Panel* m_Assets = nullptr;
 
 		std::vector<Panel*> m_panels;
-		bool show=false;
+
 	};
 
 }
