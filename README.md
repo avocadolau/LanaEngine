@@ -1,38 +1,36 @@
 # LanaEngine
-About:
+
+
+# About:
 Lanna engine is a 3D Game Engine developed during the Game Engines classes. We are making to make an Engine that can be used to develop all kinds of games.
 
 
-Features:
-Components
-FBX model loading
-PNG texture loading
+# Features:
+- Components
+- FBX model loading
+- PNG texture loading
 
-Authors:
+# Authors:
 Laura Isidro @avocadolau
 Anna Metreveli @aNnAm2606
 
-How to use
-Entities
-To create an entity left click on the Hierarchy window and select an option. You can create either a blank entity or a primitive. (Disclaimer: empty entities do not include any component and they must be added as desired)
+# Camera Controls:
+- WASD movements
+- ALT + WASD for movement
+- ALT + right click to orbit an entity
+- ALT + wheel to zoom in and out
+- ALT + Wheel hold to move without rotation
 
-Camera Control:
-WASD movements
-ALT + WASD for movement
-ALT + right click to orbit an entity
-ALT + wheel to zoom in and out
-ALT + Wheel hold to move without rotation
-
-Installing:
+# Installing:
 In order to install the project you can
 
 git clone https://github.com/avocadolau/LannaEngine
 
-Dependencies:
+# Dependencies:
 Visual Studio 2019 or more
 Open the Scripts folder and then select your Visual Studio version at GenerateProjectsX.bat Create a Assets folder at the Editor folder
 
-Note: the project only supports Windows
+- Note: the project only supports Windows
 
 MIT License
 Copyright (c) 2022 avocadolau & aNnA2606
