@@ -21,6 +21,7 @@
 #include "Lanna/ImGui/Panels/ScenePanel.h"
 #include "Lanna/ImGui/Panels/InspectorPanel.h"
 #include "Lanna/ImGui/Panels/HierarchyPanel.h"
+#include "Lanna/ImGui/Panels/AssetsPanel.h"
 #include "Lanna/GameObject/Components/MeshComponent.h"
 
 #include "Lanna/Render3D.h"
@@ -93,6 +94,7 @@ namespace Lanna {
 		m_scene = new ScenePanel();
 		m_Inspector = new InspectorPanel();
 		m_Hierarchy = new HierarchyPanel();
+		m_Assets = new AssetsPanel();
 
 		m_panels.push_back(m_configuration);
 		m_panels.push_back(m_about);
@@ -100,6 +102,7 @@ namespace Lanna {
 		m_panels.push_back(m_scene);
 		m_panels.push_back(m_Inspector);
 		m_panels.push_back(m_Hierarchy);
+		m_panels.push_back(m_Assets);
 
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -134,13 +137,12 @@ namespace Lanna {
 			if (p->active)
 				p->Draw();
 		}
+
 		if (logActive)
 			m_Log.Draw("Console", &logActive);
-
-		// trying camera
 		
-		/*static bool show = true;
-		ImGui::ShowDemoWindow(&show);*/
+		static bool show = true;
+		ImGui::ShowDemoWindow(&show);
 	}
 
 	void ImGuiLayer::Begin()
@@ -345,5 +347,4 @@ namespace Lanna {
 		
 
 	}
-
 }

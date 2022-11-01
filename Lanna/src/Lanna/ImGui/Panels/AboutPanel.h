@@ -2,11 +2,13 @@
 
 #include "Panel.h"
 
-class AboutPanel :public Panel
-{
-public:
-	AboutPanel();
-	~AboutPanel();
+namespace Lanna {
+	class AboutPanel :public Panel
+	{
+	public:
+		AboutPanel();
+		~AboutPanel();
 
-	void Draw() override;
-};
+		void Draw() override;
+	};
+}

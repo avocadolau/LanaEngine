@@ -19,9 +19,10 @@ namespace Lanna {
 		m_Document.SetObject();
 	}
 
-	/*JsonDoc::JsonDoc()
+	JsonDoc::~JsonDoc()
 	{
-	}*/
+
+	}
 
 	void JsonDoc::Parse(const char * string)
 	{

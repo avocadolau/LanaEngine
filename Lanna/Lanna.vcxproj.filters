@@ -22,6 +22,15 @@
     <Filter Include="Lanna\Renderer">
       <UniqueIdentifier>{35F26D0B-21C0-6111-0A54-D237F6C03D76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\Utilities">
+      <UniqueIdentifier>{DAA48C40-4630-FA04-4F41-7DF9BB4B5605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lanna\Utilities\Json">
+      <UniqueIdentifier>{C3C81406-AF57-9ECF-5876-B2CA44E4AE75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lanna\Utilities\Maths">
+      <UniqueIdentifier>{C660DAC8-32CD-95C3-FBC0-2D2167ECB72B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
@@ -30,9 +39,6 @@
     </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utilities">
-      <UniqueIdentifier>{010A8043-6D74-34BA-B6B2-E55F225C120F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +97,7 @@
     <ClInclude Include="src\Lanna\ImGui\Panels\AboutPanel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lanna\ImGui\Panels\AssetPannel.h">
+    <ClInclude Include="src\Lanna\ImGui\Panels\AssetsPanel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h">
@@ -139,6 +145,42 @@
     <ClInclude Include="src\Lanna\Renderer\Shader.h">
       <Filter>Lanna\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Renderer\Texture.h">
+      <Filter>Lanna\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h">
+      <Filter>Lanna\Utilities\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h">
+      <Filter>Lanna\Utilities\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Maths\Maths.h">
+      <Filter>Lanna\Utilities\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector2f.h">
+      <Filter>Lanna\Utilities\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector2i.h">
+      <Filter>Lanna\Utilities\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector3f.h">
+      <Filter>Lanna\Utilities\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector3i.h">
+      <Filter>Lanna\Utilities\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector4f.h">
+      <Filter>Lanna\Utilities\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector4i.h">
+      <Filter>Lanna\Utilities\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\MemoryAllocation.h">
+      <Filter>Lanna\Utilities</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Window.h">
       <Filter>Lanna</Filter>
     </ClInclude>
@@ -157,17 +199,7 @@
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utilities\MemoryAllocation.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
-    <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
-    <ClInclude Include="src\Lanna\Renderer\Texture.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\Resources.h" />
-    <ClInclude Include="src\Lanna\Renderer\Image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -200,7 +232,7 @@
     <ClCompile Include="src\Lanna\ImGui\Panels\AboutPanel.cpp">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClCompile>
-    <ClCompile Include="src\Lanna\ImGui\Panels\AssetPanel.cpp">
+    <ClCompile Include="src\Lanna\ImGui\Panels\AssetsPanel.cpp">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp">
@@ -239,6 +271,15 @@
     <ClCompile Include="src\Lanna\Renderer\Shader.cpp">
       <Filter>Lanna\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lanna\Renderer\Texture.cpp">
+      <Filter>Lanna\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp">
+      <Filter>Lanna\Utilities\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp">
+      <Filter>Lanna\Utilities\Json</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp">
       <Filter>Platform\OpenGL</Filter>
     </ClCompile>
@@ -252,11 +293,5 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Texture.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />
-    <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Image.cpp" />
   </ItemGroup>
 </Project>

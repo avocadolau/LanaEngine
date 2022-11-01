@@ -10,7 +10,7 @@
 #include <string>
 
 namespace Lanna {
-	class JsonDoc {
+	class LANNA_API JsonDoc {
 	private:
 		rapidjson::Document m_Document;
 		rapidjson::StringBuffer m_Buffer;

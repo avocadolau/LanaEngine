@@ -46,6 +46,7 @@ namespace Lanna {
 
 		void MainMenuBar();
 		void DockSpace();
+
 	private:
 		ImGuiLog m_Log;
 		bool logActive;
@@ -58,6 +59,7 @@ namespace Lanna {
 		Panel* m_scene = nullptr;
 		Panel* m_Inspector = nullptr;
 		Panel* m_Hierarchy = nullptr;
+		Panel* m_Assets = nullptr;
 
 		std::vector<Panel*> m_panels;
 

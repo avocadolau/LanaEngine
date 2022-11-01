@@ -5,7 +5,7 @@
 
 namespace Lanna {
 
-	class JsonValue {
+	class LANNA_API JsonValue {
 	private:
 		rapidjson::Value* m_Value;
 	public:

@@ -1,11 +1,14 @@
 #pragma once
 #include "Panel.h"
-class HardwarePanel : public Panel
-{
-public:
-	HardwarePanel();
-	~HardwarePanel();
 
-	void Draw() override;
-};
+namespace Lanna {
+	class HardwarePanel : public Panel
+	{
+	public:
+		HardwarePanel();
+		~HardwarePanel();
 
+		void Draw() override;
+	};
+
+}

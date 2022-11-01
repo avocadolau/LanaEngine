@@ -19,6 +19,7 @@ IncludeDirs["JSON"] = "Lanna/vendor/rapidjson"
 IncludeDirs["MathGeoLib"] = "Lanna/vendor/MathGeoLib"
 IncludeDirs["PCG"] = "Lanna/vendor/PCG/include"
 IncludeDirs["assimp"] = "Lanna/vendor/assimp/include"
+IncludeDirs["stb"] = "Lanna/vendor/stb"
 IncludeDirs["glm"] = "Lanna/vendor/glm/glm"
 IncludeDirs["Optick"] = "Lanna/vendor/Optick/include"
 
@@ -56,6 +57,7 @@ project "Lanna"
         "%{IncludeDirs.Glew}",
         "%{IncludeDirs.PCG}",
         "%{IncludeDirs.assimp}",
+        "%{IncludeDirs.stb}",
         "%{IncludeDirs.glm}",
         "%{IncludeDirs.Optick}"
 	}
@@ -142,6 +144,7 @@ project "Sandbox"
         "Lanna/vendor/glm/glm",
         "%{IncludeDirs.Optick}",
         "Lanna/vendor/assimp/include",
+        "Lanna/vendor/stb",
         "Lanna/vendor/PCG/include"
     }
 

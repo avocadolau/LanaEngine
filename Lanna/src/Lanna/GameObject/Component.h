@@ -1,28 +1,30 @@
 #pragma once
 
-
-class Component
+namespace Lanna
 {
-public:
-	enum Type {
-		TRANSFORM,
-		MESH,
-		MATERIAL,
-		CAMERA,
+	class Component
+	{
+	public:
+		enum Type {
+			TRANSFORM,
+			MESH,
+			MATERIAL,
+			CAMERA,
 
 
-		TOTAL
+			TOTAL
+		};
+
+
+		Type m_Type;
+
+	public:
+		Component(Type type);
+
+		~Component();
+
+		virtual void Use() = 0;
+		virtual void ImGuiDraw() = 0;
+		virtual void Render() {};
 	};
-
-
-	Type m_Type;
-
-public:
-	Component(Type type);
-
-	~Component();
-
-	virtual void Use() = 0;
-	virtual void ImGuiDraw() = 0;
-	virtual void Render() {};
-};
+}

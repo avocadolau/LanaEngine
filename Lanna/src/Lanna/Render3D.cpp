@@ -16,6 +16,7 @@
 #include "GameObject/GameObject.h"
 #include "GameObject/Components/MeshComponent.h"
 #include "GameObject/Components/CameraComponent.h"
+#include "GameObject/Components/MaterialComponent.h"
 
 namespace Lanna {
 
@@ -35,6 +36,7 @@ namespace Lanna {
 		m_Framebuffer.Init(resolution.x, resolution.y);
 
 		m_ColorShader = new Shader("resources/shaders/model_color");
+		m_TexShader = new Shader("resources/shaders/model_texture");
 
 		GameObject* camera=Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject("camera");
 		
@@ -81,14 +83,13 @@ namespace Lanna {
 	{
 
 	}
-	void Render3D::RenderMesh(MeshComponent& mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color)
+	void Render3D::RenderMeshColor(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color)
 	{
 		glViewport(0, 0, resolution.x, resolution.y);
 
-
 		// bind buffer
 		m_Framebuffer.Bind(true);
-	
+
 
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(position.x, position.y, position.z));
@@ -104,7 +105,56 @@ namespace Lanna {
 		m_ColorShader->setMat4("u_Proj", m_ActiveCamera->getProjection());
 		m_ColorShader->setVec4("u_Color", glm::vec4(color.r, color.g, color.b, color.a));
 
-		mesh.Render();
+		mesh->Render();
+
+		// unbind buffer
+		m_Framebuffer.Unbind();
+	}
+	void Render3D::RenderMesh(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, MaterialComponent* material, glm::vec4& color)
+	{
+		if (material)
+		{
+			if (material->getType() == MaterialComponent::Type::NONE)
+			{
+				RenderMeshColor(mesh, position, rotation, scale, color);
+				return;
+			}
+			else if (material->getType() == MaterialComponent::Type::COLOR)
+			{
+				RenderMeshColor(mesh, position, rotation, scale, material->getColor());
+				return;
+			}
+		}
+		else
+		{
+			RenderMeshColor(mesh, position, rotation, scale, color);
+			return;
+		}
+
+		glViewport(0, 0, resolution.x, resolution.y);
+
+		// bind buffer
+		m_Framebuffer.Bind(true);
+	
+
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(position.x, position.y, position.z));
+		model = glm::rotate(model, rotation.x, glm::vec3(1.f, 0.0f, 0.0f));
+		model = glm::rotate(model, rotation.y, glm::vec3(0.f, 1.0f, 0.0f));
+		model = glm::rotate(model, rotation.z, glm::vec3(0.f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
+
+		m_TexShader->Use();
+		glBindVertexArray(mesh->vao);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, material->getTextureID());
+
+		m_ColorShader->setMat4("u_Model", model);
+		m_ColorShader->setMat4("u_View", m_ActiveCamera->getView());
+		m_ColorShader->setMat4("u_Proj", m_ActiveCamera->getProjection());
+
+		mesh->Render();
+		glBindTexture(GL_TEXTURE_2D, 0);
 
 		// unbind buffer
 		m_Framebuffer.Unbind();

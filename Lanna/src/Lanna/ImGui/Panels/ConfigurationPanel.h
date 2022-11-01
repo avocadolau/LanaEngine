@@ -7,24 +7,26 @@
 
 #define MAX 64
 
-class ConfigurationPanel : public Panel
-{
-public:
-	ConfigurationPanel();
-	~ConfigurationPanel();
+namespace Lanna {
+	class ConfigurationPanel : public Panel
+	{
+	public:
+		ConfigurationPanel();
+		~ConfigurationPanel();
 
-	void Draw() override;
+		void Draw() override;
 
-private:
-	std::vector<float> fpsLog;
-	std::vector<float> msLog;
-	std::vector<float> allocLog;
-	std::vector<float> byteLog;
+	private:
+		std::vector<float> fpsLog;
+		std::vector<float> msLog;
+		std::vector<float> allocLog;
+		std::vector<float> byteLog;
 
-	bool fullscreen = false;
-	bool resizable = false;
-	bool vsync = false;
+		bool fullscreen = false;
+		bool resizable = false;
+		bool vsync = false;
 
-	Lanna::SysInfo info;
-};
+		Lanna::SysInfo info;
+	};
 
+}

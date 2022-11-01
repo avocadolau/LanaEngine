@@ -26,19 +26,19 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -80,11 +80,12 @@
       <PrecompiledHeaderFile>lnpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LN_PLATFORM_WINDOWS;LN_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;LN_DEBUG;LN_ENABLE_ASSERTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\rapidjson;vendor\GLFW\include;vendor\imgui;vendor\MathGeoLib;vendor\Glew\include\GL;vendor\PCG\include;vendor\assimp\include;vendor\glm\glm;vendor\Optick\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\rapidjson;vendor\GLFW\include;vendor\imgui;vendor\MathGeoLib;vendor\Glew\include\GL;vendor\PCG\include;vendor\assimp\include;vendor\stb;vendor\glm\glm;vendor\Optick\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -103,7 +104,7 @@ IF EXIST ..\bin\Debug-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\
       <PrecompiledHeaderFile>lnpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LN_PLATFORM_WINDOWS;LN_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;LN_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\rapidjson;vendor\GLFW\include;vendor\imgui;vendor\MathGeoLib;vendor\Glew\include\GL;vendor\PCG\include;vendor\assimp\include;vendor\glm\glm;vendor\Optick\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\rapidjson;vendor\GLFW\include;vendor\imgui;vendor\MathGeoLib;vendor\Glew\include\GL;vendor\PCG\include;vendor\assimp\include;vendor\stb;vendor\glm\glm;vendor\Optick\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -111,6 +112,7 @@ IF EXIST ..\bin\Debug-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,7 +132,7 @@ IF EXIST ..\bin\Release-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bi
       <PrecompiledHeaderFile>lnpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>LN_PLATFORM_WINDOWS;LN_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;LN_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\rapidjson;vendor\GLFW\include;vendor\imgui;vendor\MathGeoLib;vendor\Glew\include\GL;vendor\PCG\include;vendor\assimp\include;vendor\glm\glm;vendor\Optick\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\rapidjson;vendor\GLFW\include;vendor\imgui;vendor\MathGeoLib;vendor\Glew\include\GL;vendor\PCG\include;vendor\assimp\include;vendor\stb;vendor\glm\glm;vendor\Optick\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -138,6 +140,7 @@ IF EXIST ..\bin\Release-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bi
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -171,7 +174,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Lanna\ImGui\ImGuiLog.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\AboutPanel.h" />
-    <ClInclude Include="src\Lanna\ImGui\Panels\AssetPannel.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panels\AssetsPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\HardwarePanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\HierarchyPanel.h" />
@@ -186,19 +189,25 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\MouseButtonCodes.h" />
     <ClInclude Include="src\Lanna\Render3D.h" />
     <ClInclude Include="src\Lanna\Renderer\Framebuffer.h" />
-    <ClInclude Include="src\Lanna\Renderer\Image.h" />
     <ClInclude Include="src\Lanna\Renderer\Shader.h" />
     <ClInclude Include="src\Lanna\Renderer\Texture.h" />
     <ClInclude Include="src\Lanna\Resources.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
+    <ClInclude Include="src\Lanna\Utilities\Maths\Maths.h" />
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector2f.h" />
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector2i.h" />
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector3f.h" />
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector3i.h" />
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector4f.h" />
+    <ClInclude Include="src\Lanna\Utilities\Maths\Vector4i.h" />
+    <ClInclude Include="src\Lanna\Utilities\MemoryAllocation.h" />
     <ClInclude Include="src\Lanna\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
-    <ClInclude Include="src\Utilities\MemoryAllocation.h" />
     <ClInclude Include="src\lnpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -212,7 +221,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\GameObject\GameObject.cpp" />
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\AboutPanel.cpp" />
-    <ClCompile Include="src\Lanna\ImGui\Panels\AssetPanel.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\AssetsPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\HardwarePanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\HierarchyPanel.cpp" />
@@ -224,7 +233,6 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\Log.cpp" />
     <ClCompile Include="src\Lanna\Render3D.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Image.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Shader.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Texture.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />

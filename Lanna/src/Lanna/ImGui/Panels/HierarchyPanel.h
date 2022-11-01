@@ -1,11 +1,14 @@
 #pragma once
 #include "Panel.h"
-class HierarchyPanel : public Panel
-{
-public:
-	HierarchyPanel();
-	~HierarchyPanel();
 
-	void Draw() override;
-};
+namespace Lanna {
+	class HierarchyPanel : public Panel
+	{
+	public:
+		HierarchyPanel();
+		~HierarchyPanel();
 
+		void Draw() override;
+	};
+
+}

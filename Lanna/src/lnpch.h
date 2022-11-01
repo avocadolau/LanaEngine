@@ -13,6 +13,8 @@
 #include <unordered_set>
 #include <optick.h>
 
+#include <filesystem>
+
 #include "Lanna/Log.h"
 
 #ifdef LN_PLATFORM_WINDOWS

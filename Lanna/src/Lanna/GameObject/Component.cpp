@@ -2,10 +2,13 @@
 #include "lnpch.h"
 #include "Component.h"
 
-Component::Component(Type type) : m_Type(type)
+namespace Lanna
 {
+	Component::Component(Type type) : m_Type(type)
+	{
 
+	}
+
+
+	Component::~Component() {}
 }
-
-
-Component::~Component() {}

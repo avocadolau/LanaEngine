@@ -5,19 +5,21 @@
 #include "Panel.h"
 #include "HardwarePanel.h"
 
-HardwarePanel::HardwarePanel(): Panel("Hardware")
-{
-}
+namespace Lanna {
+	HardwarePanel::HardwarePanel() : Panel("Hardware")
+	{
+	}
 
-HardwarePanel::~HardwarePanel()
-{
-}
+	HardwarePanel::~HardwarePanel()
+	{
+	}
 
-void HardwarePanel::Draw()
-{
-	ImGui::Begin("Hardware", &active);
+	void HardwarePanel::Draw()
+	{
+		ImGui::Begin("Hardware", &active);
 
-	ImGui::Text("aqui va el textito pereza del hardware");
+		ImGui::Text("aqui va el textito pereza del hardware");
 
-	ImGui::End();
+		ImGui::End();
+	}
 }

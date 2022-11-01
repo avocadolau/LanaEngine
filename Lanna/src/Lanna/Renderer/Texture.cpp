@@ -1,39 +1,53 @@
 #include "lnpch.h"
-//#include <Lanna/Resources.h>
-//
-//#include "Lanna/Utilities/Json/JsonDoc.h"
-//
-//Lanna::Texture::Texture()
-//	: m_Type(TextureType::color), m_ResourceId(NULL), m_TextureId(NULL)
-//{
-//	m_Color = { 0.2, 0.2, 0.2, 1.0 };
-//}
-//
-//Lanna::Texture::Texture(Color4f color)
-//	: m_Type(TextureType::color), m_Color(color), m_ResourceId(NULL), m_TextureId(NULL)
-//{
-//}
-//
-//Lanna::Texture::Texture(const char* file)
-//{
-//	JsonDoc matFile(file);
-//
-//	std::string texturePath = matFile["texture"];
-//	m_Color = matFile["color"];
-//	m_Type = matFile["type"];
-//	if (!texturePath.empty())
-//	{
-//		m_ResourceId = Resources::Load<Image>(texturePath.c_str());
-//		m_TextureId = Resources::GetResourceById<Image>(m_ResourceId)->GetTextureId();
-//	}
-//}
-//
-//Lanna::Texture::~Texture()
-//{
-//}
-//
-//void Lanna::Texture::setTexture(const char* file)
-//{
-//	m_ResourceId = Resources::Load<Image>(file);
-//	m_TextureId = Resources::GetResourceById<Image>(m_ResourceId)->GetTextureId();
-//}
+#include "Texture.h"
+
+#define STB_IMAGE_IMPLEMENTATION
+
+#include <glew.h>
+#include <glm.hpp>
+#include <stb_image.h>
+
+namespace Lanna{
+
+	Texture::Texture()
+	{
+
+	}
+
+	Texture::~Texture()
+	{
+	}
+
+	bool Texture::Init(const char* path)
+	{
+		int x, y, ch;
+
+		unsigned char* image = stbi_load(path, &x, &y, &ch, STBI_rgb_alpha);
+
+		if (!image) {
+			return false;
+		}
+
+		glGenTextures(1, &m_id);
+		glBindTexture(GL_TEXTURE_2D, m_id);
+
+		int PicType = GL_RGBA;
+		glTexImage2D(GL_TEXTURE_2D, 0, PicType, x, y, 0, PicType, GL_UNSIGNED_BYTE, image);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glGenerateMipmap(GL_TEXTURE_2D);
+
+		stbi_image_free(image);
+
+		m_size.x = x;
+		m_size.y = y;
+		m_channels = ch;
+
+		return true;
+	}
+
+
+}
