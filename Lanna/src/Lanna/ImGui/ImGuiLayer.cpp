@@ -141,8 +141,8 @@ namespace Lanna {
 		if (logActive)
 			m_Log.Draw("Console", &logActive);
 		
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		if (show)
+			ImGui::ShowDemoWindow(&show);
 	}
 
 	void ImGuiLayer::Begin()
@@ -256,6 +256,7 @@ namespace Lanna {
 				if (ImGui::MenuItem(p->GetName(), "", p->active))
 					p->SwitchActive();
 			}
+			//if (ImGui::MenuItem("ImGui demo"), &show);
 			ImGui::MenuItem("Console", "", &logActive);
 			ImGui::EndMenu();
 		}
