@@ -11,8 +11,9 @@ Lanna engine is a 3D Game Engine developed during the Game Engines classes. We a
 - PNG texture loading
 
 # Authors:
-Laura Isidro @avocadolau
-Anna Metreveli @aNnAm2606
+- [Laura Isidro](https://github.com/avocadolau)
+
+- [Anna Metreveli](https://github.com/aNnAm2606)
 
 # Camera Controls:
 - WASD movements
