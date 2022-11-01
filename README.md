@@ -6,9 +6,24 @@ Lanna engine is a 3D Game Engine developed during the Game Engines classes. We a
 
 
 # Features:
-- Components
+- Baker_house is automatically loaded at the start.
 - FBX model loading
 - PNG texture loading
+- Inspector: displays information about the components of the selected GameObject.
+- Transform: Shows position, rotation and scale for the selected GameObject.
+- Mesh: information about the loaded mesh. 
+- Texture: display texture size and path.
+- Drag&drop of FBX files.
+- Drag&drop of DDS/PNG files.
+- Each GameObject has 3 display components: Transform, Mesh and Texture.
+
+# Editor Windows:
+- Console: the window LOG the process from ASSIMP and the external libraries initialization process.
+- Configuration includes:
+- A graph for the frames per second.
+- All variables on each module.
+- Information output of memory consumption, hardware detection and software
+versions.
 
 # Authors:
 - [Laura Isidro](https://github.com/avocadolau)
@@ -16,22 +31,18 @@ Lanna engine is a 3D Game Engine developed during the Game Engines classes. We a
 - [Anna Metreveli](https://github.com/aNnAm2606)
 
 # Camera Controls:
-- WASD movements
-- ALT + WASD for movement
-- ALT + right click to orbit an entity
-- ALT + wheel to zoom in and out
-- ALT + Wheel hold to move without rotation
-
-# Installing:
-In order to install the project you can
-
-git clone https://github.com/avocadolau/LannaEngine
+- Right click + WASD
+- Mouse wheel to zoom in and out.
+- ALT + Left click to orbit the object.
+- “F” to focus the camera around the geometry.
+- Hold SHIFT to duplicate movement speed.
 
 # Dependencies:
 Visual Studio 2019 or more
 Open the Scripts folder and then select your Visual Studio version at GenerateProjectsX.bat Create a Assets folder at the Editor folder
 
 - Note: the project only supports Windows
+- You will need the premake.exe in the 
 
 MIT License
 Copyright (c) 2022 avocadolau & aNnA2606
