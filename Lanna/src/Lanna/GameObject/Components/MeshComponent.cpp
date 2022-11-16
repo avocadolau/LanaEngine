@@ -115,7 +115,7 @@ namespace Lanna
 		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_FlipUVs);
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-			LN_ERROR("Couldn't load mesh file: {0}", file);
+			_LN_ERROR("Couldn't load mesh file: {0}", file);
 		}
 		LN_CORE_INFO("Loading mesh file at: {0} ...", file);
 		is_root = true;

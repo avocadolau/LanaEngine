@@ -139,7 +139,10 @@ namespace Lanna {
 		}
 
 		if (logActive)
+		{
 			m_Log.Draw("Console", &logActive);
+			AppConsole::Get().Draw("Console app", &logActive);
+		}
 		
 		static bool show = true;
 		ImGui::ShowDemoWindow(&show);

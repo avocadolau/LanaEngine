@@ -61,7 +61,7 @@ namespace Lanna
 			}
 			else
 			{
-				LN_INFO("Already has transform component");
+				_LN_INFO("Already has transform component");
 			}
 			break;
 		case Component::Type::MESH:
@@ -73,7 +73,7 @@ namespace Lanna
 			}
 			else
 			{
-				LN_INFO("Already has mesh component");
+				_LN_INFO("Already has mesh component");
 			}
 			break;
 		case Component::Type::MATERIAL:
@@ -85,7 +85,7 @@ namespace Lanna
 			}
 			else
 			{
-				LN_INFO("Already has material component");
+				_LN_INFO("Already has material component");
 			}
 			break;
 		case Component::Type::CAMERA:
@@ -100,7 +100,7 @@ namespace Lanna
 			}
 			else
 			{
-				LN_INFO("Already has camera component");
+				_LN_INFO("Already has camera component");
 			}
 			break;
 		}

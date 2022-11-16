@@ -27,8 +27,8 @@ public:
 		{
 			Lanna::KeyPressedEvent& e = (Lanna::KeyPressedEvent&)event;
 			if (e.GetKeyCode() == LN_KEY_TAB)
-				LN_TRACE("Tab key is pressed (event)!");
-			LN_TRACE("{0}", (char)e.GetKeyCode());
+				_LN_TRACE("Tab key is pressed (event)!");
+			_LN_TRACE("{0}", (char)e.GetKeyCode());
 		}
 	}
 };

@@ -34,7 +34,7 @@ namespace Lanna {
 				{
 					if (ImGui::MenuItem(c->name, "", &c->active))
 					{
-						LN_INFO("{0}, {1}", c->name, c->active);
+						_LN_INFO("{0}, {1}", c->name, c->active);
 					}
 				}
 				ImGui::EndMenu();
