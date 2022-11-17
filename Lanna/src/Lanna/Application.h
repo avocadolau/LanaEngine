@@ -59,6 +59,7 @@ namespace Lanna {
 		ImGuiLayer* m_ImGuiLayer;
 		Render3D* m_Render3D;
 		EntityManager* m_EntityManager;
+		Console* m_Console;
 	private:
 		static Application* s_Instance;
 	};

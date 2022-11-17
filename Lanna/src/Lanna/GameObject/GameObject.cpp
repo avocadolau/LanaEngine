@@ -22,6 +22,9 @@ namespace Lanna
 	GameObject::GameObject(const char* name) :m_Name(name)
 	{
 		AddComponent(Component::Type::TRANSFORM);
+		std::string text = "";
+		text= "Game object '" + (std::string)name + "' created";
+		LN_TRACE(text.c_str());
 	}
 	GameObject::~GameObject()
 	{
@@ -61,7 +64,7 @@ namespace Lanna
 			}
 			else
 			{
-				_LN_INFO("Already has transform component");
+				LN_INFO("Already has transform component");
 			}
 			break;
 		case Component::Type::MESH:
@@ -73,7 +76,7 @@ namespace Lanna
 			}
 			else
 			{
-				_LN_INFO("Already has mesh component");
+				LN_INFO("Already has mesh component");
 			}
 			break;
 		case Component::Type::MATERIAL:
@@ -85,7 +88,7 @@ namespace Lanna
 			}
 			else
 			{
-				_LN_INFO("Already has material component");
+				LN_INFO("Already has material component");
 			}
 			break;
 		case Component::Type::CAMERA:
@@ -100,7 +103,7 @@ namespace Lanna
 			}
 			else
 			{
-				_LN_INFO("Already has camera component");
+				LN_INFO("Already has camera component");
 			}
 			break;
 		}
