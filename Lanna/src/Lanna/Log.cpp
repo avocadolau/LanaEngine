@@ -7,6 +7,7 @@ namespace Lanna {
 
 	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
 	//std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
+    Console* Console::console_Instance = nullptr;
 
 	void Log::Init()
 	{
@@ -25,8 +26,9 @@ namespace Lanna {
 
 
 
-	AppConsole::AppConsole()
+	Console::Console()
 	{
+        console_Instance = this;
 		ClearLog();
 		memset(InputBuf, 0, sizeof(InputBuf));
 		HistoryPos = -1;
@@ -40,44 +42,21 @@ namespace Lanna {
 		ScrollToBottom = false;
 	}
 
-	AppConsole::~AppConsole()
+	Console::~Console()
 	{
 		ClearLog();
 		for (int i = 0; i < History.Size; i++)
 			free(History[i]);
 	}
-	void AppConsole::ClearLog()
+
+	void Console::ClearLog()
 	{
 		for (int i = 0; i < Items.Size; i++)
 			free(Items[i]);
 		Items.clear();
 	}
-	void AppConsole::AddLog(LogLevel logLevel, const char* fmt, ...) IM_FMTARGS(2)
-	{
-		std::string level;
-		switch (logLevel)
-		{
-		case LogLevel::INFO:        level = "[info] ";          break;
-		case LogLevel::WARN:        level = "[warn] ";          break;
-		case LogLevel::ERR:         level = "[error] ";         break;
-		case LogLevel::FATAL:       level = "[fatal] ";         break;
-		case LogLevel::TRACE:       level = "[trace] ";         break;
-		}
 
-		std::string text;
-		text = level + fmt;
-
-		// FIXME-OPT
-		char buf[1024];
-		va_list args;
-		va_start(args, text);
-		vsnprintf(buf, IM_ARRAYSIZE(buf), text.c_str(), args);
-		buf[IM_ARRAYSIZE(buf) - 1] = 0;
-		va_end(args);
-		Items.push_back(Strdup(buf));
-	}
-
-    void AppConsole::Draw(const char* title, bool* p_open)
+    void Console::Draw(const char* title, bool* p_open)
     {
         ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
         if (!ImGui::Begin(title, p_open))
@@ -216,7 +195,7 @@ namespace Lanna {
         ImGui::End();
     }
 
-    void AppConsole::ExecCommand(const char* command_line)
+    void Console::ExecCommand(const char* command_line)
     {
         _LN_INFO("# %s\n", command_line);
 
@@ -257,13 +236,13 @@ namespace Lanna {
         // On command input, we scroll to bottom even if AutoScroll==false
         ScrollToBottom = true;
     }
-    int AppConsole::TextEditCallbackStub(ImGuiInputTextCallbackData* data)
+    int Console::TextEditCallbackStub(ImGuiInputTextCallbackData* data)
     {
-        console_Instance = (AppConsole*)data->UserData;
+        console_Instance = (Console*)data->UserData;
         return console_Instance->TextEditCallback(data);
     }
 
-    int AppConsole::TextEditCallback(ImGuiInputTextCallbackData* data)
+    int Console::TextEditCallback(ImGuiInputTextCallbackData* data)
     {
         //AddLog("cursor: %d, selection: %d-%d", data->CursorPos, data->SelectionStart, data->SelectionEnd);
         switch (data->EventFlag)

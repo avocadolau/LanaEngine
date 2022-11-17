@@ -44,8 +44,53 @@ namespace Lanna {
 	};
 
 
-    class LANNA_API AppConsole
+    class LANNA_API Console
     {
+    public:
+
+        Console();
+        ~Console();
+
+        // Portable helpers
+        static int   Stricmp(const char* s1, const char* s2) { int d; while ((d = toupper(*s2) - toupper(*s1)) == 0 && *s1) { s1++; s2++; } return d; }
+        static int   Strnicmp(const char* s1, const char* s2, int n) { int d = 0; while (n > 0 && (d = toupper(*s2) - toupper(*s1)) == 0 && *s1) { s1++; s2++; n--; } return d; }
+        static char* Strdup(const char* s) { IM_ASSERT(s); size_t len = strlen(s) + 1; void* buf = malloc(len); IM_ASSERT(buf); return (char*)memcpy(buf, (const void*)s, len); }
+        static void  Strtrim(char* s) { char* str_end = s + strlen(s); while (str_end > s && str_end[-1] == ' ') str_end--; *str_end = 0; }
+
+        void ClearLog();
+
+        void AddLog(LogLevel logLevel, const char* fmt, ...) IM_FMTARGS(2)
+        {
+            std::string level;
+            switch (logLevel)
+            {
+            case LogLevel::INFO:        level = "[info] ";          break;
+            case LogLevel::WARN:        level = "[warn] ";          break;
+            case LogLevel::ERR:         level = "[error] ";         break;
+            case LogLevel::FATAL:       level = "[fatal] ";         break;
+            case LogLevel::TRACE:       level = "[trace] ";         break;
+            }
+
+            std::string text;
+            text = level + fmt;
+
+            // FIXME-OPT
+            char buf[1024];
+            va_list args;
+            va_start(args, text);
+            vsnprintf(buf, IM_ARRAYSIZE(buf), text.c_str(), args);
+            buf[IM_ARRAYSIZE(buf) - 1] = 0;
+            va_end(args);
+            Items.push_back(Strdup(buf));
+        }
+
+        void Draw(const char* title, bool* p_open);
+        void ExecCommand(const char* command_line);
+        // In C++11 you'd be better off using lambdas for this sort of forwarding callbacks
+        static int TextEditCallbackStub(ImGuiInputTextCallbackData* data);
+        int TextEditCallback(ImGuiInputTextCallbackData* data);
+        inline static Console& Get() { return *console_Instance; }
+
     private:
         char                  InputBuf[256];
         ImVector<char*>       Items;
@@ -56,26 +101,7 @@ namespace Lanna {
         bool                  AutoScroll;
         bool                  ScrollToBottom;
 
-        static AppConsole* console_Instance;
-    public:
-
-        AppConsole();
-        ~AppConsole();
-
-        // Portable helpers
-        static int   Stricmp(const char* s1, const char* s2) { int d; while ((d = toupper(*s2) - toupper(*s1)) == 0 && *s1) { s1++; s2++; } return d; }
-        static int   Strnicmp(const char* s1, const char* s2, int n) { int d = 0; while (n > 0 && (d = toupper(*s2) - toupper(*s1)) == 0 && *s1) { s1++; s2++; n--; } return d; }
-        static char* Strdup(const char* s) { IM_ASSERT(s); size_t len = strlen(s) + 1; void* buf = malloc(len); IM_ASSERT(buf); return (char*)memcpy(buf, (const void*)s, len); }
-        static void  Strtrim(char* s) { char* str_end = s + strlen(s); while (str_end > s && str_end[-1] == ' ') str_end--; *str_end = 0; }
-
-        void ClearLog();
-        void AddLog(LogLevel logLevel, const char* fmt, ...);
-        void Draw(const char* title, bool* p_open);
-        void ExecCommand(const char* command_line);
-        // In C++11 you'd be better off using lambdas for this sort of forwarding callbacks
-        static int TextEditCallbackStub(ImGuiInputTextCallbackData* data);
-        int TextEditCallback(ImGuiInputTextCallbackData* data);
-        static AppConsole& Get() { return *console_Instance; }
+        static Console* console_Instance;
     };
 
 }
@@ -90,8 +116,8 @@ namespace Lanna {
 #define LN_CORE_CRITICAL(...)      ::Lanna::Log::GetCoreLogger()->critical(__VA_ARGS__); 
 
 // editor logs
-#define _LN_TRACE(...) ::Lanna::AppConsole::Get().AddLog(Lanna::LogLevel::TRACE, __VA_ARGS__);
-#define _LN_INFO(...) ::Lanna::AppConsole::Get().AddLog(Lanna::LogLevel::INFO, __VA_ARGS__);
-#define _LN_WARN(...) ::Lanna::AppConsole::Get().AddLog(Lanna::LogLevel::WARN, __VA_ARGS__);
-#define _LN_ERROR(...) ::Lanna::AppConsole::Get().AddLog(Lanna::LogLevel::ERR, __VA_ARGS__);
-#define _LN_CRITICAL(...) ::Lanna::AppConsole::Get().AddLog(Lanna::LogLevel::FATAL, __VA_ARGS__);
+#define _LN_TRACE(...) ::Lanna::Console::Get().AddLog(Lanna::LogLevel::TRACE, __VA_ARGS__);
+#define _LN_INFO(...) ::Lanna::Console::Get().AddLog(Lanna::LogLevel::INFO, __VA_ARGS__);
+#define _LN_WARN(...) ::Lanna::Console::Get().AddLog(Lanna::LogLevel::WARN, __VA_ARGS__);
+#define _LN_ERROR(...) ::Lanna::Console::Get().AddLog(Lanna::LogLevel::ERR, __VA_ARGS__);
+#define _LN_CRITICAL(...) ::Lanna::Console::Get().AddLog(Lanna::LogLevel::FATAL, __VA_ARGS__);

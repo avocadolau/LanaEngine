@@ -5,13 +5,14 @@
 #include "filereadstream.h"
 #include "filewritestream.h"
 #include "Lanna.h"
+#include "Lanna/Log.h"
 
 namespace Lanna {
 
 	JsonDoc::JsonDoc(const char* path)
 	{
 		if (!load_file(path)) {
-			_LN_WARN("Couldn't load file \"{0}\"", path);
+			//_LN_WARN("Couldn't load file \"{0}\"", path);
 		}
 	}
 
