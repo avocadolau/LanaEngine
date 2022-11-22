@@ -22,6 +22,9 @@
     <Filter Include="Lanna\Renderer">
       <UniqueIdentifier>{35F26D0B-21C0-6111-0A54-D237F6C03D76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\Resources">
+      <UniqueIdentifier>{D9A5D914-4531-47D9-4E42-CACDBA4CA3D9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Lanna\Utilities">
       <UniqueIdentifier>{DAA48C40-4630-FA04-4F41-7DF9BB4B5605}</UniqueIdentifier>
     </Filter>
@@ -151,6 +154,9 @@
     <ClInclude Include="src\Lanna\Resources.h">
       <Filter>Lanna</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Resource.h">
+      <Filter>Lanna\Resources</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h">
       <Filter>Lanna\Utilities\Json</Filter>
     </ClInclude>
@@ -273,6 +279,9 @@
     </ClCompile>
     <ClCompile Include="src\Lanna\Renderer\Texture.cpp">
       <Filter>Lanna\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Resource.cpp">
+      <Filter>Lanna\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp">
       <Filter>Lanna\Utilities\Json</Filter>

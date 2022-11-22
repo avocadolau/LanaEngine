@@ -6,8 +6,7 @@
 // Resources
 #include "Renderer/Shader.h"
 #include "Renderer/Texture.h"
-//#include "Renderer/Image.h"
-//#include "Renderer/Model.h"
+
 
 #include <string>
 #include <vector>
@@ -55,7 +54,7 @@ namespace Lanna {
 		size_t size = m_Resources[LRT_SHADER].size();
 
 		ResourceId resourceId;
-
+		 
 		if (position == size) {
 			Shader* shader = new Shader();
 			shader->Init(file);

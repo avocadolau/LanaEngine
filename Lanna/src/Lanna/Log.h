@@ -59,9 +59,9 @@ namespace Lanna {
 		inline static std::shared_ptr<Console>& GetClientLogger() { return s_ClientLogger; }
 
 		static const char* GetCoreLastLog();
-		static const char* GetClientLastLog();
+		//static const char* GetClientLastLog();
 
-		static void ImGuiLogTrace(const char* log);
+		/*static void ImGuiLogTrace(const char* log);
 		static void ImGuiLogInfo(const char* log);
 		static void ImGuiLogWarn(const char* log);
 		static void ImGuiLogError(const char* log);
@@ -71,7 +71,7 @@ namespace Lanna {
 		static void ImGuiConsoleInfo(const char* log);
 		static void ImGuiConsoleWarn(const char* log);
 		static void ImGuiConsoleError(const char* log);
-		static void ImGuiConsoleCritical(const char* log);
+		static void ImGuiConsoleCritical(const char* log);*/
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
 		static std::shared_ptr<Console> s_ClientLogger;
