@@ -41,6 +41,9 @@ namespace Lanna {
 		m_Render3D = new Render3D();
 		m_Render3D->Init();
 
+		m_FileSystem = new FileSystem();
+		m_FileSystem->Init();
+
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 	}

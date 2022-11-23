@@ -27,5 +27,6 @@ namespace Lanna
 	private:
 		std::vector<GameObject*> m_Entities;
 		GameObject* activeEntitiy = nullptr;
+		static EntityManager* s_Instance;
 	};
 }

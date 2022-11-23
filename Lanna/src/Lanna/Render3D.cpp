@@ -29,6 +29,7 @@ namespace Lanna {
 
 	void Render3D::Init()
 	{
+		s_Instance = this;
 		Lanna::Window& window = Lanna::Application::Get().GetWindow();
 		resolution = { window.GetHeight(), window.GetHeight() };
 

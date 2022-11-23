@@ -206,6 +206,9 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="src\Lanna\FileSystem.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -302,5 +305,8 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="src\Lanna\FileSystem.cpp">
+      <Filter>Lanna</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@
 #include "Lanna/Events/ApplicationEvent.h"
 #include "Render3D.h"
 #include "EntityManager.h"
-
+#include "FileSystem.h"
 
 namespace Lanna {
 
@@ -45,8 +45,8 @@ namespace Lanna {
 		inline Window& GetWindow() { return *m_Window; }
 		inline static Application& Get() { return *s_Instance; }
 		inline SysInfo& GetSystemInfo() { return m_SysInfo; }
-		inline EntityManager* GetEntityManager() { return m_EntityManager; }
-		inline Render3D& GetRenderer() { return *m_Render3D; }
+		//inline EntityManager* GetEntityManager() { return m_EntityManager; }
+		//inline Render3D& GetRenderer() { return *m_Render3D; }
 
 		void OpenUrl(const char* url);
 	private:
@@ -60,6 +60,7 @@ namespace Lanna {
 		Render3D* m_Render3D;
 		EntityManager* m_EntityManager;
 		Console* m_Console;
+		FileSystem* m_FileSystem;
 	private:
 		static Application* s_Instance;
 	};

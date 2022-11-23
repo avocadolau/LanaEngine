@@ -53,5 +53,6 @@ namespace Lanna
 		void RenderMesh(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, MaterialComponent* material, glm::vec4& color);
 		void RenderGrid(Framebuffer* target = NULL, bool clear = false);
 	private:
+		static Render3D* s_Instance;
 	};
 }
