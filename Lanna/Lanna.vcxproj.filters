@@ -43,6 +43,9 @@
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\Resources\Assets">
+      <UniqueIdentifier>{7f1e45d0-bfe7-472e-acf1-5a27821c0512}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Lanna.h" />
@@ -69,6 +72,9 @@
     </ClInclude>
     <ClInclude Include="src\Lanna\Events\MouseEvent.h">
       <Filter>Lanna\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\FileSystem.h">
+      <Filter>Lanna</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\GameObject\Component.h">
       <Filter>Lanna\GameObject</Filter>
@@ -206,8 +212,20 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Lanna\FileSystem.h">
-      <Filter>Lanna</Filter>
+    <ClInclude Include="src\Lanna\Resources\Assets\MeshAsset.h">
+      <Filter>Lanna\Resources\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\AllAssets.h">
+      <Filter>Lanna\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Assets\ShaderAsset.h">
+      <Filter>Lanna\Resources\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Assets\TextureAsset.h">
+      <Filter>Lanna\Resources\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Assets\MaterialAsset.h">
+      <Filter>Lanna\Resources\Assets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +233,9 @@
       <Filter>Lanna</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\EntityManager.cpp">
+      <Filter>Lanna</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\FileSystem.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\GameObject\Component.cpp">
@@ -305,8 +326,17 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
-    <ClCompile Include="src\Lanna\FileSystem.cpp">
-      <Filter>Lanna</Filter>
+    <ClCompile Include="src\Lanna\Resources\Assets\MeshAsset.cpp">
+      <Filter>Lanna\Resources\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Assets\ShaderAsset.cpp">
+      <Filter>Lanna\Resources\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Assets\TextureAsset.cpp">
+      <Filter>Lanna\Resources\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Assets\MaterialAsset.cpp">
+      <Filter>Lanna\Resources\Assets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

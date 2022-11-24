@@ -2,6 +2,15 @@
 #include "lnpch.h"
 
 namespace Lanna {
+
+	enum ResourceType {
+		LRT_IMAGE,
+		LRT_SHADER,
+		LRT_MODEL,
+		LRT_TEXTURE,
+		LRT_ERROR
+	};
+
 	class FileSystem
 	{
 	public:

@@ -6,7 +6,7 @@
 // Resources
 #include "Renderer/Shader.h"
 #include "Renderer/Texture.h"
-
+#include "Lanna/Resources/AllAssets.h"
 
 #include <string>
 #include <vector>
@@ -41,7 +41,9 @@ namespace Lanna {
 		static void PushResource(ResourceType rt, const char* file, void* rsc);
 		static ResourceId getResourcePosition(ResourceType rt, const char* file);
 	public:
-		template<class T> static ResourceId Load(const char* file);
+		template<class T> static ResourceId Import(const char* file);
+		template<class T> static ResourceId Save();
+		template<class T> static ResourceId Load();
 		template<class T> static T* GetResourceById(ResourceId id);
 
 		static void Clear();
@@ -49,7 +51,7 @@ namespace Lanna {
 
 	// SPECIALIZATION FOR SHADER
 	template<>
-	inline ResourceId Resources::Load<Shader>(const char* file) {
+	inline ResourceId Resources::Import<Shader>(const char* file) {
 		ResourceId position = getResourcePosition(LRT_SHADER, file);
 		size_t size = m_Resources[LRT_SHADER].size();
 
@@ -150,7 +152,7 @@ namespace Lanna {
 		return model;
 	}*/
 	template<>
-	inline ResourceId Resources::Load<Texture>(const char* file)
+	inline ResourceId Resources::Import<Texture>(const char* file)
 	{
 		ResourceId position = getResourcePosition(LRT_TEXTURE, file);
 		size_t size = m_Resources[LRT_TEXTURE].size();

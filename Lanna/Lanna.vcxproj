@@ -26,19 +26,19 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -85,7 +85,6 @@
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -112,7 +111,6 @@ IF EXIST ..\bin\Debug-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -140,7 +138,6 @@ IF EXIST ..\bin\Release-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bi
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -193,6 +190,11 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\Renderer\Shader.h" />
     <ClInclude Include="src\Lanna\Renderer\Texture.h" />
     <ClInclude Include="src\Lanna\Resources.h" />
+    <ClInclude Include="src\Lanna\Resources\AllAssets.h" />
+    <ClInclude Include="src\Lanna\Resources\Assets\MaterialAsset.h" />
+    <ClInclude Include="src\Lanna\Resources\Assets\MeshAsset.h" />
+    <ClInclude Include="src\Lanna\Resources\Assets\ShaderAsset.h" />
+    <ClInclude Include="src\Lanna\Resources\Assets\TextureAsset.h" />
     <ClInclude Include="src\Lanna\Resources\Resource.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
@@ -238,6 +240,10 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Shader.cpp" />
     <ClCompile Include="src\Lanna\Renderer\Texture.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Assets\MaterialAsset.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Assets\MeshAsset.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Assets\ShaderAsset.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Assets\TextureAsset.cpp" />
     <ClCompile Include="src\Lanna\Resources\Resource.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp" />
