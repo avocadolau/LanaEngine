@@ -145,6 +145,9 @@
     <ClInclude Include="src\Lanna\Renderer\Framebuffer.h">
       <Filter>Lanna\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Renderer\Mesh.h">
+      <Filter>Lanna\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Renderer\Shader.h">
       <Filter>Lanna\Renderer</Filter>
     </ClInclude>
@@ -203,12 +206,6 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Lanna\Renderer\Mesh.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Material.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -280,11 +277,17 @@
     <ClCompile Include="src\Lanna\Renderer\Framebuffer.cpp">
       <Filter>Lanna\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lanna\Renderer\Mesh.cpp">
+      <Filter>Lanna\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Lanna\Renderer\Shader.cpp">
       <Filter>Lanna\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Renderer\Texture.cpp">
       <Filter>Lanna\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources.cpp">
+      <Filter>Lanna</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp">
       <Filter>Lanna\Utilities\Json</Filter>
@@ -305,11 +308,5 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Material.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Mesh.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -6,9 +6,13 @@
 // Resources
 #include "Renderer/Shader.h"
 #include "Renderer/Texture.h"
+#include "Renderer/Mesh.h"
+//#include "Renderer/Material.h"
 
 #include <string>
 #include <vector>
+
+#define RESOURCE_TEST
 
 typedef size_t ResourceId;
 
@@ -18,28 +22,28 @@ namespace Lanna {
 	public:
 		// Enum that indicates all the resources that can be loaded by the engine
 		enum ResourceType {
-			LRT_IMAGE,
-			LRT_SHADER,
-			LRT_MODEL,
 			LRT_TEXTURE,
+			LRT_SHADER,
+			LRT_MESH,
+			LRT_MATERIAL,
 			LRT_LAST
 		};
 
 		struct Resource {
-			// Path to resource
 			std::string filePath;
-
-			// Any type
 			void* resource;
 		};
+
 	private:
-		Resources();
 
 		static std::vector<Resource*> m_Resources[LRT_LAST];
 
 		static void PushResource(ResourceType rt, const char* file, void* rsc);
 		static ResourceId getResourcePosition(ResourceType rt, const char* file);
 	public:
+		Resources();
+		~Resources();
+
 		template<class T> static ResourceId Import(const char* file);
 		template<class T> static ResourceId Save(const char* path);
 		template<class T> static ResourceId Load(const char* path);
@@ -84,10 +88,10 @@ namespace Lanna {
 
 	//--SPECIALIZATION FOR SPRITE
 	template<>
-	inline ResourceId Resources::Load<Texture>(const char * file)
+	inline ResourceId Resources::Import<Texture>(const char * file)
 	{
-		ResourceId position = getResourcePosition(LRT_IMAGE, file);
-		size_t size = m_Resources[LRT_IMAGE].size();
+		ResourceId position = getResourcePosition(LRT_TEXTURE, file);
+		size_t size = m_Resources[LRT_TEXTURE].size();
 
 		ResourceId resourceId;
 
@@ -95,7 +99,7 @@ namespace Lanna {
 			Texture* image = new Texture();
 			image->Init(file);
 
-			PushResource(LRT_IMAGE, file, image);
+			PushResource(LRT_TEXTURE, file, image);
 
 			resourceId = size;
 		}
@@ -111,25 +115,25 @@ namespace Lanna {
 	{
 		Texture* image = NULL;
 	
-		if (id >= 0 && id < m_Resources[LRT_IMAGE].size()) {
-			image = static_cast<Texture*>(m_Resources[LRT_IMAGE][id]->resource);
+		if (id >= 0 && id < m_Resources[LRT_TEXTURE].size()) {
+			image = static_cast<Texture*>(m_Resources[LRT_TEXTURE][id]->resource);
 		}
 	
 		return image;
 	}
 	//--SPECIALIZATION FOR MODEL
 	template<>
-	inline ResourceId Resources::Load<Model>(const char* file)
+	inline ResourceId Resources::Import<Mesh>(const char* file)
 	{
-		ResourceId position = getResourcePosition(LRT_MODEL, file);
-		size_t size = m_Resources[LRT_MODEL].size();
+		ResourceId position = getResourcePosition(LRT_MESH, file);
+		size_t size = m_Resources[LRT_MESH].size();
 
 		ResourceId resourceId;
 
 		if (position == size) {
-			Model* model = new Model(file);
+			Mesh* model = new Mesh(file);
 
-			PushResource(LRT_MODEL, file, model);
+			PushResource(LRT_MESH, file, model);
 
 			resourceId = size;
 		}
@@ -140,29 +144,30 @@ namespace Lanna {
 		return resourceId;
 	}
 	template<>
-	inline Model* Resources::GetResourceById<Model>(ResourceId id)
+	inline Mesh* Resources::GetResourceById<Mesh>(ResourceId id)
 	{
-		Model* model = NULL;
+		Mesh* model = NULL;
 
-		if (id >= 0 && id < m_Resources[WRT_MODEL].size()) {
-			model = static_cast<Model*>(m_Resources[WRT_MODEL][id]->resource);
+		if (id >= 0 && id < m_Resources[LRT_MESH].size()) {
+			model = static_cast<Mesh*>(m_Resources[LRT_MESH][id]->resource);
 		}
 
 		return model;
 	}
-	template<>
-	inline ResourceId Resources::Import<Texture>(const char* file)
+	/*template<>S
+	inline ResourceId Resources::Import<Material>(const char* file)
 	{
-		ResourceId position = getResourcePosition(LRT_TEXTURE, file);
-		size_t size = m_Resources[LRT_TEXTURE].size();
+		ResourceId position = getResourcePosition(LRT_MATERIAL, file);
+		size_t size = m_Resources[LRT_MATERIAL].size();
 
 		ResourceId resourceId;
 
 		if (position == size) {
-			Texture* texture = new Texture();
-			texture->Init(file);
 
-			PushResource(LRT_TEXTURE, file, texture);
+			Material* material = new Material(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+
+			PushResource(LRT_MATERIAL, file, material);
 
 			resourceId = size;
 		}
@@ -173,14 +178,14 @@ namespace Lanna {
 		return resourceId;
 	}
 	template<>
-	inline Lanna::Texture* Resources::GetResourceById<Lanna::Texture>(ResourceId id)
+	inline Lanna::Material* Resources::GetResourceById<Material>(ResourceId id)
 	{
-		Lanna::Texture* material = NULL;
+		Lanna::Material* material = NULL;
 
-		if (id >= 0 && id < m_Resources[LRT_TEXTURE].size()) {
-			material = static_cast<Lanna::Texture*>(m_Resources[LRT_TEXTURE][id]->resource);
+		if (id >= 0 && id < m_Resources[LRT_MATERIAL].size()) {
+			material = static_cast<Lanna::Material*>(m_Resources[LRT_MATERIAL][id]->resource);
 		}
 
 		return material;
-	}
+	}*/
 }

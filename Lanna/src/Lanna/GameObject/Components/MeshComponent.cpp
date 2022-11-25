@@ -6,16 +6,16 @@
 
 #include "Lanna/Log.h"
 #include "Lanna/Application.h"
+#include "Lanna/Resources.h"
 #include "Lanna/Render3D.h"
+#include "Lanna/Renderer/Mesh.h"
 
 #include <glew.h>
 #include <glm.hpp>
 
-#ifndef ASSIMP_NOT_WORKING
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#endif // !ASSIMP_NOT_WORKING
 
 #include <imgui.h>
 
@@ -25,6 +25,7 @@ namespace Lanna
 	{
 		source = "no mesh";
 	}
+
 	MeshComponent::~MeshComponent()
 	{
 
@@ -39,6 +40,95 @@ namespace Lanna
 	{
 
 	}
+
+#ifdef RESOURCE_TEST
+	void MeshComponent::ImGuiDraw()
+	{
+		if (ImGui::TreeNode("Mesh"))
+		{
+
+
+			if (source != "no mesh")
+			{
+				ImGui::Text("Source mesh");
+				ImGui::TextWrapped(source);
+			}
+			else
+			{
+				static int selectedMesh = -1;
+				const char* names[] = { "cube", "pyramid", "plane" };
+
+				if (ImGui::Button("Primitives"))
+					ImGui::OpenPopup("my_select_popup");
+				ImGui::SameLine();
+
+				if (ImGui::BeginPopup("my_select_popup"))
+				{
+					ImGui::Text("Primitives");
+					ImGui::Separator();
+					for (int i = 0; i < IM_ARRAYSIZE(names); i++)
+						if (ImGui::Selectable(names[i]))
+						{
+							selectedMesh = i;
+							LoadPrimitive((Primitives)i);
+						}
+					if (ImGui::Selectable("<None>"))
+						selectedMesh = -1;
+					ImGui::EndPopup();
+				}
+			}
+			//ImGui::TextUnformatted(selectedMesh == -1 ? "<None>" : names[selectedMesh]);
+
+			/*ImGui::Text("");
+			static char buf[100] = "";
+			ImGui::Text("Mesh Path");
+			ImGui::SetNextItemWidth(-FLT_MIN-50);
+			ImGui::InputText("", buf, IM_ARRAYSIZE(buf));
+			ImGui::SameLine();
+			if (ImGui::SmallButton("load"))
+			{
+				LoadFromFile(buf);
+			}*/
+
+			ImGui::TreePop();
+		}
+
+	}
+
+	void MeshComponent::Render()
+	{
+		Mesh* m_Mesh = Lanna::Application::Get().GetResources().GetResourceById<Mesh>(m_MeshID);
+		m_Mesh->Render();
+	}
+
+	void MeshComponent::LoadFromFile(const char* file)
+	{
+		m_MeshID = Lanna::Application::Get().GetResources().Import<Mesh>(file);
+
+	}
+
+	void MeshComponent::LoadPrimitive(Primitives type)
+	{
+		const char* path;
+		switch (type)
+		{
+		case CUBE_:
+			path="resources/models/Primitives/cube.fbx";
+			break;
+		case PYRAMID_:
+			path="resources/models/Primitives/pyramid.fbx";
+			break;
+		case PLANE_:
+			path="resources/models/Primitives/plane.fbx";
+			break;
+		}
+		m_MeshID = Lanna::Application::Get().GetResources().Import<Mesh>(path);
+
+	}
+
+#else
+
+	
 
 	void MeshComponent::ImGuiDraw()
 	{
@@ -110,6 +200,7 @@ namespace Lanna
 
 	void MeshComponent::LoadFromFile(const char* file)
 	{
+
 		vbo_data.clear();
 		ebo_data.clear();
 		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -144,15 +235,15 @@ namespace Lanna
 		ebo_data.clear();
 		switch (type)
 		{
-		case CUBE:
+		case CUBE_:
 			LoadFromFile("resources/models/Primitives/cube.fbx");
 			source = "Cube primitive";
 			break;
-		case PYRAMID:
+		case PYRAMID_:
 			LoadFromFile("resources/models/Primitives/pyramid.fbx");
 			source = "Pyramid primitive";
 			break;
-		case PLANE:
+		case PLANE_:
 			LoadFromFile("resources/models/Primitives/plane.fbx");
 			source = "Plane primitive";
 			break;
@@ -237,4 +328,6 @@ namespace Lanna
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
+#endif // RESOURCE_TEST
+
 }

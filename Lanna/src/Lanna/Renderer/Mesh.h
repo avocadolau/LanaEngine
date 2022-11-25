@@ -1,8 +1,8 @@
 #pragma once
 #include "Lanna/Renderer/Framebuffer.h"
-#include "Lanna/Renderer/Material.h"
+//#include "Lanna/Renderer/Material.h"
 
-enum Primitives {
+enum PrimitivesMesh {
 	CUBE,
 	PYRAMID,
 	PLANE,
@@ -22,7 +22,8 @@ namespace Lanna {
 		~Mesh();
 
 		void LoadFromFile(const char* file);
-		void LoadPrimitive(Primitives primitive);
+		void LoadPrimitive(PrimitivesMesh primitive);
+		void Render();
 		Mesh* loadmesh(const aiMesh* mesh);
 	private:
 		void GenerateBuffers();
@@ -36,10 +37,6 @@ namespace Lanna {
 		std::vector<Mesh*> models;
 		Lanna::Framebuffer* buff;
 		bool is_root = false;
-		std::string m_ModelPath;
-
-		unsigned int materialID;
-		Material* material;
 	};
 
 }

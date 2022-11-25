@@ -46,11 +46,10 @@ namespace Lanna {
 		else {
 			LN_CORE_INFO("Error loading mesh {0} with error {1}", file, aiGetErrorString());
 		}
-		m_ModelPath = file;
 		GenerateBuffers();
 	}
 
-	void Mesh::LoadPrimitive(Primitives primitive)
+	void Mesh::LoadPrimitive(PrimitivesMesh primitive)
 	{
 		vbo_data.clear();
 		ebo_data.clear();
@@ -58,16 +57,28 @@ namespace Lanna {
 		{
 		case CUBE:
 			LoadFromFile("resources/models/Primitives/cube.fbx");
-			m_ModelPath = "Cube primitive";
 			break;
 		case PYRAMID:
 			LoadFromFile("resources/models/Primitives/pyramid.fbx");
-			m_ModelPath = "Pyramid primitive";
 			break;
 		case PLANE:
 			LoadFromFile("resources/models/Primitives/plane.fbx");
-			m_ModelPath = "Plane primitive";
 			break;
+		}
+	}
+
+	void Mesh::Render()
+	{
+		if (is_root) {
+			size_t meshCount = models.size();
+
+			for (size_t i = 0; i < meshCount; i++) {
+				models[i]->Render();
+			}
+		}
+		else {
+			glBindVertexArray(vao);
+			glDrawElements(GL_TRIANGLES, (GLsizei)ebo_data.size(), GL_UNSIGNED_INT, 0);
 		}
 	}
 

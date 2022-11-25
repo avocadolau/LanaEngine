@@ -8,6 +8,7 @@
 #include "Input.h"
 #include "imgui.h"
 #include "Render3D.h"
+#include "Resources.h"
 
 #include <Windows.h>
 #include <shellapi.h>
@@ -34,6 +35,8 @@ namespace Lanna {
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
 		SetHwInfo();
+
+		m_Resources = new Resources();
 
 		m_EntityManager = new EntityManager();
 		m_EntityManager->Init();

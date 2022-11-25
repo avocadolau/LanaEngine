@@ -266,7 +266,7 @@ namespace Lanna {
 		{
 			const char* names[] = { "Cube", "Pyramid","Plane" };
 
-			for (int i = 0; i < (int)Primitives::TOTAL; i++)
+			for (int i = 0; i < (int)Primitives::TOTAL_; i++)
 			{
 				if (ImGui::MenuItem(names[i]))
 				{

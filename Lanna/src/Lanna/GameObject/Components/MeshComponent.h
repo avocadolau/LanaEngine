@@ -2,14 +2,15 @@
 
 #include "Lanna/GameObject/Component.h"
 #include "Lanna/Renderer/Framebuffer.h"
+#include "Lanna/Resources.h"
 #include <vector>
 struct aiMesh;
 enum Primitives{
-	CUBE,
-	PYRAMID,
-	PLANE,
+	CUBE_,
+	PYRAMID_,
+	PLANE_,
 
-	TOTAL
+	TOTAL_
 };
 
 namespace Lanna
@@ -40,6 +41,8 @@ namespace Lanna
 		std::vector<MeshComponent*> models;
 		Lanna::Framebuffer* buff;
 		bool is_root = false;
+		
+		ResourceId m_MeshID;
 		std::string m_ModelPath;
 		const char* source;
 	};
