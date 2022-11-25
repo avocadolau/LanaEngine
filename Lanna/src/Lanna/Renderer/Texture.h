@@ -12,7 +12,7 @@ namespace Lanna {
 	class LANNA_API Texture
 	{
 	private:
-		unsigned int m_id;
+		unsigned int m_buffID;
 		glm::vec2 m_size;
 		int m_channels;
 
@@ -23,7 +23,7 @@ namespace Lanna {
 
 		bool Init(const char* path);
 
-		int GetTextureId() { return m_id; }
+		int GetTextureId() { return m_buffID; }
 		int GetChannels() { return m_channels; }
 
 		int GetWidth() { return m_size.x; }

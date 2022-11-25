@@ -28,8 +28,8 @@ namespace Lanna{
 			return false;
 		}
 
-		glGenTextures(1, &m_id);
-		glBindTexture(GL_TEXTURE_2D, m_id);
+		glGenTextures(1, &m_buffID);
+		glBindTexture(GL_TEXTURE_2D, m_buffID);
 
 		int PicType = GL_RGBA;
 		glTexImage2D(GL_TEXTURE_2D, 0, PicType, x, y, 0, PicType, GL_UNSIGNED_BYTE, image);

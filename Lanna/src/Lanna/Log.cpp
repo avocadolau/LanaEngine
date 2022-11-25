@@ -52,29 +52,33 @@ namespace Lanna {
 
     void Console::AddLog(LogLevel logLevel, const char* fmt,...) IM_FMTARGS(2)
     {
-        std::string level;
-        switch (logLevel)
+        if (fmt!="{0}")
         {
-        case LogLevel::INFO:        level = "[info] ";          break;
-        case LogLevel::WARN:        level = "[warn] ";          break;
-        case LogLevel::ERR:         level = "[error] ";         break;
-        case LogLevel::FATAL:       level = "[fatal] ";         break;
-        case LogLevel::TRACE:       level = "[trace] ";         break;
+            std::string level;
+            switch (logLevel)
+            {
+            case LogLevel::INFO:        level = "[info] ";          break;
+            case LogLevel::WARN:        level = "[warn] ";          break;
+            case LogLevel::ERR:         level = "[error] ";         break;
+            case LogLevel::FATAL:       level = "[fatal] ";         break;
+            case LogLevel::TRACE:       level = "[trace] ";         break;
+            }
+
+            std::string text;
+            text = level + fmt;
+            
+
+            // FIXME-OPT
+            char buf[1024];
+            va_list args;
+            va_start(args, text);
+            vsnprintf(buf, IM_ARRAYSIZE(buf), text.c_str(), args);
+            buf[IM_ARRAYSIZE(buf) - 1] = 0;
+            va_end(args);
+
+
+            Items.push_back(Strdup(buf));
         }
-
-        std::string text;
-        text = level + fmt;
-
-        // FIXME-OPT
-        char buf[1024];
-        va_list args;
-        va_start(args, text);
-        vsnprintf(buf, IM_ARRAYSIZE(buf), text.c_str(), args);
-        buf[IM_ARRAYSIZE(buf) - 1] = 0;
-        va_end(args);
-
-        
-        Items.push_back(Strdup(buf));
     }
 
     void Console::Draw(const char* title, bool* p_open)

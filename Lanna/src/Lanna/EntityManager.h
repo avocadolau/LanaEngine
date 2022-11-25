@@ -6,7 +6,7 @@
 namespace Lanna
 {
 
-	class EntityManager
+	class LANNA_API EntityManager
 	{
 	public:
 		EntityManager();
@@ -27,6 +27,5 @@ namespace Lanna
 	private:
 		std::vector<GameObject*> m_Entities;
 		GameObject* activeEntitiy = nullptr;
-		static EntityManager* s_Instance;
 	};
 }

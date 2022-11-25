@@ -45,8 +45,9 @@ namespace Lanna {
 		inline Window& GetWindow() { return *m_Window; }
 		inline static Application& Get() { return *s_Instance; }
 		inline SysInfo& GetSystemInfo() { return m_SysInfo; }
-		//inline EntityManager* GetEntityManager() { return m_EntityManager; }
-		//inline Render3D& GetRenderer() { return *m_Render3D; }
+		inline EntityManager* GetEntityManager() { return m_EntityManager; }
+		inline Render3D& GetRenderer() { return *m_Render3D; }
+		inline FileSystem& GetFileSystem() { return *m_FileSystem; }
 
 		void OpenUrl(const char* url);
 	private:
