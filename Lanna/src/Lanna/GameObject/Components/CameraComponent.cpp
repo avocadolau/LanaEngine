@@ -70,7 +70,7 @@ namespace Lanna
         UpdateRotation();
         if (Lanna::Input::IsKeyPressed(LN_KEY_F))
         {
-            GameObject* active = Lanna::Application::Get().GetEntityManager()->GetActiveEntitiy();
+            GameObject* active = LN_ENTITY_MAN->GetActiveEntitiy();
             LookAt(active->m_Transform->m_Position);
         }
 

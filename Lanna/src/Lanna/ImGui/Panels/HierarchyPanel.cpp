@@ -20,7 +20,7 @@ namespace Lanna {
 
     void HierarchyPanel::Draw()
     {
-        std::vector<GameObject*> entities = *Lanna::Application::Get().GetEntityManager()->GetEntityList();
+        std::vector<GameObject*> entities = *LN_ENTITY_MAN->GetEntityList();
 
         ImGui::Begin("Scene Game Objects", &active);
 
@@ -34,7 +34,7 @@ namespace Lanna {
                     selected = i;
             }
 
-            Lanna::Application::Get().GetEntityManager()->SetActiveEntity(selected);
+            LN_ENTITY_MAN->SetActiveEntity(selected);
 
 
 
@@ -81,7 +81,7 @@ namespace Lanna {
             //        }
             //    }
 
-            //    Lanna::Application::Get().GetEntityManager()->SetActiveEntity(selected);
+            //    LN_ENTITY_MAN->SetActiveEntity(selected);
             //}
         }
         ImGui::End();

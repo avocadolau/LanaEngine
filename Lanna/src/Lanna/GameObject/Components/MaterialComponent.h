@@ -4,6 +4,7 @@
 #include <glew.h>
 #include <glm.hpp>
 #include "Lanna/Renderer/Texture.h"
+#include "Lanna/Resources.h"
 
 namespace Lanna
 {
@@ -21,7 +22,7 @@ namespace Lanna
 		MaterialComponent(const char* file);
 		~MaterialComponent();
 
-		inline unsigned int getTextureID() { return m_texid; }
+		unsigned int getTextureID();
 
 		inline Type getType() { return m_Type; }
 		inline glm::vec4 getColor() { return m_Color; }
@@ -41,7 +42,7 @@ namespace Lanna
 		glm::vec2 m_TexSize;
 		glm::vec4 m_Color;
 		Type m_Type;
-		Texture* m_texture;
 		unsigned int m_texid;
+		ResourceId m_TextureID;
 	};
 }

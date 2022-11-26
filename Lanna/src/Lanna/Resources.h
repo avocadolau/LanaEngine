@@ -2,21 +2,24 @@
 #pragma warning(disable : 4251)
 
 #include <Lanna/Core.h>
+#include "Utilities/FileHelpers.h"
 
 // Resources
 #include "Renderer/Shader.h"
 #include "Renderer/Texture.h"
 #include "Renderer/Mesh.h"
-//#include "Renderer/Material.h"
+#include "Renderer/Material.h"
 
 #include <string>
 #include <vector>
 
-#define RESOURCE_TEST
+//#define RESOURCE_TEST
 
 typedef size_t ResourceId;
 
 namespace Lanna {
+
+
 	class LANNA_API Resources
 	{
 	public:
@@ -49,6 +52,7 @@ namespace Lanna {
 		template<class T> static ResourceId Load(const char* path);
 		template<class T> static T* GetResourceById(ResourceId id);
 
+		template<class T> static std::string GetPathById(ResourceId id);
 		static void Clear();
 	};
 
@@ -86,6 +90,15 @@ namespace Lanna {
 		return resource;
 	}
 
+	template<>
+	inline std::string Resources::GetPathById<Shader>(ResourceId id) {
+		std::string path;
+		if (id >= 0 && id < m_Resources[LRT_SHADER].size()) {
+			path = m_Resources[LRT_SHADER][id]->filePath;
+		}
+		return path;
+	}
+
 	//--SPECIALIZATION FOR SPRITE
 	template<>
 	inline ResourceId Resources::Import<Texture>(const char * file)
@@ -121,6 +134,16 @@ namespace Lanna {
 	
 		return image;
 	}
+
+	template<>
+	inline std::string Resources::GetPathById<Texture>(ResourceId id) {
+		std::string path;
+		if (id >= 0 && id < m_Resources[LRT_TEXTURE].size()) {
+			path = m_Resources[LRT_TEXTURE][id]->filePath;
+		}
+		return path;
+	}
+
 	//--SPECIALIZATION FOR MODEL
 	template<>
 	inline ResourceId Resources::Import<Mesh>(const char* file)
@@ -154,7 +177,17 @@ namespace Lanna {
 
 		return model;
 	}
-	/*template<>S
+	template<>
+	inline std::string Resources::GetPathById<Mesh>(ResourceId id) {
+		std::string path;
+		if (id >= 0 && id < m_Resources[LRT_MESH].size()) {
+			path = m_Resources[LRT_MESH][id]->filePath;
+		}
+		return path;
+	}
+
+#ifdef RESOURCE_TEST
+	template<>
 	inline ResourceId Resources::Import<Material>(const char* file)
 	{
 		ResourceId position = getResourcePosition(LRT_MATERIAL, file);
@@ -164,7 +197,7 @@ namespace Lanna {
 
 		if (position == size) {
 
-			Material* material = new Material(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			Material* material = new Material(file);
 
 
 			PushResource(LRT_MATERIAL, file, material);
@@ -187,5 +220,8 @@ namespace Lanna {
 		}
 
 		return material;
-	}*/
+	}
+#endif // RESOURCE_TEST
+
+	
 }

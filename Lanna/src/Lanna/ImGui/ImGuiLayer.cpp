@@ -213,8 +213,8 @@ namespace Lanna {
 		ImGuiIO& io = ImGui::GetIO();
 		io.MousePosPrev = io.MousePos;
 		io.MousePos = ImVec2(e.GetX(), e.GetY());
-		//Lanna::Application::Get().GetRenderer().GetActiveCamera().ProcessMouseMovement(e.GetX(), e.GetY(), true);
-		Lanna::Application::Get().GetRenderer().GetActiveCamera().ProcessMouseMovement(e.GetX(), e.GetY(), true);
+		//LN_RENDERER.GetActiveCamera().ProcessMouseMovement(e.GetX(), e.GetY(), true);
+		LN_RENDERER.GetActiveCamera().ProcessMouseMovement(e.GetX(), e.GetY(), true);
 
 		return false;
 	}
@@ -225,7 +225,7 @@ namespace Lanna {
 		io.MouseWheelH += e.GetXOffset();
 		io.MouseWheel += e.GetYOffset();
 
-		Lanna::Application::Get().GetRenderer().GetActiveCamera().ProcessMouseScroll(e.GetYOffset());
+		LN_RENDERER.GetActiveCamera().ProcessMouseScroll(e.GetYOffset());
 
 		return false;
 	}
@@ -270,7 +270,7 @@ namespace Lanna {
 			{
 				if (ImGui::MenuItem(names[i]))
 				{
-					GameObject* obj = Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject(names[i]);
+					GameObject* obj = LN_ENTITY_MAN->AddEmptyGameObject(names[i]);
 					MeshComponent* mesh= (MeshComponent*)obj->AddComponent(Component::Type::MESH);
 					mesh->LoadPrimitive((Primitives)i);
 				}

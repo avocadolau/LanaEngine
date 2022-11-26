@@ -73,3 +73,8 @@ namespace Lanna {
 	Application* CreateApplication();
 
 }
+
+// module getters
+#define LN_ENTITY_MAN ::Lanna::Application::Get().GetEntityManager()
+#define LN_RENDERER ::Lanna::Application::Get().GetRenderer()
+#define LN_RESOURCES ::Lanna::Application::Get().GetResources()

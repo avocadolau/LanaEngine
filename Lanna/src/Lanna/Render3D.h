@@ -9,6 +9,7 @@
 #include "Lanna/Renderer/Framebuffer.h"
 #include "Lanna/Renderer/Texture.h"
 #include "Lanna/Renderer/Shader.h"
+#include "Lanna/Resources.h"
 
 #include <glm.hpp>
 
@@ -23,9 +24,13 @@ namespace Lanna
 		glm::mat4 m_View;
 		glm::vec2  resolution;
 
-		Shader* m_ColorShader;
+		
+		/*Shader* m_ColorShader;
 		Shader* m_TexShader;
-		Shader* m_GridShader;
+		Shader* m_GridShader;*/
+		ResourceId m_ColorShader;
+		ResourceId m_TexShader;
+		ResourceId m_GridShader;
 
 	public:
 

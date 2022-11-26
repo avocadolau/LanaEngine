@@ -43,7 +43,7 @@ namespace Lanna {
 
 	void InspectorPanel::Draw()
 	{
-		GameObject* activeObject = Lanna::Application::Get().GetEntityManager()->GetActiveEntitiy();
+		GameObject* activeObject = LN_ENTITY_MAN->GetActiveEntitiy();
 
 		ImGui::Begin("Inspector", &active);
 		if (activeObject != nullptr)

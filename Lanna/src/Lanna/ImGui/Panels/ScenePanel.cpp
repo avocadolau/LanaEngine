@@ -70,10 +70,10 @@ namespace Lanna {
 		float scale = scales.x < scales.y ? scales.x : scales.y;
 
 		static bool grid = true;
-		Lanna::Application::Get().GetRenderer().RenderGrid();
+		LN_RENDERER.RenderGrid();
 
 		ImVec2 isize = { resolution.x * scale, resolution.y * scale };
-		ImTextureID tex = (ImTextureID)(intptr_t)Lanna::Application::Get().GetRenderer().getColorBufferTexture();
+		ImTextureID tex = (ImTextureID)(intptr_t)LN_RENDERER.getColorBufferTexture();
 		ImVec2 cpos = ImGui::GetCursorPos();
 		cpos.x = (viewportPanelSize.x - isize.x) / 2;
 		ImGui::SetCursorPos(cpos);
@@ -82,7 +82,7 @@ namespace Lanna {
 	}
 	void ScenePanel::ImportFBX(const std::filesystem::path& path)
 	{	
-		GameObject* newFBX = Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject(path.filename().string().c_str());
+		GameObject* newFBX = LN_ENTITY_MAN->AddEmptyGameObject(path.filename().string().c_str());
 		newFBX->AddComponent(Component::Type::MESH);
 		newFBX->m_Mesh->LoadFromFile(path.string().c_str());
 	}

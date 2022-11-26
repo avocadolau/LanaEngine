@@ -1,6 +1,8 @@
 #include "lnpch.h"
 #include "MaterialComponent.h"
 #include "Lanna/GameObject/Component.h"
+#include "Lanna/Application.h"
+#include "Lanna/Resources.h"
 
 #include <imgui.h>
 #include <glew.h>
@@ -20,14 +22,7 @@ namespace Lanna
 	}
 	MaterialComponent::MaterialComponent(const char* file) : Component(Component::Type::MATERIAL), m_Type(TEXTURE)
 	{
-		m_TexPath = file;
-		if (!m_TexPath.empty())
-		{
-			m_texture = new Texture();
-			m_texture->Init(file);
-			m_texid = m_texture->GetTextureId();
-			m_TexSize = m_texture->GetSize();
-		}
+		m_TextureID = LN_RESOURCES.Import<Texture>(file);
 	}
 
 	MaterialComponent::~MaterialComponent()
@@ -35,16 +30,16 @@ namespace Lanna
 
 	}
 
+	unsigned int MaterialComponent::getTextureID()
+	{
+		return LN_RESOURCES.GetResourceById<Texture>(m_TextureID)->GetTextureId();
+	}
+
 	void MaterialComponent::setTexture(const char* file)
 	{
+
 		m_Type = TEXTURE;
-		m_TexPath = file;
-		/*if (m_texture!=nullptr)
-			delete m_texture;*/
-		m_texture = new Texture();
-		m_texture->Init(file);
-		m_texid = m_texture->GetTextureId();
-		m_TexSize = m_texture->GetSize();
+		m_TextureID = LN_RESOURCES.Import<Texture>(file);
 	}
 
 	void MaterialComponent::Use()
@@ -75,8 +70,9 @@ namespace Lanna
 			else if (m_Type == TEXTURE)
 			{
 				ImGui::Text("Texture path:");
-				ImGui::Text(m_TexPath.c_str());
-				ImGui::Image((ImTextureID)(intptr_t)m_texture->GetTextureId(), { 64, 64 });
+				ImGui::Text(LN_RESOURCES.GetPathById<Texture>(m_TextureID).c_str()); // m_TexPath.c_str());
+				int mTexId = LN_RESOURCES.GetResourceById<Texture>(m_TextureID)->GetTextureId();
+				ImGui::Image((ImTextureID)(intptr_t)mTexId, { 64, 64 });
 			}
 			else
 			{

@@ -35,11 +35,11 @@ namespace Lanna {
 
 		m_Framebuffer.Init(resolution.x, resolution.y);
 
-		m_ColorShader = new Shader("resources/shaders/model_color");
-		m_TexShader = new Shader("resources/shaders/model_texture");
-		m_GridShader = new Shader("resourses/shaders/grid");
+		m_ColorShader = LN_RESOURCES.Import<Shader>("resources/shaders/model_color");
+		m_TexShader = LN_RESOURCES.Import<Shader>("resources/shaders/model_texture");
+		m_GridShader = LN_RESOURCES.Import<Shader>("resourses/shaders/grid");
 
-		GameObject* camera=Lanna::Application::Get().GetEntityManager()->AddEmptyGameObject("camera");
+		GameObject* camera=LN_ENTITY_MAN->AddEmptyGameObject("camera");
 		
 		m_ActiveCamera = (CameraComponent*)camera->AddComponent(Component::Type::CAMERA);
 		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
@@ -102,12 +102,13 @@ namespace Lanna {
 		model = glm::rotate(model, rotation.z, glm::vec3(0.f, 0.0f, 1.0f));
 		model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
 
-		m_ColorShader->Use();
+		Shader* colorShaderRef = LN_RESOURCES.GetResourceById<Shader>(m_ColorShader);
+		colorShaderRef->Use();
 
-		m_ColorShader->setMat4("u_Model", model);
-		m_ColorShader->setMat4("u_View", m_ActiveCamera->getView());
-		m_ColorShader->setMat4("u_Proj", m_ActiveCamera->getProjection());
-		m_ColorShader->setVec4("u_Color", glm::vec4(color.r, color.g, color.b, color.a));
+		colorShaderRef->setMat4("u_Model", model);
+		colorShaderRef->setMat4("u_View", m_ActiveCamera->getView());
+		colorShaderRef->setMat4("u_Proj", m_ActiveCamera->getProjection());
+		colorShaderRef->setVec4("u_Color", glm::vec4(color.r, color.g, color.b, color.a));
 
 		mesh->Render();
 
@@ -148,14 +149,15 @@ namespace Lanna {
 		model = glm::rotate(model, rotation.z, glm::vec3(0.f, 0.0f, 1.0f));
 		model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
 
-		m_TexShader->Use();
+		Shader* texShaderRef = LN_RESOURCES.GetResourceById<Shader>(m_TexShader);
+		texShaderRef->Use();
 		glBindVertexArray(mesh->vao);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, material->getTextureID());
 
-		m_ColorShader->setMat4("u_Model", model);
-		m_ColorShader->setMat4("u_View", m_ActiveCamera->getView());
-		m_ColorShader->setMat4("u_Proj", m_ActiveCamera->getProjection());
+		texShaderRef->setMat4("u_Model", model);
+		texShaderRef->setMat4("u_View", m_ActiveCamera->getView());
+		texShaderRef->setMat4("u_Proj", m_ActiveCamera->getProjection());
 
 		mesh->Render();
 		glBindTexture(GL_TEXTURE_2D, 0);
