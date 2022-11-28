@@ -2,7 +2,7 @@
 
 #include "lnpch.h"
 #include "Panel.h"
-#include "Lanna/Renderer/Texture.h"
+#include "Lanna/Resources/Texture.h"
 
 namespace Lanna {
 	class AssetsPanel :public Panel

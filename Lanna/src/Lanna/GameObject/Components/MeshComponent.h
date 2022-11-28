@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Lanna/GameObject/Component.h"
-#include "Lanna/Renderer/Framebuffer.h"
+#include "Lanna/Resources/Framebuffer.h"
 #include "Lanna/Resources.h"
 #include <vector>
 struct aiMesh;

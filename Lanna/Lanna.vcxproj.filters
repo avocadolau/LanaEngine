@@ -19,8 +19,8 @@
     <Filter Include="Lanna\ImGui\Panels">
       <UniqueIdentifier>{4B506C03-3734-2D59-A094-27AC8C9717DB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lanna\Renderer">
-      <UniqueIdentifier>{35F26D0B-21C0-6111-0A54-D237F6C03D76}</UniqueIdentifier>
+    <Filter Include="Lanna\Resources">
+      <UniqueIdentifier>{D9A5D914-4531-47D9-4E42-CACDBA4CA3D9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Lanna\Utilities">
       <UniqueIdentifier>{DAA48C40-4630-FA04-4F41-7DF9BB4B5605}</UniqueIdentifier>
@@ -66,9 +66,6 @@
     </ClInclude>
     <ClInclude Include="src\Lanna\Events\MouseEvent.h">
       <Filter>Lanna\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\FileSystem.h">
-      <Filter>Lanna</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\GameObject\Component.h">
       <Filter>Lanna\GameObject</Filter>
@@ -142,23 +139,23 @@
     <ClInclude Include="src\Lanna\Render3D.h">
       <Filter>Lanna</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Framebuffer.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Material.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Mesh.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Shader.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Lanna\Renderer\Texture.h">
-      <Filter>Lanna\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\Lanna\Resources.h">
       <Filter>Lanna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Framebuffer.h">
+      <Filter>Lanna\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Material.h">
+      <Filter>Lanna\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Mesh.h">
+      <Filter>Lanna\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Shader.h">
+      <Filter>Lanna\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Texture.h">
+      <Filter>Lanna\Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Utilities\FileHelpers.h">
       <Filter>Lanna\Utilities</Filter>
@@ -220,9 +217,6 @@
     <ClCompile Include="src\Lanna\EntityManager.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
-    <ClCompile Include="src\Lanna\FileSystem.cpp">
-      <Filter>Lanna</Filter>
-    </ClCompile>
     <ClCompile Include="src\Lanna\GameObject\Component.cpp">
       <Filter>Lanna\GameObject</Filter>
     </ClCompile>
@@ -280,23 +274,23 @@
     <ClCompile Include="src\Lanna\Render3D.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Framebuffer.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Material.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Mesh.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Shader.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Lanna\Renderer\Texture.cpp">
-      <Filter>Lanna\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="src\Lanna\Resources.cpp">
       <Filter>Lanna</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Framebuffer.cpp">
+      <Filter>Lanna\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Material.cpp">
+      <Filter>Lanna\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Mesh.cpp">
+      <Filter>Lanna\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Shader.cpp">
+      <Filter>Lanna\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Texture.cpp">
+      <Filter>Lanna\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Utilities\FileHelpers.cpp">
       <Filter>Lanna\Utilities</Filter>

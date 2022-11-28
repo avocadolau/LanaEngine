@@ -3,7 +3,7 @@
 #include "Lanna/GameObject/Component.h"
 #include <glew.h>
 #include <glm.hpp>
-#include "Lanna/Renderer/Texture.h"
+#include "Lanna/Resources/Texture.h"
 #include "Lanna/Resources.h"
 
 namespace Lanna

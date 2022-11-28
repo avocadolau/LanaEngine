@@ -2,13 +2,13 @@
 #include <lnpch.h>
 
 #include <Lanna/Core.h>
-#include <Lanna/Renderer/Shader.h>
+#include <Lanna/Resources/Shader.h>
 #include "GameObject/Components/MeshComponent.h"
 #include "GameObject/Components/CameraComponent.h"
 #include "GameObject/Components/MaterialComponent.h"
-#include "Lanna/Renderer/Framebuffer.h"
-#include "Lanna/Renderer/Texture.h"
-#include "Lanna/Renderer/Shader.h"
+#include "Lanna/Resources/Framebuffer.h"
+#include "Lanna/Resources/Texture.h"
+#include "Lanna/Resources/Shader.h"
 #include "Lanna/Resources.h"
 
 #include <glm.hpp>

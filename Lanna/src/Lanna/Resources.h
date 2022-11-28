@@ -1,19 +1,23 @@
 #pragma once
 #pragma warning(disable : 4251)
 
+#ifndef RESOURCES_H
+#define RESOURCES_H
+
+
 #include <Lanna/Core.h>
 #include "Utilities/FileHelpers.h"
 
 // Resources
-#include "Renderer/Shader.h"
-#include "Renderer/Texture.h"
-#include "Renderer/Mesh.h"
-#include "Renderer/Material.h"
+#include "Resources/Shader.h"
+#include "Resources/Texture.h"
+#include "Resources/Mesh.h"
+#include "Resources/Material.h"
 
 #include <string>
 #include <vector>
 
-//#define RESOURCE_TEST
+#define RESOURCE_TEST
 
 typedef size_t ResourceId;
 
@@ -186,7 +190,6 @@ namespace Lanna {
 		return path;
 	}
 
-#ifdef RESOURCE_TEST
 	template<>
 	inline ResourceId Resources::Import<Material>(const char* file)
 	{
@@ -221,7 +224,7 @@ namespace Lanna {
 
 		return material;
 	}
-#endif // RESOURCE_TEST
 
 	
 }
+#endif // !RESOURCES_H

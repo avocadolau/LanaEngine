@@ -164,7 +164,6 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\Events\Event.h" />
     <ClInclude Include="src\Lanna\Events\KeyEvent.h" />
     <ClInclude Include="src\Lanna\Events\MouseEvent.h" />
-    <ClInclude Include="src\Lanna\FileSystem.h" />
     <ClInclude Include="src\Lanna\GameObject\Component.h" />
     <ClInclude Include="src\Lanna\GameObject\Components\CameraComponent.h" />
     <ClInclude Include="src\Lanna\GameObject\Components\MaterialComponent.h" />
@@ -189,12 +188,12 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\Log.h" />
     <ClInclude Include="src\Lanna\MouseButtonCodes.h" />
     <ClInclude Include="src\Lanna\Render3D.h" />
-    <ClInclude Include="src\Lanna\Renderer\Framebuffer.h" />
-    <ClInclude Include="src\Lanna\Renderer\Material.h" />
-    <ClInclude Include="src\Lanna\Renderer\Mesh.h" />
-    <ClInclude Include="src\Lanna\Renderer\Shader.h" />
-    <ClInclude Include="src\Lanna\Renderer\Texture.h" />
     <ClInclude Include="src\Lanna\Resources.h" />
+    <ClInclude Include="src\Lanna\Resources\Framebuffer.h" />
+    <ClInclude Include="src\Lanna\Resources\Material.h" />
+    <ClInclude Include="src\Lanna\Resources\Mesh.h" />
+    <ClInclude Include="src\Lanna\Resources\Shader.h" />
+    <ClInclude Include="src\Lanna\Resources\Texture.h" />
     <ClInclude Include="src\Lanna\Utilities\FileHelpers.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
@@ -217,7 +216,6 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp" />
     <ClCompile Include="src\Lanna\EntityManager.cpp" />
-    <ClCompile Include="src\Lanna\FileSystem.cpp" />
     <ClCompile Include="src\Lanna\GameObject\Component.cpp" />
     <ClCompile Include="src\Lanna\GameObject\Components\CameraComponent.cpp" />
     <ClCompile Include="src\Lanna\GameObject\Components\MaterialComponent.cpp" />
@@ -237,12 +235,12 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\LayerStack.cpp" />
     <ClCompile Include="src\Lanna\Log.cpp" />
     <ClCompile Include="src\Lanna\Render3D.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Material.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Mesh.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Lanna\Renderer\Texture.cpp" />
     <ClCompile Include="src\Lanna\Resources.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Framebuffer.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Material.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Mesh.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Shader.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Texture.cpp" />
     <ClCompile Include="src\Lanna\Utilities\FileHelpers.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp" />

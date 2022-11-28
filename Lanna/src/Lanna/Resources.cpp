@@ -48,6 +48,11 @@ namespace Lanna {
 		{
 			m_Resources[i].clear();
 		}
+
+		for (int i = 0; i < 10; i++)
+		{
+
+		}
 	}
 
 }

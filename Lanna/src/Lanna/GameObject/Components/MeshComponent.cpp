@@ -8,7 +8,7 @@
 #include "Lanna/Application.h"
 #include "Lanna/Resources.h"
 #include "Lanna/Render3D.h"
-#include "Lanna/Renderer/Mesh.h"
+#include "Lanna/Resources/Mesh.h"
 
 #include <glew.h>
 #include <glm.hpp>

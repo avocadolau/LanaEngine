@@ -10,7 +10,7 @@
 #include <imgui.h>
 #include "Lanna/Input.h"
 #include "Lanna/KeyCodes.h"
-#include "Renderer/Framebuffer.h"
+#include "Resources/Framebuffer.h"
 
 #include "Lanna/EntityManager.h"
 #include "GameObject/GameObject.h"

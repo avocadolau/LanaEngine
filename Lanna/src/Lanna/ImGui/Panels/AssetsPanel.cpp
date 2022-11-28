@@ -3,7 +3,7 @@
 #include "imgui.h"
 #include "Panel.h"
 #include "AssetsPanel.h"
-#include "Lanna/Renderer/Texture.h"
+#include "Lanna/Resources/Texture.h"
 
 namespace Lanna {
 
