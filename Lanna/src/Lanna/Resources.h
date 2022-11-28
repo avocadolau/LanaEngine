@@ -200,7 +200,11 @@ namespace Lanna {
 
 		if (position == size) {
 
-			Material* material = new Material(file);
+			Material* material;
+			if (file == nullptr)
+				material = new Material();
+			else
+				material = new Material(file);
 
 
 			PushResource(LRT_MATERIAL, file, material);

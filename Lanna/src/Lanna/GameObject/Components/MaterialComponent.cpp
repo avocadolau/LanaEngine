@@ -14,15 +14,17 @@ namespace Lanna
 
 	MaterialComponent::MaterialComponent() : Component(Component::Type::MATERIAL)
 	{
-		m_Type=NONE;
 	}
-	MaterialComponent::MaterialComponent(glm::vec4 color) : Component(Component::Type::MATERIAL), m_Type(COLOR), m_Color(color)
+	MaterialComponent::MaterialComponent(glm::vec4 color) : Component(Component::Type::MATERIAL)
 	{
+		m_MaterialID = LN_RESOURCES.Import<Material>(nullptr);
+		LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setColor(color);
 
 	}
-	MaterialComponent::MaterialComponent(const char* file) : Component(Component::Type::MATERIAL), m_Type(TEXTURE)
+	MaterialComponent::MaterialComponent(const char* file) : Component(Component::Type::MATERIAL)
 	{
-		m_TextureID = LN_RESOURCES.Import<Texture>(file);
+		m_MaterialID = LN_RESOURCES.Import<Material>(file);
+		//LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setTexture(file);
 	}
 
 	MaterialComponent::~MaterialComponent()
@@ -32,14 +34,12 @@ namespace Lanna
 
 	unsigned int MaterialComponent::getTextureID()
 	{
-		return LN_RESOURCES.GetResourceById<Texture>(m_TextureID)->GetTextureId();
+		return LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->GetTexture()->GetTextureId();
 	}
 
-	void MaterialComponent::setTexture(const char* file)
+	Material* MaterialComponent::getMaterial()
 	{
-
-		m_Type = TEXTURE;
-		m_TextureID = LN_RESOURCES.Import<Texture>(file);
+		return LN_RESOURCES.GetResourceById<Material>(m_MaterialID);
 	}
 
 	void MaterialComponent::Use()
@@ -51,8 +51,11 @@ namespace Lanna
 
 		if (ImGui::TreeNode("Material"))
 		{
-			if (m_Type == COLOR)
+			Material* m_Mat = LN_RESOURCES.GetResourceById<Material>(m_MaterialID);
+
+			if (m_Mat->IsColor())
 			{
+				glm::vec4 m_Color = m_Mat->GetColor();
 				ImGui::Text("Texture path:");
 				ImGui::Text("r: ");
 				ImGui::SameLine();
@@ -67,12 +70,11 @@ namespace Lanna
 				ImGui::SameLine();
 				ImGui::Text(std::to_string(m_Color.a).c_str());
 			}
-			else if (m_Type == TEXTURE)
+			else if (m_Mat->IsTexture())
 			{
 				ImGui::Text("Texture path:");
-				ImGui::Text(LN_RESOURCES.GetPathById<Texture>(m_TextureID).c_str()); // m_TexPath.c_str());
-				int mTexId = LN_RESOURCES.GetResourceById<Texture>(m_TextureID)->GetTextureId();
-				ImGui::Image((ImTextureID)(intptr_t)mTexId, { 64, 64 });
+				ImGui::Text(m_Mat->GetTexturePath().c_str()); // m_TexPath.c_str());
+				ImGui::Image((ImTextureID)(intptr_t)m_Mat->GetTexture()->GetTextureId(), {64, 64});
 			}
 			else
 			{
@@ -105,7 +107,7 @@ namespace Lanna
 
 					//setTexture(texpath.string().c_str());
 
-					setTexture(texpath.string().c_str());
+					//setTexture(texpath.string().c_str());
 
 				}
 				ImGui::EndDragDropTarget();

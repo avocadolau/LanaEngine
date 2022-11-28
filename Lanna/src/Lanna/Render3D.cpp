@@ -115,18 +115,18 @@ namespace Lanna {
 		// unbind buffer
 		m_Framebuffer.Unbind();
 	}
-	void Render3D::RenderMesh(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, MaterialComponent* material, glm::vec4& color)
+	void Render3D::RenderMesh(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, Material* material, glm::vec4& color)
 	{
 		if (material)
 		{
-			if (material->getType() == MaterialComponent::Type::NONE)
+			if (material->IsColor())
 			{
-				RenderMeshColor(mesh, position, rotation, scale, color);
+				RenderMeshColor(mesh, position, rotation, scale, material->GetColor());
 				return;
 			}
-			else if (material->getType() == MaterialComponent::Type::COLOR)
+			else if (material->IsTexture() == false)
 			{
-				RenderMeshColor(mesh, position, rotation, scale, material->getColor());
+				RenderMeshColor(mesh, position, rotation, scale, color);
 				return;
 			}
 		}
@@ -153,7 +153,7 @@ namespace Lanna {
 		texShaderRef->Use();
 		glBindVertexArray(mesh->vao);
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, material->getTextureID());
+		glBindTexture(GL_TEXTURE_2D, material->GetTexture()->GetTextureId());
 
 		texShaderRef->setMat4("u_Model", model);
 		texShaderRef->setMat4("u_View", m_ActiveCamera->getView());

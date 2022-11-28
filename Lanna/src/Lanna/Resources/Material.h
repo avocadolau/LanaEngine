@@ -20,7 +20,7 @@ namespace Lanna {
 			NONE
 		};
 
-		Texture* m_Texture;
+	private:
 		ResourceId m_TextureID;
 		Type m_Type;
 		glm::vec4 m_Color;
@@ -32,6 +32,12 @@ namespace Lanna {
 
 		void setTexture(const char* file);
 		void setColor(glm::vec4 color);
+
+		glm::vec4 GetColor();
+		Texture* GetTexture();
+		std::string GetTexturePath();
+		bool IsColor();
+		bool IsTexture();
 	};
 }
 #endif

@@ -4,8 +4,6 @@
 
 std::string GetDir(const char* full_path);
 
-void CreateHiddenDir(const char* dir);
-
 unsigned int GetExtSize(const char* file);
 
 std::string GetExtension(const char* file);
@@ -30,4 +28,3 @@ enum FileType
 	LFT_Files_Max
 };
 FileType CheckExtension(std::string& ext);
-FileType CheckExtension(const char* ext);

@@ -94,23 +94,3 @@ FileType CheckExtension(std::string& ext)
 		ret = LFT_Animation;
 	return ret;
 }
-
-FileType CheckExtension(const char* extension)
-{
-	std::string ext = extension;
-	FileType ret = LFT_Error;
-
-	if (ext == std::string(".fbx") || ext == std::string(".FBX") || ext == std::string(".dae") || ext == std::string(".DAE"))
-		ret = LFT_FBX;
-	else if (ext == std::string(".png") || ext == std::string(".bmp") || ext == std::string(".jpg") || ext == std::string(".dds"))
-		ret = LFT_Texture;
-	else if (ext == std::string(".meshdrnk"))
-		ret = LFT_Mesh;
-	else if (ext == std::string(".matdrnk"))
-		ret = LFT_Material;
-	else if (ext == std::string(".skeldrnk"))
-		ret = LFT_Skeleton;
-	else if (ext == std::string(".animdrnk"))
-		ret = LFT_Animation;
-	return ret;
-}
