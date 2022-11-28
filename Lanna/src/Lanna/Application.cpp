@@ -119,11 +119,11 @@ namespace Lanna {
 			OPTICK_EVENT()
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			//glClear(GL_COLOR_BUFFER_BIT);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			//m_Render3D->Update();
 
 
-			
+			m_Render3D->Update();
 			m_EntityManager->Update();
 			m_EntityManager->Render();
 

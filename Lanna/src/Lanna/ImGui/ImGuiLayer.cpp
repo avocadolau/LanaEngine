@@ -273,6 +273,7 @@ namespace Lanna {
 					GameObject* obj = LN_ENTITY_MAN->AddEmptyGameObject(names[i]);
 					MeshComponent* mesh= (MeshComponent*)obj->AddComponent(Component::Type::MESH);
 					mesh->LoadPrimitive((Primitives)i);
+					obj->AddComponent(Component::Type::MATERIAL);
 				}
 			}
 			ImGui::EndMenu();

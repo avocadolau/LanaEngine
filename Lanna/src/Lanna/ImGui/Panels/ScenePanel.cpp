@@ -70,7 +70,7 @@ namespace Lanna {
 		float scale = scales.x < scales.y ? scales.x : scales.y;
 
 		static bool grid = true;
-		LN_RENDERER.RenderGrid();
+		//LN_RENDERER.RenderGrid();
 
 		ImVec2 isize = { resolution.x * scale, resolution.y * scale };
 		ImTextureID tex = (ImTextureID)(intptr_t)LN_RENDERER.getColorBufferTexture();

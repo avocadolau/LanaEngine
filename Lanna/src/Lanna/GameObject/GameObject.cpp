@@ -45,7 +45,7 @@ namespace Lanna
 	}
 	void GameObject::Render() {
 		if (m_Mesh)
-			LN_RENDERER.RenderMesh(m_Mesh, m_Transform->m_Position, m_Transform->m_Rotation, m_Transform->m_Scale, m_Material->getMaterial(), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+			LN_RENDERER.RenderMesh(m_Mesh, m_Transform->m_Position, m_Transform->m_Rotation, m_Transform->m_Scale, m_Material->getMaterial(), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), false);
 	}
 
 	Component* GameObject::AddComponent(Component::Type type)

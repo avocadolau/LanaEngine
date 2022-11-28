@@ -56,6 +56,7 @@ namespace Lanna {
 		ImGuiIO& io = ImGui::GetIO();
 
 		m_Framebuffer.Clear();
+		RenderGrid();
 	}
 
 
@@ -87,12 +88,12 @@ namespace Lanna {
 	{
 
 	}
-	void Render3D::RenderMeshColor(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color)
+	void Render3D::RenderMeshColor(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color, bool clear)
 	{
 		glViewport(0, 0, resolution.x, resolution.y);
 
 		// bind buffer
-		m_Framebuffer.Bind(true);
+		m_Framebuffer.Bind(clear);
 
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -115,31 +116,31 @@ namespace Lanna {
 		// unbind buffer
 		m_Framebuffer.Unbind();
 	}
-	void Render3D::RenderMesh(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, Material* material, glm::vec4& color)
+	void Render3D::RenderMesh(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, Material* material, glm::vec4& color, bool clear)
 	{
 		if (material)
 		{
 			if (material->IsColor())
 			{
-				RenderMeshColor(mesh, position, rotation, scale, material->GetColor());
+				RenderMeshColor(mesh, position, rotation, scale, material->GetColor(), clear);
 				return;
 			}
 			else if (material->IsTexture() == false)
 			{
-				RenderMeshColor(mesh, position, rotation, scale, color);
+				RenderMeshColor(mesh, position, rotation, scale, color, clear);
 				return;
 			}
 		}
 		else
 		{
-			RenderMeshColor(mesh, position, rotation, scale, color);
+			RenderMeshColor(mesh, position, rotation, scale, color, clear);
 			return;
 		}
 
 		glViewport(0, 0, resolution.x, resolution.y);
 
 		// bind buffer
-		m_Framebuffer.Bind(true);
+		m_Framebuffer.Bind(clear);
 	
 
 		glm::mat4 model = glm::mat4(1.0f);
