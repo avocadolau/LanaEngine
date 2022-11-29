@@ -14,10 +14,12 @@ namespace Lanna
 
 	MaterialComponent::MaterialComponent() : Component(Component::Type::MATERIAL)
 	{
+		m_MaterialID = LN_RESOURCES.Import<Material>("null");
+		LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setColor(glm::vec4(0.0f,0.0f,0.0f,0.0f));
 	}
 	MaterialComponent::MaterialComponent(glm::vec4 color) : Component(Component::Type::MATERIAL)
 	{
-		m_MaterialID = LN_RESOURCES.Import<Material>(nullptr);
+		m_MaterialID = LN_RESOURCES.Import<Material>("null");
 		LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setColor(color);
 
 	}
@@ -42,6 +44,17 @@ namespace Lanna
 		return LN_RESOURCES.GetResourceById<Material>(m_MaterialID);
 	}
 
+	void MaterialComponent::setTexture(const char* file)
+	{
+		LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setTexture(file);
+	}
+
+	void MaterialComponent::setColor(glm::vec4 color)
+	{
+		LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setColor(color);
+
+	}
+
 	void MaterialComponent::Use()
 	{
 	}
@@ -53,28 +66,69 @@ namespace Lanna
 		{
 			Material* m_Mat = LN_RESOURCES.GetResourceById<Material>(m_MaterialID);
 
-			if (m_Mat->IsColor())
+			if (m_Mat)
 			{
-				glm::vec4 m_Color = m_Mat->GetColor();
-				ImGui::Text("Texture path:");
-				ImGui::Text("r: ");
-				ImGui::SameLine();
-				ImGui::Text(std::to_string(m_Color.r).c_str());
-				ImGui::Text("g: ");
-				ImGui::SameLine();
-				ImGui::Text(std::to_string(m_Color.g).c_str());
-				ImGui::Text("b: ");
-				ImGui::SameLine();
-				ImGui::Text(std::to_string(m_Color.b).c_str());
-				ImGui::Text("a: ");
-				ImGui::SameLine();
-				ImGui::Text(std::to_string(m_Color.a).c_str());
-			}
-			else if (m_Mat->IsTexture())
-			{
-				ImGui::Text("Texture path:");
-				ImGui::Text(m_Mat->GetTexturePath().c_str()); // m_TexPath.c_str());
-				ImGui::Image((ImTextureID)(intptr_t)m_Mat->GetTexture()->GetTextureId(), {64, 64});
+				if (m_Mat->IsColor())
+				{
+					glm::vec4 m_Color = m_Mat->GetColor();
+					ImGui::Text("Difuse color");
+					ImGui::Text("r: ");
+					ImGui::SameLine();
+					ImGui::Text(std::to_string(m_Color.r).c_str());
+					ImGui::Text("g: ");
+					ImGui::SameLine();
+					ImGui::Text(std::to_string(m_Color.g).c_str());
+					ImGui::Text("b: ");
+					ImGui::SameLine();
+					ImGui::Text(std::to_string(m_Color.b).c_str());
+					ImGui::Text("a: ");
+					ImGui::SameLine();
+					ImGui::Text(std::to_string(m_Color.a).c_str());
+
+					bool changed = false;
+					float r = m_Color.r;
+					float g = m_Color.g;
+					float b = m_Color.b;
+					float a = m_Color.a;
+					ImGui::Text("Position");
+					ImGui::Text("r");
+					ImGui::SameLine();
+					ImGui::SetNextItemWidth(-FLT_MIN);
+					if (ImGui::DragFloat("r", &r, 0.01f, 0.0f, 1.0f))
+						changed=true;
+					ImGui::Text("g");
+					ImGui::SameLine();
+					ImGui::SetNextItemWidth(-FLT_MIN);
+					if (ImGui::DragFloat("g", &g, 0.01f, 0.0f, 1.0f))
+						changed = true;
+					ImGui::Text("b");
+					ImGui::SameLine();
+					ImGui::SetNextItemWidth(-FLT_MIN);
+					if (ImGui::DragFloat("b", &b, 0.01f, 0.0f, 1.0f))
+						changed = true;
+					/*ImGui::Text("a");
+					ImGui::SameLine();
+					ImGui::SetNextItemWidth(-FLT_MIN);
+					if (ImGui::DragFloat("a", &a, 0.01f, 0.0f, 1.0f))
+						changed = true;*/
+					if (changed)
+						m_Mat->setColor(glm::vec4(r, g, b, a));
+				}
+				else if (m_Mat->IsTexture())
+				{
+					std::string path = m_Mat->GetTexturePath().c_str();
+					if (path != "null")
+					{
+						ImGui::Text("Texture path:");
+						ImGui::Text(path.c_str()); // m_TexPath.c_str());
+						ImGui::Image((ImTextureID)(intptr_t)m_Mat->GetTexture()->GetTextureId(), { 64, 64 });
+					}
+
+				}
+				else
+				{
+					ImGui::Text("no material");
+				}
 			}
 			else
 			{

@@ -274,6 +274,7 @@ namespace Lanna {
 					MeshComponent* mesh= (MeshComponent*)obj->AddComponent(Component::Type::MESH);
 					mesh->LoadPrimitive((Primitives)i);
 					obj->AddComponent(Component::Type::MATERIAL);
+					//obj->m_Material->setColor(glm::vec4(1.0f,0.0f,0.0f,1.0f));
 				}
 			}
 			ImGui::EndMenu();

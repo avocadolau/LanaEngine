@@ -22,7 +22,7 @@ namespace Lanna {
 
 	private:
 		ResourceId m_TextureID;
-		Type m_Type;
+		Type m_Type=NONE;
 		glm::vec4 m_Color;
 
 	public:

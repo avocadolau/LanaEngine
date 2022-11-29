@@ -57,6 +57,7 @@ namespace Lanna {
 		template<class T> static T* GetResourceById(ResourceId id);
 
 		template<class T> static std::string GetPathById(ResourceId id);
+		template<class T> static ResourceId DuplicateResource(ResourceId copy);
 		static void Clear();
 	};
 
@@ -100,6 +101,7 @@ namespace Lanna {
 		if (id >= 0 && id < m_Resources[LRT_SHADER].size()) {
 			path = m_Resources[LRT_SHADER][id]->filePath;
 		}
+		else path = "null";
 		return path;
 	}
 
@@ -145,6 +147,7 @@ namespace Lanna {
 		if (id >= 0 && id < m_Resources[LRT_TEXTURE].size()) {
 			path = m_Resources[LRT_TEXTURE][id]->filePath;
 		}
+		else path = "null";
 		return path;
 	}
 
@@ -187,6 +190,7 @@ namespace Lanna {
 		if (id >= 0 && id < m_Resources[LRT_MESH].size()) {
 			path = m_Resources[LRT_MESH][id]->filePath;
 		}
+		else path = "null";
 		return path;
 	}
 
@@ -201,7 +205,7 @@ namespace Lanna {
 		if (position == size) {
 
 			Material* material;
-			if (file == nullptr)
+			if (file == "null")
 				material = new Material();
 			else
 				material = new Material(file);
@@ -229,6 +233,14 @@ namespace Lanna {
 		return material;
 	}
 
-	
+	template<>
+	inline std::string Resources::GetPathById<Material>(ResourceId id) {
+		std::string path;
+		if (id >= 0 && id < m_Resources[LRT_MATERIAL].size()) {
+			path = m_Resources[LRT_MATERIAL][id]->filePath;
+		}
+		else path = "null";
+		return path;
+	}
 }
 #endif // !RESOURCES_H

@@ -8,7 +8,7 @@
 namespace Lanna {
 	Material::Material()
 	{
-
+		setColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	Material::Material(const char* file)
 	{
@@ -24,19 +24,19 @@ namespace Lanna {
 
 	void Material::setTexture(const char* file)
 	{
-		m_Type = TEXTURE;
+		m_Type = Type::TEXTURE;
 		m_TextureID = LN_RESOURCES.Import<Texture>(file);
 	}
 
 	void Material::setColor(glm::vec4 color)
 	{
-		m_Type = COLOR;
+		m_Type = Type::COLOR;
 		m_Color = color;
 	}
 
 	glm::vec4 Material::GetColor()
 	{
-		if (m_Type == COLOR)
+		if (m_Type == Type::COLOR)
 			return m_Color;
 		else
 			return glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -44,7 +44,7 @@ namespace Lanna {
 
 	Texture* Material::GetTexture()
 	{
-		if (m_Type == TEXTURE)
+		if (m_Type == Type::TEXTURE)
 			return LN_RESOURCES.GetResourceById<Texture>(m_TextureID);
 		else
 			return nullptr;
@@ -53,7 +53,7 @@ namespace Lanna {
 	std::string Material::GetTexturePath()
 	{
 		std::string ret;
-		if (m_Type == TEXTURE)
+		if (m_Type == Type::TEXTURE)
 			ret = LN_RESOURCES.GetPathById<Texture>(m_TextureID);
 		else
 			ret = "no path";
@@ -62,12 +62,12 @@ namespace Lanna {
 
 	bool Material::IsColor()
 	{
-		return m_Type == COLOR;
+		return m_Type == Type::COLOR;
 	}
 
 	bool Material::IsTexture()
 	{
-		return m_Type == TEXTURE;
+		return m_Type == Type::TEXTURE;
 	}
 
 }

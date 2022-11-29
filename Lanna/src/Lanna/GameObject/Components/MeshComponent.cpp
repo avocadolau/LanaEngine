@@ -46,11 +46,11 @@ namespace Lanna
 		if (ImGui::TreeNode("Mesh"))
 		{
 
-
-			if (source != "no mesh")
+			std::string path = LN_RESOURCES.GetPathById<Mesh>(m_MeshID);
+			if (path != "null")
 			{
 				ImGui::Text("Source mesh");
-				ImGui::TextWrapped(source);
+				ImGui::TextWrapped(LN_RESOURCES.GetPathById<Mesh>(m_MeshID).c_str());
 			}
 			else
 			{

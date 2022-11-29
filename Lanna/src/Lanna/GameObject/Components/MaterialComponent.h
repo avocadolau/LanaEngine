@@ -24,6 +24,8 @@ namespace Lanna
 
 		unsigned int getTextureID();
 		Material* getMaterial();
+		void setTexture(const char* file);
+		void setColor(glm::vec4 color);
 
 		void Use() override;
 		void ImGuiDraw() override;

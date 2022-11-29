@@ -56,7 +56,7 @@ namespace Lanna {
 		ImGuiIO& io = ImGui::GetIO();
 
 		m_Framebuffer.Clear();
-		RenderGrid();
+		//RenderGrid();
 	}
 
 

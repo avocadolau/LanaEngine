@@ -14,7 +14,7 @@ namespace Lanna
 	class GameObject
 	{
 	public:
-
+		GameObject(GameObject* copy);
 		GameObject(const char* name);
 		~GameObject();
 
@@ -31,8 +31,6 @@ namespace Lanna
 
 	public:
 		bool active = true;
-		int mainOrder = -1;
-		int secOrder = -1;
 
 		std::list<Component*> m_Components;
 		std::list<GameObject*> m_Children;
@@ -42,7 +40,6 @@ namespace Lanna
 		CameraComponent* m_Camera = nullptr;
 		GameObject* m_Parent = nullptr;
 		std::string m_Name;
-		int m_Hierarchy;
 		bool loockComonents = false;
 	};
 

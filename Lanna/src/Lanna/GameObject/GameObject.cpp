@@ -19,6 +19,29 @@
 
 namespace Lanna
 {
+	GameObject::GameObject(GameObject* copy)
+	{
+		m_Name = copy->m_Name;
+		m_Name.append(" copy");
+
+		std::list<GameObject*> m_Children;
+		m_Transform = new TransformComponent();
+		m_Transform = copy->m_Transform;
+
+		TransformComponent* m_Transform = nullptr;
+
+		// copy constructor
+		MaterialComponent* m_Material = nullptr;
+		// copy constructor
+		MeshComponent* m_Mesh = nullptr;
+		// m_Camera
+
+		// copy constructor
+		CameraComponent* m_Camera = nullptr;
+		
+		// depending on situation
+		//GameObject* m_Parent = nullptr;
+	}
 	GameObject::GameObject(const char* name) :m_Name(name)
 	{
 		AddComponent(Component::Type::TRANSFORM);
@@ -106,6 +129,7 @@ namespace Lanna
 			}
 			break;
 		}
+		return nullptr;
 	}
 
 	void GameObject::SetParent(GameObject* parent)
