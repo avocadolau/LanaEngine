@@ -47,6 +47,12 @@ namespace Lanna {
 		void MainMenuBar();
 		void DockSpace();
 
+		void OnScenePlay();
+		void OnSceneStop();
+
+		// UI Panels
+		void UI_Toolbar();
+
 	private:
 		ImGuiLog m_Log;
 		bool logActive;
@@ -62,6 +68,15 @@ namespace Lanna {
 		Panel* m_Assets = nullptr;
 
 		std::vector<Panel*> m_panels;
+
+		enum class SceneState
+		{
+			Edit = 0, Play = 1
+		};
+		SceneState m_SceneState = SceneState::Edit;
+
+		// Editor resources
+		std::vector<Panel*> m_IconPlay, m_IconStop;
 
 	};
 
