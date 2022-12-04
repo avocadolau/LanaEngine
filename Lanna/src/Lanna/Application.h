@@ -10,6 +10,7 @@
 #include "Render3D.h"
 #include "EntityManager.h"
 #include "Resources.h"
+#include "Lanna/Utilities/Time.h"
 
 namespace Lanna {
 
@@ -62,6 +63,7 @@ namespace Lanna {
 		EntityManager* m_EntityManager;
 		Console* m_Console;
 		Resources* m_Resources;
+		Time* m_Time;
 	private:
 		static Application* s_Instance;
 	};

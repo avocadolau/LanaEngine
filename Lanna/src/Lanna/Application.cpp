@@ -127,6 +127,8 @@ namespace Lanna {
 			m_EntityManager->Update();
 			m_EntityManager->Render();
 
+			Time::Update();
+
 			m_ImGuiLayer->Begin();
 			{
 				for (Layer* layer : m_LayerStack)

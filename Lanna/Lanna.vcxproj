@@ -202,6 +202,8 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\Utilities\Maths\Vector4f.h" />
     <ClInclude Include="src\Lanna\Utilities\Maths\Vector4i.h" />
     <ClInclude Include="src\Lanna\Utilities\MemoryAllocation.h" />
+    <ClInclude Include="src\Lanna\Utilities\Time.h" />
+    <ClInclude Include="src\Lanna\Utilities\Timer.h" />
     <ClInclude Include="src\Lanna\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
@@ -241,6 +243,8 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\Utilities\FileHelpers.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp" />
+    <ClCompile Include="src\Lanna\Utilities\Time.cpp" />
+    <ClCompile Include="src\Lanna\Utilities\Timer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />

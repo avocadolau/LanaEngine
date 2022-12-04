@@ -12,6 +12,7 @@
 #include "Lanna/Utilities/MemoryAllocation.h"
 
 namespace Lanna {
+
 	ConfigurationPanel::ConfigurationPanel() :Panel("Configuration")
 	{
 	}
@@ -130,6 +131,25 @@ namespace Lanna {
 			ImGui::Text("VRAM Reserved:");
 			ImGui::SameLine();
 			ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%0.1fMb", info.gpuVRAMReserve);
+		}
+
+		if (ImGui::CollapsingHeader("Time"))
+		{
+			ImGui::Text("Time running from the start %.2fs", Lanna::Time::GetRealTimeSinceStartup());
+			ImGui::Text("Real time delta time %.3fms", Lanna::Time::GetRealDeltaTime());
+			ImGui::Text("Frame count %i", Lanna::Time::GetFrameCount());
+
+			if (Lanna::Time::IsPlaying())
+			{
+				ImGui::Text("Game time running from the start %.2fs", Lanna::Time::GetTime());
+				ImGui::Text("Game delta time %.2fms", Lanna::Time::GetDeltaTime());
+				int timeScale = Lanna::Time::GetTimeScale();
+
+				if (ImGui::DragInt("Time Scale", &timeScale, 0.1f))
+				{
+					Lanna::Time::SetTimeScale(timeScale);
+				}
+			}
 		}
 
 		if (ImGui::CollapsingHeader("Sound"))

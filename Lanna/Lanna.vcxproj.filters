@@ -209,6 +209,12 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="src\Lanna\Utilities\Time.h">
+      <Filter>Lanna\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Timer.h">
+      <Filter>Lanna\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -314,5 +320,11 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="src\Lanna\Utilities\Time.cpp">
+      <Filter>Lanna\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Utilities\Timer.cpp">
+      <Filter>Lanna\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
