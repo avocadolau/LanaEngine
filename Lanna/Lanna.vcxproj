@@ -177,6 +177,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\ImGui\Panels\HierarchyPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\InspectorPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panels\PlayStopPannel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\ScenePanel.h" />
     <ClInclude Include="src\Lanna\Input.h" />
     <ClInclude Include="src\Lanna\KeyCodes.h" />
