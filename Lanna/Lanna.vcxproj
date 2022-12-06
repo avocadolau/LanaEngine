@@ -192,6 +192,8 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\Resources\Mesh.h" />
     <ClInclude Include="src\Lanna\Resources\Shader.h" />
     <ClInclude Include="src\Lanna\Resources\Texture.h" />
+    <ClInclude Include="src\Lanna\Scene\Scene.h" />
+    <ClInclude Include="src\Lanna\Scene\SceneManager.h" />
     <ClInclude Include="src\Lanna\Utilities\FileHelpers.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
@@ -241,6 +243,8 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\Resources\Mesh.cpp" />
     <ClCompile Include="src\Lanna\Resources\Shader.cpp" />
     <ClCompile Include="src\Lanna\Resources\Texture.cpp" />
+    <ClCompile Include="src\Lanna\Scene\Scene.cpp" />
+    <ClCompile Include="src\Lanna\Scene\SceneManager.cpp" />
     <ClCompile Include="src\Lanna\Utilities\FileHelpers.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp" />

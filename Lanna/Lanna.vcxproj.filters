@@ -22,6 +22,9 @@
     <Filter Include="Lanna\Resources">
       <UniqueIdentifier>{D9A5D914-4531-47D9-4E42-CACDBA4CA3D9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\Scene">
+      <UniqueIdentifier>{0C0E3C3B-78C3-B430-01B8-AE076D6CAB34}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Lanna\Utilities">
       <UniqueIdentifier>{DAA48C40-4630-FA04-4F41-7DF9BB4B5605}</UniqueIdentifier>
     </Filter>
@@ -115,6 +118,9 @@
     <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\ImGui\Panels\PlayStopPannel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\ImGui\Panels\ScenePanel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
@@ -156,6 +162,12 @@
     </ClInclude>
     <ClInclude Include="src\Lanna\Resources\Texture.h">
       <Filter>Lanna\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Scene\Scene.h">
+      <Filter>Lanna\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Scene\SceneManager.h">
+      <Filter>Lanna\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Utilities\FileHelpers.h">
       <Filter>Lanna\Utilities</Filter>
@@ -215,9 +227,6 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Lanna\ImGui\Panels\PlayStopPannel.h">
-      <Filter>Lanna\ImGui\Panels</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -300,6 +309,12 @@
     </ClCompile>
     <ClCompile Include="src\Lanna\Resources\Texture.cpp">
       <Filter>Lanna\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Scene\Scene.cpp">
+      <Filter>Lanna\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Scene\SceneManager.cpp">
+      <Filter>Lanna\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Utilities\FileHelpers.cpp">
       <Filter>Lanna\Utilities</Filter>

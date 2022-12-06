@@ -4,15 +4,28 @@
 
 namespace Lanna {
 
-	void Lanna::Scene::Update()
+	Scene::Scene()
+	{
+
+	}
+
+	void Scene::Init()
+	{
+		m_EntityManager.Init();
+	}
+
+	void Scene::Update()
 	{
 		m_EntityManager.Update();
-
 	}
 
-	EntityManager* Lanna::Scene::GetEntityManager()
+	void Scene::Render()
 	{
-		return nullptr;
+		m_EntityManager.Render();
 	}
 
+	EntityManager* Scene::GetEntityManager()
+	{
+		return &m_EntityManager;
+	}
 }
