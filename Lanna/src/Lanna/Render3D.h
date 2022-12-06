@@ -54,8 +54,8 @@ namespace Lanna
 		glm::mat4 GetView() { return m_ActiveCamera->getView(); }
 		CameraComponent& GetActiveCamera() { return *m_ActiveCamera; }
 		uint32_t getColorBufferTexture() { return m_Framebuffer.getColorBufferTexture(); }
-		void RenderMeshColor(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color, bool clear);
-		void RenderMesh(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, Material* material, glm::vec4& color, bool clear);
+		void RenderMeshColor(Mesh* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color, bool clear);
+		void RenderMesh(Mesh* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, Material* material, glm::vec4& color, bool clear);
 		void RenderGrid(Framebuffer* target = NULL, bool clear = false);
 	};
 }

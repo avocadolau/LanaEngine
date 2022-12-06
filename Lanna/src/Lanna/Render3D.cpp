@@ -88,7 +88,7 @@ namespace Lanna {
 	{
 
 	}
-	void Render3D::RenderMeshColor(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color, bool clear)
+	void Render3D::RenderMeshColor(Mesh* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color, bool clear)
 	{
 		glViewport(0, 0, resolution.x, resolution.y);
 
@@ -116,7 +116,7 @@ namespace Lanna {
 		// unbind buffer
 		m_Framebuffer.Unbind();
 	}
-	void Render3D::RenderMesh(MeshComponent* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, Material* material, glm::vec4& color, bool clear)
+	void Render3D::RenderMesh(Mesh* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, Material* material, glm::vec4& color, bool clear)
 	{
 		if (material)
 		{

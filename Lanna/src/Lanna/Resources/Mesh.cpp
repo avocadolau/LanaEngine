@@ -5,6 +5,12 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#include <iostream>
+#include <fstream>
+#include <string>
+
+#include "Lanna/Resources.h"
+
 namespace Lanna {
 	Mesh::Mesh()
 	{
@@ -134,6 +140,54 @@ namespace Lanna {
 		return model;
 	}
 
+	void Mesh::Save(const char* path)
+	{
+		std::fstream file;
+
+		// clear file
+		file.open(path, std::ofstream::out | std::ofstream::trunc);
+		file.close();
+
+		// write
+		file.open(path, std::fstream::in | std::fstream::out | std::fstream::app);
+		
+		size_t size = sizeof(models);
+		file.write((const sbyte*)&size, sizeof(size_t));
+		file.write((const sbyte*)&models, sizeof(models));
+
+		file.close();
+		
+		std::string message = "saved succesfully as: ";
+		message.append(path);
+		LN_CORE_INFO(message.c_str());
+		LN_INFO(message.c_str());
+		
+	}
+
+	void Mesh::Load(const char* path)
+	{
+		std::fstream file;
+
+		// read
+		file.open(path, std::fstream::in | std::fstream::out | std::fstream::app);
+
+		if (file.is_open())
+		{
+			models.clear();
+
+			size_t size;
+			file.read((sbyte*)&size, sizeof(size_t));
+			file.read((sbyte*)&models, size);
+		}
+
+		GenerateBuffers();
+
+		file.close();
+		std::string message = path;
+		message.append(" loaded succesfuly");
+		LN_CORE_INFO(message.c_str());
+		LN_INFO(message.c_str());
+	}
 	void Mesh::GenerateBuffers()
 	{
 		glGenBuffers(1, &vbo);
@@ -159,6 +213,16 @@ namespace Lanna {
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
+	}
+
+	unsigned int Mesh::GetModelsSize()
+	{
+		unsigned int mSize = 0;
+		
+		
+
+
+		return mSize;
 	}
 
 }

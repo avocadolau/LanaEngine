@@ -24,23 +24,28 @@ namespace Lanna
 		m_Name = copy->m_Name;
 		m_Name.append(" copy");
 
-		std::list<GameObject*> m_Children;
-		m_Transform = new TransformComponent();
-		m_Transform = copy->m_Transform;
-
-		TransformComponent* m_Transform = nullptr;
-
-		// copy constructor
-		MaterialComponent* m_Material = nullptr;
-		// copy constructor
-		MeshComponent* m_Mesh = nullptr;
-		// m_Camera
-
-		// copy constructor
-		CameraComponent* m_Camera = nullptr;
+		if (copy->m_Transform)
+		{
+			m_Transform = new TransformComponent(copy->m_Transform);
+			m_Components.push_back(m_Transform);
+		}
+		if (copy->m_Material) {
+			m_Material = new MaterialComponent(copy->m_Material);
+			m_Components.push_back(m_Material);
+		}
+		if (copy->m_Mesh) {
+			m_Mesh = new MeshComponent(copy->m_Mesh);
+			m_Components.push_back(m_Mesh);
+		}
+		if (copy->m_Camera &&m_Transform) {
+			m_Camera = new CameraComponent(copy->m_Camera, m_Transform);
+			m_Components.push_back(m_Camera);
+		}
 		
-		// depending on situation
-		//GameObject* m_Parent = nullptr;
+		for (GameObject* c : copy->m_Children)
+		{
+			AddCopyChild(c);
+		}
 	}
 	GameObject::GameObject(const char* name) :m_Name(name)
 	{
@@ -64,11 +69,15 @@ namespace Lanna
 		{
 			c->Use();
 		}
-
+		for (GameObject* o : m_Children)
+		{
+			o->Update();
+		}
+		m_Transform->changed = false;
 	}
 	void GameObject::Render() {
 		if (m_Mesh)
-			LN_RENDERER.RenderMesh(m_Mesh, m_Transform->m_Position, m_Transform->m_Rotation, m_Transform->m_Scale, m_Material->getMaterial(), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), false);
+			LN_RENDERER.RenderMesh(LN_RESOURCES.GetResourceById<Mesh>(m_Mesh->m_MeshID), m_Transform->w_Pos, m_Transform->w_Rot, m_Transform->w_Scl, m_Material->getMaterial(), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), false);
 	}
 
 	Component* GameObject::AddComponent(Component::Type type)
@@ -132,28 +141,32 @@ namespace Lanna
 		return nullptr;
 	}
 
-	void GameObject::SetParent(GameObject* parent)
+	void GameObject::AddCopyChild(GameObject* child)
 	{
-		if (parent != nullptr)
-		{
-			m_Parent = parent;
-
-		}
+		GameObject* nChild= new GameObject(child);
+		nChild->m_Parent = this;
+		nChild->m_Transform->parent = m_Transform;
+		m_Children.push_back(nChild);
 	}
 
-	void GameObject::SetChild(GameObject* child)
+	void GameObject::AddEmptyChild()
 	{
-		m_Children.push_back(child);
+		GameObject* nChild = new GameObject("empty");
+		nChild->m_Parent = this;
+		nChild->m_Transform->parent = m_Transform;
+		m_Children.push_back(nChild);
 	}
 
 	void GameObject::DelChild(GameObject* child)
 	{
-
+		auto it = std::find(m_Children.begin(), m_Children.end(), child);
+		if (it != m_Children.end())
+		{
+			m_Children.erase(it);
+			delete child;
+			child = nullptr;
+		}
 	}
 
-	void GameObject::DelParent()
-	{
-
-	}
 
 }

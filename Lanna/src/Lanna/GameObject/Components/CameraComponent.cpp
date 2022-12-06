@@ -24,6 +24,21 @@
 
 namespace Lanna
 {
+    CameraComponent::CameraComponent(CameraComponent* copy, TransformComponent*t) :Component(Component::Type::CAMERA)
+    {
+        Position = &t->m_Position;
+        WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+        Rotation = &t->m_Rotation;
+        lastPitch = Rotation->x;
+        lastYaw = Rotation->y;
+
+        m_WorldSpot = copy->m_WorldSpot;
+        m_MovementSpeed = 0.003f;
+        m_OrbitSpeed = 0.001f;
+        m_ZoomSpeed = 0.00001f;
+        m_FreeLookSpeed = 0.001f;
+        UpdateCameraVectorsFromCameraSpot();
+    }
     CameraComponent::CameraComponent(TransformComponent* t)
         : Front(glm::vec3(0.0f, 0.0f, -1.0f)), Component(Component::Type::CAMERA)
     {

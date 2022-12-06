@@ -28,8 +28,8 @@ namespace Lanna {
 	{
 		bool node_open = ImGui::TreeNode(obj->m_Name.c_str());
 		ImGui::SameLine();
-		if (ImGui::SmallButton("Del"))
-			obj->DelParent();
+		/*if (ImGui::SmallButton("Del"))
+			obj->DelParent();*/
 
 		if (node_open)
 		{
