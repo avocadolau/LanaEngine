@@ -23,27 +23,17 @@ namespace Lanna {
 
 		void Draw() override;
 		void DrawElements();
+
 	private:
 		void ImportFBX(const std::filesystem::path& path);
 
-		void OnScenePlay();
-		void OnSceneStop();
-
-		// UI Panels
-		void UI_Toolbar();
+		//// UI Panels
+		//void UI_Toolbar();
 
 	private:
 		std::vector<ShadingView*> m_Shadings;
 
-		enum class SceneState
-		{
-			Edit = 0, Play = 1
-	    };
-
-		SceneState m_SceneState = SceneState::Edit;
-
-		Texture* m_IconPlay;
-		Texture* m_IconStop;
+		
 
 #ifdef CAMERA
 		const Camera* m_Camera;

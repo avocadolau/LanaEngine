@@ -64,6 +64,12 @@ namespace Lanna {
 
 		ImGui::StyleColorsDark();
 
+		m_IconPlay = new Texture();
+		m_IconPlay->Init("resources/icons/PlayButton.png");
+		m_IconStop = new Texture();
+		m_IconStop->Init("resources/icons/StopButton.png");
+		m_IconPause = new Texture();
+		m_IconPause->Init("resources/icons/PauseButton.png");
 
 		// TEMPORARY: should use Lanna key codes
 		/*io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
@@ -103,8 +109,8 @@ namespace Lanna {
 		m_panels.push_back(m_about);
 		m_panels.push_back(m_hardware);
 		m_panels.push_back(m_scene);
-		m_panels.push_back(m_Inspector);
 		m_panels.push_back(m_Hierarchy);
+		m_panels.push_back(m_Inspector);
 		m_panels.push_back(m_Assets);
 		m_panels.push_back(m_GameScene);
 
@@ -117,6 +123,10 @@ namespace Lanna {
 	{
 		delete m_about;
 		m_panels.clear();
+
+		delete m_IconPlay;
+		delete m_IconStop;
+		delete m_IconPause;
 
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
@@ -280,6 +290,7 @@ namespace Lanna {
 					//obj->m_Material->setColor(glm::vec4(1.0f,0.0f,0.0f,1.0f));
 				}
 			}
+
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help"))
@@ -298,6 +309,25 @@ namespace Lanna {
 
 			ImGui::EndMenu();
 		}
+
+		ImGui::PushStyleColor(ImGuiCol_Button, { 0,0,0,0 });
+		ImGui::SetCursorPosX(Lanna::Application::Get().GetWindow().GetWidth() / 2 - 15.0f);
+		ImTextureID play = Lanna::Time::IsPlaying() ? (ImTextureID)(intptr_t) m_IconStop->GetTextureId() : (ImTextureID)(intptr_t) m_IconPlay->GetTextureId();
+		if (ImGui::ImageButton(play, { 15, 15 }))
+		{
+			if (!Lanna::Time::IsPlaying())
+				Lanna::Time::Play();
+			else
+				Lanna::Time::Stop();
+		}
+
+		if (ImGui::ImageButton((ImTextureID)(intptr_t) m_IconPause->GetTextureId(), { 15, 15 }))
+		{
+			Lanna::Time::Pause();
+		}
+
+		ImGui::PopStyleColor();
+		
 	}
 
 	void ImGuiLayer::DockSpace()

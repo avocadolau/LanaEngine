@@ -60,9 +60,11 @@ namespace Lanna {
 		template<class T> static T* GetResourceById(ResourceId id);
 
 		template<class T> static std::string GetPathById(ResourceId id);
-		template<class T> static ResourceId DuplicateResource(ResourceId copy);
+		//template<class T> static ResourceId DuplicateResource(ResourceId copy);
 
-		static std::string GetSavePath(ResourceType rt, const char* file);
+		ResourceId SelectResourcePopUp(ResourceType rt, bool reset);
+
+		static std::string GenerateSavePath(ResourceType rt, const char* file);
 		static void Clear();
 		
 	};
@@ -205,7 +207,7 @@ namespace Lanna {
 	inline void Resources::Save<Mesh>(ResourceId id)
 	{
 		Mesh* mesh = GetResourceById<Mesh>(id);
-		std::string sPath = GetSavePath(ResourceType::LRT_MESH, GetPathById<Mesh>(id).c_str());
+		std::string sPath = GetPathById<Mesh>(id);// GenerateSavePath(ResourceType::LRT_MESH, GetPathById<Mesh>(id).c_str());
 		//std::fstream write_file;
 
 		//write_file.open(sPath.c_str(), std::fstream::out | std::fstream::binary);
@@ -218,7 +220,7 @@ namespace Lanna {
 	inline ResourceId Resources::Load<Mesh>(ResourceId id, const char* file)
 	{
 		Mesh* mesh = GetResourceById<Mesh>(id);
-		std::string sPath = GetSavePath(ResourceType::LRT_MESH, GetPathById<Mesh>(id).c_str());
+		std::string sPath = GetPathById<Mesh>(id);
 
 		mesh->Load(sPath.c_str());
 		return id;

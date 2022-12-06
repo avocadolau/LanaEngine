@@ -19,6 +19,7 @@ namespace Lanna
 		static std::chrono::duration<float> m_RealTimeSinceStartup;
 		static std::chrono::duration<float> m_RealTimeDeltaTime;
 		static bool m_IsPlaying;
+		static bool m_IsPaused;
 
 	private:
 		Time();
@@ -27,6 +28,7 @@ namespace Lanna
 		static void Play();
 		static void Update();
 		static void Stop();
+		static void Pause();
 
 		static inline uint32_t GetFrameCount() { return m_FrameCount; }
 		static inline float GetTime() { return m_Time.count(); }

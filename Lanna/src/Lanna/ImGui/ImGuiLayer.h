@@ -8,6 +8,7 @@
 #include "Lanna/Events/MouseEvent.h"
 
 #include "Lanna/ImGui/Panels/Panel.h"
+#include "Lanna/Resources/Texture.h"
 
 #include <vector>
 
@@ -28,6 +29,21 @@ namespace Lanna {
 
 		void OnEvent(Event& event) override;
 		void OnImGuiRender() override;
+
+
+		enum class SceneState
+		{
+			Edit = 0, Play = 1
+		};
+
+		SceneState m_SceneState = SceneState::Edit;
+
+		Texture* m_IconPlay;
+		Texture* m_IconStop;
+		Texture* m_IconPause;
+
+		void OnScenePlay();
+		void OnSceneStop();
 
 	private:
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);

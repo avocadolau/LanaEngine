@@ -17,7 +17,8 @@ namespace Lanna
 
 
 		Type m_Type;
-
+		const char* name;
+		bool toDel = false;
 	public:
 		Component(Type type);
 
@@ -26,5 +27,6 @@ namespace Lanna
 		virtual void Use() = 0;
 		virtual void ImGuiDraw() = 0;
 		virtual void Render() {};
+		
 	};
 }

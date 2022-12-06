@@ -23,11 +23,13 @@ namespace Lanna
 {
 	MeshComponent::MeshComponent() : Component(Component::Type::MESH)
 	{
-		//source = "no mesh";
+		name = "Mesh Component";
 	}
 
 	MeshComponent::MeshComponent(MeshComponent* copy) : Component(Component::Type::MESH)
 	{
+		name = "Mesh Component";
+
 		if (copy->m_MeshID != -1)
 		{
 			LoadFromFile(LN_RESOURCES.GetPathById<Mesh>(copy->m_MeshID).c_str());
@@ -41,6 +43,8 @@ namespace Lanna
 
 	MeshComponent::MeshComponent(const char* file) : Component(Component::Type::MESH)
 	{
+		name = "Mesh Component";
+
 		LoadFromFile(file);
 	}
 
@@ -53,33 +57,29 @@ namespace Lanna
 	{
 		if (ImGui::TreeNode("Mesh"))
 		{
-
-			std::string path = LN_RESOURCES.GetPathById<Mesh>(m_MeshID);
-			if (path != "null")
+			if (m_MeshID == -1)
 			{
-				ImGui::Text("Source mesh");
-				ImGui::TextWrapped(LN_RESOURCES.GetPathById<Mesh>(m_MeshID).c_str());
-
-#ifdef LN_DEBUG
-				if (ImGui::Button("save"))
+				bool reset = false;
+				if (ImGui::Button("Select Resource"))
 				{
-					LN_RESOURCES.Save<Mesh>(m_MeshID);
+					ImGui::OpenPopup("select resource");
+					reset = true;
 				}
-				if (ImGui::Button("load"))
+				if (ImGui::BeginPopupModal("select resource", NULL, ImGuiWindowFlags_AlwaysAutoResize))
 				{
-					LN_RESOURCES.Load<Mesh>(m_MeshID, "TEST");
-
+					m_MeshID = LN_RESOURCES.SelectResourcePopUp(Resources::ResourceType::LRT_MESH, reset);
+					//ImGui::SetItemDefaultFocus();
+					//ImGui::SameLine();
+					if (ImGui::Button("Cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
+					ImGui::EndPopup();
 				}
-#endif // LN_DEBUG
-			}
-			else
-			{
+
 				static int selectedMesh = -1;
 				const char* names[] = { "cube", "pyramid", "plane" };
 
 				if (ImGui::Button("Primitives"))
 					ImGui::OpenPopup("my_select_popup");
-				ImGui::SameLine();
+				
 
 				if (ImGui::BeginPopup("my_select_popup"))
 				{
@@ -96,25 +96,38 @@ namespace Lanna
 					ImGui::EndPopup();
 				}
 			}
-			//ImGui::TextUnformatted(selectedMesh == -1 ? "<None>" : names[selectedMesh]);
 
-			/*ImGui::Text("");
-			static char buf[100] = "";
-			ImGui::Text("Mesh Path");
-			ImGui::SetNextItemWidth(-FLT_MIN-50);
-			ImGui::InputText("", buf, IM_ARRAYSIZE(buf));
-			ImGui::SameLine();
-			if (ImGui::SmallButton("load"))
+			else
 			{
-				LoadFromFile(buf);
-			}*/
+				std::string path = LN_RESOURCES.GetPathById<Mesh>(m_MeshID);
+				if (path != "null")
+				{
+					ImGui::Text("Source mesh");
+					ImGui::TextWrapped(LN_RESOURCES.GetPathById<Mesh>(m_MeshID).c_str());
 
+				}
+				if (ImGui::SmallButton("save"))
+				{
+					LN_RESOURCES.Save<Mesh>(m_MeshID);
+				}
+				ImGui::SameLine();
+				if (ImGui::SmallButton("load"))
+				{
+					LN_RESOURCES.Load<Mesh>(m_MeshID, "TEST");
 
-
-
+				}
+				ImGui::SameLine();
+				if (ImGui::SmallButton("Delete"))
+				{
+					toDel = true;
+				}
+				
+			}
+			
 			ImGui::TreePop();
 		}
 
+		
 	}
 
 	void MeshComponent::Render()

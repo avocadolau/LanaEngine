@@ -26,10 +26,7 @@ namespace Lanna
 {
     CameraComponent::CameraComponent(CameraComponent* copy, TransformComponent*t) :Component(Component::Type::CAMERA)
     {
-        Lanna::Window& window = Lanna::Application::Get().GetWindow();
-        resolution = { window.GetHeight(), window.GetHeight() };
-
-        m_Framebuffer.Init(resolution.x, resolution.y);
+        name = "Camera Component";
 
         Position = &t->m_Position;
         WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -51,6 +48,7 @@ namespace Lanna
         resolution = { window.GetHeight(), window.GetHeight() };
 
         m_Framebuffer.Init(resolution.x, resolution.y);
+        name = "Camera Component";
 
         Position = &t->m_Position;
         WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);

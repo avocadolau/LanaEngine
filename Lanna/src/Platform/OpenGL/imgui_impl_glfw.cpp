@@ -770,7 +770,7 @@ static void ImGui_ImplGlfw_UpdateMonitors()
 #if GLFW_HAS_MONITOR_WORK_AREA
         int w, h;
         glfwGetMonitorWorkarea(glfw_monitors[n], &x, &y, &w, &h);
-        if (w > 0 && h > 0) // Workaround a small GLFW issue reporting Wiwa on monitor changes: https://github.com/glfw/glfw/pull/1761
+        if (w > 0 && h > 0) // Workaround a small GLFW issue reporting Lanna on monitor changes: https://github.com/glfw/glfw/pull/1761
         {
             monitor.WorkPos = ImVec2((float)x, (float)y);
             monitor.WorkSize = ImVec2((float)w, (float)h);

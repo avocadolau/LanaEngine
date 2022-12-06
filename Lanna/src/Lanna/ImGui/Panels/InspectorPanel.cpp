@@ -43,20 +43,48 @@ namespace Lanna {
 
 	void InspectorPanel::Draw()
 	{
+		bool changes_happened = false;
 		GameObject* activeObject = LN_ENTITY_MAN->GetActiveEntitiy();
 
 		ImGui::Begin("Inspector", &active);
 		if (activeObject != nullptr)
 		{
-			ImGui::Text(activeObject->m_Name.c_str());
+			//char nName[25] = { activeObject->m_Name.c_str() };
+			//changes_happened |= ImGui::InputText("##EntityNameInspector",nName, sizeof(entity->name));
+			
+			static char buff[20];
+			int size = activeObject->m_Name.size();
+			*buff = *activeObject->m_Name.c_str();
+			for (int i = 0; i < 20; i++)
+			{
+				if (i < size)
+					buff[i] = activeObject->m_Name.at(i);
+				else buff[i] = ' ';
+			}
+
+			changes_happened |= ImGui::InputText("##EntityNameInspector", buff, sizeof(buff));
+
+			activeObject->m_Name = buff;
+			//ImGui::Text(activeObject->m_Name.c_str());
 
 			ImGui::Text("Parent: ");
 			ImGui::SameLine();
-			if (activeObject->m_Parent == nullptr) ImGui::Text("None");
-			else ImGui::Text(activeObject->m_Parent->m_Name.c_str());
-			ImGui::SameLine();
-			if (ImGui::SmallButton("Del")) {}
-			if (ImGui::SmallButton("Add")) {}
+			if (activeObject->m_Parent == nullptr)
+			{
+				ImGui::Text("None");
+			}
+			else {
+				ImGui::Text(activeObject->m_Parent->m_Name.c_str());
+				/*ImGui::SameLine();
+				if (ImGui::SmallButton("Del")) {
+					GameObject* copy = new GameObject(activeObject);
+					GameObject* parent = activeObject->m_Parent;
+					parent->DelChild(activeObject);
+					LN_ENTITY_MAN->AddGameObject(copy);
+					activeObject = copy;
+				}*/
+			}
+
 
 			/*ImGui::Text("Children");
 			if(activeObject->m_Children.size()>0)
@@ -78,9 +106,24 @@ namespace Lanna {
 				// components
 			ImGui::Separator();
 			/*activeObject->m_Transform->ImGuiDraw();*/
+			
+			
 			for (Component* comps : activeObject->m_Components)
+			{
 				comps->ImGuiDraw();
+			}
 
+			for (int i = activeObject->m_Components.size() - 1; i >= 0; i--)
+			{
+				Component* comp = activeObject->m_Components.at(i);
+				if (comp->toDel==true)
+				{
+					if (comp->m_Type == Component::Type::MESH)activeObject->m_Mesh = nullptr;
+					if (comp->m_Type == Component::Type::MATERIAL)activeObject->m_Material = nullptr;
+					if (comp->m_Type == Component::Type::CAMERA)activeObject->m_Camera = nullptr;
+					activeObject->DestroyComponent(comp);
+				}
+			}
 
 			if (activeObject->loockComonents == false)
 			{

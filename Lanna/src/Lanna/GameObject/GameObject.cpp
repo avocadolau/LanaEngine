@@ -77,7 +77,19 @@ namespace Lanna
 	}
 	void GameObject::Render() {
 		if (m_Mesh)
-			LN_RENDERER.RenderMesh(LN_RESOURCES.GetResourceById<Mesh>(m_Mesh->m_MeshID), m_Transform->w_Pos, m_Transform->w_Rot, m_Transform->w_Scl, m_Material->getMaterial(), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), false);
+		{
+			if (m_Mesh->m_MeshID != -1)
+			{
+				if (m_Material)
+					LN_RENDERER.RenderMesh(LN_RESOURCES.GetResourceById<Mesh>(m_Mesh->m_MeshID), m_Transform->w_Pos, m_Transform->w_Rot, m_Transform->w_Scl, m_Material->getMaterial(), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), false);
+				else LN_RENDERER.RenderMeshColor(LN_RESOURCES.GetResourceById<Mesh>(m_Mesh->m_MeshID), m_Transform->w_Pos, m_Transform->w_Rot, m_Transform->w_Scl, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), false);
+
+			}
+		}
+		for (GameObject* o : m_Children)
+		{
+			o->Render();
+		}
 	}
 
 	Component* GameObject::AddComponent(Component::Type type)
@@ -159,12 +171,48 @@ namespace Lanna
 
 	void GameObject::DelChild(GameObject* child)
 	{
+		
+		int pos = 0;
+		for (GameObject* o : m_Children)
+		{
+			if (o == child)
+			{
+				m_Children.at(pos) = nullptr;
+				auto it = std::find(m_Children.begin(), m_Children.end(), nullptr);
+				m_Children.erase(it);
+				o->m_Parent = nullptr;
+				LN_ENTITY_MAN->AddGameObject(o);
+				break;
+			}
+			else
+			{
+				pos++;
+			}
+		}
+
+
+	}
+
+	void GameObject::DestroyChild(GameObject* child)
+	{
 		auto it = std::find(m_Children.begin(), m_Children.end(), child);
 		if (it != m_Children.end())
 		{
 			m_Children.erase(it);
 			delete child;
 			child = nullptr;
+		}
+
+	}
+
+	void GameObject::DestroyComponent(Component* comp)
+	{
+		auto it = std::find(m_Components.begin(), m_Components.end(), comp);
+		if (it != m_Components.end())
+		{
+			m_Components.erase(it);
+			delete comp;
+			comp = nullptr;
 		}
 	}
 

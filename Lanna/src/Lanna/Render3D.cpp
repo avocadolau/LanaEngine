@@ -37,7 +37,7 @@ namespace Lanna {
 		m_GridShader = LN_RESOURCES.Import<Shader>("resourses/shaders/grid");
 
 		GameObject* camera=LN_ENTITY_MAN->AddEmptyGameObject("camera");
-		
+		camera->canDelete = false;
 		m_ActiveCamera = (CameraComponent*)camera->AddComponent(Component::Type::CAMERA);
 		m_ActiveCamera->SetPerspective(45.0f, resolution.x / (float)resolution.y);
 		m_ActiveCamera->setPosition({ 0.0f,1.0f,5.0f });

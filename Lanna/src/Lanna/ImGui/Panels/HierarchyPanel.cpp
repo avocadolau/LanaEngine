@@ -91,18 +91,34 @@ namespace Lanna {
                 if (hover->m_Parent)
                 {
                     GameObject* del = hover;
-                    hover->m_Parent->DelChild(del);
+                    hover->m_Parent->DestroyChild(del);
                     if (selected.at(root) == 0)
                     {
                         root--;
                     }
                     selected.at(root)--;
                 }
+
                 else
                 {
                     LN_ENTITY_MAN->DestroyGameObject(hover);
                 }
             }
+            if (hover->m_Parent)
+            {
+                if (ImGui::Selectable("Unchild"))
+                {
+                    GameObject* del = hover;
+                    hover->m_Parent->DelChild(del);
+                    if (selected.at(root) == 0)
+                    {
+                        root--;
+                    }
+                    selected.at(root)--;
+
+                }
+            }
+            
             ImGui::EndPopup();
         }
     }
