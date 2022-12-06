@@ -13,6 +13,8 @@ namespace Lanna
 {
 	TransformComponent::TransformComponent() : Component(Component::Type::TRANSFORM)
 	{
+		name = "Transform Component";
+
 		m_Position = glm::vec3(0.0f, 0.0f, 0.0f);
 		m_Rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 		m_Scale = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -20,6 +22,8 @@ namespace Lanna
 	}
 	TransformComponent::TransformComponent(TransformComponent* copy) : Component(Component::Type::TRANSFORM)
 	{
+		name = "Transform Component";
+
 		m_Position = copy->m_Position;
 		m_Rotation = copy->m_Rotation;
 		m_Scale = copy->m_Scale;
@@ -27,6 +31,8 @@ namespace Lanna
 	}
 	TransformComponent::TransformComponent(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) : Component(Component::Type::TRANSFORM)
 	{
+		name = "Transform Component";
+
 		m_Position = position;
 		m_Rotation = rotation;
 		m_Scale = scale;

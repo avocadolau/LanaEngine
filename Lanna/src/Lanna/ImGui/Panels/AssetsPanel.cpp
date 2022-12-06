@@ -105,6 +105,7 @@ namespace Lanna {
 		ImGui::End();
 		DrawConfigurations();
 	}
+
 	void AssetsPanel::DrawConfigurations()
 	{
 		ImGui::Begin("Assets Configuration", &active);
@@ -116,33 +117,37 @@ namespace Lanna {
 			
 			path = FileDialog::OpenFile("");
 
-			LN_INFO(path.c_str());
-			FileType type = CheckExtension(GetExtension(path.c_str()));
-			switch (type)
+			if (path!= std::string())
 			{
-			case LFT_Error:
-				break;
-			case LFT_Texture:		LN_RESOURCES.Import<Texture>(path.c_str());
-				break;
-			case LFT_Object:
-				break;
-			case LFT_FBX:			LN_RESOURCES.Import<Mesh>(path.c_str());
-				break;
-			case LFT_Material:
-				break;
-			case LFT_Mesh:
-				break;
-			case LFT_Bilboad:
-				break;
-			case LFT_Skeleton:
-				break;
-			case LFT_Animation:
-				break;
-			case LFT_Files_Max:
-				break;
-			default:
-				break;
+				LN_INFO(path.c_str());
+				FileType type = CheckExtension(GetExtension(path.c_str()));
+				switch (type)
+				{
+				case LFT_Error:
+					break;
+				case LFT_Texture:		LN_RESOURCES.Import<Texture>(path.c_str());
+					break;
+				case LFT_Object:
+					break;
+				case LFT_FBX:			LN_RESOURCES.Import<Mesh>(path.c_str());
+					break;
+				case LFT_Material:
+					break;
+				case LFT_Mesh:
+					break;
+				case LFT_Bilboad:
+					break;
+				case LFT_Skeleton:
+					break;
+				case LFT_Animation:
+					break;
+				case LFT_Files_Max:
+					break;
+				default:
+					break;
+				}
 			}
+			
 			
 		}
 

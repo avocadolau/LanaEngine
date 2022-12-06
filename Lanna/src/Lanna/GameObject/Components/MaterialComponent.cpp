@@ -14,11 +14,15 @@ namespace Lanna
 
 	MaterialComponent::MaterialComponent() : Component(Component::Type::MATERIAL)
 	{
+		name = "Material Component";
+
 		m_MaterialID = LN_RESOURCES.Import<Material>("null");
 		LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setColor(glm::vec4(0.0f,0.0f,0.0f,0.0f));
 	}
 	MaterialComponent::MaterialComponent(MaterialComponent* copy) : Component(Component::Type::MATERIAL)
 	{
+		name = "Material Component";
+
 		if (copy->m_MaterialID != -1)
 		{
 			Material* copyMat = LN_RESOURCES.GetResourceById<Material>(copy->m_MaterialID);
@@ -38,12 +42,16 @@ namespace Lanna
 	}
 	MaterialComponent::MaterialComponent(glm::vec4 color) : Component(Component::Type::MATERIAL)
 	{
+		name = "Material Component";
+
 		m_MaterialID = LN_RESOURCES.Import<Material>("null");
 		LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setColor(color);
 
 	}
 	MaterialComponent::MaterialComponent(const char* file) : Component(Component::Type::MATERIAL)
 	{
+		name = "Material Component";
+
 		m_MaterialID = LN_RESOURCES.Import<Material>(file);
 		//LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setTexture(file);
 	}
@@ -83,10 +91,12 @@ namespace Lanna
 
 		if (ImGui::TreeNode("Material"))
 		{
-			Material* m_Mat = LN_RESOURCES.GetResourceById<Material>(m_MaterialID);
+			
+			
 
-			if (m_Mat)
+			if (m_MaterialID!=-1)
 			{
+				Material* m_Mat = LN_RESOURCES.GetResourceById<Material>(m_MaterialID);
 				if (m_Mat->IsColor())
 				{
 					glm::vec4 m_Color = m_Mat->GetColor();
@@ -148,10 +158,7 @@ namespace Lanna
 				{
 					ImGui::Text("no material");
 				}
-			}
-			else
-			{
-				ImGui::Text("no material");
+				
 			}
 			/*static int selectedMat = -1;
 			const char* names[] = { "material 1", "material 2", "material 3", "material 4", "material 5" };
@@ -171,20 +178,38 @@ namespace Lanna
 					selectedMat = -1;
 				ImGui::EndPopup();
 			}*/
-			if (ImGui::BeginDragDropTarget())
+			bool reset = false;
+			if (ImGui::Button("Select Resource"))
 			{
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
-				{
-					const wchar_t* path = (const wchar_t*)payload->Data;
-					std::filesystem::path& texpath = std::filesystem::path(s_AssetPath) / path;
-
-					//setTexture(texpath.string().c_str());
-
-					//setTexture(texpath.string().c_str());
-
-				}
-				ImGui::EndDragDropTarget();
+				ImGui::OpenPopup("select resource");
+				reset = true;
 			}
+			if (ImGui::BeginPopupModal("select resource", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+			{
+				m_MaterialID = LN_RESOURCES.SelectResourcePopUp(Resources::ResourceType::LRT_MATERIAL, reset);
+				//ImGui::SetItemDefaultFocus();
+				//ImGui::SameLine();
+				if (ImGui::Button("Cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
+				ImGui::EndPopup();
+			}
+			if (ImGui::SmallButton("Delete"))
+			{
+				toDel = true;
+			}
+			//if (ImGui::BeginDragDropTarget())
+			//{
+			//	if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("CONTENT_BROWSER_ITEM"))
+			//	{
+			//		const wchar_t* path = (const wchar_t*)payload->Data;
+			//		std::filesystem::path& texpath = std::filesystem::path(s_AssetPath) / path;
+
+			//		//setTexture(texpath.string().c_str());
+
+			//		//setTexture(texpath.string().c_str());
+
+			//	}
+			//	ImGui::EndDragDropTarget();
+			//}
 
 			ImGui::TreePop();
 		}

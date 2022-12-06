@@ -27,11 +27,12 @@ namespace Lanna
 		void AddCopyChild(GameObject* child);
 		void AddEmptyChild();
 		void DelChild(GameObject* child);
-
+		void DestroyChild(GameObject* child);
+		void DestroyComponent(Component* comp);
 	public:
 		bool active = true;
 
-		std::list<Component*> m_Components;
+		std::vector<Component*> m_Components;
 		std::vector<GameObject*> m_Children;
 		TransformComponent* m_Transform = nullptr;
 		MaterialComponent* m_Material = nullptr;
@@ -40,6 +41,7 @@ namespace Lanna
 		GameObject* m_Parent = nullptr;
 		std::string m_Name;
 		bool loockComonents = false;
+		bool canDelete = true;
 	};
 
 }

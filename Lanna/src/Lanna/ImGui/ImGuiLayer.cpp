@@ -106,8 +106,8 @@ namespace Lanna {
 		m_panels.push_back(m_about);
 		m_panels.push_back(m_hardware);
 		m_panels.push_back(m_scene);
-		m_panels.push_back(m_Inspector);
 		m_panels.push_back(m_Hierarchy);
+		m_panels.push_back(m_Inspector);
 		m_panels.push_back(m_Assets);
 
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
