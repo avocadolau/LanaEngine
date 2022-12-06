@@ -6,10 +6,7 @@ namespace Lanna {
 
 	Scene::Scene()
 	{
-	}
 
-	Scene::~Scene()
-	{
 	}
 
 	Scene::~Scene()

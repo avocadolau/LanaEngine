@@ -51,7 +51,6 @@ namespace Lanna {
 		Panel* m_Inspector = nullptr;
 		Panel* m_Hierarchy = nullptr;
 		Panel* m_Assets = nullptr;
-		Panel* m_GameScene = nullptr;
 
 		std::vector<Panel*> m_panels;
 

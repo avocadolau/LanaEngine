@@ -181,10 +181,6 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\ImGui\Panels\HierarchyPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\InspectorPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h" />
-<<<<<<< Updated upstream
-=======
-    <ClInclude Include="src\Lanna\ImGui\Panels\GameScenePanel.h" />
->>>>>>> Stashed changes
     <ClInclude Include="src\Lanna\ImGui\Panels\ScenePanel.h" />
     <ClInclude Include="src\Lanna\Input.h" />
     <ClInclude Include="src\Lanna\KeyCodes.h" />
@@ -235,7 +231,6 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\ImGui\Panels\AboutPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\AssetsPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp" />
-    <ClCompile Include="src\Lanna\ImGui\Panels\GameScenePanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\HardwarePanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\HierarchyPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\InspectorPanel.cpp" />
