@@ -9,6 +9,10 @@ namespace Lanna {
 
 	}
 
+	Scene::~Scene()
+	{
+	}
+
 	void Scene::Init()
 	{
 		m_EntityManager.Init();
