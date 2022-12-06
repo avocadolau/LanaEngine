@@ -18,10 +18,13 @@ namespace Lanna {
 		m_Shadings.push_back(new ShadingView("Wireframe", true));
 		m_Shadings.push_back(new ShadingView("Stil WIP T_T", true));
 
+<<<<<<< Updated upstream
 		m_IconPlay = new Texture();
 		m_IconPlay->Init("resources/icons/PlayButton.png");
 		m_IconStop = new Texture();
 		m_IconStop->Init("resources/icons/StopButton.png");
+=======
+>>>>>>> Stashed changes
 	}
 
 	ScenePanel::~ScenePanel()
@@ -94,4 +97,8 @@ namespace Lanna {
 		newFBX->AddComponent(Component::Type::MESH);
 		newFBX->m_Mesh->LoadFromFile(path.string().c_str());
 	}
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 }

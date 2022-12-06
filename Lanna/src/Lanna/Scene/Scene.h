@@ -18,6 +18,7 @@ namespace Lanna {
 		EntityManager* GetEntityManager();
 
 	private:
+
 		EntityManager m_EntityManager;
 	};
 }

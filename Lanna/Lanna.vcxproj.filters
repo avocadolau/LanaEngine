@@ -124,6 +124,12 @@
     <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
+=======
+    <ClInclude Include="src\Lanna\ImGui\Panels\GameScenePanel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClInclude>
+>>>>>>> Stashed changes
     <ClInclude Include="src\Lanna\ImGui\Panels\ScenePanel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
@@ -344,5 +350,8 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\GameScenePanel.cpp">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
