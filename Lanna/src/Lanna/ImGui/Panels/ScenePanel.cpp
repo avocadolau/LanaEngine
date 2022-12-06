@@ -4,12 +4,11 @@
 #include <Lanna/Render3D.h>
 #include <imgui.h>
 #include "Lanna/Resources/Texture.h"
+#include "Lanna/Utilities/Time.h"
 
 namespace Lanna {
 
 	extern const std::filesystem::path s_AssetPath;
-
-
 
 	ScenePanel::ScenePanel() : Panel("Scene")
 	{
@@ -18,10 +17,10 @@ namespace Lanna {
 		m_Shadings.push_back(new ShadingView("Wireframe", true));
 		m_Shadings.push_back(new ShadingView("Stil WIP T_T", true));
 
-		m_IconPlay = new Texture();
+		/*m_IconPlay = new Texture();
 		m_IconPlay->Init("resources/icons/PlayButton.png");
 		m_IconStop = new Texture();
-		m_IconStop->Init("resources/icons/StopButton.png");
+		m_IconStop->Init("resources/icons/StopButton.png");*/
 	}
 
 	ScenePanel::~ScenePanel()
@@ -43,6 +42,7 @@ namespace Lanna {
 					if (ImGui::MenuItem(c->name, "", &c->active))
 					{
 						LN_INFO("{0}, {1}", c->name, c->active);
+
 					}
 				}
 				ImGui::EndMenu();
@@ -94,4 +94,12 @@ namespace Lanna {
 		newFBX->AddComponent(Component::Type::MESH);
 		newFBX->m_Mesh->LoadFromFile(path.string().c_str());
 	}
+	//
+	//void ScenePanel::OnScenePlay()
+	//{
+	//}
+	//
+	//void ScenePanel::OnSceneStop()
+	//{
+	//}
 }

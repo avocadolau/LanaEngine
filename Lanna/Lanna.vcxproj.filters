@@ -124,6 +124,9 @@
     <ClInclude Include="src\Lanna\ImGui\Panels\Panel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\ImGui\Panels\PlayStopPannel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\ImGui\Panels\ScenePanel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
@@ -172,6 +175,9 @@
     <ClInclude Include="src\Lanna\Scene\Scene.h">
       <Filter>Lanna\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Scene\SceneManager.h">
+      <Filter>Lanna\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Utilities\FileDialog.h">
       <Filter>Lanna\Utilities</Filter>
     </ClInclude>
@@ -209,6 +215,12 @@
       <Filter>Lanna\Utilities\Maths</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Utilities\MemoryAllocation.h">
+      <Filter>Lanna\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Time.h">
+      <Filter>Lanna\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Timer.h">
       <Filter>Lanna\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Window.h">
@@ -319,6 +331,9 @@
     <ClCompile Include="src\Lanna\Scene\Scene.cpp">
       <Filter>Lanna\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lanna\Scene\SceneManager.cpp">
+      <Filter>Lanna\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\Lanna\Utilities\FileDialog.cpp">
       <Filter>Lanna\Utilities</Filter>
     </ClCompile>
@@ -330,6 +345,12 @@
     </ClCompile>
     <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp">
       <Filter>Lanna\Utilities\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Utilities\Time.cpp">
+      <Filter>Lanna\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Utilities\Timer.cpp">
+      <Filter>Lanna\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp">
       <Filter>Platform\OpenGL</Filter>
