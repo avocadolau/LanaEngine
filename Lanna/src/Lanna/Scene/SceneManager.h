@@ -6,7 +6,6 @@
 
 typedef size_t SceneId;
 
-
 namespace Lanna {
 
 	class LANNA_API SceneManager {
@@ -16,15 +15,15 @@ namespace Lanna {
 		void Update();
 		void Render();
 
+
 		size_t CreateScene();
 		SceneId getActiveSceneId() { return m_ActiveScene; }
-		Scene* getActiveScene() { return m_Scene[m_ActiveScene]; }
+		Scene* getActiveScene() { return m_SceneList[m_ActiveScene]; }
+		void setActiveScene(SceneId _sceneId) { m_ActiveScene = _sceneId; };
 		SceneId LoadScene(const char* scene_path);
 	
 	private:
-		std::vector<Scene*> m_Scene;
 		std::vector<Scene*> m_SceneList;
 		SceneId m_ActiveScene;
-		SceneManager();
 	};
 }

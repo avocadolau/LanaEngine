@@ -161,6 +161,14 @@ namespace Lanna {
 		ImGui::ShowDemoWindow(&show);
 	}
 
+	void ImGuiLayer::SaveAScene()
+	{
+	}
+
+	void ImGuiLayer::OpenAScene()
+	{
+	}
+
 	void ImGuiLayer::Begin()
 	{
 		ImGui_ImplOpenGL3_NewFrame();
@@ -257,6 +265,26 @@ namespace Lanna {
 	{
 		if (ImGui::BeginMenu("File"))
 		{
+			if (ImGui::MenuItem("New Scene"))
+			{
+				size_t active = LN_SCENE_MAN->CreateScene();
+				LN_SCENE_MAN->setActiveScene(active);
+			}
+			if (ImGui::MenuItem("Open Scene"))
+			{
+				/*std::string filePath = Lanna::FileDialogs::OpenFile("Scene (*.scene)\0*.scene\0");
+				if (!filePath.empty())
+				{
+					SceneId scene_id = Lanna::SceneManager::LoadScene(filePath.c_str());
+					Lanna::SceneManager::SetScene(scene_id);
+					LN_INFO("Succesfully opened project at path {0}", filePath.c_str());
+				}*/
+				
+			}
+			if (ImGui::MenuItem("Save Scene"))
+			{
+
+			}
 			if (ImGui::MenuItem("Quit"))
 			{
 				Lanna::Application::Get().Close();

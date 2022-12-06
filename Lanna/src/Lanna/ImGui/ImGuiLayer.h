@@ -24,6 +24,10 @@ namespace Lanna {
 		void OnDetach() override;
 		void OnUpdate() override;
 
+		// Scene Serialization functions
+		void SaveAScene();
+		void OpenAScene();
+
 		void Begin();
 		void End();
 
@@ -42,8 +46,6 @@ namespace Lanna {
 		Texture* m_IconStop;
 		Texture* m_IconPause;
 
-		void OnScenePlay();
-		void OnSceneStop();
 
 	private:
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);

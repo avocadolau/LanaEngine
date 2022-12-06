@@ -38,8 +38,9 @@ namespace Lanna {
 
 		m_Resources = new Resources();
 
-		m_EntityManager = new EntityManager();
-		m_EntityManager->Init();
+		m_SceneManager = new SceneManager();
+		size_t newVar = m_SceneManager->CreateScene();
+		m_SceneManager->setActiveScene(newVar);
 
 		m_Render3D = new Render3D();
 		m_Render3D->Init();
@@ -124,8 +125,8 @@ namespace Lanna {
 
 
 			m_Render3D->Update();
-			m_EntityManager->Update();
-			m_EntityManager->Render();
+			m_SceneManager->Update();
+			m_SceneManager->Render();
 
 			Time::Update();
 

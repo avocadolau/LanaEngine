@@ -9,6 +9,7 @@
 #include "Lanna/Events/ApplicationEvent.h"
 #include "Render3D.h"
 #include "EntityManager.h"
+#include "Scene/SceneManager.h"
 #include "Resources.h"
 #include "Lanna/Utilities/Time.h"
 
@@ -46,7 +47,7 @@ namespace Lanna {
 		inline Window& GetWindow() { return *m_Window; }
 		inline static Application& Get() { return *s_Instance; }
 		inline SysInfo& GetSystemInfo() { return m_SysInfo; }
-		inline EntityManager* GetEntityManager() { return m_EntityManager; }
+		inline SceneManager* GetSceneManager() { return m_SceneManager; }
 		inline Render3D& GetRenderer() { return *m_Render3D; }
 		inline Resources& GetResources() { return *m_Resources; }
 
@@ -60,7 +61,7 @@ namespace Lanna {
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_ImGuiLayer;
 		Render3D* m_Render3D;
-		EntityManager* m_EntityManager;
+		SceneManager* m_SceneManager;
 		Console* m_Console;
 		Resources* m_Resources;
 		Time* m_Time;
@@ -74,6 +75,7 @@ namespace Lanna {
 }
 
 // module getters
-#define LN_ENTITY_MAN ::Lanna::Application::Get().GetEntityManager()
+#define LN_ENTITY_MAN ::Lanna::Application::Get().GetSceneManager()->getActiveScene()->GetEntityManager()
+#define LN_SCENE_MAN ::Lanna::Application::Get().GetSceneManager()
 #define LN_RENDERER ::Lanna::Application::Get().GetRenderer()
 #define LN_RESOURCES ::Lanna::Application::Get().GetResources()

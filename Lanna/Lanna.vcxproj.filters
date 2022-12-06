@@ -112,6 +112,9 @@
     <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\ImGui\Panels\GameScenePanel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\ImGui\Panels\HardwarePanel.h">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClInclude>
@@ -242,9 +245,6 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
-    <ClInclude Include="src\Lanna\ImGui\Panels\GameScenePanel.h">
-      <Filter>Lanna\ImGui\Panels</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -281,6 +281,9 @@
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\ImGui\Panels\GameScenePanel.cpp">
       <Filter>Lanna\ImGui\Panels</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\ImGui\Panels\HardwarePanel.cpp">
@@ -368,8 +371,5 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
-    <ClCompile Include="src\Lanna\ImGui\Panels\GameScenePanel.cpp">
-      <Filter>Lanna\ImGui\Panels</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
