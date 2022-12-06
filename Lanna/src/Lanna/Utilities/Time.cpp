@@ -57,7 +57,7 @@ namespace Lanna
 	void Time::SetTimeScale(const int value)
 	{
 		m_TimeScale = value;
-		//CLAMP(m_TimeScale, -2, 5);
+		CLAMP(m_TimeScale, -2, 5);
 	}
 
 }

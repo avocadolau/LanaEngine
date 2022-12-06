@@ -317,7 +317,7 @@ namespace Lanna {
 				Lanna::Time::Stop();
 		}
 
-		if (ImGui::ImageButton(m_IconStop, { 15, 15 }))
+		if (ImGui::ImageButton((ImTextureID)(intptr_t) m_IconPause->GetTextureId(), { 15, 15 }))
 		{
 			Lanna::Time::Pause();
 		}
