@@ -323,6 +323,8 @@ namespace Lanna {
 		ImGui::Begin("Lanna Engine", &dockspaceOpen, window_flags);
 		ImGui::PopStyleVar(2);
 
+
+
 		// Submit the DockSpace
 		ImGuiIO& io = ImGui::GetIO();
 		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
