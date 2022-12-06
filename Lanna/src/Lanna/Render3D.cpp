@@ -32,9 +32,6 @@ namespace Lanna {
 		Lanna::Window& window = Lanna::Application::Get().GetWindow();
 		resolution = { window.GetHeight(), window.GetHeight() };
 
-
-		m_Framebuffer.Init(resolution.x, resolution.y);
-
 		m_ColorShader = LN_RESOURCES.Import<Shader>("resources/shaders/model_color");
 		m_TexShader = LN_RESOURCES.Import<Shader>("resources/shaders/model_texture");
 		m_GridShader = LN_RESOURCES.Import<Shader>("resourses/shaders/grid");
@@ -55,7 +52,8 @@ namespace Lanna {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 
-		m_Framebuffer.Clear();
+		m_ActiveCamera->m_Framebuffer.Clear();
+
 		//RenderGrid();
 	}
 
@@ -93,7 +91,7 @@ namespace Lanna {
 		glViewport(0, 0, resolution.x, resolution.y);
 
 		// bind buffer
-		m_Framebuffer.Bind(clear);
+		m_ActiveCamera->m_Framebuffer.Bind(clear);
 
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -114,7 +112,7 @@ namespace Lanna {
 		mesh->Render();
 
 		// unbind buffer
-		m_Framebuffer.Unbind();
+		m_ActiveCamera->m_Framebuffer.Unbind();
 	}
 	void Render3D::RenderMesh(Mesh* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, Material* material, glm::vec4& color, bool clear)
 	{
@@ -140,7 +138,7 @@ namespace Lanna {
 		glViewport(0, 0, resolution.x, resolution.y);
 
 		// bind buffer
-		m_Framebuffer.Bind(clear);
+		m_ActiveCamera->m_Framebuffer.Bind(clear);
 	
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -164,13 +162,13 @@ namespace Lanna {
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		// unbind buffer
-		m_Framebuffer.Unbind();
+		m_ActiveCamera->m_Framebuffer.Unbind();
 
 	}
 
 	void Render3D::RenderGrid(Framebuffer* target, bool clear)
 	{
-		if (!target) target = &m_Framebuffer;
+		if (!target) target = &m_ActiveCamera->m_Framebuffer;
 		glViewport(0, 0, target->width, target->height);
 
 		target->Bind(clear);

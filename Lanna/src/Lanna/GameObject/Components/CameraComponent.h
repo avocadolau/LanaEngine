@@ -1,6 +1,7 @@
 #pragma once
 #include "Lanna/GameObject/Component.h"
 #include "TransformComponent.h"
+#include "Lanna/Resources/Framebuffer.h"
 
 #include <glew.h>
 #include <glm.hpp>
@@ -102,5 +103,11 @@ namespace Lanna
         float distance = 10.0f;
         glm::vec2 lastpos;
         bool freelookaround = false;
+
+        glm::vec2  resolution;
+
+    public:
+
+        Framebuffer m_Framebuffer;
     };
 }

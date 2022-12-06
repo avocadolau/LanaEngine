@@ -20,6 +20,7 @@ namespace Lanna
 	private:
 
 		CameraComponent* m_ActiveCamera;
+		
 		glm::mat4 m_PersProj;
 		glm::mat4 m_View;
 		glm::vec2  resolution;
@@ -31,10 +32,6 @@ namespace Lanna
 		ResourceId m_ColorShader;
 		ResourceId m_TexShader;
 		ResourceId m_GridShader;
-
-	public:
-
-		Framebuffer m_Framebuffer;
 
 	public:
 		Render3D();
@@ -53,7 +50,7 @@ namespace Lanna
 		glm::mat4 GetPersProjection() { return m_ActiveCamera->getProjection(); }
 		glm::mat4 GetView() { return m_ActiveCamera->getView(); }
 		CameraComponent& GetActiveCamera() { return *m_ActiveCamera; }
-		uint32_t getColorBufferTexture() { return m_Framebuffer.getColorBufferTexture(); }
+		uint32_t getColorBufferTexture() { return m_ActiveCamera->m_Framebuffer.getColorBufferTexture(); }
 		void RenderMeshColor(Mesh* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, glm::vec4& color, bool clear);
 		void RenderMesh(Mesh* mesh, glm::vec3& position, glm::vec3& rotation, glm::vec3& scale, Material* material, glm::vec4& color, bool clear);
 		void RenderGrid(Framebuffer* target = NULL, bool clear = false);
