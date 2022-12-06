@@ -70,4 +70,16 @@ namespace Lanna {
 		return m_Type == Type::TEXTURE;
 	}
 
+	void Material::Save(const char* path)
+	{
+		ResourceId m_TextureID;
+		Type m_Type = NONE;
+		glm::vec4 m_Color;
+	}
+
+	void Material::Load(const char* path)
+	{
+
+	}
+
 }

@@ -62,4 +62,22 @@ namespace Lanna {
 		EVENT_CLASS_TYPE(AppRender)
 			EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
+
+	class LANNA_API AppSaveEvent : public Event
+	{
+	public:
+		AppSaveEvent() {}
+
+		EVENT_CLASS_TYPE(AppSave)
+			EVENT_CLASS_CATEGORY(EventCategoryApplication)
+	};
+
+	class LANNA_API AppLoadEvent : public Event
+	{
+	public:
+		AppLoadEvent() {}
+
+		EVENT_CLASS_TYPE(AppLoad)
+			EVENT_CLASS_CATEGORY(EventCategoryApplication)
+	};
 }

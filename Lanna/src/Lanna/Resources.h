@@ -14,12 +14,15 @@
 #include "Resources/Mesh.h"
 #include "Resources/Material.h"
 
+#include "Lanna/Resources/Importers/MeshImporter.h"
+
 #include <string>
 #include <vector>
 
 #define RESOURCE_TEST
 
 typedef size_t ResourceId;
+typedef char sbyte;
 
 namespace Lanna {
 
@@ -40,7 +43,7 @@ namespace Lanna {
 			std::string filePath;
 			void* resource;
 		};
-
+		//MeshImporter meshimporter;
 	private:
 
 		static std::vector<Resource*> m_Resources[LRT_LAST];
@@ -52,13 +55,16 @@ namespace Lanna {
 		~Resources();
 
 		template<class T> static ResourceId Import(const char* file);
-		template<class T> static ResourceId Save(const char* path);
-		template<class T> static ResourceId Load(const char* path);
+		template<class T> static void Save(ResourceId id);
+		template<class T> static ResourceId Load(ResourceId id,const char* path);
 		template<class T> static T* GetResourceById(ResourceId id);
 
 		template<class T> static std::string GetPathById(ResourceId id);
 		template<class T> static ResourceId DuplicateResource(ResourceId copy);
+
+		static std::string GetSavePath(ResourceType rt, const char* file);
 		static void Clear();
+		
 	};
 
 	// SPECIALIZATION FOR SHADER
@@ -164,12 +170,13 @@ namespace Lanna {
 			Mesh* model = new Mesh(file);
 
 			PushResource(LRT_MESH, file, model);
-
 			resourceId = size;
 		}
 		else {
 			resourceId = position;
 		}
+
+		Test();
 
 		return resourceId;
 	}
@@ -191,9 +198,31 @@ namespace Lanna {
 			path = m_Resources[LRT_MESH][id]->filePath;
 		}
 		else path = "null";
+
 		return path;
 	}
+	template<>
+	inline void Resources::Save<Mesh>(ResourceId id)
+	{
+		Mesh* mesh = GetResourceById<Mesh>(id);
+		std::string sPath = GetSavePath(ResourceType::LRT_MESH, GetPathById<Mesh>(id).c_str());
+		//std::fstream write_file;
 
+		//write_file.open(sPath.c_str(), std::fstream::out | std::fstream::binary);
+		
+		mesh->Save(sPath.c_str());
+
+		//write_file.close();
+	}
+	template<>
+	inline ResourceId Resources::Load<Mesh>(ResourceId id, const char* file)
+	{
+		Mesh* mesh = GetResourceById<Mesh>(id);
+		std::string sPath = GetSavePath(ResourceType::LRT_MESH, GetPathById<Mesh>(id).c_str());
+
+		mesh->Load(sPath.c_str());
+		return id;
+	}
 	template<>
 	inline ResourceId Resources::Import<Material>(const char* file)
 	{

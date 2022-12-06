@@ -18,6 +18,7 @@ namespace Lanna
 			NONE
 		};
 		MaterialComponent();
+		MaterialComponent(MaterialComponent* copy);
 		MaterialComponent(glm::vec4 color);
 		MaterialComponent(const char* file);
 		~MaterialComponent();
@@ -35,6 +36,6 @@ namespace Lanna
 		//glm::vec2 m_TexSize;
 		//glm::vec4 m_Color;
 		//unsigned int m_texid;
-		ResourceId m_MaterialID;
+		ResourceId m_MaterialID=-1;
 	};
 }

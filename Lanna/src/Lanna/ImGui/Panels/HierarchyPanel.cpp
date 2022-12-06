@@ -24,66 +24,124 @@ namespace Lanna {
 
         ImGui::Begin("Scene Game Objects", &active);
 
-        static int selected = 0;
+        if (ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0)) {
+            if (ImGui::BeginPopup("options uwu"))
+            {
+
+                ImGui::EndPopup();
+            }
+        }
+
+        if (selected.size() == 0)
+        {
+            selected.push_back(0);
+            selected.push_back(-1);
+            selected.push_back(-1);
+            selected.push_back(-1);
+        }
+
+        GameObject* selection;
+        for (int i = 0; i < entities.size(); i++)
+        {
+            if (ImGui::Selectable(entities.at(i)->m_Name.c_str(), selected[0] == i&&root==0))
+            {
+                
+            }
+            if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Right))
+            {
+                ImGui::OpenPopup("options");
+                hovered = entities.at(i);
+            }
+            if (ImGui::IsItemClicked() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+            {
+                for (int j : selected)
+                {
+                    j = -1;
+                }
+                selected[0] = i;
+                root = 0;
+
+            }
+            if (selected[0] == i)
+            {
+                EntityChildren(entities.at(i), 1);
+
+            }
+            
+        }
+        
+        PopMenu(hovered);
+
+        LN_ENTITY_MAN->SetActiveEntity(&selected, root);
+        
+        ImGui::End();
+    }
+    void HierarchyPanel::PopMenu(GameObject* hover)
+    {
+        if (ImGui::BeginPopup("options"))
         {
 
-
-            for (int i = 0; i < entities.size(); i++)
+            ImGui::Text(hover->m_Name.c_str());
+            if (ImGui::Selectable("Add new entity"))
             {
-                if (ImGui::Selectable(entities.at(i)->m_Name.c_str(), selected == i))
-                    selected = i;
+                hover->AddEmptyChild();
+            }
+            if (ImGui::Selectable("Delete selected"))
+            {
+                if (hover->m_Parent)
+                {
+                    GameObject* del = hover;
+                    hover->m_Parent->DelChild(del);
+                    if (selected.at(root) == 0)
+                    {
+                        root--;
+                    }
+                    selected.at(root)--;
+                }
+                else
+                {
+                    LN_ENTITY_MAN->DestroyGameObject(hover);
+                }
+            }
+            ImGui::EndPopup();
+        }
+    }
+    void HierarchyPanel::UpdateEntry(GameObject* entity)
+    {
+
+    }
+    void HierarchyPanel::EntityChildren(GameObject* entity, int n)
+    {
+        if (selected.size() <= n)
+            selected.push_back(-1);
+        for (int i = 0; i < entity->m_Children.size(); i++)
+        {
+            std::string name;
+            for (int i = 0; i < n; i++)name.append(" ");
+            name.append("-");
+            name.append(entity->m_Children.at(i)->m_Name);
+            if (ImGui::Selectable(name.c_str(), selected[n] == i&& root==n))
+            {
+
+            }
+            if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Right))
+            {
+                ImGui::OpenPopup("options");
+                hovered = entity->m_Children.at(i);
+            }
+            if (ImGui::IsItemClicked() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+            {
+                selected[n] = i;
+                for (int j = n + 1; j < selected.size(); j++)
+                    selected[j] = -1;
+                root = n;
+
+            }
+            if (selected[n] == i)
+            {
+                EntityChildren(entity->m_Children.at(i), n + 1);
             }
 
-            LN_ENTITY_MAN->SetActiveEntity(selected);
-
-
-
-            //ImGui::Separator();
-
-
-            //static const char* item_names[] = { "Item One", "Item Two", "Item Three", "Item Four", "Item Five" };
-            //for (int n = 0; n < IM_ARRAYSIZE(item_names); n++)
-            //{
-            //    const char* item = item_names[n];
-            //    ImGui::Selectable(item);
-
-            //    if (ImGui::IsItemActive() && !ImGui::IsItemHovered())
-            //    {
-            //        int n_next = n + (ImGui::GetMouseDragDelta(0).y < 0.f ? -1 : 1);
-            //        if (n_next >= 0 && n_next < IM_ARRAYSIZE(item_names))
-            //        {
-            //            item_names[n] = item_names[n_next];
-            //            item_names[n_next] = item;
-            //            ImGui::ResetMouseDragDelta();
-            //        }
-            //    }
-
-            //}
-            //ImGui::Separator();
-
-            //for (int i = 0; i < entities.size(); i++)
-            //{
-            //    if (ImGui::Selectable(entities.at(i)->m_Name))
-            //    {
-            //        selected = i;
-
-            //    }
-
-            //    if (ImGui::IsItemActive() && !ImGui::IsItemHovered())
-            //    {
-            //        int n_next = i + (ImGui::GetMouseDragDelta(0).y < 0.f ? -1 : 1);
-            //        if (n_next >= 0 && n_next < entities.size())
-            //        {
-            //            //std::iter_swap(entities.at(i), entities.at(n_next));
-            //            //std::swap(entities.at(i), entities.at(n_next));
-
-            //            ImGui::ResetMouseDragDelta();
-            //        }
-            //    }
-
-            //    LN_ENTITY_MAN->SetActiveEntity(selected);
-            //}
         }
-        ImGui::End();
     }
 }

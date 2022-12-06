@@ -23,6 +23,7 @@ namespace Lanna
     class CameraComponent : public Component
     {
     public:
+        CameraComponent(CameraComponent* copy, TransformComponent* t);
         CameraComponent(TransformComponent* t);
         /*CameraComponent(glm::vec3 _position, glm::vec3 _up, float _yaw, float _pitch);
         CameraComponent(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);*/

@@ -86,12 +86,21 @@ namespace Lanna {
 		}
 	}
 
-	void EntityManager::SetActiveEntity(unsigned int index = -1)
+	void EntityManager::SetActiveEntity(std::vector<uint64_t>* selection, int root)
 	{
-		if (index == -1) activeEntitiy = nullptr;
+		if (selection->at(0) == -1)
+			activeEntitiy = nullptr;
 		else
 		{
-			activeEntitiy = m_Entities.at(index);
+
+			activeEntitiy = m_Entities.at(selection->at(0));
+
+			for (int i = 1; i <= root; i++)
+			{
+				if (selection->at(i) != -1)
+					activeEntitiy = activeEntitiy->m_Children.at(selection->at(i));
+				else break;
+			}
 		}
 	}
 

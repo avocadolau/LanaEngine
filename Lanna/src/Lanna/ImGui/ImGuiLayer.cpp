@@ -140,7 +140,6 @@ namespace Lanna {
 
 		if (logActive)
 		{
-			m_Log.Draw("Console", &logActive);
 			Console::Get().Draw("Console app", &logActive);
 		}
 		

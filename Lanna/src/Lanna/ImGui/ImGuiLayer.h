@@ -29,14 +29,6 @@ namespace Lanna {
 		void OnEvent(Event& event) override;
 		void OnImGuiRender() override;
 
-		inline void LogTrace(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::TRACE, log); }
-		inline void LogInfo(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::INFO, log); }
-		inline void LogWarn(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::WARN, log); }
-		inline void LogError(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::ERR, log); }
-		inline void LogCritical(const char* log) { m_Log.AddLog(ImGuiLog::LogLevel::FATAL, log); }
-
-		inline ImGuiLog& GetLog() { return m_Log; }
-
 	private:
 		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
 		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
@@ -48,7 +40,6 @@ namespace Lanna {
 		void DockSpace();
 
 	private:
-		ImGuiLog m_Log;
 		bool logActive;
 
 		float m_Time = 0.0f;

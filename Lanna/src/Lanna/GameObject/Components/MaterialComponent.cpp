@@ -17,6 +17,25 @@ namespace Lanna
 		m_MaterialID = LN_RESOURCES.Import<Material>("null");
 		LN_RESOURCES.GetResourceById<Material>(m_MaterialID)->setColor(glm::vec4(0.0f,0.0f,0.0f,0.0f));
 	}
+	MaterialComponent::MaterialComponent(MaterialComponent* copy) : Component(Component::Type::MATERIAL)
+	{
+		if (copy->m_MaterialID != -1)
+		{
+			Material* copyMat = LN_RESOURCES.GetResourceById<Material>(copy->m_MaterialID);
+
+			m_MaterialID = LN_RESOURCES.Import<Material>("null");
+			Material* mMat= LN_RESOURCES.GetResourceById<Material>(m_MaterialID);
+
+			if (copyMat->IsColor())
+			{
+				mMat->setColor(copyMat->GetColor());
+			}
+			else if (copyMat->IsTexture())
+			{
+				mMat->setTexture(copyMat->GetTexturePath().c_str());
+			}
+		}
+	}
 	MaterialComponent::MaterialComponent(glm::vec4 color) : Component(Component::Type::MATERIAL)
 	{
 		m_MaterialID = LN_RESOURCES.Import<Material>("null");

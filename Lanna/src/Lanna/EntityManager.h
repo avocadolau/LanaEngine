@@ -20,7 +20,7 @@ namespace Lanna
 		GameObject* AddEmptyGameObject(const char* name);
 
 		void DestroyGameObject(GameObject* gameObject);
-		void SetActiveEntity(unsigned int index);
+		void SetActiveEntity(std::vector<uint64_t> *selection, int root);
 
 		GameObject* GetActiveEntitiy() { return activeEntitiy; }
 		std::vector<GameObject*>* GetEntityList() { return &m_Entities; }

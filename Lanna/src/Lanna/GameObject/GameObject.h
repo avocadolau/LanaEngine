@@ -24,16 +24,15 @@ namespace Lanna
 
 		Component* AddComponent(Component::Type type);
 
-		void SetParent(GameObject* parent);
-		void SetChild(GameObject* child);
+		void AddCopyChild(GameObject* child);
+		void AddEmptyChild();
 		void DelChild(GameObject* child);
-		void DelParent();
 
 	public:
 		bool active = true;
 
 		std::list<Component*> m_Components;
-		std::list<GameObject*> m_Children;
+		std::vector<GameObject*> m_Children;
 		TransformComponent* m_Transform = nullptr;
 		MaterialComponent* m_Material = nullptr;
 		MeshComponent* m_Mesh = nullptr;

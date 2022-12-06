@@ -22,6 +22,12 @@
     <Filter Include="Lanna\Resources">
       <UniqueIdentifier>{D9A5D914-4531-47D9-4E42-CACDBA4CA3D9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lanna\Resources\Importers">
+      <UniqueIdentifier>{AD7FADCA-1942-E154-62F2-6FE1CEF3B932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lanna\Scene">
+      <UniqueIdentifier>{0C0E3C3B-78C3-B430-01B8-AE076D6CAB34}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Lanna\Utilities">
       <UniqueIdentifier>{DAA48C40-4630-FA04-4F41-7DF9BB4B5605}</UniqueIdentifier>
     </Filter>
@@ -56,6 +62,9 @@
       <Filter>Lanna</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Events\ApplicationEvent.h">
+      <Filter>Lanna\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Events\EntityEvent.h">
       <Filter>Lanna\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Events\Event.h">
@@ -145,6 +154,9 @@
     <ClInclude Include="src\Lanna\Resources\Framebuffer.h">
       <Filter>Lanna\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Importers\MeshImporter.h">
+      <Filter>Lanna\Resources\Importers</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Resources\Material.h">
       <Filter>Lanna\Resources</Filter>
     </ClInclude>
@@ -157,6 +169,12 @@
     <ClInclude Include="src\Lanna\Resources\Texture.h">
       <Filter>Lanna\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Scene\Scene.h">
+      <Filter>Lanna\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\FileDialog.h">
+      <Filter>Lanna\Utilities</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Utilities\FileHelpers.h">
       <Filter>Lanna\Utilities</Filter>
     </ClInclude>
@@ -165,6 +183,9 @@
     </ClInclude>
     <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h">
       <Filter>Lanna\Utilities\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Utilities\Maths\FrustumCull.h">
+      <Filter>Lanna\Utilities\Maths</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Utilities\Maths\Maths.h">
       <Filter>Lanna\Utilities\Maths</Filter>
@@ -280,6 +301,9 @@
     <ClCompile Include="src\Lanna\Resources\Framebuffer.cpp">
       <Filter>Lanna\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Importers\MeshImporter.cpp">
+      <Filter>Lanna\Resources\Importers</Filter>
+    </ClCompile>
     <ClCompile Include="src\Lanna\Resources\Material.cpp">
       <Filter>Lanna\Resources</Filter>
     </ClCompile>
@@ -291,6 +315,12 @@
     </ClCompile>
     <ClCompile Include="src\Lanna\Resources\Texture.cpp">
       <Filter>Lanna\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Scene\Scene.cpp">
+      <Filter>Lanna\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Utilities\FileDialog.cpp">
+      <Filter>Lanna\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Utilities\FileHelpers.cpp">
       <Filter>Lanna\Utilities</Filter>

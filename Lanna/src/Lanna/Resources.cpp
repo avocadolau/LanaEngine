@@ -12,7 +12,8 @@ namespace Lanna {
 		resource->resource = rsc;
 
 		m_Resources[rt].push_back(resource);
-
+		std::string saveFile = GetSavePath(rt, file);
+		//std::ofstream outfile(saveFile.c_str());
 		std::string message = "Loaded resource \"" + resource->filePath + "\" successfully.";
 
 		LN_CORE_INFO(message.c_str());
@@ -31,6 +32,26 @@ namespace Lanna {
 		}
 
 		return resourceId;
+	}
+	std::string Resources::GetSavePath(ResourceType rt,const char* file)
+	{
+		std::string sPath;
+
+		std::string ext;
+		std::string folder = "resources/";
+
+		switch (rt)
+		{
+		case Lanna::Resources::LRT_TEXTURE:				ext = ".lntexture";		folder += "textures/";		break;
+		case Lanna::Resources::LRT_SHADER:				ext = ".lnshader";		folder += "shaders/";		break;
+		case Lanna::Resources::LRT_MESH:				ext = ".lnmesh";		folder += "models/";		break;
+		case Lanna::Resources::LRT_MATERIAL:			ext = ".lnmaterial";	folder += "materials/";		break;
+		case Lanna::Resources::LRT_LAST:				ext = ".error";			break;
+		default:										ext = ".error";			break;
+		}
+
+		sPath = folder + GetFileName(file) + ext;
+		return sPath;
 	}
 	Resources::Resources()
 	{

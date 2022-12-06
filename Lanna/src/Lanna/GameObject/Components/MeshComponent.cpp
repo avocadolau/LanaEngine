@@ -23,7 +23,15 @@ namespace Lanna
 {
 	MeshComponent::MeshComponent() : Component(Component::Type::MESH)
 	{
-		source = "no mesh";
+		//source = "no mesh";
+	}
+
+	MeshComponent::MeshComponent(MeshComponent* copy) : Component(Component::Type::MESH)
+	{
+		if (copy->m_MeshID != -1)
+		{
+			LoadFromFile(LN_RESOURCES.GetPathById<Mesh>(copy->m_MeshID).c_str());
+		}
 	}
 
 	MeshComponent::~MeshComponent()
@@ -51,6 +59,18 @@ namespace Lanna
 			{
 				ImGui::Text("Source mesh");
 				ImGui::TextWrapped(LN_RESOURCES.GetPathById<Mesh>(m_MeshID).c_str());
+
+#ifdef LN_DEBUG
+				if (ImGui::Button("save"))
+				{
+					LN_RESOURCES.Save<Mesh>(m_MeshID);
+				}
+				if (ImGui::Button("load"))
+				{
+					LN_RESOURCES.Load<Mesh>(m_MeshID, "TEST");
+
+				}
+#endif // LN_DEBUG
 			}
 			else
 			{
@@ -89,6 +109,9 @@ namespace Lanna
 				LoadFromFile(buf);
 			}*/
 
+
+
+
 			ImGui::TreePop();
 		}
 
@@ -103,6 +126,7 @@ namespace Lanna
 	void MeshComponent::LoadFromFile(const char* file)
 	{
 		m_MeshID = LN_RESOURCES.Import<Mesh>(file);
+		LN_RESOURCES.Save<Mesh>(m_MeshID);
 
 	}
 
@@ -122,8 +146,6 @@ namespace Lanna
 			break;
 		}
 		m_MeshID = LN_RESOURCES.Import<Mesh>(path);
-
 	}
-
 
 }

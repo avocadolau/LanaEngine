@@ -25,8 +25,12 @@ namespace Lanna {
 		void LoadPrimitive(PrimitivesMesh primitive);
 		void Render();
 		Mesh* loadmesh(const aiMesh* mesh);
+
+		void Save(const char* path);
+		void Load(const char* path);
 	private:
 		void GenerateBuffers();
+		unsigned int GetModelsSize();
 	public:
 		unsigned int vao = -1;				// vertex array object
 		unsigned int ebo = -1;				// element buffer object

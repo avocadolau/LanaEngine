@@ -38,6 +38,9 @@ namespace Lanna {
 		std::string GetTexturePath();
 		bool IsColor();
 		bool IsTexture();
+
+		void Save(const char* path);
+		void Load(const char* path);
 	};
 }
 #endif
