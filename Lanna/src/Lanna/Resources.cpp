@@ -1,5 +1,8 @@
 #include "lnpch.h"
+#include "Lanna/Application.h"
 #include "Resources.h"
+#include "imgui.h"
+#include "Lanna/Utilities/FileDialog.h"
 
 namespace Lanna {
 	std::vector<Resources::Resource*> Resources::m_Resources[Resources::LRT_LAST];
@@ -8,11 +11,10 @@ namespace Lanna {
 	{
 		Resource* resource = new Resource();
 
-		resource->filePath = file;
+		resource->filePath = GenerateSavePath(rt, file);;
 		resource->resource = rsc;
 
 		m_Resources[rt].push_back(resource);
-		std::string saveFile = GetSavePath(rt, file);
 		//std::ofstream outfile(saveFile.c_str());
 		std::string message = "Loaded resource \"" + resource->filePath + "\" successfully.";
 
@@ -33,7 +35,31 @@ namespace Lanna {
 
 		return resourceId;
 	}
-	std::string Resources::GetSavePath(ResourceType rt,const char* file)
+
+	ResourceId Resources::SelectResourcePopUp(ResourceType rt, bool reset)
+	{
+
+		static int selection = -1;
+
+		size_t size = m_Resources[rt].size();
+
+		for (size_t i = 0; i < size; i++) {
+			if (ImGui::Selectable(GetFileName(m_Resources[rt][i]->filePath.c_str()).c_str(), selection == i))
+			{
+				selection = NULL;
+				return (ResourceId)i;
+			}
+		}
+		if (ImGui::Selectable("none", selection == -1))
+		{
+			return (ResourceId)-1;
+		}
+		return -1;
+	}
+
+
+
+	std::string Resources::GenerateSavePath(ResourceType rt,const char* file)
 	{
 		std::string sPath;
 

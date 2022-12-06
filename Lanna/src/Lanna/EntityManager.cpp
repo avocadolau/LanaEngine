@@ -22,7 +22,7 @@ namespace Lanna {
 	{
 		AddEmptyGameObject("uwu");
 		GameObject* house = AddEmptyGameObject("House");
-		MeshComponent* houseMesh = new MeshComponent("resources/models/BakerHouse.fbx");
+		MeshComponent* houseMesh =new MeshComponent("resources/models/BakerHouse.fbx");
 		MaterialComponent* houseMat = new MaterialComponent("resources/images/bakerHouse.png");
 		house->m_Transform->m_Position = glm::vec3(0.0, 0.0, 1.0f);
 		house->m_Mesh = houseMesh;
@@ -77,12 +77,20 @@ namespace Lanna {
 
 	void EntityManager::DestroyGameObject(GameObject* gameObject)
 	{
-		auto it = std::find(m_Entities.begin(), m_Entities.end(), gameObject);
-		if (it != m_Entities.end())
+		if (gameObject->canDelete)
 		{
-			m_Entities.erase(it); //Layer isnt deleted, just removed from the actual vector
-			delete gameObject;
-			gameObject = nullptr;
+			auto it = std::find(m_Entities.begin(), m_Entities.end(), gameObject);
+			if (it != m_Entities.end())
+			{
+				m_Entities.erase(it); //Layer isnt deleted, just removed from the actual vector
+				delete gameObject;
+				gameObject = nullptr;
+			}
+		}
+		else
+		{
+			std::string message = "Game object '" + gameObject->m_Name+"' cant be deleted";
+			LN_WARN(message.c_str());
 		}
 	}
 

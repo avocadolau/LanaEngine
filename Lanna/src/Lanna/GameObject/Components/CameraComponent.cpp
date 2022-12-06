@@ -26,6 +26,8 @@ namespace Lanna
 {
     CameraComponent::CameraComponent(CameraComponent* copy, TransformComponent*t) :Component(Component::Type::CAMERA)
     {
+        name = "Camera Component";
+
         Position = &t->m_Position;
         WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
         Rotation = &t->m_Rotation;
@@ -42,6 +44,8 @@ namespace Lanna
     CameraComponent::CameraComponent(TransformComponent* t)
         : Front(glm::vec3(0.0f, 0.0f, -1.0f)), Component(Component::Type::CAMERA)
     {
+        name = "Camera Component";
+
         Position = &t->m_Position;
         WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
         Rotation = &t->m_Rotation;

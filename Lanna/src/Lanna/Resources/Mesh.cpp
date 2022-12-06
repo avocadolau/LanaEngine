@@ -39,14 +39,18 @@ namespace Lanna {
 		LN_CORE_INFO("Loading mesh file at: {0} ...", file);
 		is_root = true;
 
-		if (scene != nullptr && scene->HasMeshes())
-		{
-			for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
-				Mesh* model = loadmesh(scene->mMeshes[i]);
+		if (scene != nullptr)
+		{ 
+			if (scene->HasMeshes())
+			{
+				for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
+					Mesh* model = loadmesh(scene->mMeshes[i]);
 
-				models.push_back(model);
+					models.push_back(model);
+				}
 			}
-
+			
+			is_root = true;
 			aiReleaseImport(scene);
 		}
 		else {
