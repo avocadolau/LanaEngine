@@ -6,24 +6,39 @@ Lanna engine is a 3D Game Engine developed during the Game Engines classes. We a
 
 
 # Features:
-- Baker_house is automatically loaded at the start.
+- Street is automatically loaded at the start.
 - FBX model loading
 - PNG texture loading
 - Inspector: displays information about the components of the selected GameObject.
-- Transform: Shows position, rotation and scale for the selected GameObject.
+- Transform: Shows position, rotation, and scale for the selected GameObject.
 - Mesh: information about the loaded mesh. 
 - Texture: display texture size and path.
 - Drag&drop of FBX files.
 - Drag&drop of DDS/PNG files.
-- Each GameObject has 3 display components: Transform, Mesh and Texture.
+- Each GameObject has 3 display components: Transform, Mesh, and Texture.
+- Game objects can be picked from the world using the mouse.
+- Start / Pause / Stop the simulation.
+- Custom file format.
+- Modify a Game Object: translate, rotate and scale, delete, reparent, create empty, select any imported mesh, select any imported
+ texture and create children, camera can be modified.
+- Models, meshes, and textures are saved to our own format.
+- The editor has 2 windows one with the scene(editor view) and another captured from a
+game object with a camera component(main game camera), each one has its own
+framebuffer and the user can visualize both at the same time.
+- Resource Management:
+- Assets window shows all user assets.
+- Import new files. 
+
+
 
 # Editor Windows:
-- Console: the window LOG the process from ASSIMP and the external libraries initialization process.
+- Console: the window LOG the process from ASSIMP and the external libraries' initialization process.
 - Configuration includes:
 - A graph for the frames per second.
 - All variables on each module.
-- Information output of memory consumption, hardware detection and software
+- Information output of memory consumption, hardware detection, and software
 versions.
+- Time, delta time, frames.
 
 # Link to GitHub repository:
 https://github.com/avocadolau/LannaEngine
