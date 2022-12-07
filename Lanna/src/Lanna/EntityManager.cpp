@@ -86,6 +86,27 @@ namespace Lanna {
 		return object;
 	}
 
+	void EntityManager::DeleteGameObject(GameObject* entity)
+	{
+
+		int pos = 0;
+		for (GameObject* o : m_Entities)
+		{
+			if (o == entity)
+			{
+				m_Entities.at(pos) = nullptr;
+				auto it = std::find(m_Entities.begin(), m_Entities.end(), nullptr);
+				m_Entities.erase(it);
+				o->m_Parent = nullptr;
+				break;
+			}
+			else
+			{
+				pos++;
+			}
+		}
+	}
+
 	void EntityManager::DestroyGameObject(GameObject* gameObject)
 	{
 		if (gameObject->canDelete)

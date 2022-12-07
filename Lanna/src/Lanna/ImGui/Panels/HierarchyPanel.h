@@ -16,11 +16,11 @@ namespace Lanna {
 
 		std::vector<uint64_t> *selected;
 		GameObject* hovered;
-		int *root;
 		bool IsSelected(uint64_t eid) { for (auto v : *selected) if (eid == v) return true; return false; }
 		void UpdateEntry(GameObject* entity);
 
 		bool EntityChildren(GameObject* entity, int root);
+		GameObject* AllChildrenList(GameObject* hover, GameObject* entity);
 	};
 }
 

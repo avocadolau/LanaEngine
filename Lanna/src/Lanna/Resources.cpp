@@ -7,11 +7,38 @@
 namespace Lanna {
 	std::vector<Resources::Resource*> Resources::m_Resources[Resources::LRT_LAST];
 
+	ResourceId Resources::PushEmptyResource(ResourceType rt)
+	{
+		Resource* resource = new Resource();
+
+		switch (rt)
+		{
+		case Lanna::Resources::LRT_TEXTURE: resource->resource = new Texture();
+			break;
+		case Lanna::Resources::LRT_SHADER: //resource->resource = new Shader();
+			break;
+		case Lanna::Resources::LRT_MESH: resource->resource = new Mesh();
+			break;
+		case Lanna::Resources::LRT_MATERIAL: resource->resource = new Material();
+			break;
+		case Lanna::Resources::LRT_LAST:
+			break;
+		default:
+			break;
+		}
+
+		return m_Resources[rt].size();
+	}
+
 	void Resources::PushResource(ResourceType rt, const char* file, void* rsc)
 	{
 		Resource* resource = new Resource();
 
-		resource->filePath = GenerateSavePath(rt, file);;
+		if (rt == ResourceType::LRT_MATERIAL || rt == ResourceType::LRT_MESH)
+		{
+			resource->filePath = GenerateSavePath(rt, file);
+		}
+		else resource->filePath = file;
 		resource->resource = rsc;
 
 		m_Resources[rt].push_back(resource);

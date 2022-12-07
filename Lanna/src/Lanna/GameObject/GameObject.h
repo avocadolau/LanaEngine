@@ -30,6 +30,7 @@ namespace Lanna
 		void DelChild(GameObject* child);
 		void DestroyChild(GameObject* child);
 		void DestroyComponent(Component* comp);
+		void Reparent(GameObject* newParent);
 	public:
 		bool active = true;
 

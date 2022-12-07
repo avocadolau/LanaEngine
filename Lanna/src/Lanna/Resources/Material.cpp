@@ -3,6 +3,7 @@
 
 #include "Lanna/Application.h"
 #include "Lanna/Resources.h"
+#include "Texture.h"
 #include "Lanna/Utilities/FileHelpers.h"
 
 namespace Lanna {
@@ -72,14 +73,75 @@ namespace Lanna {
 
 	void Material::Save(const char* path)
 	{
-		ResourceId m_TextureID;
-		Type m_Type = NONE;
-		glm::vec4 m_Color;
+		std::fstream file;
+
+		// clear file
+		file.open(path, std::ofstream::out | std::ofstream::trunc);
+		file.close();
+
+		// write
+		file.open(path, std::fstream::in | std::fstream::out | std::fstream::app);
+
+		file.write((const sbyte*)&m_Type, sizeof(Type));
+		if (m_Type == Type::COLOR)
+		{
+			file.write((const sbyte*)&m_Color, sizeof(glm::vec4));
+
+		}
+		if (m_Type == Type::TEXTURE)
+		{
+			std::string savepath = LN_RESOURCES.GetPathById<Texture>(m_TextureID);
+			size_t sizepath = sizeof(savepath);
+			file.write((const sbyte*)&sizepath, sizeof(size_t));
+			file.write((const sbyte*)&savepath, sizepath);
+
+		}
+
+
+		file.close();
+
+		std::string message = "saved succesfully as: ";
+		message.append(path);
+		LN_CORE_INFO(message.c_str());
+		LN_INFO(message.c_str());
 	}
 
 	void Material::Load(const char* path)
 	{
+		std::fstream file;
 
+		// read
+		file.open(path, std::fstream::in | std::fstream::out | std::fstream::app);
+
+		if (file.is_open())
+		{
+			file.read((sbyte*)&m_Type, sizeof(Type));
+
+
+			if (m_Type == Type::COLOR)
+			{
+				file.read((sbyte*)&m_Color, sizeof(glm::vec4));
+
+			}
+			if (m_Type == Type::TEXTURE)
+			{
+				std::string savepath;
+				size_t sizepath;
+				file.read((sbyte*)&sizepath, sizeof(size_t));
+				file.read((sbyte*)&savepath, sizepath);
+
+				if (savepath.c_str() != "")
+				{
+					m_TextureID = LN_RESOURCES.Import<Texture>(savepath.c_str());
+				}
+			}
+		}
+
+		file.close();
+		std::string message = path;
+		message.append(" loaded succesfuly");
+		LN_CORE_INFO(message.c_str());
+		LN_INFO(message.c_str());
 	}
 
 }

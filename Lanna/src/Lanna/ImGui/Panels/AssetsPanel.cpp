@@ -151,6 +151,30 @@ namespace Lanna {
 			
 		}
 
+		if (ImGui::Button("Load"))
+		{
+			path = FileDialog::OpenFile("");
+			if (path != std::string())
+			{
+				LN_INFO(path.c_str());
+				std::string ext = GetExtension(path.c_str());
+
+				if (ext == ".lnmesh")
+				{
+					ResourceId id = LN_RESOURCES.PushEmptyResource(Resources::ResourceType::LRT_MESH);
+					LN_RESOURCES.Load<Mesh>(id, path.c_str());
+				}
+				if (ext == ".lnmaterial")
+				{
+					ResourceId id = LN_RESOURCES.PushEmptyResource(Resources::ResourceType::LRT_MATERIAL);
+					LN_RESOURCES.Load<Material>(id, path.c_str());
+				}
+
+				
+			}
+			
+		}
+
 		ImGui::Text("Thumbnail Size");
 		ImGui::SameLine();
 		ImGui::SetNextItemWidth(-FLT_MIN);
@@ -186,6 +210,10 @@ namespace Lanna {
 			if (ImGui::Button("Import")) {
 				// importation stuff
 				ImGui::CloseCurrentPopup();
+			}
+			if (ImGui::Button("Load"))
+			{
+				
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("Close"))

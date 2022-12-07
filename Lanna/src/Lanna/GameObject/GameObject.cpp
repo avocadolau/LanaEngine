@@ -216,5 +216,19 @@ namespace Lanna
 		}
 	}
 
+	void GameObject::Reparent(GameObject* newParent)
+	{
+		if (m_Parent)
+		{
+			m_Parent->DelChild(this);
+		}
+		else
+		{
+			LN_ENTITY_MAN->DeleteGameObject(this);
+		}
+		newParent->m_Children.push_back(this);
+		m_Parent = newParent;
+	}
+
 
 }

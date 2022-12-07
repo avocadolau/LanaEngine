@@ -12,7 +12,6 @@ namespace Lanna {
     {
         active = true;
         selected = &LN_ENTITY_MAN->selected;
-        root = &LN_ENTITY_MAN->root;
     }
 
     HierarchyPanel::~HierarchyPanel()
@@ -45,7 +44,7 @@ namespace Lanna {
 
         for (int i = 0; i < entities.size(); i++)
         {
-            if (ImGui::Selectable(entities.at(i)->m_Name.c_str(), selected->at(0) == i && root == 0))
+            if (ImGui::Selectable(entities.at(i)->m_Name.c_str(), selected->at(0) == i && LN_ENTITY_MAN->GetRoot() == 0))
             {
                 
             }
@@ -96,13 +95,14 @@ namespace Lanna {
                 {
                     GameObject* del = hover;
                     hover->m_Parent->DestroyChild(del);
-                    if (selected->at(LN_ENTITY_MAN->GetRoot()) == 0)
+                    LN_ENTITY_MAN->SetRoot(1);
+                    selected->at(0) = 0;
+                    for (int i = 1; i < selected->size(); i++)
                     {
-                        LN_ENTITY_MAN->SetRoot(LN_ENTITY_MAN->GetRoot() - 1);
-                        //root--;
+                        selected->at(i) = -1;
                     }
-                    //selected->at(*root)--;
-                    selected->at(LN_ENTITY_MAN->GetRoot())--;
+                    LN_ENTITY_MAN->activeFromSelection = true;
+                    LN_ENTITY_MAN->SetActiveEntity(selected);
                 }
 
                 else
@@ -110,22 +110,60 @@ namespace Lanna {
                     LN_ENTITY_MAN->DestroyGameObject(hover);
                 }
             }
-            if (hover->m_Parent)
+            if (hover)
             {
-                if (ImGui::Selectable("Unchild"))
+                if (hover->m_Parent)
                 {
-                    GameObject* del = hover;
-                    hover->m_Parent->DelChild(del);
-                    if (selected->at(LN_ENTITY_MAN->GetRoot()) == 0)
+                    if (ImGui::Selectable("Unchild"))
                     {
-                        LN_ENTITY_MAN->SetRoot(LN_ENTITY_MAN->GetRoot() - 1);
-                        //root--;
+                        GameObject* del = hover;
+                        hover->m_Parent->DelChild(del);
+                        LN_ENTITY_MAN->SetRoot(1);
+                        selected->at(0) = 0;
+                        for (int i = 1; i < selected->size(); i++)
+                        {
+                            selected->at(i) = -1;
+                        }
+                        LN_ENTITY_MAN->activeFromSelection = true;
                     }
-                    selected->at(LN_ENTITY_MAN->GetRoot())--;
-
+                }
+            }
+            if (hover)
+            {
+                if (hover->m_Children.size() > 0)
+                {
+                    if (ImGui::Selectable("Clear children"))
+                    {
+                        hover->m_Children.clear();
+                        LN_ENTITY_MAN->SetRoot(1);
+                        selected->at(0) = 0;
+                        for (int i = 1; i < selected->size(); i++)
+                        {
+                            selected->at(i) = -1;
+                        }
+                        LN_ENTITY_MAN->activeFromSelection = true;
+                    }
                 }
             }
             
+            if (ImGui::BeginMenu("entitiesList"))
+            {
+                for (int i = 0; i < LN_ENTITY_MAN->GetEntityList()->size(); i++)
+                {
+                    GameObject* entity = LN_ENTITY_MAN->GetEntityList()->at(i);
+                    if (entity == hover) continue;
+                    else
+                    {
+                        if (ImGui::MenuItem(entity->m_Name.c_str()))
+                        {
+                            hover->Reparent(entity);
+                        }
+                        AllChildrenList(hover, entity);
+                    }
+                }
+                ImGui::EndMenu();
+            }
+
             ImGui::EndPopup();
         }
     }
@@ -169,5 +207,22 @@ namespace Lanna {
 
         }
         return ret;
+    }
+    GameObject* HierarchyPanel::AllChildrenList(GameObject* hover, GameObject* entity)
+    {
+        for (int i = 0; i < entity->m_Children.size(); i++)
+        {
+            GameObject* o= entity->m_Children.at(i);
+            if (entity == hover) continue;
+            else
+            {
+                if (ImGui::MenuItem(o->m_Name.c_str()))
+                {
+                    hover->Reparent(o);
+                }
+                AllChildrenList(hover, o);
+            }
+        }
+        return entity;
     }
 }

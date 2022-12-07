@@ -54,6 +54,8 @@ namespace Lanna {
 		Resources();
 		~Resources();
 
+		ResourceId PushEmptyResource(ResourceType rt);
+
 		template<class T> static ResourceId Import(const char* file);
 		template<class T> static void Save(ResourceId id);
 		template<class T> static ResourceId Load(ResourceId id,const char* path);
@@ -272,6 +274,29 @@ namespace Lanna {
 		}
 		else path = "null";
 		return path;
+	}
+	template<>
+	inline void Resources::Save<Material>(ResourceId id)
+	{
+		Material* mat = GetResourceById<Material>(id);
+		std::string sPath = GetPathById<Mesh>(id);// GenerateSavePath(ResourceType::LRT_MESH, GetPathById<Mesh>(id).c_str());
+		//std::fstream write_file;
+
+		//write_file.open(sPath.c_str(), std::fstream::out | std::fstream::binary);
+
+		mat->Save(sPath.c_str());
+
+		//write_file.close();
+	}
+
+	template<>
+	inline ResourceId Resources::Load<Material>(ResourceId id, const char* file)
+	{
+		Material* mat = GetResourceById<Material>(id);
+		mat->Save(file);
+
+		//write_file.close();
+		return id;
 	}
 }
 #endif // !RESOURCES_H
