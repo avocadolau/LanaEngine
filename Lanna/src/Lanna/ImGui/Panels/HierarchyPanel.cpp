@@ -11,6 +11,8 @@ namespace Lanna {
     HierarchyPanel::HierarchyPanel() : Panel("SceneObjects")
     {
         active = true;
+        selected = &LN_ENTITY_MAN->selected;
+        root = &LN_ENTITY_MAN->root;
     }
 
     HierarchyPanel::~HierarchyPanel()
@@ -20,6 +22,7 @@ namespace Lanna {
 
     void HierarchyPanel::Draw()
     {
+        bool changed = false;
         std::vector<GameObject*> entities = *LN_ENTITY_MAN->GetEntityList();
 
         ImGui::Begin("Scene Game Objects", &active);
@@ -32,18 +35,17 @@ namespace Lanna {
             }
         }
 
-        if (selected.size() == 0)
+        if (selected->size() == 0)
         {
-            selected.push_back(0);
-            selected.push_back(-1);
-            selected.push_back(-1);
-            selected.push_back(-1);
+            selected->push_back(0);
+            selected->push_back(-1);
+            selected->push_back(-1);
+            selected->push_back(-1);
         }
 
-        GameObject* selection;
         for (int i = 0; i < entities.size(); i++)
         {
-            if (ImGui::Selectable(entities.at(i)->m_Name.c_str(), selected[0] == i&&root==0))
+            if (ImGui::Selectable(entities.at(i)->m_Name.c_str(), selected->at(0) == i && root == 0))
             {
                 
             }
@@ -54,17 +56,18 @@ namespace Lanna {
             }
             if (ImGui::IsItemClicked() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
             {
-                for (int j : selected)
+                for (int j : *selected)
                 {
                     j = -1;
                 }
-                selected[0] = i;
-                root = 0;
-
+                selected->at(0) = i;
+                LN_ENTITY_MAN->SetRoot(0);
+                changed = true;
             }
-            if (selected[0] == i)
+            if (selected->at(0) == i)
             {
-                EntityChildren(entities.at(i), 1);
+                if (EntityChildren(entities.at(i), 1) == true)
+                    changed = true;
 
             }
             
@@ -72,7 +75,8 @@ namespace Lanna {
         
         PopMenu(hovered);
 
-        LN_ENTITY_MAN->SetActiveEntity(&selected, root);
+        if (changed==true)
+            LN_ENTITY_MAN->SetActiveEntity(selected);
         
         ImGui::End();
     }
@@ -92,11 +96,13 @@ namespace Lanna {
                 {
                     GameObject* del = hover;
                     hover->m_Parent->DestroyChild(del);
-                    if (selected.at(root) == 0)
+                    if (selected->at(LN_ENTITY_MAN->GetRoot()) == 0)
                     {
-                        root--;
+                        LN_ENTITY_MAN->SetRoot(LN_ENTITY_MAN->GetRoot() - 1);
+                        //root--;
                     }
-                    selected.at(root)--;
+                    //selected->at(*root)--;
+                    selected->at(LN_ENTITY_MAN->GetRoot())--;
                 }
 
                 else
@@ -110,11 +116,12 @@ namespace Lanna {
                 {
                     GameObject* del = hover;
                     hover->m_Parent->DelChild(del);
-                    if (selected.at(root) == 0)
+                    if (selected->at(LN_ENTITY_MAN->GetRoot()) == 0)
                     {
-                        root--;
+                        LN_ENTITY_MAN->SetRoot(LN_ENTITY_MAN->GetRoot() - 1);
+                        //root--;
                     }
-                    selected.at(root)--;
+                    selected->at(LN_ENTITY_MAN->GetRoot())--;
 
                 }
             }
@@ -126,17 +133,18 @@ namespace Lanna {
     {
 
     }
-    void HierarchyPanel::EntityChildren(GameObject* entity, int n)
+    bool HierarchyPanel::EntityChildren(GameObject* entity, int n)
     {
-        if (selected.size() <= n)
-            selected.push_back(-1);
+        bool ret = false;
+        if (selected->size() <= n)
+            selected->push_back(-1);
         for (int i = 0; i < entity->m_Children.size(); i++)
         {
             std::string name;
             for (int i = 0; i < n; i++)name.append(" ");
             name.append("-");
             name.append(entity->m_Children.at(i)->m_Name);
-            if (ImGui::Selectable(name.c_str(), selected[n] == i&& root==n))
+            if (ImGui::Selectable(name.c_str(), selected->at(n) == i&& LN_ENTITY_MAN->GetRoot() == n))
             {
 
             }
@@ -147,17 +155,19 @@ namespace Lanna {
             }
             if (ImGui::IsItemClicked() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
             {
-                selected[n] = i;
-                for (int j = n + 1; j < selected.size(); j++)
-                    selected[j] = -1;
-                root = n;
-
+                selected->at(n) = i;
+                for (int j = n + 1; j < selected->size(); j++)
+                    selected->at(j) = -1;
+                LN_ENTITY_MAN->SetRoot(n);
+                ret = true;
             }
-            if (selected[n] == i)
+            if (selected->at(n) == i)
             {
-                EntityChildren(entity->m_Children.at(i), n + 1);
+                if (EntityChildren(entity->m_Children.at(i), n + 1) == true)
+                    ret = true;
             }
 
         }
+        return ret;
     }
 }

@@ -90,6 +90,7 @@ namespace Lanna
 
     void CameraComponent::Use()
     {
+ 
         UpdateRotation();
         if (Lanna::Input::IsKeyPressed(LN_KEY_F))
         {

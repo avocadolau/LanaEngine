@@ -94,7 +94,7 @@ namespace Lanna {
 		}
 	}
 
-	void EntityManager::SetActiveEntity(std::vector<uint64_t>* selection, int root)
+	void EntityManager::SetActiveEntity(std::vector<uint64_t>* selection)
 	{
 		if (selection->at(0) == -1)
 			activeEntitiy = nullptr;
@@ -110,6 +110,39 @@ namespace Lanna {
 				else break;
 			}
 		}
+		activeFromSelection = true;
+	}
+
+	void EntityManager::SetActiveEntity(GameObject* enitity)
+	{
+		
+		activeFromSelection = false;
+		activeEntitiy = enitity;
+	}
+
+	bool EntityManager::FindEntity(GameObject* entity, int count)
+	{
+		for (int i = 0; i < entity->m_Children.size(); i++)
+		{
+			if (entity->m_Children.at(i) == entity)
+			{
+				selected[0] = i;
+				root = count;
+				for (int i = root; i < selected.size(); i++)
+				{
+					selected[i] = -1;
+				}
+				return true;
+			}
+			else
+			{
+				if (FindEntity(entity->m_Children.at(i), count + 1))
+				{
+					break;
+				}
+			}
+		}
+		return false;
 	}
 
 }

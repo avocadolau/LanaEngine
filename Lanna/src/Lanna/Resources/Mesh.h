@@ -1,6 +1,7 @@
 #pragma once
 #include "Lanna/Resources/Framebuffer.h"
 //#include "Lanna/Resources/Material.h"
+#include "Lanna/Utilities/Maths/AABB.h"
 
 enum PrimitivesMesh {
 	CUBE,
@@ -41,6 +42,7 @@ namespace Lanna {
 		std::vector<Mesh*> models;
 		Lanna::Framebuffer* buff;
 		bool is_root = false;
+		AABB aabb;
 	};
 
 }

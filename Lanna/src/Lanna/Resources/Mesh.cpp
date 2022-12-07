@@ -217,6 +217,12 @@ namespace Lanna {
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
+
+		for (int i = 0; i < vbo_data.size(); i += 8)
+		{
+			glm::vec3 vec = { vbo_data[i], vbo_data[i + 1], vbo_data[i + 2] };
+			aabb.extend(vec);
+		}
 	}
 
 	unsigned int Mesh::GetModelsSize()
