@@ -31,6 +31,7 @@ namespace Lanna {
 		house->m_Components.push_back(houseMesh);
 		house->m_Components.push_back(houseMat);*/
 
+		AddEmptyGameObject("uwu");
 		GameObject* street = AddEmptyGameObject("Street");
 		MeshComponent* streetMesh = new MeshComponent("resources/models/Street environment_V01.FBX");
 		MaterialComponent* streetMat = new MaterialComponent("resources/images/Building_V02_C.png");
