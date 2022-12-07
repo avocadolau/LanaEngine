@@ -37,6 +37,7 @@ namespace Lanna
 		TransformComponent* m_Transform = nullptr;
 		MaterialComponent* m_Material = nullptr;
 		MeshComponent* m_Mesh = nullptr;
+
 		CameraComponent* m_Camera = nullptr;
 		GameObject* m_Parent = nullptr;
 		std::string m_Name;

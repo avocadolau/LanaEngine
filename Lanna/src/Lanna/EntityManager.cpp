@@ -4,6 +4,7 @@
 #include "GameObject/GameObject.h"
 #include "GameObject/Components/TransformComponent.h"
 #include "GameObject/Components/MeshComponent.h"
+
 #include <vector>
 
 namespace Lanna {
@@ -20,15 +21,24 @@ namespace Lanna {
 
 	void EntityManager::Init()
 	{
-		AddEmptyGameObject("uwu");
+		/*AddEmptyGameObject("uwu");
 		GameObject* house = AddEmptyGameObject("House");
-		MeshComponent* houseMesh =new MeshComponent("resources/models/BakerHouse.fbx");
+		MeshComponent* houseMesh = new MeshComponent("resources/models/BakerHouse.fbx");
 		MaterialComponent* houseMat = new MaterialComponent("resources/images/bakerHouse.png");
 		house->m_Transform->m_Position = glm::vec3(0.0, 0.0, 1.0f);
 		house->m_Mesh = houseMesh;
 		house->m_Material = houseMat;
 		house->m_Components.push_back(houseMesh);
-		house->m_Components.push_back(houseMat);
+		house->m_Components.push_back(houseMat);*/
+
+		GameObject* street = AddEmptyGameObject("Street");
+		MeshComponent* streetMesh = new MeshComponent("resources/models/Street environment_V01.FBX");
+		MaterialComponent* streetMat = new MaterialComponent("resources/images/Building_V02_C.png");
+		street->m_Transform->m_Position = glm::vec3(0.0, 0.0, 1.0f);
+		street->m_Mesh = streetMesh;
+		street->m_Material = streetMat;
+		street->m_Components.push_back(streetMesh);
+		street->m_Components.push_back(streetMat);
 
 	}
 

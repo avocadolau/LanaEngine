@@ -31,7 +31,7 @@ namespace Lanna {
 	{
 		vbo_data.clear();
 		ebo_data.clear();
-		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_FlipUVs);
+		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_PreTransformVertices);
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 			LN_ERROR("Couldn't load mesh file: {0}", file);
