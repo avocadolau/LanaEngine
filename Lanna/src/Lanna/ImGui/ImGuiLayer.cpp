@@ -354,6 +354,12 @@ namespace Lanna {
 			Lanna::Time::Pause();
 		}
 
+		if (Lanna::Time::IsPlaying())
+		{
+			ImGui::Text(" %.2fs", Lanna::Time::GetTime());
+		}
+
+
 		ImGui::PopStyleColor();
 		
 	}
