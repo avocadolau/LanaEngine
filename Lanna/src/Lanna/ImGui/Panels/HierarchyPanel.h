@@ -14,13 +14,13 @@ namespace Lanna {
 		void Draw() override;
 		void PopMenu(GameObject* hover);
 
-		std::vector<uint64_t> selected;
+		std::vector<uint64_t> *selected;
 		GameObject* hovered;
-		int root = 1;
-		bool IsSelected(uint64_t eid) { for (auto v : selected) if (eid == v) return true; return false; }
+		int *root;
+		bool IsSelected(uint64_t eid) { for (auto v : *selected) if (eid == v) return true; return false; }
 		void UpdateEntry(GameObject* entity);
 
-		void EntityChildren(GameObject* entity, int root);
+		bool EntityChildren(GameObject* entity, int root);
 	};
 }
 

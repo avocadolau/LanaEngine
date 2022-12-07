@@ -199,10 +199,12 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\Scene\SceneManager.h" />
     <ClInclude Include="src\Lanna\Utilities\FileDialog.h" />
     <ClInclude Include="src\Lanna\Utilities\FileHelpers.h" />
+    <ClInclude Include="src\Lanna\Utilities\Frustum.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonDoc.h" />
     <ClInclude Include="src\Lanna\Utilities\Json\JsonValue.h" />
+    <ClInclude Include="src\Lanna\Utilities\Maths\AABB.h" />
     <ClInclude Include="src\Lanna\Utilities\Maths\FrustumCull.h" />
-    <ClInclude Include="src\Lanna\Utilities\Maths\Maths.h" />
+    <ClInclude Include="src\Lanna\Utilities\Maths\Math.h" />
     <ClInclude Include="src\Lanna\Utilities\Maths\Vector2f.h" />
     <ClInclude Include="src\Lanna\Utilities\Maths\Vector2i.h" />
     <ClInclude Include="src\Lanna\Utilities\Maths\Vector3f.h" />
@@ -256,6 +258,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\Utilities\FileHelpers.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonDoc.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Json\JsonValue.cpp" />
+    <ClCompile Include="src\Lanna\Utilities\Maths\AABB.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Time.cpp" />
     <ClCompile Include="src\Lanna\Utilities\Timer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp" />
