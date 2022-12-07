@@ -46,6 +46,7 @@ namespace Lanna {
 		std::string message = "Loaded resource \"" + resource->filePath + "\" successfully.";
 
 		LN_CORE_INFO(message.c_str());
+		LN_INFO(message.c_str());
 	}
 	ResourceId Resources::getResourcePosition(ResourceType rt, const char* file)
 	{

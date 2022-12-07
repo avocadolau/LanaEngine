@@ -180,8 +180,6 @@ namespace Lanna {
 			resourceId = position;
 		}
 
-		Test();
-
 		return resourceId;
 	}
 	template<>

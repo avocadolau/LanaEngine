@@ -111,15 +111,28 @@ namespace Lanna {
 		ImGui::Begin("Assets Configuration", &active);
 		std::string path;
 
+		ImGui::TextWrapped("JUST SELECT RESOURCES that are inside Editor");
+
 		if (ImGui::Button("Import"))
 		{
 			//path = FileDialog::OpenFile("Something (*.ln)\0*.ln\0");
 			
 			path = FileDialog::OpenFile("");
 
+			
+
 			if (path!= std::string())
 			{
-				LN_INFO(path.c_str());
+				std::string folder = "Editor\\";
+				std::string nPath = path.substr(path.find(folder) + 7, path.length());
+
+				for (int i = 0; i < nPath.length(); i++)
+				{
+					if (nPath[i] == '\\')
+						nPath[i] = '/';
+				}
+
+				LN_INFO(nPath.c_str());
 				FileType type = CheckExtension(GetExtension(path.c_str()));
 				switch (type)
 				{
@@ -150,7 +163,7 @@ namespace Lanna {
 			
 			
 		}
-
+		ImGui::SameLine();
 		if (ImGui::Button("Load"))
 		{
 			path = FileDialog::OpenFile("");
@@ -174,6 +187,15 @@ namespace Lanna {
 			}
 			
 		}
+		//if (ImGui::Button("New"))
+		//{
+		//	if(ImGui::BeginMenu("New Resource"))
+		//	{
+		//		if(ImGui::)
+
+		//		ImGui::EndMenu();
+		//	}
+		//}
 
 		ImGui::Text("Thumbnail Size");
 		ImGui::SameLine();
