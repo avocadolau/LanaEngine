@@ -115,51 +115,18 @@ namespace Lanna {
 
 		if (ImGui::Button("Import"))
 		{
+			
+			action = IMPORT;
+			ImGui::OpenPopup("import selector");
+			
+
 			//path = FileDialog::OpenFile("Something (*.ln)\0*.ln\0");
-			
-			path = FileDialog::OpenFile("");
+
+			////path = FileDialog::OpenFile("");
+
+			//
 
 			
-
-			if (path!= std::string())
-			{
-				std::string folder = "Editor\\";
-				std::string nPath = path.substr(path.find(folder) + 7, path.length());
-
-				for (int i = 0; i < nPath.length(); i++)
-				{
-					if (nPath[i] == '\\')
-						nPath[i] = '/';
-				}
-
-				LN_INFO(nPath.c_str());
-				FileType type = CheckExtension(GetExtension(path.c_str()));
-				switch (type)
-				{
-				case LFT_Error:
-					break;
-				case LFT_Texture:		LN_RESOURCES.Import<Texture>(path.c_str());
-					break;
-				case LFT_Object:
-					break;
-				case LFT_FBX:			LN_RESOURCES.Import<Mesh>(path.c_str());
-					break;
-				case LFT_Material:
-					break;
-				case LFT_Mesh:
-					break;
-				case LFT_Bilboad:
-					break;
-				case LFT_Skeleton:
-					break;
-				case LFT_Animation:
-					break;
-				case LFT_Files_Max:
-					break;
-				default:
-					break;
-				}
-			}
 			
 			
 		}
@@ -187,15 +154,59 @@ namespace Lanna {
 			}
 			
 		}
-		//if (ImGui::Button("New"))
-		//{
-		//	if(ImGui::BeginMenu("New Resource"))
-		//	{
-		//		if(ImGui::)
 
-		//		ImGui::EndMenu();
-		//	}
-		//}
+		if (ImGui::BeginPopup("import selector"))
+		{
+			ImGui::Text("Import type");
+			ImGui::Separator();
+			if (ImGui::Selectable("Texture"))
+			{
+				resType = Resources::ResourceType::LRT_TEXTURE;
+				path = FileDialog::OpenFile("Image (*.png)(*.bmp)(*jpg)(*dds)\0*.png\0*.bmp\0*.jpg\0*.dds\0");
+			}
+			if (ImGui::Selectable("Mesh"))
+			{
+				resType = Resources::ResourceType::LRT_MESH;
+				path = FileDialog::OpenFile("Image (*.fbx)(*.FBX)(*dae)(*DAE)\0*.fbx\0*.FBX\0*.dae\0*.DAE\0");
+			}
+			ImGui::EndPopup();
+		}
+
+
+
+		if (path != std::string())
+		{
+			std::string folder = "Editor\\";
+			std::string nPath = path.substr(path.find(folder) + 7, path.length());
+
+			for (int i = 0; i < nPath.length(); i++)
+			{
+				if (nPath[i] == '\\')
+					nPath[i] = '/';
+			}
+
+			LN_INFO(nPath.c_str());
+
+			if (action == IMPORT)
+			{
+				switch (resType)
+				{
+				case Lanna::Resources::LRT_TEXTURE:	LN_RESOURCES.Import<Texture>(nPath.c_str());
+					break;
+				case Lanna::Resources::LRT_SHADER:
+					break;
+				case Lanna::Resources::LRT_MESH:	LN_RESOURCES.Import<Mesh>(nPath.c_str());
+					break;
+				case Lanna::Resources::LRT_MATERIAL:
+					break;
+				case Lanna::Resources::LRT_LAST:
+					break;
+				default:
+					break;
+				}
+			}
+		}
+
 
 		ImGui::Text("Thumbnail Size");
 		ImGui::SameLine();
