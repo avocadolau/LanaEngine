@@ -71,7 +71,7 @@ namespace Lanna
 					ImGui::TextWrapped(LN_RESOURCES.GetPathById<Mesh>(m_MeshID).c_str());
 
 				}
-				if (ImGui::SmallButton("save"))
+				/*if (ImGui::SmallButton("save"))
 				{
 					LN_RESOURCES.Save<Mesh>(m_MeshID);
 				}
@@ -80,7 +80,7 @@ namespace Lanna
 				{
 					LN_RESOURCES.Load<Mesh>(m_MeshID, "TEST");
 
-				}
+				}*/
 				ImGui::SameLine();
 				if (ImGui::SmallButton("Delete"))
 				{

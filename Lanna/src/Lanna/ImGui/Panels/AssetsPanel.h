@@ -5,6 +5,9 @@
 #include "Lanna/Resources/Texture.h"
 #include "Lanna/Resources.h"
 
+#define NEW_ASSETS_PANEL
+typedef size_t ResourceId;
+
 namespace Lanna {
 	class AssetsPanel :public Panel
 	{
@@ -16,22 +19,27 @@ namespace Lanna {
 			LOAD,
 			NONE =-1
 		};
+		
 
 		AssetsPanel();
 		~AssetsPanel();
 
 		void Draw() override;
 		void DrawConfigurations();
-		const char* ImportPopUp();
+		void AssetInspector();
 
 	private:
-		Resources::ResourceType resType = Resources::ResourceType::LRT_LAST;
+
+		Resources::ResourceType resImportType = Resources::ResourceType::LRT_LAST;
+		Resources::ResourceType resFolder = Resources::ResourceType::LRT_LAST;
+		ResourceId resId = -1;
 		ResourceActions action = NONE;
 		std::filesystem::path m_CurrentDirectory;
 		std::filesystem::path m_importDirectory;
 		Texture* m_dirIcon;
 		Texture* m_fileIcon;
-
+		
+		const char* ResourcesName[4] = { "Texture", "Shaders", "Meshes", "Materials" };
 		float padding = 16.0f;
 		float thumbnailSize = 32.0f;
 		float cellSize;

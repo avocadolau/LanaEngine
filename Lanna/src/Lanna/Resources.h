@@ -39,6 +39,8 @@ namespace Lanna {
 			LRT_LAST
 		};
 
+		
+
 		struct Resource {
 			std::string filePath;
 			void* resource;
@@ -54,6 +56,7 @@ namespace Lanna {
 		Resources();
 		~Resources();
 
+		std::vector<Resource*>* GetList(ResourceType rt) { return &m_Resources[rt]; }
 		ResourceId PushEmptyResource(ResourceType rt);
 
 		template<class T> static ResourceId Import(const char* file);
@@ -119,6 +122,15 @@ namespace Lanna {
 	template<>
 	inline ResourceId Resources::Import<Texture>(const char * file)
 	{
+		/*if (file)
+		{
+			if (CheckExtension(GetExtension(file)) != FileType::LFT_Texture)
+			{
+				std::string message = GetExtension(file) + " isnt a texture. Could not import";
+				LN_WARN(message.c_str());
+				return -1;
+			}
+		}*/
 		ResourceId position = getResourcePosition(LRT_TEXTURE, file);
 		size_t size = m_Resources[LRT_TEXTURE].size();
 
@@ -165,13 +177,39 @@ namespace Lanna {
 	template<>
 	inline ResourceId Resources::Import<Mesh>(const char* file)
 	{
+		if (file!=nullptr)
+		{
+			std::string ext = GetExtension(file);
+
+			if (ext != std::string(".fbx") && ext != std::string(".FBX") && ext != std::string(".dae") && ext != std::string(".DAE"))
+			{
+				std::string message = GetExtension(file) + " isnt a mesh. Could not import";
+				LN_WARN(message.c_str());
+				return -1;
+			}
+		}
 		ResourceId position = getResourcePosition(LRT_MESH, file);
 		size_t size = m_Resources[LRT_MESH].size();
 
 		ResourceId resourceId;
 
 		if (position == size) {
-			Mesh* model = new Mesh(file);
+			Mesh* model;
+			if (file == nullptr)
+			{
+				model = new Mesh();
+			}
+			else if (GetExtension(file).c_str() == ".lnmesh")
+			{
+				model = new Mesh();
+				model->Load(file);
+			}
+			else
+			{
+				model = new Mesh(file);
+			}
+
+
 
 			PushResource(LRT_MESH, file, model);
 			resourceId = size;
@@ -219,15 +257,36 @@ namespace Lanna {
 	template<>
 	inline ResourceId Resources::Load<Mesh>(ResourceId id, const char* file)
 	{
-		Mesh* mesh = GetResourceById<Mesh>(id);
-		std::string sPath = GetPathById<Mesh>(id);
+		if (GetExtension(file).c_str() != "lnmesh")
+		{
+			LN_WARN("incompatible extension");
+		}
+		else
+		{
+			Mesh* mesh = GetResourceById<Mesh>(id);
+			//std::string sPath = GetPathById<Mesh>(id);
 
-		mesh->Load(sPath.c_str());
+			mesh->Load(file);
+		}
+		
 		return id;
 	}
 	template<>
 	inline ResourceId Resources::Import<Material>(const char* file)
 	{
+		if (file)
+		{
+			if (GetExtension(file) == ".lnmaterial")
+			{
+
+			}
+			else if (CheckExtension(GetExtension(file)) != FileType::LFT_Texture)
+			{
+				std::string message = GetExtension(file) + " isnt a texture or material. Could not import";
+				LN_WARN(message.c_str());
+				return -1;
+			}
+		}
 		ResourceId position = getResourcePosition(LRT_MATERIAL, file);
 		size_t size = m_Resources[LRT_MATERIAL].size();
 
@@ -237,12 +296,25 @@ namespace Lanna {
 
 			Material* material;
 			if (file == "null")
+			{
 				material = new Material();
+			}
+			else if (GetExtension(file).c_str() == ".lnmaterial")
+			{
+				material = new Material();
+				material->Load(file);
+			}
 			else
+			{
 				material = new Material(file);
+			}
 
-
-			PushResource(LRT_MATERIAL, file, material);
+			if (file == "null")
+			{
+				PushResource(LRT_MATERIAL, "Color material", material);
+			}
+			else
+				PushResource(LRT_MATERIAL, file, material);
 
 			resourceId = size;
 		}
@@ -290,8 +362,16 @@ namespace Lanna {
 	template<>
 	inline ResourceId Resources::Load<Material>(ResourceId id, const char* file)
 	{
-		Material* mat = GetResourceById<Material>(id);
-		mat->Save(file);
+		if (GetExtension(file).c_str() != "lnmaterial")
+		{
+			LN_WARN("incompatible extension");
+		}
+		else
+		{
+			Material* mat = GetResourceById<Material>(id);
+			mat->Save(file);
+		}
+		
 
 		//write_file.close();
 		return id;

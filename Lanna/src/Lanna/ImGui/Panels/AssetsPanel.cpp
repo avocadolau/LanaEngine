@@ -15,7 +15,7 @@ namespace Lanna {
 	extern const std::filesystem::path s_AssetPath = "resources";
 	//extern const std::filesystem::path s_AssetPath = "C:/";
 
-	AssetsPanel::AssetsPanel() :Panel("Assets"), m_CurrentDirectory(s_AssetPath)
+	AssetsPanel::AssetsPanel() :Panel("Resources"), m_CurrentDirectory(s_AssetPath)
 	{
 		m_dirIcon = new Texture();
 		m_dirIcon->Init("resources/icons/ContentBrowser/DirectoryIcon.png");
@@ -32,6 +32,9 @@ namespace Lanna {
 	void AssetsPanel::Draw()
 	{
 		ImGui::Begin(name, &active);
+
+#ifndef NEW_ASSETS_PANEL
+
 		if (m_CurrentDirectory != std::filesystem::path(s_AssetPath))
 		{
 			if (ImGui::Button("<-"))
@@ -101,9 +104,73 @@ namespace Lanna {
 			}
 			ImGui::EndDragDropTarget();
 		}
+#else
+		if (resFolder == Resources::ResourceType::LRT_LAST)
+		{
+			ImGui::Text("Select a folder");
+		}
+		else
+		{
+			//const char* ResourcesName[4] = { "Texture", "Shaders", "Meshes", "Materials" };
+			if (ImGui::Button("<-"))
+			{
 
+				resFolder = Resources::ResourceType::LRT_LAST;
+				resId = -1;
+			}
+			ImGui::SameLine();
+			if (resFolder!= Resources::ResourceType::LRT_LAST)
+				ImGui::Text(ResourcesName[resFolder]);
+		}
+
+		cellSize = thumbnailSize + padding;
+
+		float panelWidth = ImGui::GetContentRegionAvail().x;
+		int columnCount = (int)(panelWidth / cellSize);
+		if (columnCount < 1)
+			columnCount = 1;
+
+		Texture* icon;
+
+		if (resFolder == Resources::ResourceType::LRT_LAST)
+		{
+			//const char* ResourcesName[4] = { "Texture", "Shaders", "Meshes", "Materials" };
+			ImGui::Columns(columnCount, 0, false);
+			
+			for (int i = 0; i < (int)Resources::ResourceType::LRT_LAST; i++)
+			{
+				ImGui::PushID(i);
+				if (ImGui::ImageButton((ImTextureID)m_dirIcon->GetTextureId(), { thumbnailSize, thumbnailSize }, { 1, 0 }, { 0, 1 }))
+				{
+					resFolder = (Resources::ResourceType)i;
+				}
+				ImGui::TextWrapped(ResourcesName[i]);
+				ImGui::PopID();
+				ImGui::NextColumn();
+			}
+		}
+		else
+		{
+			ImGui::Columns(columnCount, 0, false);
+			for (int i = 0; i < LN_RESOURCES.GetList(resFolder)->size(); i++)
+			{
+				ImGui::PushID(i);
+				if (ImGui::ImageButton((ImTextureID)m_fileIcon->GetTextureId(), { thumbnailSize, thumbnailSize }))
+				{
+					resId = i;
+				}
+				const char* text = LN_RESOURCES.GetList(resFolder)->at(i)->filePath.c_str();
+				ImGui::TextWrapped(GetFileName(text).c_str());
+				ImGui::PopID();
+				ImGui::NextColumn();
+			}
+		}
+
+		
+#endif // !NEW_ASSETS_PANEL
 		ImGui::End();
 		DrawConfigurations();
+		//AssetInspector();
 	}
 
 	void AssetsPanel::DrawConfigurations()
@@ -111,48 +178,17 @@ namespace Lanna {
 		ImGui::Begin("Assets Configuration", &active);
 		std::string path;
 
+		/*ImGui::Text("Asset viewer");
+	
+		
+		ImGui::Separator();*/
+
 		ImGui::TextWrapped("JUST SELECT RESOURCES that are inside Editor");
 
 		if (ImGui::Button("Import"))
 		{
-			
 			action = IMPORT;
 			ImGui::OpenPopup("import selector");
-			
-
-			//path = FileDialog::OpenFile("Something (*.ln)\0*.ln\0");
-
-			////path = FileDialog::OpenFile("");
-
-			//
-
-			
-			
-			
-		}
-		ImGui::SameLine();
-		if (ImGui::Button("Load"))
-		{
-			path = FileDialog::OpenFile("");
-			if (path != std::string())
-			{
-				LN_INFO(path.c_str());
-				std::string ext = GetExtension(path.c_str());
-
-				if (ext == ".lnmesh")
-				{
-					ResourceId id = LN_RESOURCES.PushEmptyResource(Resources::ResourceType::LRT_MESH);
-					LN_RESOURCES.Load<Mesh>(id, path.c_str());
-				}
-				if (ext == ".lnmaterial")
-				{
-					ResourceId id = LN_RESOURCES.PushEmptyResource(Resources::ResourceType::LRT_MATERIAL);
-					LN_RESOURCES.Load<Material>(id, path.c_str());
-				}
-
-				
-			}
-			
 		}
 
 		if (ImGui::BeginPopup("import selector"))
@@ -161,14 +197,28 @@ namespace Lanna {
 			ImGui::Separator();
 			if (ImGui::Selectable("Texture"))
 			{
-				resType = Resources::ResourceType::LRT_TEXTURE;
-				path = FileDialog::OpenFile("Image (*.png)(*.bmp)(*jpg)(*dds)\0*.png\0*.bmp\0*.jpg\0*.dds\0");
+				resImportType = Resources::ResourceType::LRT_TEXTURE;
+				path = FileDialog::OpenFile("");
+				//path = FileDialog::OpenFile("Image (*.png)(*.bmp)(*.jpg)(*.dds)\0*.png\0*.bmp\0*.jpg\0*.dds\0");
+			}
+			if (ImGui::Selectable("Material"))
+			{
+				resImportType = Resources::ResourceType::LRT_TEXTURE;
+				path = FileDialog::OpenFile("");
+				//path = FileDialog::OpenFile("Material (*.png)(*.bmp)(*.jpg)(*.dds)(*.lnmaterial)\0*.png\0*.bmp\0*.jpg\0*.dds\0.lnmaterial\0");
 			}
 			if (ImGui::Selectable("Mesh"))
 			{
-				resType = Resources::ResourceType::LRT_MESH;
-				path = FileDialog::OpenFile("Image (*.fbx)(*.FBX)(*dae)(*DAE)\0*.fbx\0*.FBX\0*.dae\0*.DAE\0");
+				resImportType = Resources::ResourceType::LRT_MESH;
+				path = FileDialog::OpenFile("");
+				//path = FileDialog::OpenFile("Mesh (*.fbx)(*.FBX)(*.dae)(*.DAE)(*.lnmesh)(*.LNMESH)\0*.fbx\0*.FBX\0*.dae\0*.DAE\0*.lnmesh\0*.LNMESH\0");
 			}
+			/*if (ImGui::Selectable("Shader"))
+			{
+				resType = Resources::ResourceType::LRT_SHADER;
+				path = FileDialog::OpenFile("Shader (*.vs)(*.fs)(*lnshader)\0*.vs\0*.fs\0*.lnshader\0");
+			}*/
+			
 			ImGui::EndPopup();
 		}
 
@@ -185,28 +235,28 @@ namespace Lanna {
 					nPath[i] = '/';
 			}
 
-			LN_INFO(nPath.c_str());
+			//LN_INFO(nPath.c_str());
 
 			if (action == IMPORT)
 			{
-				switch (resType)
+				switch (resImportType)
 				{
-				case Lanna::Resources::LRT_TEXTURE:	LN_RESOURCES.Import<Texture>(nPath.c_str());
+				case Lanna::Resources::LRT_TEXTURE:		LN_RESOURCES.Import<Texture>(nPath.c_str());
 					break;
-				case Lanna::Resources::LRT_SHADER:
+				case Lanna::Resources::LRT_SHADER:		LN_RESOURCES.Import<Texture>(nPath.c_str());
 					break;
-				case Lanna::Resources::LRT_MESH:	LN_RESOURCES.Import<Mesh>(nPath.c_str());
+				case Lanna::Resources::LRT_MESH:		LN_RESOURCES.Import<Mesh>(nPath.c_str());
 					break;
-				case Lanna::Resources::LRT_MATERIAL:
+				case Lanna::Resources::LRT_MATERIAL:	LN_RESOURCES.Import<Material>(nPath.c_str());
 					break;
-				case Lanna::Resources::LRT_LAST:
+				case Lanna::Resources::LRT_LAST:		
 					break;
 				default:
 					break;
 				}
 			}
 		}
-
+		
 
 		ImGui::Text("Thumbnail Size");
 		ImGui::SameLine();
@@ -218,41 +268,92 @@ namespace Lanna {
 		ImGui::SetNextItemWidth(-FLT_MIN);
 		ImGui::SliderFloat("Padding", &padding, thumbnailSize/2, thumbnailSize);
 
-		ImportPopUp();
+		//ImportPopUp();
+
+		AssetInspector();
 
 		ImGui::End();
 	}
-	const char* AssetsPanel::ImportPopUp()
+	//const char* AssetsPanel::ImportPopUp()
+	//{
+	//	if (ImGui::BeginPopupModal("Import", NULL, ImGuiWindowFlags_MenuBar))
+	//	{
+	//		bool changes_happened = false;
+
+	//		if (ImGui::BeginMenuBar())
+	//		{
+	//			
+	//			//std::string textBar= m_importDirectory.string();
+	//			ImGui::Text(m_importDirectory.string().c_str());
+
+	//			ImGui::EndMenuBar();
+	//		}
+	//		//------------------------------------------------
+	//		
+
+	//		//---------------------------------------------
+	//		if (ImGui::Button("Import")) {
+	//			// importation stuff
+	//			ImGui::CloseCurrentPopup();
+	//		}
+	//		if (ImGui::Button("Load"))
+	//		{
+	//			
+	//		}
+	//		ImGui::SameLine();
+	//		if (ImGui::Button("Close"))
+	//			ImGui::CloseCurrentPopup();
+	//		ImGui::EndPopup();
+	//	}
+	//	return nullptr;
+	//}
+	void AssetsPanel::AssetInspector()
 	{
-		if (ImGui::BeginPopupModal("Import", NULL, ImGuiWindowFlags_MenuBar))
+		if (resId != -1)
 		{
-			bool changes_happened = false;
-
-			if (ImGui::BeginMenuBar())
-			{
-				
-				//std::string textBar= m_importDirectory.string();
-				ImGui::Text(m_importDirectory.string().c_str());
-
-				ImGui::EndMenuBar();
-			}
-			//------------------------------------------------
-			
-
-			//---------------------------------------------
-			if (ImGui::Button("Import")) {
-				// importation stuff
-				ImGui::CloseCurrentPopup();
-			}
-			if (ImGui::Button("Load"))
-			{
-				
-			}
+			std::string path=std::string();
+			ImGui::Separator();
+			//const char* ResourcesName[4] = { "Texture", "Shaders", "Meshes", "Materials" };
+			ImGui::Text("AssetType: ");
 			ImGui::SameLine();
-			if (ImGui::Button("Close"))
-				ImGui::CloseCurrentPopup();
-			ImGui::EndPopup();
+			ImGui::Text(ResourcesName[resFolder]);
+
+			ImGui::Text("Path: ");
+			const char* text = LN_RESOURCES.GetList(resFolder)->at(resId)->filePath.c_str();
+			ImGui::TextWrapped(text);
+			if (ImGui::SmallButton("Save"))
+			{
+				if (resFolder == Resources::ResourceType::LRT_MATERIAL)		LN_RESOURCES.Save<Material>(resId);
+				if (resFolder == Resources::ResourceType::LRT_MESH)			LN_RESOURCES.Save<Mesh>(resId);
+				/*if (resFolder == Resources::ResourceType::LRT_SHADER)		LN_RESOURCES.Save<Shader>(resId);
+				if (resFolder == Resources::ResourceType::LRT_TEXTURE)		LN_RESOURCES.Save<Texture>(resId);*/
+			}
+			if (ImGui::SmallButton("Load"))
+			{
+				path = FileDialog::OpenFile("");
+			}
+			/*if (ImGui::SmallButton("Delete"))
+			{
+
+			}*/
+			if (path != std::string())
+			{
+				std::string folder = "Editor\\";
+				std::string nPath = path.substr(path.find(folder) + 7, path.length());
+
+				for (int i = 0; i < nPath.length(); i++)
+				{
+					if (nPath[i] == '\\')
+						nPath[i] = '/';
+				}
+
+				//LN_INFO(nPath.c_str());
+				if (resFolder == Resources::ResourceType::LRT_MATERIAL)		LN_RESOURCES.Load<Material>(resId, nPath.c_str());
+				if (resFolder == Resources::ResourceType::LRT_MESH)		LN_RESOURCES.Load<Mesh>(resId, nPath.c_str());
+			}
+
 		}
-		return nullptr;
+		
+		
 	}
 }
