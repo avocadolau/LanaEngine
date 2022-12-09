@@ -59,42 +59,7 @@ namespace Lanna
 		{
 			if (m_MeshID == -1)
 			{
-				bool reset = false;
-				if (ImGui::Button("Select Resource"))
-				{
-					ImGui::OpenPopup("select resource");
-					reset = true;
-				}
-				if (ImGui::BeginPopupModal("select resource", NULL, ImGuiWindowFlags_AlwaysAutoResize))
-				{
-					m_MeshID = LN_RESOURCES.SelectResourcePopUp(Resources::ResourceType::LRT_MESH, reset);
-					//ImGui::SetItemDefaultFocus();
-					//ImGui::SameLine();
-					if (ImGui::Button("Cancel", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
-					ImGui::EndPopup();
-				}
-
-				static int selectedMesh = -1;
-				const char* names[] = { "cube", "pyramid", "plane" };
-
-				if (ImGui::Button("Primitives"))
-					ImGui::OpenPopup("my_select_popup");
 				
-
-				if (ImGui::BeginPopup("my_select_popup"))
-				{
-					ImGui::Text("Primitives");
-					ImGui::Separator();
-					for (int i = 0; i < IM_ARRAYSIZE(names); i++)
-						if (ImGui::Selectable(names[i]))
-						{
-							selectedMesh = i;
-							LoadPrimitive((Primitives)i);
-						}
-					if (ImGui::Selectable("<None>"))
-						selectedMesh = -1;
-					ImGui::EndPopup();
-				}
 			}
 
 			else
@@ -122,6 +87,46 @@ namespace Lanna
 					toDel = true;
 				}
 				
+			}
+
+			bool reset = false;
+			if (ImGui::Button("Select Resource"))
+			{
+				ImGui::OpenPopup("select resource");
+				reset = true;
+			}
+			if (ImGui::BeginPopupModal("select resource", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+			{
+				m_MeshID = LN_RESOURCES.SelectResourcePopUp(Resources::ResourceType::LRT_MESH, reset);
+				//ImGui::SetItemDefaultFocus();
+				//ImGui::SameLine();
+				if (ImGui::Button("Cancel", ImVec2(120, 0))) {
+					ImGui::CloseCurrentPopup();
+					m_MeshID = (ResourceId)-1;
+				}
+				ImGui::EndPopup();
+			}
+
+			static int selectedMesh = -1;
+			const char* names[] = { "cube", "pyramid", "plane" };
+
+			if (ImGui::Button("Primitives"))
+				ImGui::OpenPopup("my_select_popup");
+
+
+			if (ImGui::BeginPopup("my_select_popup"))
+			{
+				ImGui::Text("Primitives");
+				ImGui::Separator();
+				for (int i = 0; i < IM_ARRAYSIZE(names); i++)
+					if (ImGui::Selectable(names[i]))
+					{
+						selectedMesh = i;
+						LoadPrimitive((Primitives)i);
+					}
+				if (ImGui::Selectable("<None>"))
+					selectedMesh = -1;
+				ImGui::EndPopup();
 			}
 			
 			ImGui::TreePop();

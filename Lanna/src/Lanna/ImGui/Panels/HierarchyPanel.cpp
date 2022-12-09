@@ -84,7 +84,7 @@ namespace Lanna {
         if (ImGui::BeginPopup("options"))
         {
 
-            ImGui::Text(hover->m_Name.c_str());
+            ImGui::Text(hover->m_Name.c_str()); 
             if (ImGui::Selectable("Add new entity"))
             {
                 hover->AddEmptyChild();
@@ -108,6 +108,14 @@ namespace Lanna {
                 else
                 {
                     LN_ENTITY_MAN->DestroyGameObject(hover);
+                    LN_ENTITY_MAN->SetRoot(1);
+                    selected->at(0) = 0;
+                    for (int i = 1; i < selected->size(); i++)
+                    {
+                        selected->at(i) = -1;
+                    }
+                    LN_ENTITY_MAN->activeFromSelection = true;
+                    LN_ENTITY_MAN->SetActiveEntity(selected);
                 }
             }
             if (hover)

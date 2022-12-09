@@ -82,7 +82,7 @@ namespace Lanna {
 		{
 			return (ResourceId)-1;
 		}
-		return -1;
+		return (ResourceId) - 1;
 	}
 
 

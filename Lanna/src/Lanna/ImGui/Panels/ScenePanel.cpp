@@ -120,6 +120,8 @@ namespace Lanna {
 			{
 				if (!LN_ENTITY_MAN->GetEntityList()->at(i)->m_Mesh)
 					continue;
+				if (LN_ENTITY_MAN->GetEntityList()->at(i)->m_Mesh->m_MeshID == -1)
+					continue;
 				Lanna::Mesh* model = Lanna::Resources::GetResourceById<Mesh>(LN_ENTITY_MAN->GetEntityList()->at(i)->m_Mesh->m_MeshID);
 				Lanna::TransformComponent* trs = LN_ENTITY_MAN->GetEntityList()->at(i)->m_Transform;
 				glm::mat4 transform(1.0f);
