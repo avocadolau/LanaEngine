@@ -156,6 +156,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Lanna.h" />
+    <ClInclude Include="src\Lanna\Animations.h" />
     <ClInclude Include="src\Lanna\Application.h" />
     <ClInclude Include="src\Lanna\Core.h" />
     <ClInclude Include="src\Lanna\EntityManager.h" />
@@ -175,6 +176,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Lanna\ImGui\ImGuiLog.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\AboutPanel.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panels\AnimationPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\AssetsPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\ConfigurationPanel.h" />
     <ClInclude Include="src\Lanna\ImGui\Panels\GameScenePanel.h" />
@@ -192,11 +194,13 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\Lanna\MouseButtonCodes.h" />
     <ClInclude Include="src\Lanna\Render3D.h" />
     <ClInclude Include="src\Lanna\Resources.h" />
+    <ClInclude Include="src\Lanna\Resources\Animation.h" />
     <ClInclude Include="src\Lanna\Resources\Framebuffer.h" />
-    <ClInclude Include="src\Lanna\Resources\Importers\MeshImporter.h" />
+    <ClInclude Include="src\Lanna\Resources\Importers\AnimImporter.h" />
     <ClInclude Include="src\Lanna\Resources\Material.h" />
     <ClInclude Include="src\Lanna\Resources\Mesh.h" />
     <ClInclude Include="src\Lanna\Resources\Shader.h" />
+    <ClInclude Include="src\Lanna\Resources\Skeleton.h" />
     <ClInclude Include="src\Lanna\Resources\Texture.h" />
     <ClInclude Include="src\Lanna\Scene\Scene.h" />
     <ClInclude Include="src\Lanna\Scene\SceneManager.h" />
@@ -226,6 +230,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\lnpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Lanna\Animations.cpp" />
     <ClCompile Include="src\Lanna\Application.cpp" />
     <ClCompile Include="src\Lanna\EntityManager.cpp" />
     <ClCompile Include="src\Lanna\GameObject\Component.cpp" />
@@ -236,6 +241,7 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\GameObject\GameObject.cpp" />
     <ClCompile Include="src\Lanna\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\AboutPanel.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\AnimationPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\AssetsPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\ConfigurationPanel.cpp" />
     <ClCompile Include="src\Lanna\ImGui\Panels\GameScenePanel.cpp" />
@@ -249,11 +255,13 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClCompile Include="src\Lanna\Log.cpp" />
     <ClCompile Include="src\Lanna\Render3D.cpp" />
     <ClCompile Include="src\Lanna\Resources.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Animation.cpp" />
     <ClCompile Include="src\Lanna\Resources\Framebuffer.cpp" />
-    <ClCompile Include="src\Lanna\Resources\Importers\MeshImporter.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Importers\AnimImporter.cpp" />
     <ClCompile Include="src\Lanna\Resources\Material.cpp" />
     <ClCompile Include="src\Lanna\Resources\Mesh.cpp" />
     <ClCompile Include="src\Lanna\Resources\Shader.cpp" />
+    <ClCompile Include="src\Lanna\Resources\Skeleton.cpp" />
     <ClCompile Include="src\Lanna\Resources\Texture.cpp" />
     <ClCompile Include="src\Lanna\Scene\Scene.cpp" />
     <ClCompile Include="src\Lanna\Scene\SceneManager.cpp" />

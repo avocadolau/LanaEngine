@@ -6,6 +6,7 @@
 #include "Lanna/Resources.h"
 
 #define NEW_ASSETS_PANEL
+#define ANI_UPDATE
 typedef size_t ResourceId;
 
 namespace Lanna {
@@ -29,6 +30,12 @@ namespace Lanna {
 		void AssetInspector();
 
 	private:
+
+#ifdef ANI_UPDATE
+
+
+
+#endif // 
 
 		Resources::ResourceType resImportType = Resources::ResourceType::LRT_LAST;
 		Resources::ResourceType resFolder = Resources::ResourceType::LRT_LAST;

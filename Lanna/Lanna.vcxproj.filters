@@ -157,10 +157,13 @@
     <ClInclude Include="src\Lanna\Resources.h">
       <Filter>Lanna</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Animation.h">
+      <Filter>Lanna\Resources</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\Resources\Framebuffer.h">
       <Filter>Lanna\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="src\Lanna\Resources\Importers\MeshImporter.h">
+    <ClInclude Include="src\Lanna\Resources\Importers\AnimImporter.h">
       <Filter>Lanna\Resources\Importers</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Resources\Material.h">
@@ -170,6 +173,9 @@
       <Filter>Lanna\Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Resources\Shader.h">
+      <Filter>Lanna\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Resources\Skeleton.h">
       <Filter>Lanna\Resources</Filter>
     </ClInclude>
     <ClInclude Include="src\Lanna\Resources\Texture.h">
@@ -251,6 +257,12 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\lnpch.h" />
+    <ClInclude Include="src\Lanna\ImGui\Panels\AnimationPanel.h">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lanna\Animations.h">
+      <Filter>Lanna</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Lanna\Application.cpp">
@@ -322,10 +334,13 @@
     <ClCompile Include="src\Lanna\Resources.cpp">
       <Filter>Lanna</Filter>
     </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Animation.cpp">
+      <Filter>Lanna\Resources</Filter>
+    </ClCompile>
     <ClCompile Include="src\Lanna\Resources\Framebuffer.cpp">
       <Filter>Lanna\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="src\Lanna\Resources\Importers\MeshImporter.cpp">
+    <ClCompile Include="src\Lanna\Resources\Importers\AnimImporter.cpp">
       <Filter>Lanna\Resources\Importers</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Resources\Material.cpp">
@@ -335,6 +350,9 @@
       <Filter>Lanna\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Resources\Shader.cpp">
+      <Filter>Lanna\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Resources\Skeleton.cpp">
       <Filter>Lanna\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\Resources\Texture.cpp">
@@ -380,5 +398,11 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\lnpch.cpp" />
+    <ClCompile Include="src\Lanna\ImGui\Panels\AnimationPanel.cpp">
+      <Filter>Lanna\ImGui\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\Animations.cpp">
+      <Filter>Lanna</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

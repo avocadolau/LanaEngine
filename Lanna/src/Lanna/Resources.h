@@ -6,6 +6,7 @@
 
 
 #include <Lanna/Core.h>
+#include "Lanna/Log.h"
 #include "Utilities/FileHelpers.h"
 
 // Resources
@@ -13,8 +14,10 @@
 #include "Resources/Texture.h"
 #include "Resources/Mesh.h"
 #include "Resources/Material.h"
+#include "Resources/Animation.h"
 
-#include "Lanna/Resources/Importers/MeshImporter.h"
+
+//#include "Lanna/Resources/Importers/MeshImporter.h"
 
 #include <string>
 #include <vector>
@@ -23,6 +26,9 @@
 
 typedef size_t ResourceId;
 typedef char sbyte;
+
+struct aiAnimation;
+
 
 namespace Lanna {
 
@@ -36,6 +42,7 @@ namespace Lanna {
 			LRT_SHADER,
 			LRT_MESH,
 			LRT_MATERIAL,
+			LRT_ANIMATION,
 			LRT_LAST
 		};
 
@@ -376,5 +383,80 @@ namespace Lanna {
 		//write_file.close();
 		return id;
 	}
+
+	template<>
+	inline ResourceId Resources::Import<Animation>(const char* file)
+	{
+		
+		if (file)
+		{
+			if (GetExtension(file) == ".lnanimation")
+			{
+
+			}
+			else if (CheckExtension(GetExtension(file)) != FileType::LFT_Animation)
+			{
+				std::string message = GetExtension(file) + " isnt an animation. Could not import";
+				LN_WARN(message.c_str());
+				return -1;
+			}
+		}
+		ResourceId position = getResourcePosition(LRT_ANIMATION, file);
+		size_t size = m_Resources[LRT_ANIMATION].size();
+
+		ResourceId resourceId;
+
+		if (position == size) {
+
+			Animation* animation;
+			if (file == "null")
+			{
+				animation = new Animation();
+			}
+			else if (GetExtension(file).c_str() == ".lnanimation")
+			{
+				animation = new Animation();
+				animation->Import(file);
+			}
+			else
+			{
+				animation = new Animation();
+				animation->Import(file);
+			}
+
+			if (file == "null")
+			{
+				PushResource(LRT_ANIMATION, "animation", animation);
+			}
+			else
+				PushResource(LRT_ANIMATION, file, animation);
+
+			resourceId = size;
+		}
+		else {
+			resourceId = position;
+		}
+	}
+	template<>
+	inline void Resources::Save<Animation>(ResourceId id)
+	{
+
+	}
+	template<>
+	inline ResourceId Resources::Load<Animation>(ResourceId id, const char* path)
+	{
+
+	}
+	template<>
+	inline Animation* Resources::GetResourceById<Animation>(ResourceId id)
+	{
+
+	}
+	template<>
+	inline std::string Resources::GetPathById<Animation>(ResourceId id)
+	{
+
+	}
+
 }
 #endif // !RESOURCES_H

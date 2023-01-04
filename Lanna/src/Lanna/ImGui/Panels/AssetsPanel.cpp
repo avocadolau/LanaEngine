@@ -10,6 +10,75 @@
 
 #include <Windows.h>
 
+#ifdef ANI_UPDATE
+
+namespace Lanna {
+	extern const std::filesystem::path s_AssetPath = "resources";
+	AssetsPanel::AssetsPanel() :Panel("Resources"), m_CurrentDirectory(s_AssetPath)
+	{
+		m_dirIcon = new Texture();
+		m_dirIcon->Init("resources/icons/ContentBrowser/DirectoryIcon.png");
+		m_fileIcon = new Texture();
+		m_fileIcon->Init("resources/icons/ContentBrowser/FileIcon.png");
+		active = true;
+	}
+	AssetsPanel::~AssetsPanel()
+	{
+
+	}
+	void AssetsPanel::Draw()
+	{
+		ImGui::Begin(name, &active);
+		
+		static ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchSame | ImGuiTableFlags_Resizable | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV | ImGuiTableFlags_ContextMenuInBody;
+
+		
+		if (ImGui::BeginTable("table", 2, flags))
+		{
+			ImGui::TableNextColumn();
+
+			ImGui::Text("Thumbnail Size");
+			ImGui::SameLine();
+			ImGui::SetNextItemWidth(-FLT_MIN);
+			ImGui::SliderFloat("Thumbnail Size", &thumbnailSize, 32, 128);
+
+			ImGui::Text("Padding");
+			ImGui::SameLine();
+			ImGui::SetNextItemWidth(-FLT_MIN);
+			ImGui::SliderFloat("Padding", &padding, thumbnailSize / 2, thumbnailSize);
+
+
+			ImGui::TextWrapped("JUST SELECT RESOURCES that are inside Editor");
+
+			if (ImGui::Button("Import"))
+			{
+				//action = IMPORT;
+				//ImGui::OpenPopup("import selector");
+			}
+
+			// COMPROBRA EXTENSION
+			// Import configuration segun la extension
+			
+
+			//----------------------------------------------------------------------
+			
+			ImGui::TableNextColumn();
+			// all resources
+			ImGui::TextWrapped("resources");
+
+
+			ImGui::EndTable();
+		}
+
+
+
+		ImGui::End();
+	}
+
+}
+
+#else
+
 namespace Lanna {
 
 	extern const std::filesystem::path s_AssetPath = "resources";
@@ -218,7 +287,13 @@ namespace Lanna {
 				resType = Resources::ResourceType::LRT_SHADER;
 				path = FileDialog::OpenFile("Shader (*.vs)(*.fs)(*lnshader)\0*.vs\0*.fs\0*.lnshader\0");
 			}*/
-			
+			if (ImGui::Selectable("Animation"))
+			{
+				resImportType = Resources::ResourceType::LRT_ANIMATION;
+				path = FileDialog::OpenFile("");
+			}
+
+
 			ImGui::EndPopup();
 		}
 
@@ -248,6 +323,11 @@ namespace Lanna {
 				case Lanna::Resources::LRT_MESH:		LN_RESOURCES.Import<Mesh>(nPath.c_str());
 					break;
 				case Lanna::Resources::LRT_MATERIAL:	LN_RESOURCES.Import<Material>(nPath.c_str());
+					break;
+				case Lanna::Resources::LRT_ANIMATION:
+					// 
+
+
 					break;
 				case Lanna::Resources::LRT_LAST:		
 					break;
@@ -357,3 +437,5 @@ namespace Lanna {
 		
 	}
 }
+
+#endif // ANI_UPDATE
