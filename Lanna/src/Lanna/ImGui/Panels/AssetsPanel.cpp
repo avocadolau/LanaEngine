@@ -8,6 +8,7 @@
 #include "Lanna/Utilities/FileDialog.h"
 #include "Lanna/Resources.h"
 
+
 #include <Windows.h>
 
 #ifdef ANI_UPDATE
@@ -50,11 +51,28 @@ namespace Lanna {
 
 			ImGui::TextWrapped("JUST SELECT RESOURCES that are inside Editor");
 
+
 			if (ImGui::Button("Import"))
 			{
-				//action = IMPORT;
-				//ImGui::OpenPopup("import selector");
+				action = IMPORT;
+				mPath = FileDialog::OpenFile("");
 			}
+
+			if (mPath != std::string())
+			{
+				std::string folder = "Editor\\";
+				std::string nPath = mPath.substr(mPath.find(folder) + 7, mPath.length());
+
+				for (int i = 0; i < nPath.length(); i++)
+				{
+					if (nPath[i] == '\\')
+						nPath[i] = '/';
+				}
+				mPath = nPath;
+				//ImGui::OpenPopup("Import options");
+				ImportOptions(nullptr);
+			}
+
 
 			// COMPROBRA EXTENSION
 			// Import configuration segun la extension
@@ -71,9 +89,43 @@ namespace Lanna {
 		}
 
 
-
 		ImGui::End();
 	}
+
+	void AssetsPanel::ImportOptions(const char* file)
+	{
+		if (file != nullptr) mPath = file;
+		FileType fileType = CheckExtension(GetExtension(mPath.c_str()));
+
+		/*switch (fileType)
+		{
+		case LFT_Error:				ImGui::OpenPopup("Error FileType");			break;
+		case LFT_Texture:			LN_RESOURCES.Import<Texture>(mPath.c_str());						break;
+		case LFT_FBX:				ImGui::OpenPopup("FBX OPTIONS");			break;
+		case LFT_Material:			LN_RESOURCES.Import<Material>(mPath.c_str());						break;
+		case LFT_Mesh:				LN_RESOURCES.Import<Mesh>(mPath.c_str());							break;
+		case LFT_Skeleton:			ImGui::OpenPopup("SKELLETON OPTIONS");		break;
+		case LFT_Animation:			ImGui::OpenPopup("ANIMATION OPTIONS");		break;
+		case LFT_Files_Max:			break;
+		default:
+			break;
+		}*/
+
+
+		if (ImGui::BeginPopup("Error FileType"))
+		{
+			ImGui::Text("Wrong file type");
+			mPath = std::string();
+			if (ImGui::Button("OK")) ImGui::CloseCurrentPopup();
+			ImGui::EndPopup();
+		}
+
+		if (ImGui::BeginPopup("FBX OPTIONS"))
+		{
+			ImGui::EndPopup();
+		}
+	}
+
 
 }
 
@@ -436,6 +488,7 @@ namespace Lanna {
 		
 		
 	}
+	
 }
 
 #endif // ANI_UPDATE

@@ -5,10 +5,12 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#include "imgui.h"
+
 namespace Lanna {
-	AniChannel::AniChannel(aiNodeAnim* channel)
+	Bone::Bone(aiNodeAnim* channel)
 	{
-		node_name = channel->mNodeName.C_Str();
+		name = channel->mNodeName.C_Str();
 
 		for (unsigned int i = 0; i < channel->mNumPositionKeys; i++)
 		{
@@ -26,6 +28,7 @@ namespace Lanna {
 			rotationKeys.push_back(new QuatKey(channel->mRotationKeys[i].mTime,
 				channel->mRotationKeys[i].mValue.x, channel->mRotationKeys[i].mValue.y, channel->mRotationKeys[i].mValue.z, channel->mRotationKeys[i].mValue.w));
 		}
+		
 	}
 	
 	void MetaAnimation::Import(aiAnimation* ani)
@@ -35,22 +38,24 @@ namespace Lanna {
 		tickrate = ani->mTicksPerSecond;
 		for (unsigned int i = 0; i < ani->mNumChannels; i++)
 		{
-			m_Channels.push_back(new AniChannel(ani->mChannels[i]));
+			m_Channels.push_back(new Bone(ani->mChannels[i]));
 		}
 	}
 
 	Animation::Animation()
 	{
-
+		
 	}
 
 	Animation::~Animation()
 	{
+
 	}
 
 	void Animation::Import(const char* file)
 	{
-		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_PreTransformVertices);
+		const aiScene* scene = aiImportFile(file, aiProcess_Triangulate | aiProcess_FlipUVs);
+		
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 			LN_ERROR("Couldn't load animation file: {0}", file);
@@ -59,7 +64,7 @@ namespace Lanna {
 
 		if (scene != nullptr)
 		{
-			if (scene->HasAnimations() == true)
+			if (scene->HasAnimations())
 			{
 				for (size_t i = 0; i < scene->mNumAnimations; i++)
 				{
@@ -68,7 +73,7 @@ namespace Lanna {
 					anims.push_back(nAni);
 				}
 			}
-			else LN_CORE_INFO("mamaste pinga");
+			else LN_CORE_INFO("Couldn't find the animation at: {0}", file);
 			aiReleaseImport(scene);
 		}
 		else {
@@ -76,5 +81,38 @@ namespace Lanna {
 		}
 	}
 
+
+
+	// skelleton list
+	void Animation::DisplayAnimationsList()
+	{
+		for (MetaAnimation* ani : anims)
+		{
+			ani->DisplayBonesList();
+		}
+	}
+
+	void MetaAnimation::DisplayBonesList()
+	{
+		if (ImGui::TreeNode(name.c_str()))
+		{
+
+			for (Bone* chnl : m_Channels)
+			{
+				chnl->DisplayChildren();
+			}
+
+			ImGui::TreePop();
+		}
+
+	}
+
+	void Bone::DisplayChildren()
+	{
+		if (ImGui::TreeNode(name.c_str()))
+		{
+			ImGui::TreePop();
+		}
+	}
 
 }

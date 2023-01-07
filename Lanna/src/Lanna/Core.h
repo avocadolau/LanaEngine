@@ -28,6 +28,9 @@
 #define LN_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
 #define CLAMP(x, mn, mx) (x) < (mn) ? (x) = (mn) : (x) = (x); (x) > (mx) ? (x) = (mx) : (x) = (x)
+
+
+
 //namespace Lanna {
 //
 //	template<typename T>

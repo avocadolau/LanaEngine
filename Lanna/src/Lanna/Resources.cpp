@@ -21,6 +21,8 @@ namespace Lanna {
 			break;
 		case Lanna::Resources::LRT_MATERIAL: resource->resource = new Material();
 			break;
+		case Lanna::Resources::LRT_ANIMATION: resource->resource = new Animation();
+			break;
 		case Lanna::Resources::LRT_LAST:
 			break;
 		default:
@@ -99,7 +101,8 @@ namespace Lanna {
 		case Lanna::Resources::LRT_TEXTURE:				ext = ".lntexture";		folder += "textures/";		break;
 		case Lanna::Resources::LRT_SHADER:				ext = ".lnshader";		folder += "shaders/";		break;
 		case Lanna::Resources::LRT_MESH:				ext = ".lnmesh";		folder += "models/";		break;
-		case Lanna::Resources::LRT_MATERIAL:			ext = ".lnmaterial";	folder += "materials/";		break;
+		case Lanna::Resources::LRT_MATERIAL:			ext = ".lnmat";			folder += "materials/";		break;
+		case Lanna::Resources::LRT_ANIMATION:			ext = ".lnanim";		folder += "animations/";		break;
 		case Lanna::Resources::LRT_LAST:				ext = ".error";			break;
 		default:										ext = ".error";			break;
 		}
@@ -129,5 +132,4 @@ namespace Lanna {
 
 		}
 	}
-
 }

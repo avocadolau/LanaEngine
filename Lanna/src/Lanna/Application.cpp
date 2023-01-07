@@ -13,6 +13,13 @@
 #include <Windows.h>
 #include <shellapi.h>
 
+
+#ifdef DEBUG_ANIM
+#include "Lanna/Resources/Animation.h"
+#endif // DEBUG_ANIM\
+
+
+
 #define GL_GPU_MEM_INFO_TOTAL_AVAILABLE_MEM_NVX 0x9048
 #define GL_GPU_MEM_INFO_CURRENT_AVAILABLE_MEM_NVX 0x9049
 #define GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX 0x904B
@@ -47,6 +54,12 @@ namespace Lanna {
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
+
+#ifdef DEBUG_ANIM
+		LN_RESOURCES.Import<Animation>("resources/animations/test.FBX");
+#endif // DEBUG_ANIM
+
+
 	}
 
 	Application::~Application()

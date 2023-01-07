@@ -20,3 +20,8 @@
 #ifdef LN_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif
+
+
+// DEBUG DEFINES
+
+#define DEBUG_ANIM

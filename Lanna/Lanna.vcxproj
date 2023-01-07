@@ -156,7 +156,6 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Lanna.h" />
-    <ClInclude Include="src\Lanna\Animations.h" />
     <ClInclude Include="src\Lanna\Application.h" />
     <ClInclude Include="src\Lanna\Core.h" />
     <ClInclude Include="src\Lanna\EntityManager.h" />
@@ -230,7 +229,6 @@ IF EXIST ..\bin\Dist-windows-x86_64\Lanna\Lanna.dll\ (xcopy /Q /E /Y /I ..\bin\D
     <ClInclude Include="src\lnpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Lanna\Animations.cpp" />
     <ClCompile Include="src\Lanna\Application.cpp" />
     <ClCompile Include="src\Lanna\EntityManager.cpp" />
     <ClCompile Include="src\Lanna\GameObject\Component.cpp" />

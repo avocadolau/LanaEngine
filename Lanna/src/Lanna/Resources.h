@@ -78,7 +78,7 @@ namespace Lanna {
 
 		static std::string GenerateSavePath(ResourceType rt, const char* file);
 		static void Clear();
-		
+
 	};
 
 	// SPECIALIZATION FOR SHADER
@@ -390,7 +390,7 @@ namespace Lanna {
 		
 		if (file)
 		{
-			if (GetExtension(file) == ".lnanimation")
+			/*if (GetExtension(file) == ".lnanimation")
 			{
 
 			}
@@ -399,7 +399,7 @@ namespace Lanna {
 				std::string message = GetExtension(file) + " isnt an animation. Could not import";
 				LN_WARN(message.c_str());
 				return -1;
-			}
+			}*/
 		}
 		ResourceId position = getResourcePosition(LRT_ANIMATION, file);
 		size_t size = m_Resources[LRT_ANIMATION].size();
@@ -436,6 +436,7 @@ namespace Lanna {
 		else {
 			resourceId = position;
 		}
+		return resourceId;
 	}
 	template<>
 	inline void Resources::Save<Animation>(ResourceId id)
@@ -450,7 +451,13 @@ namespace Lanna {
 	template<>
 	inline Animation* Resources::GetResourceById<Animation>(ResourceId id)
 	{
+		Lanna::Animation* ani = NULL;
 
+		if (id >= 0 && id < m_Resources[LRT_ANIMATION].size()) {
+			ani = static_cast<Lanna::Animation*>(m_Resources[LRT_ANIMATION][id]->resource);
+		}
+
+		return ani;
 	}
 	template<>
 	inline std::string Resources::GetPathById<Animation>(ResourceId id)

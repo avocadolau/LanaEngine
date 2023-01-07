@@ -4,8 +4,6 @@
 
 struct aiAnimation;
 struct aiNodeAnim;
-struct Bone;
-
 
 namespace Lanna {
 
@@ -30,25 +28,31 @@ namespace Lanna {
 			time = t;
 		}
 	};
-
-	struct AniChannel
+	   
+	struct Bone
 	{
-		std::string node_name = "unknown";
+		std::string name = "Unkown";
+
 		std::vector<VectorKey*>positionKeys;
 		std::vector<VectorKey*>scaleKeys;
 		std::vector<QuatKey*>rotationKeys;
-		AniChannel(aiNodeAnim* channel);
+		std::vector<Bone*> children;
+
+
+		Bone(aiNodeAnim* channel);
+		void DisplayChildren();
 	};
 
 	struct MetaAnimation
 	{
 		std::string name = "unknown";
-		std::vector<AniChannel*> m_Channels;
+		std::vector<Bone*> m_Channels;
 		double duration;
 		double tickrate;
 
 
 		void Import(aiAnimation* ani);
+		void DisplayBonesList();
 	};
 
 	class Animation
@@ -58,8 +62,9 @@ namespace Lanna {
 		~Animation();
 
 		void Import(const char* file);
-	private:
+	public:
 		std::vector<MetaAnimation*> anims;
+		void DisplayAnimationsList();
 	};
 }
 

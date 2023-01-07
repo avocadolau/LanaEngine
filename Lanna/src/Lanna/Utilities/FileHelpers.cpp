@@ -84,13 +84,13 @@ FileType CheckExtension(std::string& ext)
 		ret = LFT_FBX;
 	else if (ext == std::string(".png") || ext == std::string(".bmp") || ext == std::string(".jpg") || ext == std::string(".dds"))
 		ret = LFT_Texture;
-	else if (ext == std::string(".meshdrnk"))
+	else if (ext == std::string(".lnmesh"))
 		ret = LFT_Mesh;
-	else if (ext == std::string(".matdrnk"))
+	else if (ext == std::string(".lnmat"))
 		ret = LFT_Material;
-	else if (ext == std::string(".skeldrnk"))
+	else if (ext == std::string(".lnskel"))
 		ret = LFT_Skeleton;
-	else if (ext == std::string(".animdrnk"))
+	else if (ext == std::string(".lnanim"))
 		ret = LFT_Animation;
 	return ret;
 }

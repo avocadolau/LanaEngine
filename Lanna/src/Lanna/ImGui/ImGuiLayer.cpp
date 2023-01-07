@@ -23,6 +23,7 @@
 #include "Lanna/ImGui/Panels/HierarchyPanel.h"
 #include "Lanna/ImGui/Panels/AssetsPanel.h"
 #include "Lanna/ImGui/Panels/GameScenePanel.h"
+#include "Lanna/ImGui/Panels/AnimationPanel.h"
 #include "Lanna/GameObject/Components/MeshComponent.h"
 
 #include "Lanna/Render3D.h"
@@ -103,7 +104,7 @@ namespace Lanna {
 		m_Hierarchy = new HierarchyPanel();
 		m_Assets = new AssetsPanel();
 		m_GameScene = new GameScenePanel();
-
+		m_Animation = new AnimPanel();
 
 		m_panels.push_back(m_configuration);
 		m_panels.push_back(m_about);
@@ -113,6 +114,7 @@ namespace Lanna {
 		m_panels.push_back(m_Inspector);
 		m_panels.push_back(m_Assets);
 		m_panels.push_back(m_GameScene);
+		m_panels.push_back(m_Animation);
 
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		ImGui_ImplGlfw_InitForOpenGL(window, true);

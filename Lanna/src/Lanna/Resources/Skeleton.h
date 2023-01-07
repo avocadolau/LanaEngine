@@ -27,10 +27,8 @@ namespace Lanna {
 	class Skeleton
 	{
 		std::vector<Bone*> bones;
-		TransformComponent* transform;
-
-
-
+		
+		
 
 	};
 }

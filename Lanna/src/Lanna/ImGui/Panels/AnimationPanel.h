@@ -1,5 +1,5 @@
 #include "Panel.h"
-
+#include "Lanna/Resources/Animation.h"
 
 namespace Lanna {
 	class AnimPanel :public Panel
@@ -10,6 +10,6 @@ namespace Lanna {
 
 		void Draw() override;
 	private:
-
+		Animation* ani = nullptr;
 	};
 }
