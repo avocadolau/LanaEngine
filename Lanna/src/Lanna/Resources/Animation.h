@@ -29,24 +29,24 @@ namespace Lanna {
 		}
 	};
 	   
-	struct Bone
+	struct AniChannel
 	{
 		std::string name = "Unkown";
 
 		std::vector<VectorKey*>positionKeys;
 		std::vector<VectorKey*>scaleKeys;
 		std::vector<QuatKey*>rotationKeys;
-		std::vector<Bone*> children;
+		std::vector<AniChannel*> children;
 
 
-		Bone(aiNodeAnim* channel);
+		AniChannel(aiNodeAnim* channel);
 		void DisplayChildren();
 	};
 
 	struct MetaAnimation
 	{
 		std::string name = "unknown";
-		std::vector<Bone*> m_Channels;
+		std::vector<AniChannel*> m_Channels;
 		double duration;
 		double tickrate;
 

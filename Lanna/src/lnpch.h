@@ -24,4 +24,6 @@
 
 // DEBUG DEFINES
 
+#define MAX_BONES_PER_VERTEX 6
+
 #define DEBUG_ANIM

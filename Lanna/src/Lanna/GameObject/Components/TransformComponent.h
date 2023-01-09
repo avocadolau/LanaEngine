@@ -28,6 +28,9 @@ namespace Lanna
 		TransformComponent(TransformComponent* copy);
 		TransformComponent(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
+		void SetPosition(glm::vec3 pos);
+		void SetRotation(glm::vec3 rot);
+		void SetScale(glm::vec3 scl);
 
 		glm::vec3 GetPosition() { return m_Position; }
 		glm::vec3 GetRotation() { return m_Rotation; }

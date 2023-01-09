@@ -96,6 +96,11 @@ namespace Lanna {
 	{
 		Mesh* model = new Mesh();
 
+		if (mesh->HasBones())
+		{
+			hasBones = true;
+		}
+
 		for (unsigned int j = 0; j < mesh->mNumVertices; j++) {
 			// Vertices
 			model->vbo_data.push_back(mesh->mVertices[j].x);
@@ -115,6 +120,16 @@ namespace Lanna {
 				model->vbo_data.push_back(0.0f);
 				model->vbo_data.push_back(0.0f);
 			}
+			// bone weights
+			/*for (unsigned int k=0;k< MAX_BONES_PER_VERTEX;k++)
+			{
+			}
+			model->boneWeights.push_back(new VertexBoneData());
+			struct VertexBoneData
+			{
+				unsigned int IDs[MAX_BONES_PER_VERTEX];
+				float weights[MAX_BONES_PER_VERTEX];
+			};*/
 		}
 		if (model->vbo_data.empty())
 		{
@@ -139,6 +154,8 @@ namespace Lanna {
 		{
 			LN_CORE_INFO("Index buffer generated correctly");
 		}
+
+
 		model->GenerateBuffers();
 
 		return model;

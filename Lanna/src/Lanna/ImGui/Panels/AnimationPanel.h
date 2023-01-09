@@ -1,5 +1,5 @@
 #include "Panel.h"
-#include "Lanna/Resources/Animation.h"
+#include "Lanna/Resources/Skeleton.h"
 
 namespace Lanna {
 	class AnimPanel :public Panel
@@ -9,7 +9,9 @@ namespace Lanna {
 		~AnimPanel();
 
 		void Draw() override;
+		void SetActiveBone(Bone* b);
 	private:
-		Animation* ani = nullptr;
+		Skeleton* skl = nullptr;
+		Bone* bone = nullptr;
 	};
 }

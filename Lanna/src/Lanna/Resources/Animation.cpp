@@ -4,11 +4,14 @@
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <assimp/cfileio.h>
+
+#include "Skeleton.h"
 
 #include "imgui.h"
 
 namespace Lanna {
-	Bone::Bone(aiNodeAnim* channel)
+	AniChannel::AniChannel(aiNodeAnim* channel)
 	{
 		name = channel->mNodeName.C_Str();
 
@@ -38,7 +41,7 @@ namespace Lanna {
 		tickrate = ani->mTicksPerSecond;
 		for (unsigned int i = 0; i < ani->mNumChannels; i++)
 		{
-			m_Channels.push_back(new Bone(ani->mChannels[i]));
+			m_Channels.push_back(new AniChannel(ani->mChannels[i]));
 		}
 	}
 
@@ -54,8 +57,8 @@ namespace Lanna {
 
 	void Animation::Import(const char* file)
 	{
-		const aiScene* scene = aiImportFile(file, aiProcess_Triangulate | aiProcess_FlipUVs);
-		
+		//const aiScene* scene = aiImportFile(file, aiProcess_Triangulate | aiProcess_FlipUVs);
+		const aiScene* scene = aiImportFile(file, aiProcessPreset_TargetRealtime_Fast);
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 			LN_ERROR("Couldn't load animation file: {0}", file);
@@ -71,6 +74,11 @@ namespace Lanna {
 					MetaAnimation* nAni = new MetaAnimation();
 					nAni->Import(scene->mAnimations[i]);
 					anims.push_back(nAni);
+					
+
+					//-------------------------
+
+					
 				}
 			}
 			else LN_CORE_INFO("Couldn't find the animation at: {0}", file);
@@ -97,7 +105,7 @@ namespace Lanna {
 		if (ImGui::TreeNode(name.c_str()))
 		{
 
-			for (Bone* chnl : m_Channels)
+			for (AniChannel* chnl : m_Channels)
 			{
 				chnl->DisplayChildren();
 			}
@@ -107,7 +115,7 @@ namespace Lanna {
 
 	}
 
-	void Bone::DisplayChildren()
+	void AniChannel::DisplayChildren()
 	{
 		if (ImGui::TreeNode(name.c_str()))
 		{

@@ -15,7 +15,7 @@
 #include "Resources/Mesh.h"
 #include "Resources/Material.h"
 #include "Resources/Animation.h"
-
+#include "Resources/Skeleton.h"
 
 //#include "Lanna/Resources/Importers/MeshImporter.h"
 
@@ -43,6 +43,7 @@ namespace Lanna {
 			LRT_MESH,
 			LRT_MATERIAL,
 			LRT_ANIMATION,
+			LRT_SKELETON,
 			LRT_LAST
 		};
 
@@ -465,5 +466,85 @@ namespace Lanna {
 
 	}
 
+	template<>
+	inline ResourceId Resources::Import<Skeleton>(const char* file)
+	{
+
+		if (file)
+		{
+			/*if (GetExtension(file) == ".lnanimation")
+			{
+
+			}
+			else if (CheckExtension(GetExtension(file)) != FileType::LFT_Animation)
+			{
+				std::string message = GetExtension(file) + " isnt an animation. Could not import";
+				LN_WARN(message.c_str());
+				return -1;
+			}*/
+		}
+		ResourceId position = getResourcePosition(LRT_SKELETON, file);
+		size_t size = m_Resources[LRT_SKELETON].size();
+
+		ResourceId resourceId;
+
+		if (position == size) {
+
+			Skeleton* skl;
+			if (file == "null")
+			{
+				skl = new Skeleton();
+			}
+			else if (GetExtension(file).c_str() == ".lnanimation")
+			{
+				skl = new Skeleton();
+				skl->Import(file);
+			}
+			else
+			{
+				skl = new Skeleton();
+				skl->Import(file);
+			}
+
+			if (file == "null")
+			{
+				PushResource(LRT_SKELETON, "animation", skl);
+			}
+			else
+				PushResource(LRT_SKELETON, file, skl);
+
+			resourceId = size;
+		}
+		else {
+			resourceId = position;
+		}
+		return resourceId;
+	}
+	template<>
+	inline void Resources::Save<Skeleton>(ResourceId id)
+	{
+
+	}
+	template<>
+	inline ResourceId Resources::Load<Skeleton>(ResourceId id, const char* path)
+	{
+
+	}
+	template<>
+	inline Skeleton* Resources::GetResourceById<Skeleton>(ResourceId id)
+	{
+		Lanna::Skeleton* skl = NULL;
+
+		if (id >= 0 && id < m_Resources[LRT_SKELETON].size()) {
+			skl = static_cast<Lanna::Skeleton*>(m_Resources[LRT_SKELETON][id]->resource);
+		}
+
+		return skl;
+	}
+	template<>
+	inline std::string Resources::GetPathById<Skeleton>(ResourceId id)
+	{
+
+	}
 }
 #endif // !RESOURCES_H

@@ -2,6 +2,7 @@
 #include "Lanna/Resources/Framebuffer.h"
 //#include "Lanna/Resources/Material.h"
 #include "Lanna/Utilities/Maths/AABB.h"
+#include "lnpch.h"
 
 enum PrimitivesMesh {
 	CUBE,
@@ -14,6 +15,12 @@ enum PrimitivesMesh {
 struct aiMesh;
 
 namespace Lanna {
+
+	struct VertexBoneData
+	{
+		unsigned int IDs[MAX_BONES_PER_VERTEX];
+		float weights[MAX_BONES_PER_VERTEX];
+	};
 
 	class Mesh
 	{
@@ -29,6 +36,7 @@ namespace Lanna {
 
 		void Save(const char* path);
 		void Load(const char* path);
+
 	private:
 		void GenerateBuffers();
 		unsigned int GetModelsSize();
@@ -40,9 +48,13 @@ namespace Lanna {
 		std::vector<float> vbo_data;
 		std::vector<int> ebo_data;
 		std::vector<Mesh*> models;
+		std::vector<VertexBoneData*> boneWeights;
+
 		Lanna::Framebuffer* buff;
 		bool is_root = false;
 		AABB aabb;
+		bool hasBones = false;
+
 	};
 
 }

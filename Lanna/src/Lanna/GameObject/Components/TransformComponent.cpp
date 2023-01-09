@@ -39,6 +39,24 @@ namespace Lanna
 		UpdateWorldTransform();
 	}
 
+	void TransformComponent::SetPosition(glm::vec3 pos)
+	{
+		m_Position = pos;
+		UpdateWorldTransform();
+	}
+
+	void TransformComponent::SetRotation(glm::vec3 rot)
+	{
+		m_Rotation = rot;
+		UpdateWorldTransform();
+	}
+
+	void TransformComponent::SetScale(glm::vec3 scl)
+	{
+		m_Scale = scl;
+		UpdateWorldTransform();
+	}
+
 
 	/*void TransformComponent::SetPosition(glm::vec3 position) { m_Position = position; }
 	void TransformComponent::SetRotation(glm::vec3 rotation) { m_Rotation = rotation; }
