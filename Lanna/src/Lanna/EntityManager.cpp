@@ -41,6 +41,10 @@ namespace Lanna {
 		street->m_Components.push_back(streetMesh);
 		street->m_Components.push_back(streetMat);
 
+		GameObject* test = AddEmptyGameObject("test");
+		MeshComponent* testMesh = new MeshComponent("resources/animations/test.fbx");
+		test->m_Mesh = testMesh;
+		test->m_Components.push_back(testMesh);
 	}
 
 	void EntityManager::Update()

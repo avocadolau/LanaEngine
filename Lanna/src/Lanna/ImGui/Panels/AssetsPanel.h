@@ -29,7 +29,6 @@ namespace Lanna {
 		void DrawConfigurations();
 		void AssetInspector();
 		
-		void ImportOptions(const char* file);
 	private:
 
 #ifdef ANI_UPDATE

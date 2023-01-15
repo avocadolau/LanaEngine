@@ -52,31 +52,121 @@ namespace Lanna {
 			ImGui::TextWrapped("JUST SELECT RESOURCES that are inside Editor");
 
 
+			static bool importing = false;
 			if (ImGui::Button("Import"))
 			{
 				action = IMPORT;
 				mPath = FileDialog::OpenFile("");
+				importing = true;
 			}
 
-			if (mPath != std::string())
-			{
-				std::string folder = "Editor\\";
-				std::string nPath = mPath.substr(mPath.find(folder) + 7, mPath.length());
-
-				for (int i = 0; i < nPath.length(); i++)
+			if (importing) {
+				if (mPath != std::string())
 				{
-					if (nPath[i] == '\\')
-						nPath[i] = '/';
+					std::string folder = "Editor\\";
+					std::string nPath = mPath.substr(mPath.find(folder) + 7, mPath.length());
+
+					for (int i = 0; i < nPath.length(); i++)
+					{
+						if (nPath[i] == '\\')
+							nPath[i] = '/';
+					}
+					mPath = nPath;
+
+					FileType fileType = CheckExtension(GetExtension(mPath.c_str()));
+					switch (fileType) {
+					case LFT_Error:				ImGui::OpenPopup("Error FileType");			break;
+					case LFT_Texture:			LN_RESOURCES.Import<Texture>(mPath.c_str());						break;
+					case LFT_FBX:				ImGui::OpenPopup("FBX OPTIONS");			break;
+					case LFT_Material:			LN_RESOURCES.Import<Material>(mPath.c_str());						break;
+					case LFT_Mesh:				LN_RESOURCES.Import<Mesh>(mPath.c_str());							break;
+					case LFT_Skeleton:			ImGui::OpenPopup("SKELLETON OPTIONS");		break;
+					case LFT_Animation:			ImGui::OpenPopup("ANIMATION OPTIONS");		break;
+					case LFT_Files_Max:			break;
+					default:					break;
+					}
+					importing = false;
 				}
-				mPath = nPath;
-				//ImGui::OpenPopup("Import options");
-				ImportOptions(nullptr);
+			}
+			if (ImGui::BeginPopupModal("Error FileType", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+			{
+				ImGui::Text("Wrong file type");
+				mPath = std::string();
+				if (ImGui::Button("OK")) ImGui::CloseCurrentPopup();
+				ImGui::EndPopup();
 			}
 
+			if (ImGui::BeginPopupModal("FBX OPTIONS", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+			{
+				static bool gameObj, mesh, skeleton, animations, texture;
+				ImGui::Text("Import: ");
+				ImGui::Checkbox("Mesh", &mesh);
+				ImGui::Checkbox("Skeleton", &skeleton);
+				ImGui::Checkbox("Animation", &animations);
+				ImGui::Checkbox("Texture", &texture);
 
-			// COMPROBRA EXTENSION
-			// Import configuration segun la extension
-			
+				ImGui::Text("\n");
+				ImGui::Checkbox("Create Game Object", &gameObj);
+
+				if (ImGui::Button("Import"))
+				{
+					if (gameObj)
+					{
+						GameObject* obj = new GameObject(GetFileName(mPath.c_str()).c_str());
+						LN_ENTITY_MAN->AddGameObject(obj);
+						if (mesh)
+						{
+							obj->AddComponent(Lanna::Component::Type::MESH);
+							obj->m_Mesh->LoadFromFile(mPath.c_str());
+						}
+						if (skeleton)
+						{
+							obj->AddComponent(Lanna::Component::Type::SKELETON);
+							obj->m_Skeleton->LoadFromFile(mPath.c_str());
+						}
+						if (animations)
+						{
+							// to do - animation component
+						}
+						/*if (animations)
+						{
+							obj->AddComponent(Lanna::Component::Type::STATE_MACHINE);
+							obj->m_StateMachine->LoadFromFile(nullptr);
+							obj->m_StateMachine->AddState(GetFileName(mPath.c_str()).c_str());
+						}*/
+						/*if (texture)
+						{
+							obj->AddComponent(Lanna::Component::Type::MATERIAL);
+
+						}*/
+					}
+					else
+					{
+						if (mesh)
+						{
+							LN_RESOURCES.Import<Mesh>(mPath.c_str());
+						}
+						if (skeleton)
+						{
+							LN_RESOURCES.Import<Skeleton>(mPath.c_str());
+						}
+						if (animations)
+						{
+							LN_RESOURCES.Import<Animation>(mPath.c_str());
+						}
+						/*if (texture)
+						{
+							obj->AddComponent(Lanna::Component::Type::MATERIAL);
+
+						}*/
+					}
+					ImGui::CloseCurrentPopup();
+				}
+
+				ImGui::SameLine();
+				if (ImGui::Button("Cancel")) ImGui::CloseCurrentPopup();
+				ImGui::EndPopup();
+			}
 
 			//----------------------------------------------------------------------
 			
@@ -92,39 +182,7 @@ namespace Lanna {
 		ImGui::End();
 	}
 
-	void AssetsPanel::ImportOptions(const char* file)
-	{
-		if (file != nullptr) mPath = file;
-		FileType fileType = CheckExtension(GetExtension(mPath.c_str()));
-
-		/*switch (fileType)
-		{
-		case LFT_Error:				ImGui::OpenPopup("Error FileType");			break;
-		case LFT_Texture:			LN_RESOURCES.Import<Texture>(mPath.c_str());						break;
-		case LFT_FBX:				ImGui::OpenPopup("FBX OPTIONS");			break;
-		case LFT_Material:			LN_RESOURCES.Import<Material>(mPath.c_str());						break;
-		case LFT_Mesh:				LN_RESOURCES.Import<Mesh>(mPath.c_str());							break;
-		case LFT_Skeleton:			ImGui::OpenPopup("SKELLETON OPTIONS");		break;
-		case LFT_Animation:			ImGui::OpenPopup("ANIMATION OPTIONS");		break;
-		case LFT_Files_Max:			break;
-		default:
-			break;
-		}*/
-
-
-		if (ImGui::BeginPopup("Error FileType"))
-		{
-			ImGui::Text("Wrong file type");
-			mPath = std::string();
-			if (ImGui::Button("OK")) ImGui::CloseCurrentPopup();
-			ImGui::EndPopup();
-		}
-
-		if (ImGui::BeginPopup("FBX OPTIONS"))
-		{
-			ImGui::EndPopup();
-		}
-	}
+	
 
 
 }

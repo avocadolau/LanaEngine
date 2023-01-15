@@ -121,6 +121,7 @@ namespace Lanna {
 					if (comp->m_Type == Component::Type::MESH)activeObject->m_Mesh = nullptr;
 					if (comp->m_Type == Component::Type::MATERIAL)activeObject->m_Material = nullptr;
 					if (comp->m_Type == Component::Type::CAMERA)activeObject->m_Camera = nullptr;
+					if (comp->m_Type == Component::Type::SKELETON)activeObject->m_Skeleton = nullptr;
 					activeObject->DestroyComponent(comp);
 				}
 			}
@@ -146,6 +147,11 @@ namespace Lanna {
 					if (ImGui::Button("Material"))
 					{
 						activeObject->AddComponent(Component::Type::MATERIAL);
+						addComp = false;
+					}
+					if (ImGui::Button("Skeleton"))
+					{
+						activeObject->AddComponent(Component::Type::SKELETON);
 						addComp = false;
 					}
 					/*if (ImGui::Button("Camera"))

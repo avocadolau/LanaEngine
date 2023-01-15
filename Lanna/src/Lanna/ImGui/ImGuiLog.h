@@ -54,7 +54,7 @@ struct ImGuiLog
         logs.push_back(new Log(fmt, level));
     }
 
-    void Draw(const char* title, bool* p_open = NULL)
+    void Render(const char* title, bool* p_open = NULL)
     {
 
         ImGui::Begin(title, p_open, ImGuiWindowFlags_MenuBar);

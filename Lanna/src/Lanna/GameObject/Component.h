@@ -10,7 +10,7 @@ namespace Lanna
 			MESH,
 			MATERIAL,
 			CAMERA,
-
+			SKELETON,
 
 			TOTAL
 		};

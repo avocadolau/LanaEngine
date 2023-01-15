@@ -8,7 +8,7 @@
 #include "Components/MeshComponent.h"
 #include "Components/MaterialComponent.h"
 #include "Components/CameraComponent.h"
-
+#include "Components/SkeletonComponent.h"
 
 namespace Lanna
 {
@@ -39,6 +39,7 @@ namespace Lanna
 		TransformComponent* m_Transform = nullptr;
 		MaterialComponent* m_Material = nullptr;
 		MeshComponent* m_Mesh = nullptr;
+		SkeletonComponent* m_Skeleton = nullptr;
 
 		CameraComponent* m_Camera = nullptr;
 		GameObject* m_Parent = nullptr;

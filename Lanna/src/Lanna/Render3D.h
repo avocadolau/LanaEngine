@@ -40,7 +40,7 @@ namespace Lanna
 
 		void Init();
 		void Update();
-		void Draw();
+		void Render();
 		void Close();
 
 		uint32_t gridShaderModelLoc;

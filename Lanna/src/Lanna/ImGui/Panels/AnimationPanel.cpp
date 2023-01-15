@@ -73,6 +73,21 @@ namespace Lanna
 				ImGui::InputFloat("scale x", &bone->transform.m_Scale.x);
 				ImGui::InputFloat("scale y", &bone->transform.m_Scale.y);
 				ImGui::InputFloat("scale x", &bone->transform.m_Scale.z);
+
+				ImGui::Text("world transform");
+				ImGui::InputFloat("world pos x", &bone->transform.w_Pos.x);
+				ImGui::InputFloat("world pos y", &bone->transform.w_Pos.y);
+				ImGui::InputFloat("world pos x", &bone->transform.w_Pos.z);
+
+				ImGui::Text("");
+				ImGui::InputFloat("world rot x", &bone->transform.w_Rot.x);
+				ImGui::InputFloat("world rot y", &bone->transform.w_Rot.y);
+				ImGui::InputFloat("world rot x", &bone->transform.w_Rot.z);
+
+				ImGui::Text("");
+				ImGui::InputFloat("world scale x", &bone->transform.w_Scl.x);
+				ImGui::InputFloat("world scale y", &bone->transform.w_Scl.y);
+				ImGui::InputFloat("world scale x", &bone->transform.w_Scl.z);
 			}
 
 

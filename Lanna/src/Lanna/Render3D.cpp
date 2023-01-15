@@ -58,7 +58,7 @@ namespace Lanna {
 	}
 
 
-	void Render3D::Draw()
+	void Render3D::Render()
 	{
 		/*if (m_ActiveCamera)
 		{

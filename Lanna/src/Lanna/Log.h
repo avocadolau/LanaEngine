@@ -45,7 +45,7 @@ namespace Lanna {
         void AddLog(LogLevel logLevel, const char* fmt,...);
         
 
-        void Draw(const char* title, bool* p_open);
+        void Render(const char* title, bool* p_open);
         inline static Console& Get() { return *console_Instance; }
     };
 

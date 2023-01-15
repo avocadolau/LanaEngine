@@ -156,7 +156,7 @@ namespace Lanna {
 
 		if (logActive)
 		{
-			Console::Get().Draw("Console app", &logActive);
+			Console::Get().Render("Console app", &logActive);
 		}
 		
 		static bool show = true;

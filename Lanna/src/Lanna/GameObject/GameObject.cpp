@@ -41,7 +41,11 @@ namespace Lanna
 			m_Camera = new CameraComponent(copy->m_Camera, m_Transform);
 			m_Components.push_back(m_Camera);
 		}
-		
+		if (copy->m_Skeleton)
+		{
+			m_Skeleton = new SkeletonComponent(copy->m_Skeleton);
+			m_Components.push_back(m_Skeleton);
+		}
 		for (GameObject* c : copy->m_Children)
 		{
 			AddCopyChild(c);
@@ -132,6 +136,18 @@ namespace Lanna
 			else
 			{
 				LN_INFO("Already has material component");
+			}
+			break;
+		case Component::Type::SKELETON:
+			if (m_Skeleton == nullptr)
+			{
+				m_Skeleton = new SkeletonComponent();
+				m_Components.push_back(m_Skeleton);
+				return m_Skeleton;
+			}
+			else
+			{
+				LN_INFO("Already has skeleton component");
 			}
 			break;
 		case Component::Type::CAMERA:

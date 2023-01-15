@@ -81,7 +81,7 @@ namespace Lanna {
         }
     }
 
-    void Console::Draw(const char* title, bool* p_open)
+    void Console::Render(const char* title, bool* p_open)
     {
         ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
         if (!ImGui::Begin(title, p_open))
@@ -133,7 +133,7 @@ namespace Lanna {
         if (ImGui::Button("Options"))
             ImGui::OpenPopup("Options");
         ImGui::SameLine();
-        Filter.Draw("Filter (\"incl,-excl\") (\"error\")", 180);
+        Filter.Render("Filter (\"incl,-excl\") (\"error\")", 180);
         ImGui::Separator();
 
         // Reserve enough left-over height for 1 separator + 1 input text

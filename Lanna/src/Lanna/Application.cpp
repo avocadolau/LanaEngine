@@ -45,15 +45,15 @@ namespace Lanna {
 		SetHwInfo();
 
 		m_Resources = new Resources();
-
 		m_SceneManager = new SceneManager();
+		m_Render3D = new Render3D();
+		m_ImGuiLayer = new ImGuiLayer();
+		m_AnimManager = new AnimManager();
+
 		size_t newVar = m_SceneManager->CreateScene();
 		m_SceneManager->setActiveScene(newVar);
-
-		m_Render3D = new Render3D();
 		m_Render3D->Init();
-
-		m_ImGuiLayer = new ImGuiLayer();
+		m_AnimManager->Init();
 		PushOverlay(m_ImGuiLayer);
 
 #ifdef DEBUG_ANIM
@@ -141,7 +141,9 @@ namespace Lanna {
 
 			m_Render3D->Update();
 			m_SceneManager->Update();
+			m_AnimManager->Update();
 			m_SceneManager->Render();
+			m_AnimManager->Render();
 
 			Time::Update();
 

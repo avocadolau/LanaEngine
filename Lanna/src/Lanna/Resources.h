@@ -16,6 +16,7 @@
 #include "Resources/Material.h"
 #include "Resources/Animation.h"
 #include "Resources/Skeleton.h"
+#include "AnimManager.h"
 
 //#include "Lanna/Resources/Importers/MeshImporter.h"
 
@@ -44,10 +45,11 @@ namespace Lanna {
 			LRT_MATERIAL,
 			LRT_ANIMATION,
 			LRT_SKELETON,
+			LRT_STATE_MACHINE,
 			LRT_LAST
 		};
 
-		
+
 
 		struct Resource {
 			std::string filePath;
@@ -69,7 +71,7 @@ namespace Lanna {
 
 		template<class T> static ResourceId Import(const char* file);
 		template<class T> static void Save(ResourceId id);
-		template<class T> static ResourceId Load(ResourceId id,const char* path);
+		template<class T> static ResourceId Load(ResourceId id, const char* path);
 		template<class T> static T* GetResourceById(ResourceId id);
 
 		template<class T> static std::string GetPathById(ResourceId id);
@@ -89,7 +91,7 @@ namespace Lanna {
 		size_t size = m_Resources[LRT_SHADER].size();
 
 		ResourceId resourceId;
-		 
+
 		if (position == size) {
 			Shader* shader = new Shader(file);
 			shader->Init(file);
@@ -128,7 +130,7 @@ namespace Lanna {
 
 	//--SPECIALIZATION FOR SPRITE
 	template<>
-	inline ResourceId Resources::Import<Texture>(const char * file)
+	inline ResourceId Resources::Import<Texture>(const char* file)
 	{
 		/*if (file)
 		{
@@ -163,11 +165,11 @@ namespace Lanna {
 	inline Texture* Resources::GetResourceById<Texture>(ResourceId id)
 	{
 		Texture* image = NULL;
-	
+
 		if (id >= 0 && id < m_Resources[LRT_TEXTURE].size()) {
 			image = static_cast<Texture*>(m_Resources[LRT_TEXTURE][id]->resource);
 		}
-	
+
 		return image;
 	}
 
@@ -185,7 +187,7 @@ namespace Lanna {
 	template<>
 	inline ResourceId Resources::Import<Mesh>(const char* file)
 	{
-		if (file!=nullptr)
+		if (file != nullptr)
 		{
 			std::string ext = GetExtension(file);
 
@@ -257,7 +259,7 @@ namespace Lanna {
 		//std::fstream write_file;
 
 		//write_file.open(sPath.c_str(), std::fstream::out | std::fstream::binary);
-		
+
 		mesh->Save(sPath.c_str());
 
 		//write_file.close();
@@ -276,7 +278,7 @@ namespace Lanna {
 
 			mesh->Load(file);
 		}
-		
+
 		return id;
 	}
 	template<>
@@ -284,7 +286,11 @@ namespace Lanna {
 	{
 		if (file)
 		{
-			if (GetExtension(file) == ".lnmaterial")
+			if (file == "null")
+			{
+
+			}
+			else if (GetExtension(file) == ".lnmaterial")
 			{
 
 			}
@@ -303,7 +309,7 @@ namespace Lanna {
 		if (position == size) {
 
 			Material* material;
-			if (file == "null")
+			if (file == "null" || file == NULL)
 			{
 				material = new Material();
 			}
@@ -379,7 +385,7 @@ namespace Lanna {
 			Material* mat = GetResourceById<Material>(id);
 			mat->Save(file);
 		}
-		
+
 
 		//write_file.close();
 		return id;
@@ -388,7 +394,7 @@ namespace Lanna {
 	template<>
 	inline ResourceId Resources::Import<Animation>(const char* file)
 	{
-		
+
 		if (file)
 		{
 			/*if (GetExtension(file) == ".lnanimation")
@@ -546,5 +552,86 @@ namespace Lanna {
 	{
 
 	}
+	//template<>
+	//inline ResourceId Resources::Import<StateMachine>(const char* file)
+	//{
+
+	//	if (file)
+	//	{
+	//		/*if (GetExtension(file) == ".lnanimation")
+	//		{
+
+	//		}
+	//		else if (CheckExtension(GetExtension(file)) != FileType::LFT_Animation)
+	//		{
+	//			std::string message = GetExtension(file) + " isnt an animation. Could not import";
+	//			LN_WARN(message.c_str());
+	//			return -1;
+	//		}*/
+	//	}
+	//	ResourceId position = getResourcePosition(LRT_STATE_MACHINE, file);
+	//	size_t size = m_Resources[LRT_STATE_MACHINE].size();
+
+	//	ResourceId resourceId;
+
+	//	if (position == size) {
+
+	//		StateMachine* mch = new StateMachine();
+	//		/*StateMachine* mch;
+	//		if (file == "null")
+	//		{
+	//			mch = new StateMachine();
+	//		}*/
+	//		/*else if (GetExtension(file).c_str() == ".lnanimation")
+	//		{
+	//			mch = new Skeleton();
+	//			mch->Import(file);
+	//		}*/
+	//		/*else
+	//		{
+	//			mch = new Skeleton();
+	//			mch->Import(file);
+	//		}*/
+
+	//		if (file == "null")
+	//		{
+	//			PushResource(LRT_STATE_MACHINE, "state machine", mch);
+	//		}
+	//		else
+	//			PushResource(LRT_STATE_MACHINE, file, mch);
+
+	//		resourceId = size;
+	//	}
+	//	else {
+	//		resourceId = position;
+	//	}
+	//	return resourceId;
+	//}
+	//template<>
+	//inline void Resources::Save<StateMachine>(ResourceId id)
+	//{
+
+	//}
+	//template<>
+	//inline ResourceId Resources::Load<StateMachine>(ResourceId id, const char* path)
+	//{
+
+	//}
+	//template<>
+	//inline StateMachine* Resources::GetResourceById<StateMachine>(ResourceId id)
+	//{
+	//	Lanna::StateMachine* mch = NULL;
+
+	//	if (id >= 0 && id < m_Resources[LRT_STATE_MACHINE].size()) {
+	//		mch = static_cast<Lanna::StateMachine*>(m_Resources[LRT_STATE_MACHINE][id]->resource);
+	//	}
+
+	//	return mch;
+	//}
+	//template<>
+	//inline std::string Resources::GetPathById<StateMachine>(ResourceId id)
+	//{
+
+	//}
 }
 #endif // !RESOURCES_H

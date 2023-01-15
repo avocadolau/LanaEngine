@@ -7,13 +7,24 @@
 #include <assimp/postprocess.h>
 
 #include "imgui.h"
+#include <gtx/rotate_vector.hpp>
+
+// to delete
+#include "Lanna/Resources/Mesh.h"
+#include "Lanna/Application.h"
+#include "Lanna/Resources.h"
+#include "Lanna/EntityManager.h"
+#include "Lanna/GameObject/GameObject.h"
+
 
 namespace Lanna {
 	Skeleton::Skeleton()
 	{
+
 	}
 	Skeleton::~Skeleton()
 	{
+
 	}
 
 	void Skeleton::Import(const char* file)
@@ -47,7 +58,7 @@ namespace Lanna {
 						}
 					}
 
-					// next step
+
 				}
 			}
 			else LN_CORE_INFO("Couldn't find the animation at: {0}", file);
@@ -67,21 +78,29 @@ namespace Lanna {
 			{
 				ret = bone;
 			}
-			
+
 			for (Bone* b : bone->children)
 			{
-				Bone* nRet= ImGuiHierarchyDraw(b);
+				Bone* nRet = ImGuiHierarchyDraw(b);
 				if (nRet) ret = nRet;
 			}
-			
+
 			ImGui::TreePop();
 		}
 		return ret;
 	}
 
+	void Skeleton::RenderBones()
+	{
+		for (Bone* bone : bones)
+		{
+			bone->RenderBone();
+		}
+	}
+
 	void Skeleton::FindBones(aiMesh** meshes, const aiNode* node, std::vector<const aiNode*>& boneNodes)
 	{
-		for (int i = 0; i<node->mNumMeshes; i++)
+		for (int i = 0; i < node->mNumMeshes; i++)
 		{
 			size_t meshID = node->mMeshes[i];
 			if (meshes[meshID]->HasBones())
@@ -93,7 +112,7 @@ namespace Lanna {
 		}
 	}
 
-	void Skeleton::ExtractBones(aiMesh* mesh, const aiNode* node, Bone* bone)
+	void Skeleton::ExtractBones(aiMesh* mesh, const aiNode* node, Bone* bone, aiBone* prev)
 	{
 		Bone* nBone = nullptr;
 		for (int i = 0; i < mesh->mNumBones; i++)
@@ -101,13 +120,28 @@ namespace Lanna {
 			if (node->mName == mesh->mBones[i]->mName)
 			{
 				nBone = new Bone();
-				
+
+				nBone->parent = bone;
 				nBone->name = node->mName.C_Str();
-				aiVector3D pos, rot, scl;
+				if (bone) nBone->transform.parent = &bone->transform;
+
+				for (int j = 0; j < 4; j++)
+					for (int k = 0; k < 4; k++)
+					{
+						nBone->m_OffsetMat[j][k] = mesh->mBones[i]->mOffsetMatrix[j][k];
+					}
+
+				aiVector3D pos, rot, scl, offpos, offrot, offscl;
 				node->mTransformation.Decompose(scl, rot, pos);
-				nBone->transform.SetPosition(glm::vec3(pos.x, pos.y, pos.z));
-				nBone->transform.SetRotation(glm::vec3(rot.x, rot.y, rot.z));
-				nBone->transform.SetScale(glm::vec3(scl.x, scl.y, scl.z));
+				mesh->mBones[i]->mOffsetMatrix.Inverse().Decompose(offscl, offrot, offpos);
+
+				if (bone) nBone->transform.parent = &bone->transform;
+				nBone->transform.SetWorldTransform(glm::vec3(offpos.x, offpos.y, offpos.z), glm::vec3(offrot.x, offrot.y, offrot.z), glm::vec3(offscl.x, offscl.y, offscl.z));
+
+				for (int j = 0; j < mesh->mBones[i]->mNumWeights; j++)
+				{
+					nBone->weights.push_back(new VertexWeights(mesh->mBones[i]->mWeights[j].mVertexId, mesh->mBones[i]->mWeights[j].mWeight));
+				}
 
 				if (bone)
 					bone->children.push_back(nBone);
@@ -116,6 +150,7 @@ namespace Lanna {
 
 				break;
 			}
+
 		}
 
 		for (int i = 0; i < node->mNumChildren; i++)
@@ -126,5 +161,31 @@ namespace Lanna {
 				ExtractBones(mesh, node->mChildren[i], bone);
 		}
 	}
+
+	void Bone::RenderBone()
+	{
+
+		//LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, transform.w_Pos, transform.w_Rot, transform.w_Scl, m_OffsetMat, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
+		//LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, transform.m_Position, transform.m_Rotation,transform.m_Scale, m_OffsetMat, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
+		//if (parent)
+		//{
+		//	LN_RENDERER.RenderLine(transform.w_Pos,parent->transform.w_Pos, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
+		//	//LN_RENDERER.RenderLine(transform.m_Position, transform.parent->m_Position, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
+		//}
+		LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, transform.w_Pos, transform.w_Rot, transform.w_Scl, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
+		LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, transform.w_Pos, transform.w_Rot, transform.w_Scl, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
+		for (Bone* bone : children)
+			bone->RenderBone();
+		/*if (children.size() == 0)
+		{
+			LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, transform.m_Position, transform.m_Rotation, transform.m_Scale, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
+		}*/
+	}
+
+	void Bone::RenderWeights()
+	{
+
+	}
+
 
 }

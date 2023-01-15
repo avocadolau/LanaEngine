@@ -7,6 +7,9 @@
 #include "vec3.hpp"
 
 #include <gl/GL.h>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtx/rotate_vector.hpp>
 #include "imgui.h"
 
 namespace Lanna
@@ -37,6 +40,45 @@ namespace Lanna
 		m_Rotation = rotation;
 		m_Scale = scale;
 		UpdateWorldTransform();
+	}
+	void TransformComponent::SetWorldTransform(glm::vec3 pos, glm::vec3 rot, glm::vec3 scl)
+	{
+		w_Pos = pos;
+		w_Rot = rot;
+		w_Scl = scl;
+
+		if (parent)
+		{
+			m_Scale = w_Scl / parent->w_Scl;
+			m_Rotation = w_Rot - parent->w_Rot;
+
+			m_Position = w_Pos - parent->w_Pos;
+			m_Position = glm::rotateX(m_Position, -parent->w_Rot.x);
+			m_Position = glm::rotateY(m_Position, -parent->w_Rot.y);
+			m_Position = glm::rotateZ(m_Position, -parent->w_Rot.z);
+			m_Position /= parent->m_Scale;
+		}
+		else
+		{
+			m_Position = w_Pos;
+			m_Rotation = w_Rot;
+			m_Scale = w_Scl;
+		}
+	}
+
+	void TransformComponent::SetWorldPosition(glm::vec3 pos)
+	{
+		w_Pos = pos;
+		if (parent)
+		{
+			m_Position = w_Pos - parent->w_Pos;
+			m_Position = glm::rotateX(m_Position, -parent->w_Rot.x);
+			m_Position = glm::rotateY(m_Position, -parent->w_Rot.y);
+			m_Position = glm::rotateZ(m_Position, -parent->w_Rot.z);
+			m_Position /= parent->m_Scale;
+		}
+		else
+			m_Position = w_Pos;
 	}
 
 	void TransformComponent::SetPosition(glm::vec3 pos)
