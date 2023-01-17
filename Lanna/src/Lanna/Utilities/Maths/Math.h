@@ -9,6 +9,10 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <gtx/matrix_decompose.hpp>
 
+#define PI 3.141596
+#define RAD_TO_DEG PI/180
+#define DEG_TO_RAD PI*180
+
 namespace Lanna {
 	namespace Math {
 		inline void ScreenPosToWorldRay(
@@ -248,6 +252,104 @@ namespace Lanna {
 
 
 			return true;
+		}
+		// using a quaternion and translation
+		inline glm::mat4 TranslationMatrix(glm::vec4 q, glm::vec3 t)
+		{
+			glm::mat4 ret = glm::mat4(1.0f);
+			
+			ret[0][0] = 2 * (q[0] * q[0] + q[1] * q[1])-1;
+			ret[0][1] = 2 * (q[1] * q[2] - q[0] * q[3]);
+			ret[0][2] = 2 * (q[1] * q[3] + q[0] * q[2]);
+
+			ret[1][0] = 2 * (q[1] * q[2] + q[0] * q[3]);
+			ret[1][1] = 2 * (q[0] * q[0] + q[2] * q[2])-1;
+			ret[1][2] = 2 * (q[2] * q[3] - q[0] * q[1]);
+
+			ret[2][0] = 2 * (q[1] * q[3] - q[0] * q[2]);
+			ret[2][1] = 2 * (q[2] * q[3] + q[0] * q[1]);
+			ret[2][2] = 2 * (q[0] * q[0] + q[3] * q[3])-1;
+
+			ret[0][3] = t[0];
+			ret[1][3] = t[1];
+			ret[2][3] = t[2];
+			return ret;
+		}
+
+		// just translation
+		inline glm::mat4 TranslationMatrix(glm::vec3 t)
+		{
+			glm::mat4 ret = glm::mat4(1.0f);
+
+			ret[0][3] = t[0];
+			ret[1][3] = t[1];
+			ret[2][3] = t[2];
+
+			return ret;
+		}
+
+		// in degrees
+		inline glm::mat4 TranslationMatrix(glm::vec3 rotation, glm::vec3 t)
+		{
+			glm::mat4 ret = glm::mat4(1.0f);
+			float x = rotation.x * DEG_TO_RAD;
+			float y = rotation.y * DEG_TO_RAD;
+			float z = rotation.z * DEG_TO_RAD;
+			ret[0][0] = cos(y)*cos(z);
+			ret[0][1] = sin(x)*sin(y)*cos(z)-cos(x)*sin(z);
+			ret[0][2] = cos(x)*sin(y)*cos(z)+sin(x)*sin(z);
+
+			ret[1][0] = cos(y)*sin(z);
+			ret[1][1] = sin(x) * sin(y) * sin(z) + cos(x) * cos(z);
+			ret[1][2] = cos(x) * sin(y) * sin(z) - sin(x) * cos(z);
+
+			ret[2][0] = -sin(y);
+			ret[2][1] = sin(x)*cos(y);
+			ret[2][2] = cos(x)*cos(y);
+			
+			ret[0][3] += t[0];
+			ret[1][3] += t[1];
+			ret[2][3] += t[2];
+
+			return ret;
+		}
+		inline glm::vec3 QuaternionToEulerAngles(glm::vec4 q)
+		{
+			glm::vec3 ret = glm::vec3();
+
+			ret.x = RAD_TO_DEG *atan((2*(q[0]*q[1]+q[2]*q[3])) / (1-2*(q[1]*q[1]+q[2]*q[2])));
+			ret.y = RAD_TO_DEG*((-PI / 2) + 2 * atan(sqrt((1+2*(q[0]*q[2]-q[1]*q[3])) / (1-2*(q[0]*q[2]-q[1]*q[3])))));
+			ret.z = RAD_TO_DEG * atan((2*(q[0]*q[3]+q[1]*q[2])) / (1-2*(q[2]*q[2]+q[3]*q[3])));
+
+			return ret;
+		}
+		inline glm::mat4 InverseTranslation(glm::mat4 m)
+		{
+			glm::mat4 ret = m;
+
+			glm::mat3 rot = glm::mat3(0.0f);
+
+			for(int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					rot[i][j] = m[i][j];
+				}
+			}
+			rot = glm::inverse(rot);
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					ret[i][j] = rot[i][j];
+				}
+			}
+
+			ret[0][3] *= -1;
+			ret[1][3] *= -1;
+			ret[2][3] *= -1;
+
+			return ret;
 		}
 	}
 }

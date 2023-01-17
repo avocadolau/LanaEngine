@@ -82,6 +82,9 @@
     <ClInclude Include="src\Lanna\GameObject\Component.h">
       <Filter>Lanna\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="src\Lanna\GameObject\Components\AnimationComponent.h">
+      <Filter>Lanna\GameObject\Components</Filter>
+    </ClInclude>
     <ClInclude Include="src\Lanna\GameObject\Components\CameraComponent.h">
       <Filter>Lanna\GameObject\Components</Filter>
     </ClInclude>
@@ -279,6 +282,9 @@
     </ClCompile>
     <ClCompile Include="src\Lanna\GameObject\Component.cpp">
       <Filter>Lanna\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lanna\GameObject\Components\AnimationComponent.cpp">
+      <Filter>Lanna\GameObject\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Lanna\GameObject\Components\CameraComponent.cpp">
       <Filter>Lanna\GameObject\Components</Filter>

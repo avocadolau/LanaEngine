@@ -19,6 +19,8 @@ namespace Lanna
 		void Render();
 
 		bool LoadFromFile(const char* file);
+		bool IsSkinned();
+		void Skin(ResourceId meshID);
 		//MeshComponent* loadmesh(const aiMesh* mesh);
 	public:
 		

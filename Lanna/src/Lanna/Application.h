@@ -52,6 +52,7 @@ namespace Lanna {
 		inline Render3D& GetRenderer() { return *m_Render3D; }
 		inline Resources& GetResources() { return *m_Resources; }
 		inline AnimManager& GetAnimMan() { return *m_AnimManager; }
+		inline Time& GetTime() { return *m_Time; }
 
 		void OpenUrl(const char* url);
 	private:

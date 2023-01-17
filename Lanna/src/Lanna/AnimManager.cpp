@@ -18,9 +18,12 @@ namespace Lanna {
 		LN_RESOURCES.Import<Skeleton>("resources/animations/test.fbx");
 		boneMesh = new Mesh();
 		boneMesh->LoadFromFile("resources/models/Primitives/small_cube.fbx");
+
+		LN_RESOURCES.Import<StateMachine>("resources/animations/test.fbx");
 	}
 	void AnimManager::Update()
 	{
+		LN_RESOURCES.GetResourceById<StateMachine>(0)->Update();
 	}
 	void AnimManager::Render()
 	{

@@ -334,7 +334,7 @@ namespace Optick
 			
 			// CPU
 			AI,
-			Animation, 
+			StateMachine, 
 			Audio,
 			Debug,
 			Camera,
@@ -379,7 +379,7 @@ namespace Optick
 			// CPU
 			None			= OPTICK_MAKE_CATEGORY(Filter::None, Color::Null),
 			AI				= OPTICK_MAKE_CATEGORY(Filter::AI, Color::Purple),
-			Animation		= OPTICK_MAKE_CATEGORY(Filter::Animation, Color::LightSkyBlue),
+			StateMachine		= OPTICK_MAKE_CATEGORY(Filter::StateMachine, Color::LightSkyBlue),
 			Audio			= OPTICK_MAKE_CATEGORY(Filter::Audio, Color::HotPink),
 			Debug			= OPTICK_MAKE_CATEGORY(Filter::Debug, Color::Black),
 			Camera			= OPTICK_MAKE_CATEGORY(Filter::Camera, Color::Black),

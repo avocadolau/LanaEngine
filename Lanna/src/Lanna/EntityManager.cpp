@@ -45,6 +45,12 @@ namespace Lanna {
 		MeshComponent* testMesh = new MeshComponent("resources/animations/test.fbx");
 		test->m_Mesh = testMesh;
 		test->m_Components.push_back(testMesh);
+		test->m_Skeleton = new SkeletonComponent();
+		test->m_Skeleton->m_SkeletonID = 0;
+		test->m_Anim = new AnimationComponent();
+		test->m_Anim->m_AnimationID = 0;
+		test->m_Components.push_back(test->m_Skeleton);
+		test->m_Components.push_back(test->m_Anim);
 	}
 
 	void EntityManager::Update()

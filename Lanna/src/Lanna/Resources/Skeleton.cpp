@@ -57,7 +57,8 @@ namespace Lanna {
 							ExtractBones(bMesh, scene->mRootNode, nullptr);
 						}
 					}
-
+					int jhjhg = bones.size();
+					const char* uwu = "aslkdfja";
 
 				}
 			}
@@ -79,11 +80,6 @@ namespace Lanna {
 				ret = bone;
 			}
 
-			for (Bone* b : bone->children)
-			{
-				Bone* nRet = ImGuiHierarchyDraw(b);
-				if (nRet) ret = nRet;
-			}
 
 			ImGui::TreePop();
 		}
@@ -95,6 +91,18 @@ namespace Lanna {
 		for (Bone* bone : bones)
 		{
 			bone->RenderBone();
+		}
+	}
+
+	void Skeleton::SkinMesh(ResourceId meshId)
+	{
+		if (meshId != 0)
+		{
+			Mesh* mesh = LN_RESOURCES.GetResourceById<Mesh>(meshId);
+			for (Bone* b : bones)
+			{
+				b->v_data = &mesh->models[0]->vbo_data;
+			}
 		}
 	}
 
@@ -123,7 +131,7 @@ namespace Lanna {
 
 				nBone->parent = bone;
 				nBone->name = node->mName.C_Str();
-				if (bone) nBone->transform.parent = &bone->transform;
+				//if (bone) nBone->transform.parent = &bone->transform;
 
 				for (int j = 0; j < 4; j++)
 					for (int k = 0; k < 4; k++)
@@ -135,18 +143,23 @@ namespace Lanna {
 				node->mTransformation.Decompose(scl, rot, pos);
 				mesh->mBones[i]->mOffsetMatrix.Inverse().Decompose(offscl, offrot, offpos);
 
-				if (bone) nBone->transform.parent = &bone->transform;
-				nBone->transform.SetWorldTransform(glm::vec3(offpos.x, offpos.y, offpos.z), glm::vec3(offrot.x, offrot.y, offrot.z), glm::vec3(offscl.x, offscl.y, offscl.z));
+				//if (bone) nBone->transform.parent = &bone->transform;
+				nBone->pos =nBone->wpos = glm::vec3(offpos.x, offpos.y, offpos.z);
+				nBone->rot =nBone->wrot = glm::vec3(offrot.x, offrot.y, offrot.z);
+				nBone->scl =nBone->wscl = glm::vec3(offscl.x, offscl.y, offscl.z);
+				//nBone->transform.SetWorldTransform(glm::vec3(offpos.x, offpos.y, offpos.z), glm::vec3(offrot.x, offrot.y, offrot.z), glm::vec3(offscl.x, offscl.y, offscl.z));
+
 
 				for (int j = 0; j < mesh->mBones[i]->mNumWeights; j++)
 				{
 					nBone->weights.push_back(new VertexWeights(mesh->mBones[i]->mWeights[j].mVertexId, mesh->mBones[i]->mWeights[j].mWeight));
 				}
 
-				if (bone)
+				/*if (bone)
 					bone->children.push_back(nBone);
 				else
-					bones.push_back(nBone);
+					bones.push_back(nBone);*/
+				bones.push_back(nBone);
 
 				break;
 			}
@@ -155,10 +168,11 @@ namespace Lanna {
 
 		for (int i = 0; i < node->mNumChildren; i++)
 		{
-			if (nBone)
+			/*if (nBone)
 				ExtractBones(mesh, node->mChildren[i], nBone);
 			else
-				ExtractBones(mesh, node->mChildren[i], bone);
+				ExtractBones(mesh, node->mChildren[i], bone);*/
+			ExtractBones(mesh, node->mChildren[i], nullptr);
 		}
 	}
 
@@ -172,10 +186,8 @@ namespace Lanna {
 		//	LN_RENDERER.RenderLine(transform.w_Pos,parent->transform.w_Pos, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
 		//	//LN_RENDERER.RenderLine(transform.m_Position, transform.parent->m_Position, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
 		//}
-		LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, transform.w_Pos, transform.w_Rot, transform.w_Scl, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
-		LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, transform.w_Pos, transform.w_Rot, transform.w_Scl, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
-		for (Bone* bone : children)
-			bone->RenderBone();
+		LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, wpos, wrot, wscl, color, false);
+		//LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, transform.w_Pos, transform.w_Rot, transform.w_Scl, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);
 		/*if (children.size() == 0)
 		{
 			LN_RENDERER.RenderMeshColor(LN_ANIMATIONS.boneMesh, transform.m_Position, transform.m_Rotation, transform.m_Scale, glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), false);

@@ -53,12 +53,12 @@ namespace Lanna {
 
 
 			static bool importing = false;
-			if (ImGui::Button("Import"))
+			/*if (ImGui::Button("Import"))
 			{
 				action = IMPORT;
 				mPath = FileDialog::OpenFile("");
 				importing = true;
-			}
+			}*/
 
 			if (importing) {
 				if (mPath != std::string())
@@ -152,7 +152,7 @@ namespace Lanna {
 						}
 						if (animations)
 						{
-							LN_RESOURCES.Import<Animation>(mPath.c_str());
+							LN_RESOURCES.Import<StateMachine>(mPath.c_str());
 						}
 						/*if (texture)
 						{

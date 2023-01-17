@@ -46,6 +46,11 @@ namespace Lanna
 			m_Skeleton = new SkeletonComponent(copy->m_Skeleton);
 			m_Components.push_back(m_Skeleton);
 		}
+		if (copy->m_Anim)
+		{
+			m_Anim = new AnimationComponent(copy->m_Anim);
+			m_Components.push_back(m_Anim);
+		}
 		for (GameObject* c : copy->m_Children)
 		{
 			AddCopyChild(c);
@@ -68,7 +73,30 @@ namespace Lanna
 
 	void GameObject::Update() {
 
-
+		if (m_Skeleton)
+		{
+			if (m_Anim)
+			{
+				if (m_Skeleton->m_SkeletonID != -1 && m_Anim->m_AnimationID != -1)
+				{
+					if (!m_Anim->IsLinked())
+					{
+						m_Anim->Link(LN_RESOURCES.GetResourceById<Skeleton>(m_Skeleton->m_SkeletonID));
+					}
+				}
+			}
+			if (m_Mesh)
+			{
+				if (m_Skeleton->m_SkeletonID != -1 && m_Mesh->m_MeshID != -1)
+				{
+					if (!m_Skeleton->IsSkinned())
+					{
+						m_Skeleton->Skin(m_Mesh->m_MeshID);
+					}
+				}
+			}
+		}
+		
 		for (Component* c : m_Components)
 		{
 			c->Use();
@@ -148,6 +176,18 @@ namespace Lanna
 			else
 			{
 				LN_INFO("Already has skeleton component");
+			}
+			break;
+		case Component::Type::ANIMATION:
+			if (m_Anim == nullptr)
+			{
+				m_Anim = new AnimationComponent();
+				m_Components.push_back(m_Anim);
+				return m_Anim;
+			}
+			else
+			{
+				LN_INFO("Already has an animation component");
 			}
 			break;
 		case Component::Type::CAMERA:

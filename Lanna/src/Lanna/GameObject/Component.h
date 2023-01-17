@@ -11,6 +11,7 @@ namespace Lanna
 			MATERIAL,
 			CAMERA,
 			SKELETON,
+			ANIMATION,
 
 			TOTAL
 		};

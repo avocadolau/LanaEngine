@@ -96,4 +96,14 @@ namespace Lanna
 		return false;
 	}
 
+	bool SkeletonComponent::IsSkinned()
+	{
+		return LN_RESOURCES.GetResourceById<Skeleton>(m_SkeletonID)->skinned;
+	}
+
+	void SkeletonComponent::Skin(ResourceId meshID)
+	{
+		LN_RESOURCES.GetResourceById<Skeleton>(m_SkeletonID)->SkinMesh(meshID);
+	}
+
 }

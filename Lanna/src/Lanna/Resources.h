@@ -392,7 +392,7 @@ namespace Lanna {
 	}
 
 	template<>
-	inline ResourceId Resources::Import<Animation>(const char* file)
+	inline ResourceId Resources::Import<StateMachine>(const char* file)
 	{
 
 		if (file)
@@ -415,19 +415,19 @@ namespace Lanna {
 
 		if (position == size) {
 
-			Animation* animation;
+			StateMachine* animation;
 			if (file == "null")
 			{
-				animation = new Animation();
+				animation = new StateMachine();
 			}
 			else if (GetExtension(file).c_str() == ".lnanimation")
 			{
-				animation = new Animation();
+				animation = new StateMachine();
 				animation->Import(file);
 			}
 			else
 			{
-				animation = new Animation();
+				animation = new StateMachine();
 				animation->Import(file);
 			}
 
@@ -446,28 +446,28 @@ namespace Lanna {
 		return resourceId;
 	}
 	template<>
-	inline void Resources::Save<Animation>(ResourceId id)
+	inline void Resources::Save<StateMachine>(ResourceId id)
 	{
 
 	}
 	template<>
-	inline ResourceId Resources::Load<Animation>(ResourceId id, const char* path)
+	inline ResourceId Resources::Load<StateMachine>(ResourceId id, const char* path)
 	{
 
 	}
 	template<>
-	inline Animation* Resources::GetResourceById<Animation>(ResourceId id)
+	inline StateMachine* Resources::GetResourceById<StateMachine>(ResourceId id)
 	{
-		Lanna::Animation* ani = NULL;
+		Lanna::StateMachine* ani = NULL;
 
 		if (id >= 0 && id < m_Resources[LRT_ANIMATION].size()) {
-			ani = static_cast<Lanna::Animation*>(m_Resources[LRT_ANIMATION][id]->resource);
+			ani = static_cast<Lanna::StateMachine*>(m_Resources[LRT_ANIMATION][id]->resource);
 		}
 
 		return ani;
 	}
 	template<>
-	inline std::string Resources::GetPathById<Animation>(ResourceId id)
+	inline std::string Resources::GetPathById<StateMachine>(ResourceId id)
 	{
 
 	}

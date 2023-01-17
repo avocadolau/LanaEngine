@@ -30,6 +30,7 @@ namespace Lanna
 			}
 		}*/
 		skl = LN_RESOURCES.GetResourceById<Skeleton>(0);
+		//ani = LN_RESOURCES.GetResourceById<Animation>(0);
 		static ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchSame | ImGuiTableFlags_Resizable | !ImGuiTableFlags_BordersOuter | !ImGuiTableFlags_BordersV | ImGuiTableFlags_ContextMenuInBody;
 		if (ImGui::BeginTable("ANIMATION", 2, flags))
 		{
@@ -52,6 +53,7 @@ namespace Lanna
 					ImGui::TreePop();
 				}
 			}
+			
 			ImGui::EndChild();
 
 			// ----------------------------------------------------------------------------
@@ -59,6 +61,26 @@ namespace Lanna
 			ImGui::Text("GRAPHIC");
 			if (bone)
 			{
+				ImGui::Text(bone->name.c_str());
+				ImGui::InputFloat("pos x", &bone->pos.x);
+				ImGui::InputFloat("pos y", &bone->pos.y);
+				ImGui::InputFloat("pos x", &bone->pos.z);
+
+				ImGui::Text("");
+				ImGui::InputFloat("rot x", &bone->rot.x);
+				ImGui::InputFloat("rot y", &bone->rot.y);
+				ImGui::InputFloat("rot x", &bone->rot.z);
+
+				ImGui::Text("");
+				ImGui::InputFloat("scale x", &bone->scl.x);
+				ImGui::InputFloat("scale y", &bone->scl.y);
+				ImGui::InputFloat("scale x", &bone->scl.z);
+
+				/*ImGui::Text("world transform");
+				ImGui::InputFloat("world pos x", &bone->transform.w_Pos.x);
+				ImGui::InputFloat("world pos y", &bone->transform.w_Pos.y);
+				ImGui::InputFloat("world pos x", &bone->transform.w_Pos.z);
+
 				ImGui::Text(bone->name.c_str());
 				ImGui::InputFloat("pos x", &bone->transform.m_Position.x);
 				ImGui::InputFloat("pos y", &bone->transform.m_Position.y);
@@ -87,7 +109,7 @@ namespace Lanna
 				ImGui::Text("");
 				ImGui::InputFloat("world scale x", &bone->transform.w_Scl.x);
 				ImGui::InputFloat("world scale y", &bone->transform.w_Scl.y);
-				ImGui::InputFloat("world scale x", &bone->transform.w_Scl.z);
+				ImGui::InputFloat("world scale x", &bone->transform.w_Scl.z);*/
 			}
 
 

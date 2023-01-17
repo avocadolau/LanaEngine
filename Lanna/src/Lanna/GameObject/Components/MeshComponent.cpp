@@ -50,7 +50,11 @@ namespace Lanna
 
 	void MeshComponent::Use()
 	{
-
+		/*int a = LN_RESOURCES.GetResourceById<Mesh>(m_MeshID)->vbo_data.size();
+		std::stringstream ss;
+		ss << a;
+		std::string str = ss.str();
+		LN_INFO(str.c_str());*/
 	}
 
 	void MeshComponent::ImGuiDraw()

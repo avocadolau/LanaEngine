@@ -21,7 +21,7 @@ namespace Lanna {
 			break;
 		case Lanna::Resources::LRT_MATERIAL: resource->resource = new Material();
 			break;
-		case Lanna::Resources::LRT_ANIMATION: resource->resource = new Animation();
+		case Lanna::Resources::LRT_ANIMATION: resource->resource = new StateMachine();
 			break;
 		case Lanna::Resources::LRT_SKELETON: resource->resource = new Skeleton();
 			break;

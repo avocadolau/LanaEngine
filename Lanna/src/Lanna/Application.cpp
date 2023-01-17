@@ -55,13 +55,6 @@ namespace Lanna {
 		m_Render3D->Init();
 		m_AnimManager->Init();
 		PushOverlay(m_ImGuiLayer);
-
-#ifdef DEBUG_ANIM
-		//LN_RESOURCES.Import<Animation>("resources/animations/test.FBX");
-		LN_RESOURCES.Import<Skeleton>("resources/animations/test.FBX");
-#endif // DEBUG_ANIM
-
-
 	}
 
 	Application::~Application()
