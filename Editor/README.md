@@ -4,6 +4,13 @@
 # About:
 Lanna engine is a 3D Game Engine developed during the Game Engines classes. We are making to make an Engine that can be used to develop all kinds of games.
 
+# Animation Module:
+- At the beginning loads successfuly a test mesh with skeleton and animation components
+- The bones are represented with red cubes
+- Animation panel showing bone data
+- Hierarchy loaded on animation class successfuly but can't be showed on the editor
+- There are interpolation errors related to quaternions
+
 
 # Features:
 - Street is automatically loaded at the start.
